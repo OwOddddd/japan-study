@@ -10,6 +10,19 @@
 
 只屬於單一主題的元件留在該主題的 `assets/`（例如日本地理的 `japan-map.js`、`climate-chart.js`），但樣式一律寫進這裡的 `style.css`。
 
+## 發布與更新
+
+- 網站：https://owoddddd.github.io/japan-study/
+- Repo：https://github.com/OwOddddd/japan-study （公開，GitHub Pages 用 main 分支根目錄）
+- 不進 repo 的檔案由根目錄 `.gitignore` 控制：`CLAUDE.md`、`.claude/`、各主題的 `MISSION.md`、`NOTES.md`、`learning-records/`。
+
+上完新課後的更新流程（在 `日本學習/` 根目錄執行）：
+
+1. 確認新課已加進主題的 `index.html`。
+2. `git status` 檢查要提交的檔案，確定沒有私人檔案。
+3. `git add -A`，`git commit -m "新增 xxx 第 N 課"`。
+4. `git push`。約一到兩分鐘後網站自動更新。
+
 ## 網站結構
 
 ```
