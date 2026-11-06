@@ -1,0 +1,12 @@
+# 給 Claude 的工作規則與設定（任何層級）
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+
+# 各主題的私人學習檔案
+MISSION.md
+NOTES.md
+learning-records/
+
+# 網站整合的工作指令
+網站整合指令.md

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>太平洋側的帶狀走廊</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 4 課・太平洋側的帶狀走廊</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 4 課・約 10 分鐘</p>
+  <h1>太平洋側的帶狀走廊</h1>
+  <p class="lede">日本有多少人？住在哪裡？為什麼一半的人擠在三個都市圈？</p>
+
+  <div class="callout">
+    <b>為什麼學這個</b>：從東京搭新幹線到大阪、再往西到福岡，窗外幾乎一路都是城市，這條路線就是日本人口最密集的地帶。
+    診斷時你把日本總人口選成「約 2 億」，人口最少的縣、三大都市圈的占比也都不知道。這一課先建立幾個基準數字，再用前三課學過的地形和氣候解釋人口分布。
+  </div>
+
+  <h2>1. 先記三個數字</h2>
+  <table class="cmp">
+    <tr><th>基準</th><th>數字</th><th>好記的比較</th></tr>
+    <tr><td>日本總人口</td><td><b>約 1 億 2,270 萬</b>（2026 年 10 月）</td><td>台灣約 2,320 萬，日本是台灣的 <b>5 倍多</b></td></tr>
+    <tr><td>每年減少</td><td>約 <b>53 萬人</b></td><td>差不多是一整個鳥取縣（約 55 萬，全國最少）</td></tr>
+    <tr><td>三大都市圈</td><td>約占全國的 <b>一半</b></td><td>光東京圈就約占 <b>三成</b></td></tr>
+  </table>
+  <p class="small">來源：<a href="https://www.stat.go.jp/data/jinsui/new.html" target="_blank">總務省統計局「人口推計」</a>（2026 年 10 月 1 日概算值）、<a href="https://udn.com/news/story/7266/9619831" target="_blank">聯合報：內政部 2026 年 6 月戶口統計</a>、<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei/20/dl/sanko2.pdf" target="_blank">2020 年國勢調查各都道府縣人口</a>。</p>
+
+  <h2>2. 人口密度地圖</h2>
+  <figure>
+    <div class="mapbox" id="density-map"></div>
+    <div class="legend" id="density-legend"></div>
+    <figcaption>各都道府縣人口密度（人／km²，2020 年國勢調查）。滑鼠移到縣上可以看數字。沖繩不在圖框內，密度 643，排全國第 9（島小人多）。
+      資料：<a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/586047.pdf" target="_blank">福島縣整理的國勢調查排名</a>；統計局也有官方的<a href="https://www.stat.go.jp/data/chiri/map/c_koku/mitsudo/pdf/2020.pdf" target="_blank">人口密度地圖</a>。</figcaption>
+    <details class="cc-table"><summary>看全部 47 都道府縣的數字</summary><table class="cmp" id="density-table"></table></details>
+  </figure>
+  <p>
+    顏色最深的地方連成一條帶子：<b>東京圈 → 靜岡 → 愛知 → 京阪神 → 瀨戶內沿岸 → 福岡</b>。這條沿著太平洋側和瀨戶內海延伸的帶狀地帶，日本稱為「<b>太平洋帶狀地帶</b>」（太平洋ベルト）。
+    反過來，北海道（67）、東北、山陰（島根 100）、四國南部（高知 97）都很淡。
+  </p>
+
+  <h2>3. 三大都市圈</h2>
+  <table class="cmp">
+    <tr><th>都市圈</th><th>範圍（本課採用的定義）</th><th>人口</th><th>占全國</th></tr>
+    <tr><td>東京圈</td><td>東京、神奈川、埼玉、千葉</td><td>3,691 萬</td><td>29.3%</td></tr>
+    <tr><td>大阪圈</td><td>大阪、兵庫、京都、奈良</td><td>1,821 萬</td><td>14.4%</td></tr>
+    <tr><td>名古屋圈</td><td>愛知、岐阜、三重</td><td>1,129 萬</td><td>9.0%</td></tr>
+    <tr><td><b>合計</b></td><td></td><td><b>6,641 萬</b></td><td><b>52.6%</b></td></tr>
+  </table>
+  <p class="small">由 2020 年國勢調查的各縣人口相加計算（全國 1 億 2,615 萬）。三個都市圈分別位在第 2 課和診斷考卷提過的關東平原、大阪平原、濃尾平原上。</p>
+
+  <h2>4. 為什麼擠在這裡？</h2>
+  <ol class="chain">
+    <li><b>能住的地不多</b>：第 2 課說過日本多山。用全部國土算，人口密度是每 km² 338 人；只算平地等「可住地」，就變成 1,021 人（<a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/586047.pdf" target="_blank">總務省「社會生活統計指標」</a>）。換句話說，能住人的土地只有國土的約三分之一。</li>
+    <li><b>大平原在太平洋側</b>：關東、濃尾、大阪這三大平原都面向太平洋，旁邊還有東京灣、伊勢灣、大阪灣，適合建港口。</li>
+    <li><b>冬天的條件比較好</b>：第 3 課的季風，冬天的雪下在日本海側，太平洋側晴朗少雪，交通和工作都不容易中斷。</li>
+    <li><b>越集中，就越吸引人</b>：港口旁發展出工業帶，工作機會多 → 人搬進來 → 公司、學校、交通再加碼 → 吸引更多人。這是一個自我增強的循環。</li>
+  </ol>
+  <p>反過來看，山多、冬天大雪、離大城市遠的地方，工作少、年輕人外移，這就是診斷時問過的「過疏化」，之後會有一課專門講。</p>
+
+  <div class="source">
+    <b>推薦資料</b>：<a href="https://www.stat.go.jp/data/chiri/map/c_koku/mitsudo/pdf/2020.pdf" target="_blank">統計局「日本統計地圖：人口密度」</a>（官方人口密度地圖，比本課地圖更細，畫到市區町村）。<br>
+    <b>速查表</b>：<a href="../reference/population.html">人口基準數字速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <p class="small">憑記憶作答。前 3 題是你在診斷時答錯或不知道的題目，最後兩題複習第 2、3 課。</p>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <div class="callout">有不懂的地方，或想延伸問（例如「為什麼沖繩人口密度這麼高」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+
+  <nav class="lesson-nav">
+    <a href="0004-monsoon-meets-mountains.html">← 第 3 課：季風碰上山</a>
+    <a href="../index.html">課程首頁</a>
+  </nav>
+</main>
+
+<script>
+// 2020 年國勢調查 人口密度（人/km²），key 為都道府縣代碼
+const DENSITY = {
+  1: 66.6, 2: 128.3, 3: 79.2, 4: 316.1, 5: 82.4, 6: 114.6, 7: 133.0, 8: 470.2, 9: 301.7, 10: 304.8,
+  11: 1934.0, 12: 1218.5, 13: 6402.6, 14: 3823.2, 15: 174.9, 16: 243.6, 17: 270.5, 18: 183.0, 19: 181.4, 20: 151.0,
+  21: 186.3, 22: 467.2, 23: 1458.0, 24: 306.6, 25: 351.9, 26: 559.0, 27: 4638.4, 28: 650.5, 29: 358.8, 30: 195.3,
+  31: 157.8, 32: 100.1, 33: 265.4, 34: 330.2, 35: 219.6, 36: 173.5, 37: 506.3, 38: 235.2, 39: 97.3, 40: 1029.8,
+  41: 332.5, 42: 317.7, 43: 234.6, 44: 177.2, 45: 138.3, 46: 172.9, 47: 642.9,
+};
+const BINS = [150, 300, 600, 1500];
+const BIN_LABELS = ['未滿 150', '150–300', '300–600', '600–1,500', '1,500 以上'];
+const bin = v => BINS.filter(b => v >= b).length;
+const fmt = v => v.toLocaleString('zh-TW', { maximumFractionDigits: 1 });
+
+const JapanMapName = {};
+JapanMap.render(document.getElementById('density-map'), {
+  choropleth: id => bin(DENSITY[id]),
+  tooltip: id => `<b>${JapanMapName[id] || ''}</b><br>${fmt(DENSITY[id])} 人／km²`,
+});
+JapanMap.load().then(fs => {
+  fs.forEach(f => { JapanMapName[f.properties.id] = f.properties.nam_ja.replace('県', '縣'); });
+  const rows = Object.entries(DENSITY).sort((a, b) => b[1] - a[1])
+    .map(([id, v], i) => `<tr><td>${i + 1}</td><td>${JapanMapName[id]}</td><td>${fmt(v)}</td></tr>`).join('');
+  document.getElementById('density-table').innerHTML = '<tr><th>排名</th><th>都道府縣</th><th>人／km²</th></tr>' + rows;
+});
+document.getElementById('density-legend').innerHTML =
+  BIN_LABELS.map((l, i) => `<span><i style="background:var(--q${i})"></i>${l}</span>`).join('');
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '第 4 課 小測驗：太平洋側的帶狀走廊',
+  facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'jgeo-lesson-0005-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  questions: [
+    { id: 'l4-1', facet: 'l4', level: 1, type: 'choice',
+      prompt: '（重答診斷題）日本的總人口大約是多少？',
+      options: ['約 1.2 億人', '約 0.8 億人', '約 1.6 億人', '約 2.0 億人'],
+      explain: '約 1 億 2,270 萬人（2026 年 10 月概算），而且每年減少約 53 萬人。' },
+    { id: 'l4-2', facet: 'l4', level: 1, type: 'choice',
+      prompt: '（重答診斷題）人口最少的縣是哪一個？',
+      options: ['鳥取縣', '島根縣', '高知縣', '德島縣'],
+      explain: '鳥取縣約 55 萬人，是全國最少；島根約 67 萬居次。日本每年減少的人口，差不多就是一個鳥取縣。' },
+    { id: 'l4-3', facet: 'l4', level: 2, type: 'choice',
+      prompt: '（重答診斷題）東京、名古屋、大阪三大都市圈的人口，大約占全國的多少？',
+      options: ['約五成', '約二成', '約三成', '約七成'],
+      explain: '2020 年約 52.6%。約三成是東京圈單獨的占比，容易搞混。' },
+    { id: 'l4-4', facet: 'l4', level: 1, type: 'choice',
+      prompt: '日本的人口大約是台灣的幾倍？',
+      options: ['5 倍多', '2 倍多', '10 倍多', '20 倍多'],
+      explain: '日本約 1 億 2,270 萬，台灣約 2,320 萬，約 5.3 倍。' },
+    { id: 'l4-5', facet: 'l4', level: 2, type: 'mapClick', target: 23, view: [[134.5, 33.8], [140.5, 37.0]],
+      prompt: '人口密度排全國第 5 的<b>愛知縣</b>（名古屋圈的中心）在哪裡？請在地圖上點出來。',
+      explain: '愛知縣在濃尾平原，面向伊勢灣和三河灣，位於東京圈和大阪圈中間。' },
+    { id: 'l4-6', facet: 'l4', level: 2, type: 'choice',
+      prompt: '只算平地等「可住地」時，日本的人口密度約是全國土計算時的 3 倍。這代表什麼？',
+      options: ['能住人的土地只有國土約三分之一', '日本的人口在近年增加了約三倍', '都市人口是鄉村人口的約三倍多', '日本人平均有三個住處分散各地'],
+      explain: '338 人／km² 對 1,021 人／km²：山地多，能住的地只有約三分之一，人口只能擠在平原上。' },
+    { id: 'l4-7', facet: 'l4', level: 3, type: 'short',
+      prompt: '為什麼日本的人口集中在太平洋側的帶狀地帶？用至少三個步驟說明，並至少用到一個前幾課學過的概念（地形或氣候）。',
+      keywords: [['山', '可住', '平地少'], ['平原', '平野', '關東', '濃尾', '大阪'], ['港', '灣', '海運', '貿易'], ['冬', '晴', '雪', '季風'], ['工業', '工作', '就業', '工廠', '機會'], ['循環', '吸引', '集中', '更多人']],
+      need: 3,
+      answer: '日本多山，可住地只有約三分之一 → 大平原（關東、濃尾、大阪）和良港（東京灣、伊勢灣、大阪灣）都在太平洋側 → 冬季季風的雪下在日本海側，太平洋側冬天晴朗 → 港口旁發展出工業帶，工作多吸引人口，人口多又吸引更多產業，形成自我增強的集中。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 3 課）高松全年雨量只有高知的一半不到，主要原因是？',
+      options: ['南北兩道山擋住兩季的季風', '瀨戶內海的海水溫度特別低', '颱風從來不會經過瀨戶內海', '高松的海拔比高知高出很多'],
+      explain: '北邊中國山地擋冬季西北季風、南邊四國山地擋夏季東南季風。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 2 課）日本阿爾卑斯和富士山都很高，兩者成因的差別是？',
+      options: ['阿爾卑斯是隆起，富士是火山', '阿爾卑斯是火山，富士是隆起', '兩者都是由火山噴發堆積成的', '兩者都是由地殼推擠隆起成的'],
+      explain: '日本阿爾卑斯是地殼被推擠隆起的長條山脈；富士山是岩漿噴發堆積的圓錐形火山。' },
+  ],
+});
+</script>
+</body>
+</html>

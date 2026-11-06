@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本的屋脊</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 2 課・日本的屋脊</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 2 課・約 10 分鐘</p>
+  <h1>日本的屋脊</h1>
+  <p class="lede">日本阿爾卑斯、富士山，以及縱貫列島的「脊梁山脈」。</p>
+
+  <div class="callout">
+    <b>為什麼學這個</b>：立山黑部阿爾卑斯路線、上高地、富士山，都是去日本旅行時常被排進行程的山岳景點。
+    診斷時你把日本阿爾卑斯的位置選成了奧羽山脈，也不知道富士山的高度。這一課要把山放回地圖上，並說明山為什麼會這麼高。
+  </div>
+
+  <h2>1. 一條縱貫列島的「脊梁」</h2>
+  <p>
+    第 1 課學過，海洋板塊從東、南兩側推擠日本，陸地因此隆起。結果就是一條從北海道一路延伸到九州、貫穿列島中央的山脈帶，日本人稱為<b>脊梁山脈</b>。
+    這道山牆把日本分成<b>太平洋側</b>和<b>日本海側</b>：河川往兩邊流，冬季季風也被它擋住（第 3 課會用到）。
+  </p>
+  <figure>
+    <div class="mapbox" id="spine-map"></div>
+    <figcaption>主要山脈與山地（位置為示意）。紅色三角形是富士山。</figcaption>
+  </figure>
+  <p>從北往南記這幾條就夠了：<b>日高山脈</b>（北海道）→ <b>奧羽山脈</b>（東北的脊梁）→ <b>越後山脈</b> → <b>日本阿爾卑斯</b>（本州中部）→ 西南日本的<b>紀伊山地、中國山地、四國山地、九州山地</b>。</p>
+
+  <h2>2. 日本阿爾卑斯：三條山脈，西北東南排開</h2>
+  <figure>
+    <div class="mapbox" id="alps-map"></div>
+    <figcaption>本州中部放大圖。灰色虛線是糸魚川—靜岡構造線（Fossa Magna 西緣）。</figcaption>
+  </figure>
+  <table class="cmp">
+    <tr><th>正式名稱</th><th>俗稱</th><th>代表山峰</th><th>旅行時會遇到的</th></tr>
+    <tr><td>飛驒山脈</td><td>北阿爾卑斯</td><td>奧穗高岳 3,190 m、槍岳、立山</td><td>立山黑部阿爾卑斯路線、上高地</td></tr>
+    <tr><td>木曾山脈</td><td>中央阿爾卑斯</td><td>木曾駒岳</td><td>駒岳纜車（直達高山的纜車）</td></tr>
+    <tr><td>赤石山脈</td><td>南阿爾卑斯</td><td>北岳 3,193 m（日本第二高）</td><td>南阿爾卑斯國立公園</td></tr>
+  </table>
+  <p class="small">記法：由西到東依序是飛驒、木曾、赤石，剛好對應「北、中央、南」。三條都在 Fossa Magna 西緣的西側。標高 3,000 m 以上的山峰，幾乎全部集中在這裡和富士山。</p>
+
+  <h3>為什麼這裡特別高？</h3>
+  <ol class="chain">
+    <li>日本阿爾卑斯是在最近約一兩百萬年內（地質學上的「第四紀」）急速隆起形成的。不過<b>隆起的完整機制，科學上還沒有完全釐清</b>（<a href="https://www.gsi.go.jp/common/000057258.pdf" target="_blank">国土地理院</a>）。</li>
+    <li>比較清楚的是南阿爾卑斯：菲律賓海板塊上的伊豆半島原本是一座火山島，隨著板塊北移，撞上了本州。這場碰撞從南邊持續推擠，被認為讓赤石山脈約從 100 萬年前開始快速隆起（<a href="https://www2.jpgu.org/meeting/2011/yokou/HCG036-02.pdf" target="_blank">日本地球惑星科學連合 2011 年大會要旨</a>）。</li>
+    <li>過去的水準測量估計，赤石山脈一帶每年約隆起 4 mm（壇原 1971，引自<a href="https://www.gsi.go.jp/common/000057258.pdf" target="_blank">国土地理院</a>）。山還在長高，但河川和崩塌也同時在侵蝕它，所以山谷又深又陡。</li>
+  </ol>
+
+  <h2>3. 富士山：同樣很高，成因完全不同</h2>
+  <p>
+    富士山標高 <b>3,776 m</b>，是日本第一高峰。它和日本阿爾卑斯的差別在於：<b>富士山是火山</b>，由岩漿一層層噴發堆積成圓錐形；日本阿爾卑斯則是地殼被推擠<b>隆起</b>形成的長條山脈。
+    所以富士山是孤零零一座漂亮的圓錐，阿爾卑斯則是連綿起伏、稜線鋸齒狀的山脈。
+    富士山位在 Fossa Magna 裡面，也在北美、歐亞、菲律賓海三塊板塊交會的附近。
+  </p>
+  <table class="cmp">
+    <tr><th></th><th>隆起形成的山脈</th><th>火山</th></tr>
+    <tr><td>形狀</td><td>長條、連綿、稜線鋸齒狀</td><td>單獨一座、圓錐形</td></tr>
+    <tr><td>成因</td><td>板塊推擠 → 地殼隆起</td><td>隱沒 → 岩漿 → 噴發堆積</td></tr>
+    <tr><td>例子</td><td>飛驒、木曾、赤石、奧羽山脈</td><td>富士山、淺間山、櫻島</td></tr>
+  </table>
+  <p class="small">注意：奧羽山脈本身是隆起的山脈，但火山前線剛好通過它，所以山脈上面又長出了許多火山（岩手山、藏王山等）。兩種成因可以疊在同一個地方。</p>
+
+  <div class="source">
+    <b>推薦閱讀</b>：<a href="https://www.gsi.go.jp/common/000057258.pdf" target="_blank">国土地理院「日本アルプスの隆起運動に関する研究」</a>（日文 PDF，看第 1 節「はじめに」就好，可以了解科學家目前知道和不知道的部分）。<br>
+    <b>速查表</b>：<a href="../reference/mountains.html">日本主要山脈速查</a>・<a href="../reference/plates-quakes-volcanoes.html">板塊、地震與火山速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <p class="small">憑記憶作答。最後三題是複習第 1 課和診斷考卷的內容。</p>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <div class="callout">有不懂的地方，或想知道更多（例如「為什麼要叫阿爾卑斯」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+
+  <nav class="lesson-nav">
+    <a href="0002-plates-quakes-volcanoes.html">← 第 1 課：板塊、地震與火山</a>
+    <a href="0004-monsoon-meets-mountains.html">下一課：季風碰上山 →</a>
+  </nav>
+</main>
+
+<script>
+const RANGES = [
+  { label: '日高山脈', labelAt: 0, coords: [[142.3, 43.2], [142.9, 42.6], [143.2, 42.05]] },
+  { label: '奧羽山脈', labelAt: 1, coords: [[140.95, 41.0], [140.9, 40.0], [140.7, 39.0], [140.5, 38.0], [140.2, 37.2]] },
+  { label: '越後山脈', labelAt: 0, coords: [[139.65, 37.45], [139.2, 36.9]] },
+  { label: '日本阿爾卑斯', labelAt: 0, coords: [[137.7, 36.85], [137.6, 36.1], [137.9, 35.6], [138.15, 35.2]] },
+  { label: '紀伊山地', labelAt: 1, coords: [[135.9, 34.35], [135.85, 33.9]] },
+  { label: '中國山地', labelAt: 2, coords: [[131.9, 34.5], [132.8, 34.85], [133.6, 35.15], [134.5, 35.25]] },
+  { label: '四國山地', labelAt: 1, coords: [[132.8, 33.6], [133.5, 33.8], [134.3, 33.9]] },
+  { label: '九州山地', labelAt: 1, coords: [[130.95, 32.75], [131.2, 32.3], [131.2, 31.95]] },
+];
+JapanMap.render(document.getElementById('spine-map'), {
+  lines: RANGES,
+  points: [{ shape: 'tri', label: '富士山', lon: 138.73, lat: 35.36 }],
+});
+JapanMap.render(document.getElementById('alps-map'), {
+  view: [[136.4, 34.8], [139.4, 37.2]],
+  lines: [
+    { label: '飛驒山脈（北）', labelAt: 0, coords: [[137.72, 36.95], [137.62, 36.58], [137.65, 36.3], [137.55, 36.08]] },
+    { label: '木曾山脈（中央）', labelAt: 0, coords: [[137.85, 35.98], [137.8, 35.78], [137.65, 35.45]] },
+    { label: '赤石山脈（南）', labelAt: 0, coords: [[138.25, 35.8], [138.16, 35.46], [138.02, 35.2]] },
+    { cls: 'uncertain', label: '糸魚川—靜岡構造線', labelAt: 0, coords: [[137.86, 37.04], [137.95, 36.5], [138.1, 36.05], [138.3, 35.5], [138.38, 34.98]] },
+  ],
+  points: [
+    { shape: 'tri', label: '富士山 3776', lon: 138.73, lat: 35.36 },
+    { label: '奧穗高岳', lon: 137.65, lat: 36.29 },
+    { label: '北岳', lon: 138.24, lat: 35.67 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '第 2 課 小測驗：日本的屋脊',
+  facets: [{ id: 'l2', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'jgeo-lesson-0003-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  questions: [
+    { id: 'l2-1', facet: 'l2', level: 2, type: 'mapPoints', view: [[136.4, 34.8], [139.4, 37.2]],
+      points: [
+        { name: '赤石山脈（南阿爾卑斯）', lon: 138.16, lat: 35.5, correct: true },
+        { name: '飛驒山脈（北阿爾卑斯）', lon: 137.62, lat: 36.4 },
+        { name: '木曾山脈（中央阿爾卑斯）', lon: 137.8, lat: 35.75 },
+        { name: '富士山', lon: 138.73, lat: 35.36 },
+      ],
+      prompt: '哪一點是<b>赤石山脈（南阿爾卑斯）</b>？',
+      explain: '由西到東：飛驒（北）、木曾（中央）、赤石（南）。富士山在赤石山脈的東邊、Fossa Magna 裡面。' },
+    { id: 'l2-2', facet: 'l2', level: 1, type: 'choice',
+      prompt: '飛驒山脈的俗稱是？',
+      options: ['北阿爾卑斯', '中央阿爾卑斯', '南阿爾卑斯', '東阿爾卑斯'],
+      explain: '飛驒＝北、木曾＝中央、赤石＝南。沒有「東阿爾卑斯」。' },
+    { id: 'l2-3', facet: 'l2', level: 1, type: 'choice',
+      prompt: '富士山的標高是多少？',
+      options: ['3,776 公尺', '3,193 公尺', '3,190 公尺', '4,776 公尺'],
+      explain: '富士山 3,776 m 是第一高峰；北岳 3,193 m 第二；奧穗高岳 3,190 m。' },
+    { id: 'l2-4', facet: 'l2', level: 2, type: 'choice',
+      prompt: '富士山和飛驒山脈的成因有什麼不同？',
+      options: ['富士是火山，飛驒是隆起山脈', '富士是隆起山脈，飛驒是火山', '兩者都是由岩漿噴發堆積成的', '兩者都是由地殼推擠隆起成的'],
+      explain: '富士山是岩漿噴發堆積的圓錐形火山；飛驒山脈是地殼被推擠隆起的長條山脈。' },
+    { id: 'l2-5', facet: 'l2', level: 2, type: 'mapPoints',
+      points: [
+        { name: '奧羽山脈', lon: 140.8, lat: 39.5, correct: true },
+        { name: '日高山脈', lon: 142.85, lat: 42.6 },
+        { name: '中國山地', lon: 133.2, lat: 35.0 },
+        { name: '紀伊山地', lon: 135.9, lat: 34.1 },
+      ],
+      prompt: '東北地方的「脊梁」<b>奧羽山脈</b>是哪一點？',
+      explain: '奧羽山脈南北縱貫東北地方的中央，把東北分成太平洋側和日本海側；火山前線也通過這裡。' },
+    { id: 'l2-6', facet: 'l2', level: 3, type: 'short',
+      prompt: '南阿爾卑斯（赤石山脈）被認為還在長高。用至少兩個步驟（A → B → C）說明原因。',
+      keywords: [['菲律賓海'], ['伊豆'], ['碰撞', '衝突', '撞', '擠壓', '推擠', '推'], ['隆起', '抬升', '長高', '上升']],
+      need: 3,
+      answer: '菲律賓海板塊向北移動 → 板塊上的伊豆半島（原本是火山島）撞上本州 → 從南邊持續推擠本州中部 → 赤石山脈隆起。不過整個日本阿爾卑斯的隆起機制，科學上還沒有完全釐清。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 1 課）神戶的有馬溫泉附近沒有火山，溫泉的熱水主要從哪裡來？',
+      options: ['年輕板塊在淺處釋出的熱水', '附近火山底下的岩漿加熱的', '海水滲入地底被地熱加熱的', '古代火山殘留在地底的熱水'],
+      explain: '近畿底下是年輕而熱的菲律賓海板塊，水在淺處就被擠出來，直接成為溫泉；也因為水在淺處就用光了，深處產生不了岩漿。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 1 課）阪神・淡路大震災屬於哪一種地震？',
+      options: ['陸地淺層的直下型地震', '板塊交界的海溝型地震', '火山噴發引起的火山性地震', '下沉板塊內部發生的深層地震'],
+      explain: '由活斷層錯動引起，震源淺、就在城市正下方。這是你在診斷時不知道的題目。' },
+    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習診斷）日本最長的河川信濃川，最後流進哪一片海？',
+      options: ['日本海', '太平洋', '瀨戶內海', '鄂霍次克海'],
+      explain: '信濃川從長野流到新潟注入日本海。它位在脊梁山脈的日本海側。' },
+  ],
+});
+</script>
+</body>
+</html>

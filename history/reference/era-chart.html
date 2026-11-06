@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本史時代總覽</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<style>
+  .viz-root {
+    --cat-1: #2a78d6; --cat-2: #eb6834; --cat-3: #1baf7a;
+    --cat-4: #eda100; --cat-5: #e87ba4; --cat-6: #008300;
+    --cn-a: #cfc9bf; --cn-b: #e4dfd6;
+  }
+  @media (prefers-color-scheme: dark) {
+    .viz-root {
+      --cat-1: #3987e5; --cat-2: #d95926; --cat-3: #199e70;
+      --cat-4: #c98500; --cat-5: #d55181; --cat-6: #008300;
+      --cn-a: #3d3935; --cn-b: #312e2b;
+    }
+  }
+  main.wide { max-width: 860px; }
+  .chart-scroll { overflow-x: auto; margin: 1.5em 0; }
+  .chart-scroll svg { display: block; width: 100%; min-width: 680px; height: auto; }
+  .legend { display: flex; flex-wrap: wrap; gap: .4em 1.2em; font-family: "Noto Sans TC", sans-serif; font-size: .85rem; margin: .4em 0; }
+  .legend span::before {
+    content: ""; display: inline-block; width: .9em; height: .9em; border-radius: 2px;
+    margin-right: .35em; vertical-align: -.1em; background: var(--c);
+  }
+  .legend .ev-b::before { width: .7em; height: .7em; transform: rotate(45deg); background: var(--accent); border-radius: 0; }
+  .legend .ev-o::before { width: .55em; height: .55em; border-radius: 50%; background: none; border: 1.5px solid var(--muted); }
+  #tip {
+    position: fixed; pointer-events: none; display: none; z-index: 10; max-width: 280px;
+    background: var(--card); color: var(--text); border: 1px solid var(--rule); border-radius: 6px;
+    padding: .4em .7em; font-family: "Noto Sans TC", sans-serif; font-size: .8rem; line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  }
+  svg text { font-family: "Noto Sans TC", sans-serif; fill: var(--text); }
+  svg .axis text { fill: var(--muted); font-size: 10px; }
+  svg .axis line { stroke: var(--rule); }
+  svg .hit:hover { stroke: var(--text); stroke-width: 1; }
+  svg .cn text { fill: var(--muted); }
+  svg .ev-b text.lbl { fill: var(--accent); font-weight: 500; }
+</style>
+</head>
+<body>
+<main class="wide viz-root">
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本歷史</a></nav>
+
+<nav class="crumbs">日本史因果主線 · 參考文件 · <a href="timeline.html">年表速查（表格版）</a></nav>
+<h1>日本史時代總覽</h1>
+<p class="subtitle">由上往下是時間。中間是各時代與當時的掌權者，右邊是重大事件和年份，最右側淡色的是同時期的中國朝代，只供大致對照。滑鼠移到色帶或事件上可看詳細資訊。</p>
+
+<div class="legend" aria-label="分類圖例">
+  <span style="--c: var(--cat-1)">原始</span>
+  <span style="--c: var(--cat-2)">古代</span>
+  <span style="--c: var(--cat-3)">中世</span>
+  <span style="--c: var(--cat-4)">近世</span>
+  <span style="--c: var(--cat-5)">近代</span>
+  <span style="--c: var(--cat-6)">現代</span>
+</div>
+<div class="legend" aria-label="事件圖例">
+  <span class="ev-b">時代的分界事件</span>
+  <span class="ev-o">課程中出現過的其他事件</span>
+</div>
+
+<div class="chart-scroll"><svg id="chart" role="img" aria-label="日本時代、掌權者、重大事件與中國朝代的時間對照圖"></svg></div>
+<div id="tip"></div>
+
+<h2>讀圖說明</h2>
+<ul>
+<li><strong>最上方一段沒有照比例</strong>。舊石器和繩文加起來超過三萬年，照比例畫的話其他時代會擠成細線，所以壓縮在折線上方。折線以下（西元前 300 年起）所有欄位共用同一把尺。</li>
+<li><strong>紅線</strong>從分界事件一路拉到左側，正好落在兩個時代的交界上。</li>
+<li><strong>事件標籤有時會往下錯開</strong>。年份接近的事件擠在一起時，文字會依序往下排，用細線連回圓點；<strong>圓點的高度才是事件真正的年份</strong>。</li>
+<li><strong>南北朝、戰國</strong>畫在「細分」欄，它們是室町時代內部的時期。戰國的結束點這裡採 1590 年豐臣秀吉統一全國，所以它跨進了安土桃山時代。<sup class="cite"><a href="https://japanknowledge.com/introduction/keyword.html?i=1930">[1]</a></sup></li>
+<li><strong>昭和</strong>橫跨近代和現代，以 1945 年戰敗為界。</li>
+<li>明治以後一位天皇只用一個年號，<strong>天皇過世或退位就換時代名稱</strong>，所以大正、昭和、平成、令和的分界都是改元，沒有政權更替。</li>
+<li>色帶太短的時代（大正、令和等）只顯示名稱，掌權者請用滑鼠查看。</li>
+</ul>
+
+<h2>有爭議的年份採用哪一說</h2>
+<table>
+<thead><tr><th>項目</th><th>本圖採用</th><th>其他說法</th></tr></thead>
+<tbody>
+<tr><td>舊石器開始</td><td>約 3 萬 8 千年前</td><td>有更早的主張，證據仍有爭議</td></tr>
+<tr><td>繩文開始</td><td>約前 14000 年</td><td>約前 10000 年起算等</td></tr>
+<tr><td>彌生開始</td><td>約前 300 年</td><td>放射性碳定年支持前 10 世紀左右</td></tr>
+<tr><td>飛鳥開始</td><td>592 年（推古天皇即位）<sup class="cite"><a href="https://japanknowledge.com/introduction/keyword.html?i=537">[2]</a></sup></td><td>593 年；或以佛教傳入的 538／552 年</td></tr>
+<tr><td>平安結束／鎌倉開始</td><td>1185 年</td><td>舊教科書用 1192 年（源賴朝任征夷大將軍）</td></tr>
+<tr><td>戰國</td><td>1467–1590 年</td><td>結束點另有 1568、1573、1600、1615 年等說</td></tr>
+<tr><td>江戶開始</td><td>1603 年</td><td>1600 年（關原之戰）</td></tr>
+<tr><td>中國的夏</td><td>約前 2070–前 1600 年</td><td>夏是否存在仍有爭議</td></tr>
+</tbody>
+</table>
+<p class="note">中國朝代畫的是統一或主要政權的期間：隋從 589 年統一算起（建國 581），元從 1279 年滅南宋算起（定國號 1271）。1949 年以後並列中華民國（臺灣）與中華人民共和國。</p>
+
+<p class="muted" style="font-size:.8rem">引用：[1] <a href="https://japanknowledge.com/introduction/keyword.html?i=1930">JapanKnowledge：戦国時代</a>　[2] <a href="https://japanknowledge.com/introduction/keyword.html?i=537">JapanKnowledge：飛鳥時代</a>　其餘年份見 <a href="timeline.html">年表速查</a> 與各課的來源。</p>
+
+</main>
+
+<script>
+(function () {
+  const NOW = 2026;
+  const Y0 = -300, K = 1.25;            // 線性區：前300 起，每年 1.25px
+  const HEAD = 34, COMP = 230;          // 表頭高、壓縮區高
+  const LIN_TOP = HEAD + COMP;
+  const y = (yr) => LIN_TOP + (yr - Y0) * K;
+  const C = (f) => HEAD + f * COMP;     // 壓縮區內的位置（不依比例）
+  const W = 760;
+  const COL = {
+    axis: [0, 44], cat: [48, 40], jp: [92, 168], sub: [264, 52],
+    ev: [326, 330], cn: [672, 88]
+  };
+  const EV_X = COL.ev[0] + 6;           // 事件圓點所在的直線
+  const cat = (n) => `var(--cat-${n})`;
+  const span = (a, b) => b - a - (a < 0 && b > 0 ? 1 : 0);   // 跨西元前後時無 0 年
+  const fmt = (yr) => (yr < 0 ? "前" + -yr : String(yr));
+
+  const categories = [
+    { name: "原始", c: 1, top: C(0), bot: y(250) },
+    { name: "古代", c: 2, top: y(250), bot: y(1185) },
+    { name: "中世", c: 3, top: y(1185), bot: y(1573) },
+    { name: "近世", c: 4, top: y(1573), bot: y(1868) },
+    { name: "近代", c: 5, top: y(1868), bot: y(1945) },
+    { name: "現代", c: 6, top: y(1945), bot: y(NOW) },
+  ];
+
+  // who：掌權者，每個元素一行
+  const jp = [
+    { n: "舊石器", c: 1, top: C(0), bot: C(0.45), dur: "約2萬4千年", tip: "約前36000 – 約前14000", who: ["狩獵採集的小群體"] },
+    { n: "繩文", c: 1, top: C(0.45), bot: LIN_TOP, dur: "約1萬3700年", tip: "約前14000 – 約前300", who: ["聚落社會", "無統一政權"] },
+    { n: "彌生", c: 1, a: -300, b: 250, who: ["各地小國的王", "後期：卑彌呼", "（邪馬台國）"] },
+    { n: "古墳", c: 2, a: 250, b: 592, who: ["大和政權", "（大王與豪族聯盟）"] },
+    { n: "飛鳥", c: 2, a: 592, b: 710, who: ["天皇與豪族", "蘇我氏 → 天皇中心"] },
+    { n: "奈良", c: 2, a: 710, b: 794, who: ["天皇與貴族", "（藤原氏崛起）"] },
+    { n: "平安", c: 2, a: 794, b: 1185, who: ["天皇與貴族", "藤原氏攝關 → 上皇院政", "→ 平氏"] },
+    { n: "鎌倉", c: 3, a: 1185, b: 1333, who: ["鎌倉幕府", "源氏將軍 → 北條氏執權"] },
+    { n: "建武新政", c: 3, a: 1333, b: 1336, nolabel: true, who: ["後醍醐天皇親政"] },
+    { n: "室町", c: 3, a: 1336, b: 1573, who: ["室町幕府（足利氏）", "後期實權落入各地大名"] },
+    { n: "安土桃山", c: 4, a: 1573, b: 1603, who: ["織田信長 → 豐臣秀吉"] },
+    { n: "江戶", c: 4, a: 1603, b: 1868, who: ["江戶幕府（德川氏）"] },
+    { n: "明治", c: 5, a: 1868, b: 1912, who: ["明治政府", "（薩長出身的領導者）"] },
+    { n: "大正", c: 5, a: 1912, b: 1926, who: ["政黨內閣興起"] },
+    { n: "昭和", c: 5, a: 1926, b: 1989, split: 1945, who: ["戰前：軍部勢力抬頭", "戰後：占領改革 → 議會內閣"] },
+    { n: "平成", c: 6, a: 1989, b: 2019, who: ["議會內閣"] },
+    { n: "令和", c: 6, a: 2019, b: NOW, ongoing: true, outside: true, who: ["議會內閣"] },
+  ];
+  const sub = [
+    { n: "南北朝", c: 3, a: 1336, b: 1392, who: ["南朝（吉野）與北朝（京都）兩個天皇對立"] },
+    { n: "戰國", c: 3, a: 1467, b: 1590, who: ["各地戰國大名割據"] },
+  ];
+
+  // b: true 表示時代的分界事件；cy：壓縮區內的位置
+  const events = [
+    { cy: C(0.45), t: "約前14000", s: "陶器出現（繩文開始）", b: true },
+    { yr: -300, t: "約前300", s: "稻作・金屬器傳入北九州（彌生開始）", b: true, off: 12 },
+    { yr: 57, s: "奴國王受東漢金印" },
+    { yr: 185, t: "2世紀後半", s: "倭國大亂 → 共立卑彌呼" },
+    { yr: 239, s: "卑彌呼遣使魏國" },
+    { yr: 250, t: "約250", s: "前方後圓墳出現（古墳開始）", b: true },
+    { yr: 538, t: "538／552", s: "佛教從朝鮮半島傳入" },
+    { yr: 587, s: "蘇我氏滅物部氏" },
+    { yr: 592, s: "推古天皇即位（飛鳥開始）", b: true },
+    { yr: 607, s: "遣隋使小野妹子" },
+    { yr: 645, s: "乙巳之變 → 大化革新（公地公民）" },
+    { yr: 663, s: "白村江戰敗 → 加速中央集權" },
+    { yr: 672, s: "壬申之亂 → 天武天皇" },
+    { yr: 701, s: "大寶律令（律令國家完成）" },
+    { yr: 710, s: "遷都平城京（奈良開始）", b: true },
+    { yr: 743, s: "墾田永年私財法 → 莊園擴大" },
+    { yr: 752, s: "東大寺大佛開眼（寺院勢力膨脹）" },
+    { yr: 784, s: "遷都長岡京（擺脫寺院干政）" },
+    { yr: 794, s: "遷都平安京（平安開始）", b: true },
+    { yr: 894, s: "停派遣唐使 → 國風文化" },
+    { yr: 939, s: "平將門之亂（朝廷靠武士平定）" },
+    { yr: 1016, s: "藤原道長任攝政（攝關全盛）" },
+    { yr: 1086, s: "白河上皇開始院政" },
+    { yr: 1156, s: "保元之亂（武士決定朝廷之爭）" },
+    { yr: 1167, s: "平清盛任太政大臣" },
+    { yr: 1185, s: "平氏滅亡、源賴朝掌權（鎌倉開始）", b: true },
+    { yr: 1333, s: "鎌倉幕府滅亡 → 建武新政", b: true },
+    { yr: 1336, s: "足利尊氏開幕府（室町開始）", b: true },
+    { yr: 1467, s: "應仁之亂（戰國開始）" },
+    { yr: 1573, s: "信長逐出將軍足利義昭（室町結束）", b: true },
+    { yr: 1590, s: "豐臣秀吉統一全國" },
+    { yr: 1600, s: "關原之戰，德川家康勝出" },
+    { yr: 1603, s: "家康任征夷大將軍（江戶開始）", b: true },
+    { yr: 1853, s: "黑船來航（西方叩關）" },
+    { yr: 1868, s: "明治維新（明治開始）", b: true },
+    { yr: 1912, s: "明治天皇逝世，改元大正", b: true },
+    { yr: 1926, s: "大正天皇逝世，改元昭和", b: true },
+    { yr: 1945, s: "戰敗投降（近代 → 現代）", b: true },
+    { yr: 1989, s: "昭和天皇逝世，改元平成", b: true },
+    { yr: 2019, s: "天皇退位，改元令和", b: true },
+  ];
+
+  const cn = [
+    { n: "史前", top: C(0), bot: C(0.5), tip: "舊石器・新石器時代" },
+    { n: "夏", top: C(0.5), bot: C(0.64), tip: "約前2070 – 約前1600（存在仍有爭議）" },
+    { n: "商", top: C(0.64), bot: C(0.78), tip: "約前1600 – 前1046" },
+    { n: "西周", top: C(0.78), bot: C(0.88), tip: "前1046 – 前771" },
+    { n: "春秋", top: C(0.88), bot: C(0.96), tip: "前770 – 前476" },
+    { n: "戰國", top: C(0.96), bot: y(-221), tip: "前475 – 前221" },
+    { n: "秦", a: -221, b: -206 },
+    { n: "西漢", a: -202, b: 8 },
+    { n: "新", a: 9, b: 23 },
+    { n: "東漢", a: 25, b: 220 },
+    { n: "三國", a: 220, b: 266 },
+    { n: "西晉", a: 266, b: 316 },
+    { n: "東晉十六國", a: 317, b: 420 },
+    { n: "南北朝", a: 420, b: 589 },
+    { n: "隋", a: 589, b: 618, note: "581年建國，589年統一" },
+    { n: "唐", a: 618, b: 907 },
+    { n: "五代十國", a: 907, b: 960 },
+    { n: "北宋", a: 960, b: 1127 },
+    { n: "南宋", a: 1127, b: 1279 },
+    { n: "元", a: 1279, b: 1368, note: "1271年定國號，1279年滅南宋" },
+    { n: "明", a: 1368, b: 1644 },
+    { n: "清", a: 1644, b: 1912 },
+    { n: "中華民國", a: 1912, b: 1949 },
+    { n: "臺", a: 1949, b: NOW, half: 0, ongoing: true, tip: "中華民國（臺灣）1949 – 至今" },
+    { n: "中", a: 1949, b: NOW, half: 1, ongoing: true, tip: "中華人民共和國 1949 – 至今" },
+  ];
+
+  // ---- 版面高度：事件標籤可能往下推，最後再決定 ----
+  const LINE = 13.5;
+  let lastY = -Infinity;
+  events.forEach((e) => {
+    e.dot = e.cy ?? y(e.yr);
+    e.ly = Math.max(e.dot + (e.off || 0), lastY + LINE);
+    lastY = e.ly;
+  });
+  const H = Math.ceil(Math.max(y(NOW), lastY) + 16);
+
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("chart");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const el = (tag, attrs, parent = svg) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e);
+    return e;
+  };
+  const txt = (s, attrs, parent) => { const e = el("text", { "pointer-events": "none", ...attrs }, parent); e.textContent = s; return e; };
+  const tip = document.getElementById("tip");
+  const hover = (node, html) => {
+    node.classList.add("hit");
+    node.addEventListener("mousemove", (ev) => {
+      tip.innerHTML = html;
+      tip.style.display = "block";
+      tip.style.left = Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 8) + "px";
+      tip.style.top = ev.clientY + 14 + "px";
+    });
+    node.addEventListener("mouseleave", () => (tip.style.display = "none"));
+  };
+
+  // 表頭
+  [["分類", COL.cat], ["日本時代・掌權者", COL.jp], ["細分", COL.sub], ["重大事件", COL.ev], ["中國", COL.cn]].forEach(([t, [x, w]]) =>
+    txt(t, { x: x + w / 2, y: 20, "text-anchor": "middle", "font-size": 12, "font-weight": 500 }));
+
+  // 壓縮區背景與折線
+  el("rect", { x: 0, y: HEAD, width: W, height: COMP, fill: "var(--rule)", "fill-opacity": 0.25 });
+  txt("不依比例", { x: 2, y: HEAD + 14, "font-size": 10, fill: "var(--muted)" });
+  let zz = `M0 ${LIN_TOP}`;
+  for (let x = 0; x <= W; x += 8) zz += ` L${x} ${LIN_TOP + (x / 8 % 2 ? -3 : 3)}`;
+  el("path", { d: zz, fill: "none", stroke: "var(--muted)", "stroke-width": 1 });
+
+  // 時間軸
+  const axis = el("g", { class: "axis" });
+  txt("前300", { x: COL.axis[1] - 6, y: LIN_TOP - 7, "text-anchor": "end" }, axis);
+  for (let yr = -200; yr <= 2000; yr += 100) {
+    const yy = y(yr);
+    el("line", { x1: COL.axis[1] - 4, x2: COL.ev[0], y1: yy, y2: yy, "stroke-dasharray": "2 4", "stroke-opacity": 0.8 }, axis);
+    txt(yr === 0 ? "0" : fmt(yr), { x: COL.axis[1] - 6, y: yy + 3.5, "text-anchor": "end" }, axis);
+  }
+
+  const GAP = 1;   // 上下各留 1px，相鄰色帶之間形成 2px 間隙
+  const rangeOf = (d) => d.tip ?? (d.ongoing ? `${fmt(d.a)} – 至今` : `${fmt(d.a)} – ${fmt(d.b)}`);
+  const yearsOf = (d) => d.dur ?? (d.ongoing ? `${span(d.a, d.b)}年+（至今）` : `約${span(d.a, d.b)}年`);
+  function rect(d, [x, w], fill, opacity, parent) {
+    const top = d.top ?? y(d.a), bot = d.bot ?? y(d.b);
+    const r = el("rect", { x, y: top + GAP, width: w, height: Math.max(bot - top - GAP * 2, 1), rx: 3, fill, "fill-opacity": opacity }, parent);
+    return { r, top, bot, h: bot - top - GAP * 2 };
+  }
+  // 依可用高度決定顯示幾行：名稱、年數、掌權者
+  function eraLabel(d, x, top, bot) {
+    const h = bot - top, cx = x + COL.jp[1] / 2, who = d.who || [];
+    const fit = Math.min(who.length, Math.floor((h - 16) / LINE) - 1);   // 放得下幾行掌權者
+    let lines;
+    if (h >= 30) lines = [[d.n, 13, 600], [yearsOf(d), 10.5], ...who.slice(0, Math.max(fit, 0)).map((w) => [w, 10.5, 400, true])];
+    else lines = [[`${d.n} ${yearsOf(d).replace("約", "")}`, h >= 16 ? 12 : 10.5, 600]];
+    const total = (lines.length - 1) * LINE;
+    let yy = top + h / 2 - total / 2 + 4;
+    lines.forEach(([s, size, weight, muted]) => {
+      txt(s, { x: cx, y: yy, "text-anchor": "middle", "font-size": size, "font-weight": weight || 400, ...(muted ? { "fill-opacity": 0.8 } : {}) });
+      yy += LINE;
+    });
+  }
+  const eraTip = (d, extra = "") => `<strong>${d.n}</strong>　${rangeOf(d)}<br>${yearsOf(d)}${extra}${d.who ? "<br>掌權者：" + d.who.join("") : ""}`;
+
+  // 分類欄
+  categories.forEach((d) => {
+    const r = el("rect", { x: COL.cat[0], y: d.top + GAP, width: COL.cat[1], height: d.bot - d.top - GAP * 2, rx: 3, fill: cat(d.c) });
+    hover(r, `<strong>${d.name}</strong>`);
+    txt(d.name, { x: COL.cat[0] + COL.cat[1] / 2, y: (d.top + d.bot) / 2 + 5, "text-anchor": "middle",
+      "font-size": 13, "font-weight": 700, fill: [3, 4, 5].includes(d.c) ? "#111" : "#fff" });
+  });
+
+  // 日本時代
+  jp.forEach((d) => {
+    if (d.split) {
+      // 昭和：戰前屬近代、戰後屬現代，色帶分兩段，文字寫在整段中央
+      const a = rect({ ...d, b: d.split }, COL.jp, cat(5), 0.28);
+      const b = rect({ ...d, a: d.split }, COL.jp, cat(6), 0.28);
+      hover(a.r, eraTip(d, "（戰前屬近代）"));
+      hover(b.r, eraTip(d, "（戰後屬現代）"));
+      eraLabel(d, COL.jp[0], y(d.a), y(d.b));
+      return;
+    }
+    const { r, top, bot } = rect(d, COL.jp, cat(d.c), 0.28);
+    hover(r, eraTip(d));
+    if (d.nolabel) return;
+    if (d.outside) {
+      txt(`${d.n} ${yearsOf(d)}`, { x: COL.sub[0], y: bot + 12, "font-size": 10.5, "font-weight": 600 });
+      return;
+    }
+    eraLabel(d, COL.jp[0], top, bot);
+  });
+
+  // 細分欄
+  sub.forEach((d) => {
+    const { r, top, bot } = rect(d, COL.sub, cat(d.c), 0.5);
+    hover(r, eraTip(d));
+    const mid = (top + bot) / 2;
+    txt(d.n, { x: COL.sub[0] + COL.sub[1] / 2, y: mid - 2, "text-anchor": "middle", "font-size": 11.5, "font-weight": 600 });
+    txt(yearsOf(d), { x: COL.sub[0] + COL.sub[1] / 2, y: mid + 11, "text-anchor": "middle", "font-size": 9.5 });
+  });
+
+  // 事件欄
+  el("line", { x1: EV_X, x2: EV_X, y1: HEAD, y2: y(NOW), stroke: "var(--rule)", "stroke-width": 1 });
+  events.forEach((e) => {
+    const g = el("g", { class: e.b ? "ev-b" : "ev-o" });
+    if (e.b) {
+      // 分界線一路拉到左側的時代色帶，應正好落在兩個時代的交界
+      el("line", { x1: COL.cat[0], x2: EV_X, y1: e.dot, y2: e.dot, stroke: "var(--accent)", "stroke-width": 1.2, "stroke-opacity": 0.85 }, g);
+      el("rect", { x: EV_X - 4, y: e.dot - 4, width: 8, height: 8, fill: "var(--accent)", transform: `rotate(45 ${EV_X} ${e.dot})` }, g);
+    } else {
+      el("circle", { cx: EV_X, cy: e.dot, r: 3.2, fill: "var(--bg)", stroke: "var(--muted)", "stroke-width": 1.5 }, g);
+    }
+    el("path", { d: `M${EV_X + 6} ${e.dot} L${EV_X + 14} ${e.ly - 3.5} L${EV_X + 18} ${e.ly - 3.5}`, fill: "none", stroke: "var(--rule)", "stroke-width": 1 }, g);
+    const label = `${e.t ?? fmt(e.yr)}　${e.s}`;
+    txt(label, { class: "lbl", x: EV_X + 20, y: e.ly, "font-size": 10.5 }, g);
+    const hit = el("rect", { x: EV_X - 6, y: Math.min(e.dot, e.ly) - 9, width: COL.ev[1] - 4, height: Math.abs(e.ly - e.dot) + 12, fill: "transparent" }, g);
+    hover(hit, `<strong>${e.t ?? fmt(e.yr)}</strong><br>${e.s}${e.b ? "<br>（時代分界）" : ""}`);
+    hit.classList.remove("hit");
+  });
+
+  // 中國欄（淡化，只供對照）
+  const cnG = el("g", { class: "cn" });
+  cn.forEach((d, i) => {
+    const col = d.half === undefined ? COL.cn : [COL.cn[0] + d.half * (COL.cn[1] / 2 + 1), COL.cn[1] / 2 - 1];
+    const { r, top, bot, h } = rect(d, col, i % 2 ? "var(--cn-a)" : "var(--cn-b)", 1, cnG);
+    hover(r, `<strong>${d.tip && d.half !== undefined ? d.tip : d.n}</strong><br>${d.tip && d.half === undefined ? d.tip : rangeOf(d)}${d.note ? "<br>" + d.note : ""}`);
+    if (h >= 11) txt(d.n, { x: col[0] + col[1] / 2, y: (top + bot) / 2 + 3.5, "text-anchor": "middle", "font-size": 9.5 }, cnG);
+  });
+})();
+</script>
+</body>
+</html>

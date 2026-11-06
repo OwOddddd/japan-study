@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>板塊、地震與火山</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 1 課・板塊、地震與火山</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 1 課・約 10 分鐘</p>
+  <h1>一個原因，三種現象</h1>
+  <p class="lede">日本的高山、地震和火山，其實都是同一件事造成的：海洋板塊鑽到日本底下。</p>
+
+  <div class="callout">
+    <b>為什麼先學這個</b>：去日本旅行時，你會泡溫泉、看到富士山和櫻島，手機也可能響起地震速報。這些全都來自今天這條因果鏈。
+    診斷時你寫了「位在聚合型板塊的交界處」。這個起點是對的，今天要把後面的步驟接完整。
+  </div>
+
+  <h2>1. 日本底下有四塊板塊</h2>
+  <p>
+    兩塊<b>海洋板塊</b>（太平洋板塊、菲律賓海板塊）每年以幾公分的速度往日本移動，鑽到兩塊<b>大陸板塊</b>（北美板塊、歐亞板塊）的下方
+    （<a href="https://www.data.jma.go.jp/eqev/data/jishin/about_eq.html" target="_blank">気象庁</a>）。
+    海洋板塊開始往下鑽的地方，海底會出現一道又深又長的溝，叫做<b>海溝</b>。比較淺的叫<b>海槽</b>。
+  </p>
+  <figure>
+    <div class="mapbox" id="plate-map"></div>
+    <figcaption>藍線是海溝與海槽，灰色虛線是北美板塊和歐亞板塊的交界（位置仍有爭論），紅色三角形是主要活火山。位置都只是示意。</figcaption>
+  </figure>
+  <p>先看地圖找出一個規律：<b>火山排成一條線，而且和海溝平行</b>。不過火山不是緊貼著海溝，中間隔了一段距離。例如三陸海岸面對日本海溝，卻一座火山都沒有；東北的火山都在內陸的奧羽山脈一帶。為什麼會這樣？要看剖面圖。</p>
+
+  <h2>2. 從側面看：一張圖說明三種現象</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 360" role="img" aria-label="海洋板塊隱沒到大陸板塊下方的剖面示意圖">
+      <rect x="0" y="0" width="720" height="360" class="d-mantle"/>
+      <rect x="0" y="0" width="720" height="60" fill="var(--bg)"/>
+      <!-- 海 -->
+      <polygon points="388,60 720,60 720,96 440,110" class="d-sea"/>
+      <!-- 大陸板塊 -->
+      <polygon points="0,58 390,60 440,108 330,168 0,168" class="d-cont-plate"/>
+      <!-- 地表的山 -->
+      <polygon points="0,58 40,46 80,52 120,38 160,48 200,24 214,24 240,46 290,52 340,56 390,60" class="d-land"/>
+      <!-- 海洋板塊 -->
+      <polygon points="720,96 440,110 330,170 220,260 160,345 195,345 245,290 345,202 452,142 720,128" class="d-ocean-plate"/>
+      <!-- 100km 深度線 -->
+      <line x1="0" y1="235" x2="720" y2="235" stroke="var(--muted)" stroke-dasharray="4 4"/>
+      <text x="8" y="229" class="d-muted">深度約 100 km</text>
+      <!-- 板塊移動箭頭 -->
+      <path d="M690,88 L600,92" class="d-arrow" marker-end="url(#ah)"/>
+      <path d="M300,215 L265,252" class="d-arrow" marker-end="url(#ah)"/>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--ink)"/></marker></defs>
+      <!-- 斷層 -->
+      <line x1="80" y1="70" x2="100" y2="150" stroke="var(--ink)" stroke-width="1.5"/>
+      <line x1="130" y1="68" x2="148" y2="140" stroke="var(--ink)" stroke-width="1.5"/>
+      <!-- 水與岩漿 -->
+      <circle cx="244" cy="222" r="3" fill="var(--map-sel)"/><circle cx="236" cy="212" r="3" fill="var(--map-sel)"/><circle cx="230" cy="201" r="3" fill="var(--map-sel)"/>
+      <ellipse cx="216" cy="186" rx="16" ry="11" class="d-magma"/>
+      <path d="M212,174 L208,30" stroke="var(--accent)" stroke-width="3" stroke-dasharray="6 4"/>
+      <!-- 文字 -->
+      <text x="560" y="80" class="d-muted">太平洋</text>
+      <text x="470" y="125">太平洋板塊（海洋板塊）</text>
+      <text x="165" y="155">北美板塊（大陸板塊）</text>
+      <text x="440" y="50" class="d-muted" text-anchor="middle">日本海溝 ↓</text>
+      <text x="560" y="320" class="d-muted">地函</text>
+      <!-- 編號 -->
+      <g><circle cx="415" cy="96" r="11" class="d-badge"/><text x="415" y="100" class="d-num" text-anchor="middle">1</text></g>
+      <g><circle cx="115" cy="108" r="11" class="d-badge"/><text x="115" y="112" class="d-num" text-anchor="middle">2</text></g>
+      <g><circle cx="262" cy="196" r="11" class="d-badge"/><text x="262" y="200" class="d-num" text-anchor="middle">3</text></g>
+      <g><circle cx="235" cy="16" r="11" class="d-badge"/><text x="235" y="20" class="d-num" text-anchor="middle">4</text></g>
+    </svg>
+    <figcaption>東北日本的剖面示意圖（右邊是太平洋，左邊是日本海方向；比例不準確）</figcaption>
+  </figure>
+
+  <ol class="chain">
+    <li><b>板塊交界的地震（海溝型）</b>：海洋板塊往下鑽時，會把大陸板塊的邊緣一起往下拖。拖到撐不住時，大陸板塊整片彈回來，就是大地震。震源在海底，海床大範圍上下錯動，所以常伴隨大海嘯。例子：2011 年東北地方太平洋沖地震、未來的南海海槽地震。</li>
+    <li><b>陸地淺層的地震（直下型）</b>：整個日本被海洋板塊從東邊推擠，陸地內部累積壓力，沿著<b>活斷層</b>錯動。規模通常比海溝型小，但震源淺、就在城市正下方，搖晃特別劇烈。例子：1995 年阪神・淡路大震災（兵庫縣南部地震）、2016 年熊本地震（<a href="https://www.data.jma.go.jp/eqev/data/jishin/about_eq.html" target="_blank">気象庁</a>）。同樣的推擠也讓陸地隆起，這就是日本山又高又陡的原因。</li>
+    <li><b>岩漿從哪裡來</b>：海洋板塊在海底泡了很久，含有水。它下沉到大約 100 公里深時，水被擠出來，讓上方的地函岩石熔點降低，一部分熔成岩漿。<br><span class="small">常見誤解：岩漿是板塊「摩擦生熱」熔出來的。其實關鍵是「水」。</span></li>
+    <li><b>火山前線</b>：只有板塊下沉到夠深的地方，上方才會產生岩漿。所以火山排成一條和海溝平行的線，線和海溝之間那一段完全沒有火山。三陸海岸沒有火山，原因就在這裡。</li>
+  </ol>
+
+  <h2>3. 兩種地震，一張表</h2>
+  <table class="cmp">
+    <tr><th></th><th>海溝型（板塊交界）</th><th>直下型（陸地淺層）</th></tr>
+    <tr><td>發生在哪</td><td>海溝附近的海底</td><td>陸地內部的活斷層</td></tr>
+    <tr><td>規模</td><td>很大（規模 8–9 級）</td><td>較小（規模 7 級前後）</td></tr>
+    <tr><td>主要危險</td><td>大範圍搖晃＋海嘯</td><td>震源正上方搖晃極劇烈</td></tr>
+    <tr><td>例子</td><td>2011 東日本、南海海槽（預估）</td><td>1995 阪神・淡路、2016 熊本</td></tr>
+  </table>
+  <p class="small">氣象廳其實分成三類，第三類是「鑽下去的板塊內部發生的地震」，例如 1993 年釧路沖地震。入門先掌握上面兩類就夠了。</p>
+
+  <h2>4. 旅行時看得到的成果</h2>
+  <p>
+    日本有 <b>111 座活火山</b>（<a href="https://www.data.jma.go.jp/vois/data/tokyo/STOCK/kaisetsu/katsukazan_toha/katsukazan_toha.html" target="_blank">気象庁「活火山とは」</a>）。
+    火山底下的岩漿會把地下水加熱，所以箱根、草津、別府、霧島這些溫泉鄉都在火山前線附近。下次泡溫泉時，可以想一想這條鏈：
+    <b>海洋板塊下沉 → 釋出水 → 產生岩漿 → 火山 → 溫泉</b>。
+  </p>
+
+  <div class="source">
+    <b>推薦閱讀</b>：<a href="https://www.data.jma.go.jp/eqev/data/jishin/about_eq.html" target="_blank">気象庁「地震発生のしくみ」</a>（日文，有板塊模式圖和日本周邊的地震分布圖）。<br>
+    <b>速查表</b>：<a href="../reference/plates-quakes-volcanoes.html">板塊、地震與火山速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <p class="small">先不要往上翻，憑記憶作答。最後兩題是診斷考卷裡的舊題目，用來複習。</p>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <div class="callout">有任何地方不懂，或想知道更多（例如「為什麼四國幾乎沒有火山」），直接在對話框問老師。交卷後也可以把結果複製貼給老師。</div>
+
+  <nav class="lesson-nav">
+    <a href="0001-diagnostic-test.html">← 程度診斷</a>
+    <a href="0003-japan-alps-mountains.html">下一課：日本的屋脊 →</a>
+  </nav>
+</main>
+
+<script>
+JapanMap.render(document.getElementById('plate-map'), {
+  view: [[128.5, 30.5], [150, 45.8]],
+  lines: [
+    { cls: 'trench', label: '千島海溝', labelAt: 0, coords: [[150, 44.6], [147.5, 42.8], [145.2, 41.4]] },
+    { cls: 'trench', label: '日本海溝', labelAt: 2, coords: [[145.2, 41.4], [144.4, 39.5], [143.9, 38], [142.6, 35.8], [142.0, 34.3]] },
+    { cls: 'trench', label: '伊豆・小笠原海溝', labelAt: 1, coords: [[142.0, 34.3], [142.3, 32.2], [142.6, 30.5]] },
+    { cls: 'trench', label: '相模海槽', labelAt: 1, coords: [[139.3, 35.1], [140.2, 34.6], [141.2, 34.3], [142.0, 34.3]] },
+    { cls: 'trench', label: '南海海槽', labelAt: 3, coords: [[138.5, 34.9], [138.3, 34.3], [137, 33.6], [135.5, 33.0], [134, 32.6], [132.6, 31.6], [131.6, 30.4]] },
+    { cls: 'uncertain', coords: [[139.3, 45.5], [139.4, 42], [139, 40], [138.6, 38.4], [137.9, 37.05], [138.1, 36.2], [138.5, 34.9]] },
+  ],
+  labels: [
+    { text: '太平洋板塊', lon: 147.3, lat: 37.5 },
+    { text: '菲律賓海板塊', lon: 137.5, lat: 31.5 },
+    { text: '北美板塊', lon: 144.5, lat: 45.2 },
+    { text: '歐亞板塊', lon: 133.5, lat: 39 },
+  ],
+  points: [
+    { shape: 'tri', label: '有珠山', lon: 140.84, lat: 42.54 },
+    { shape: 'tri', lon: 142.69, lat: 43.42 },
+    { shape: 'tri', lon: 141.0, lat: 39.85 },
+    { shape: 'tri', lon: 140.44, lat: 38.14 },
+    { shape: 'tri', lon: 140.07, lat: 37.6 },
+    { shape: 'tri', label: '淺間山', lon: 138.52, lat: 36.41 },
+    { shape: 'tri', lon: 137.48, lat: 35.89 },
+    { shape: 'tri', label: '富士山', lon: 138.73, lat: 35.36 },
+    { shape: 'tri', lon: 139.02, lat: 35.23 },
+    { shape: 'tri', lon: 139.39, lat: 34.73 },
+    { shape: 'tri', lon: 139.53, lat: 34.08 },
+    { shape: 'tri', label: '阿蘇山', lon: 131.1, lat: 32.88 },
+    { shape: 'tri', lon: 130.29, lat: 32.76 },
+    { shape: 'tri', lon: 130.87, lat: 31.93 },
+    { shape: 'tri', label: '櫻島', lon: 130.66, lat: 31.58 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '第 1 課 小測驗：板塊、地震與火山',
+  facets: [{ id: 'l1', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'jgeo-lesson-0002-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  questions: [
+    { id: 'l1-1', facet: 'l1', level: 1, type: 'choice',
+      prompt: '下列哪一個是<b>海溝型</b>（板塊交界）地震？',
+      options: ['2011 年東日本大震災', '1995 年阪神大震災', '2016 年熊本地震', '2004 年新潟中越地震'],
+      explain: '東日本大震災的震源在日本海溝附近的板塊交界。其他三個都是陸地淺層的直下型地震。' },
+    { id: 'l1-2', facet: 'l1', level: 2, type: 'choice',
+      prompt: '海溝型地震常伴隨大海嘯，主要原因是？',
+      options: ['海底大範圍上下錯動推動海水', '震源很淺而且就在城市正下方', '火山噴發把海水推向沿岸陸地', '颱風的低氣壓把海面往上吸高'],
+      explain: '震源在海底，板塊交界整片彈回時，海床上下錯動，把上方的海水整片推起，形成海嘯。' },
+    { id: 'l1-3', facet: 'l1', level: 2, type: 'choice',
+      prompt: '隱沒帶的岩漿，主要是怎麼產生的？',
+      options: ['下沉板塊釋出的水讓地函熔化', '兩塊板塊摩擦產生熱熔化岩石', '海水從海溝直接灌進地底加熱', '地核的熱量直接向上傳到地表'],
+      explain: '下沉的海洋板塊在約 100 km 深處釋出水，水讓地函岩石的熔點降低，部分熔融成岩漿。「摩擦生熱」是常見誤解。' },
+    { id: 'l1-4', facet: 'l1', level: 2, type: 'mapPoints',
+      points: [
+        { name: '三陸海岸', lon: 141.95, lat: 39.6, correct: true },
+        { name: '岩手山一帶（奧羽山脈）', lon: 141.0, lat: 39.85 },
+        { name: '淺間山一帶', lon: 138.52, lat: 36.41 },
+        { name: '霧島山一帶', lon: 130.87, lat: 31.93 },
+      ],
+      prompt: '哪一點位在海溝和火山前線之間，<b>最不可能有火山</b>？',
+      explain: '三陸海岸離日本海溝太近，下方的太平洋板塊還不夠深、產生不了岩漿，所以沒有火山。火山前線在更內陸的奧羽山脈。' },
+    { id: 'l1-5', facet: 'l1', level: 3, type: 'short',
+      prompt: '用自己的話說明：為什麼日本的火山會排成一條線，而且和海溝平行？請寫出至少兩個步驟（A → B → C）。',
+      keywords: [['隱沒', '下沉', '鑽', '沉入', '俯衝'], ['深', '100', '一百'], ['水'], ['岩漿', '熔']],
+      need: 3,
+      answer: '海洋板塊從海溝鑽到日本下方，越往內陸越深 → 下沉到約 100 km 深時釋出水 → 水讓上方地函部分熔融成岩漿 → 所以只有在板塊深度約 100 km 的正上方才有火山。這個深度的位置和海溝平行，火山也就排成一條和海溝平行的線。' },
+    { id: 'l1-6', facet: 'l1', level: 2, type: 'choice',
+      prompt: '箱根、別府、霧島都是有名的溫泉鄉，它們的共同點是？',
+      options: ['都在火山前線附近', '都在海溝的正上方', '都在大平原的中央', '都在暖流的沿岸邊'],
+      explain: '火山底下的岩漿把地下水加熱成溫泉，所以溫泉鄉多集中在火山附近。' },
+    { id: 'rv-1', facet: 'review', level: 3, type: 'choice',
+      prompt: '（複習）Fossa Magna 的西側邊界是哪一條構造線？',
+      options: ['糸魚川—靜岡構造線', '中央構造線', '棚倉構造線', '日本海溝'],
+      explain: '糸魚川—靜岡構造線是 Fossa Magna 的西緣，也大致是北美板塊和歐亞板塊的交界（有爭論）。中央構造線則縱貫西南日本。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習）日本海側冬天會下大雪，主要原因是什麼？',
+      options: ['西北季風越過日本海帶來水氣', '東南季風越過太平洋帶來水氣', '颱風在冬季帶來大量的降雨', '黑潮在冬季沿著日本海北上'],
+      explain: '下一課之後會把這條鏈延伸到「雪 → 融雪水 → 稻米」。' },
+  ],
+});
+</script>
+</body>
+</html>
