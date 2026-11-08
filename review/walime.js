@@ -1507,12 +1507,16 @@ const kinin = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${ro
 const ryoSlime = (o) => slime(Object.assign({ shape: 'cloud' }, o));
 
 // --- 大和國 ---
-// 前方後圓墳：從上空看的鑰匙孔形，周圍一圈護城河
-const KOFUN = `<g><path d="M56,32 C56,14 74,8 92,16 C104,4 134,6 142,22 C148,36 140,52 122,54 C108,56 100,50 94,46 C80,54 56,50 56,32 Z" fill="#a8d4ea" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M108,22 L66,14 C62,24 62,40 66,50 L108,38 Z" fill="#6b9a4a" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
-  <circle cx="120" cy="30" r="15" fill="#6b9a4a" stroke="var(--ink)" stroke-width="2.4"/><path d="M107,23 V37" stroke="#6b9a4a" stroke-width="3.4"/>
-  <g fill="#4f7a34">${[[116, 24], [124, 28], [118, 34], [126, 36], [112, 30], [88, 24], [80, 32], [92, 36], [74, 40], [98, 30]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.2"/>`).join('')}</g>
-  <path d="M62,44 q4,-2 8,0 M132,46 q4,-2 8,0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></g>`;
+// 前方後圓墳：從上空看的鑰匙孔形，直立擺放（圓的後圓部在上、往下變寬的前方部在下），
+// 墳丘畫出三段築成的段差線，外圍一圈同形的周濠。橫放時不容易認出是鑰匙孔（2026-11-09 使用者回饋）
+const keyhole = (cy, r, yj, hw, yb) => { const a = Math.sqrt(r * r - (yj - cy) ** 2).toFixed(1);
+  return `M${100 - a},${yj} L${100 - hw},${yb} H${100 + hw} L${100 + +a},${yj} A${r},${r} 0 1,0 ${100 - a},${yj} Z`; };
+// 直立後變高，往下多蓋住頭頂一些來放大（圖鑑 viewBox 上緣是 -4，最高只能到 -2）
+const KOFUN = `<g transform="translate(100 70) scale(1.24) translate(-100 -58)"><path d="${keyhole(20, 20, 34, 29, 58)}" fill="#a8d4ea" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="${keyhole(20, 14, 31, 21, 52)}" fill="#6b9a4a" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="${keyhole(20, 8.5, 28, 14, 46)}" fill="none" stroke="#4f7a34" stroke-width="1.3" stroke-linejoin="round"/>
+  <g fill="#4f7a34">${[[95, 14], [104, 17], [99, 24], [93, 42], [106, 40], [100, 34]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.7"/>`).join('')}</g>
+  <path d="M73,52 q3,-2 6,0 M121,52 q3,-2 6,0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></g>`;
 // 銅鏡：背面朝外的青銅鏡，中央鈕和同心紋
 const dokyo = (x, y) => `<g transform="translate(${x} ${y})"><circle r="15" fill="#5f9a8a" stroke="var(--ink)" stroke-width="2.6"/>
   <circle r="11" fill="none" stroke="#3f7a6a" stroke-width="1.6"/><circle r="7" fill="none" stroke="#3f7a6a" stroke-width="1.2" stroke-dasharray="2 1.6"/>

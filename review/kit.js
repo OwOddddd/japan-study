@@ -146,6 +146,7 @@ if (typeof RV_LESSON !== 'undefined') (() => {
         if (drawing) return;
         if (cur) { cur.pause(); }
         showLine(Math.min(n.line - 1, SCRIPT.length - 1));
+        clearInk();
         n.strokes.forEach(s => drawStroke(ink, s));
         li.classList.add('on');
         player.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -144,7 +144,8 @@ function clearScene(keep = ['yamato', 'tailime']) {
 }
 const label = (x, y, t, size = 22, fill = 'var(--ink)', w = 'normal') => `<text x="${x}" y="${y}" text-anchor="middle" font-family="Huninn, sans-serif" font-size="${size}" font-weight="${w}" fill="${fill}">${t}</text>`;
 const tag = (x, y, t, bg = '#2f2b33', fg = '#fff', size = 20) => { const w = t.length * size * 1.05 + 28; return `<rect x="${x - w / 2}" y="${y - size - 2}" width="${w}" height="${size + 14}" rx="${(size + 14) / 2}" fill="${bg}"/>${label(x, y + 2, t, size, fg)}`; };
-const pin = (x, y, t, dx = 0, dy = -18) => `<g><circle cx="${x}" cy="${y}" r="7" fill="#d23b33" stroke="var(--ink)" stroke-width="2.4"/>${label(x + dx, y + dy, t, 18, '#5a4a3a')}</g>`;
+// 地名加白邊，壓在海岸線上也讀得清楚
+const pin = (x, y, t, dx = 0, dy = -18) => `<g><circle cx="${x}" cy="${y}" r="7" fill="#d23b33" stroke="var(--ink)" stroke-width="2.4"/>${label(x + dx, y + dy, t, 18, '#4a3a2a', 'bold').replace('<text ', '<text stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" ')}</g>`;
 const arrow = (x1, y, x2, c = 'var(--ink)') => `<path d="M${x1},${y} H${x2} m-12,-10 l12,10 l-12,10" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
 const box = (x, y, w, h, t, sub, c = '#fff') => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="16" fill="${c}" stroke="var(--ink)" stroke-width="3.2"/>${label(x, y + (sub ? -4 : 8), t, 22)}${sub ? label(x, y + 22, sub, 15, '#6a6470') : ''}`;
 
@@ -170,7 +171,7 @@ const VIEW = { wide: { lon0: 132.3, lat0: 37.75, k: 88.9 }, kansai: { lon0: 134.
 const proj = (v, [lon, lat]) => [(lon - v.lon0) * v.k, (v.lat0 - lat) * v.k * 1.22];
 const P = (v, name) => proj(VIEW[v], PLACE[name]);
 const MAP_LABELS = {
-  wide: [['日本海', 134.6, 36.7, 18, '#6f98ad'], ['太平洋', 138.2, 33.9, 20, '#6f98ad'], ['瀨戶內海', 133.4, 34.27, 13, '#6f98ad'], ['本州', 137.6, 36.1, 22, '#9b8461'], ['琵琶湖', 136.55, 35.35, 12, '#6f98ad']],
+  wide: [['日本海', 134.6, 36.7, 18, '#6f98ad'], ['太平洋', 138.2, 33.9, 20, '#6f98ad'], ['本州', 137.6, 36.1, 22, '#9b8461']],
   kansai: [['大阪灣', 135.22, 34.47, 16, '#6f98ad'], ['琵琶湖', 136.1, 35.28, 15, '#5f8fab'], ['淡路島', 134.84, 34.33, 13, '#9b8461']],
   kanto: [], // 黑船這場只標江戶與浦賀，其他地名拿掉
 };
@@ -183,7 +184,9 @@ function mapBg(v) {
     ${MAP_LABELS[v].map(([t, lon, lat, sz, c]) => { const [x, y] = proj(V, [lon, lat]); return label(x.toFixed(0), y.toFixed(0), t, sz, c); }).join('')}`;
 }
 const pinAt = (v, name, dx = 0, dy = -16, t = name) => { const [x, y] = P(v, name); return pin(x, y, t, dx, dy); };
-const link = (x1, y1, x2, y2) => `<path d="M${x1},${y1} L${x2},${y2}" stroke="#7a6a5a" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>`;
+// 虛線從紅點外緣起畫，不壓在紅點上
+const link = (x1, y1, x2, y2) => { const L = Math.hypot(x2 - x1, y2 - y1), ox = (x2 - x1) / L * 13, oy = (y2 - y1) / L * 13;
+  return `<path d="M${(x1 + ox).toFixed(1)},${(y1 + oy).toFixed(1)} L${x2},${y2}" stroke="#7a6a5a" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>`; };
 
 // ===== 腳本 =====
 // who：說話的角色 id；t：中文字幕；ja：日語配音（VOICEVOX 讀這一行）；a：音檔
@@ -229,14 +232,14 @@ const SCRIPT = [
     } },
   { who: 'yamato', t: '江戶時代的江戶，就是今天的東京。', ja: '江戸時代の江戸は、今の東京じゃ。', act() {
       const [x, y] = P('wide', '江戶');
-      addProp('p-edo', pinAt('wide', '江戶', 30, 2));
+      addProp('p-edo', pinAt('wide', '江戶', -30, 2));
       later(() => { addProp('l-edo', link(x, y, 700, 196), 'mid', ''); addActor('edo', '常態', 700, 204, .42); }, 400);
     } },
   { who: 'tailime', t: '原來時代名就是地名！', ja: '時代の名前って、地名だったんだ！', act() { look('tailime', '懂了'); } },
   { who: 'yamato', t: '明治以後改用年號來叫，政府一直在東京。', ja: '明治からは年号で呼ぶ。政府はずっと東京じゃ。', act() {
       look('tailime', '好奇');
       look('edo', { face: 'flat' }); move('edo', 770, 140, .3);
-      later(() => { dropProp('p-edo'); addProp('p-tokyo', pinAt('wide', '江戶', 30, 2, '東京')); addActor('meiji', '文明開化', 700, 204, .42); }, 500);
+      later(() => { dropProp('p-edo'); addProp('p-tokyo', pinAt('wide', '江戶', -30, 2, '東京')); addActor('meiji', '文明開化', 700, 204, .42); }, 500);
     } },
   // 3. 時間軸與三大階段
   { who: 'yamato', t: '把主要的時代排成一列。', ja: '主な時代を一列に並べてみよう。', act() {
