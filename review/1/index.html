@@ -1,0 +1,428 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>日本史的骨架</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../kit.css">
+<style>
+/* 一支短片播放器。舞台和字幕在深淺色主題都維持原色 */
+:root {
+  --bg: #e9ebee; --fg: #1e2329; --muted: #5d6670; --chip: #dfe3e8;
+  --ink: #2f2b33; --paper: #fbf7ef;
+  --display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --text: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.7 var(--text); margin: 0; }
+.wrap { max-width: 900px; margin: 0 auto; padding-block: 24px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; }
+h1 { font: 1.7rem/1.25 var(--display); margin: 0; }
+.intro, .note { margin: 0; color: var(--muted); max-width: 64ch; }
+.note { font-size: .88rem; }
+.player { background: var(--paper); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.08); }
+#stage { display: block; width: 100%; height: auto; background: #f4ead2; }
+.cap { min-height: 4.6em; padding: 12px 16px 10px; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; border-top: 1px solid #eadfcd; }
+.who { font: .85rem/1.6 var(--display); color: #fff; padding: 1px 10px; border-radius: 999px; background: #8a7468; white-space: nowrap; margin-top: 2px; }
+.who:empty { visibility: hidden; }
+.line { font: 1.12rem/1.6 var(--display); color: var(--ink); text-wrap: pretty; }
+.seek { display: flex; align-items: center; gap: 10px; padding: 6px 14px 0; }
+.seek input { flex: 1; min-width: 0; accent-color: #5f8a4a; height: 24px; cursor: pointer; }
+.seek span { font: .85rem/1 var(--display); color: #8a7468; white-space: nowrap; }
+.instant .actor, .instant .fade { transition: none !important; }
+.instant .pop { animation: none !important; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 14px 14px; }
+.controls button { font: 1rem/1 var(--display); border: 0; border-radius: 999px; padding: 10px 18px; background: var(--ink); color: #fff; cursor: pointer; }
+.controls button.ghost { background: #eadfcd; color: var(--ink); }
+.controls label { display: flex; align-items: center; gap: 6px; color: var(--ink); font-size: .95rem; cursor: pointer; }
+
+/* 角色動作 */
+.actor { transition: transform .9s cubic-bezier(.45,.05,.3,1.2); }
+.wl { transform-box: fill-box; transform-origin: 50% 100%; }
+.talk .wl { animation: talk .32s ease-in-out infinite alternate; }
+@keyframes talk { from { transform: scale(1, 1); } to { transform: scale(1.03, .96); } }
+.hop .wl { animation: hop .45s ease-in-out infinite alternate; }
+@keyframes hop { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+.pop { animation: pop .45s cubic-bezier(.3,1.6,.5,1) both; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes pop { from { transform: scale(.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.fade { transition: opacity .7s; }
+.glow { animation: glow 1s ease-in-out infinite alternate; }
+@keyframes glow { from { opacity: 1; } to { opacity: .55; } }
+
+/* 和萊姆的配件動畫（和圖鑑相同） */
+.bob { animation: bob 2.6s ease-in-out infinite alternate; }
+.float { animation: float 3.4s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.swing { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 1.8s ease-in-out infinite alternate; }
+@keyframes swing { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+.shake { transform-box: fill-box; transform-origin: 50% 100%; animation: shake .25s linear infinite alternate; }
+@keyframes shake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.nod { transform-box: fill-box; transform-origin: 100% 40%; animation: nod 1.6s ease-in-out infinite alternate; }
+@keyframes nod { from { transform: rotate(-6deg); } to { transform: rotate(10deg); } }
+.paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .talk .wl, .hop .wl, .pop, .bob, .float, .blink, .swing, .shake, .nod, .glow { animation: none; } .actor { transition: none; } }
+</style>
+
+<div class="wrap">
+  <h1>日本史的骨架：權力在誰手上？</h1>
+  <p class="intro">第 1 課的和萊姆動畫版，約兩分鐘。大和國講解，台萊姆君發問；時代名稱就是政權所在地，每個都城都是一隻和萊姆。</p>
+  <div class="player">
+    <svg id="stage" viewBox="0 0 800 450" role="img" aria-label="動畫舞台">
+      <defs>
+        <pattern id="mame" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="2.75" cy="2.75" r="2.1" fill="#eef2f7"/><circle cx="8.25" cy="8.25" r="2.1" fill="#eef2f7"/></pattern>
+        <clipPath id="c-stage"><rect width="800" height="450"/></clipPath>
+      </defs>
+      <g clip-path="url(#c-stage)"><g id="bg"></g><g id="mid"></g><g id="front"></g></g>
+    </svg>
+    <div class="seek"><input type="range" id="seek" min="0" max="1" value="0" step="1" aria-label="跳到第幾句"><span id="pos">0 / 0</span></div>
+    <div class="cap"><span class="who" id="who"></span><div class="line" id="line">按「播放」開始。</div></div>
+    <div class="controls">
+      <button id="play">播放</button>
+      <label><input type="checkbox" id="voice" checked> 配音</label>
+    </div>
+  </div>
+  <p class="note">配音是日語（VOICEVOX），字幕是繁體中文。進度條可以拖曳，跳到任一句。地圖依真實經緯度簡化繪製。VOICEVOX：青山龍星、ずんだもん、九州そら、雀松朱司、玄野武宏、白上虎太郎、No.7。</p>
+</div>
+
+<script src="../walime.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const $ = id => document.getElementById(id);
+
+// ===== 和萊姆角色 =====
+// 角色以腳底為原點：walime 的畫布是 0 -4 200 214，腳底約在 y=205
+const CH = id => CHARS.find(c => c.id === id);
+function charSVG(id, f) {
+  const c = CH(id);
+  const face = typeof f === 'string' ? (c.faces.find(x => x.name === f) || {}) : (f || {});
+  // 動畫 class 和 transform 分在兩層，否則 CSS 動畫會蓋掉位移
+  return `<g class="wl"><g transform="translate(-100 -205)">${c.look(face)}</g></g>`;
+}
+const actors = {};
+function el(tag, attrs = {}, html = '') { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (html) e.innerHTML = html; return e; }
+function place(a) { a.g.style.transform = `translate(${a.x}px, ${a.y}px) scale(${a.flip ? -a.s : a.s}, ${a.s})`; }
+function addActor(id, f, x, y, s, layer = 'mid') {
+  removeActor(id);
+  const g = el('g', { class: 'actor' });
+  const inner = el('g', { class: instant ? '' : 'pop' }, charSVG(id, f));
+  g.appendChild(inner);
+  const a = actors[id] = { g, inner, f, x, y, s, flip: false };
+  g.style.transition = 'none'; place(a); $(layer).appendChild(g);
+  g.getBBox(); setTimeout(() => { g.style.transition = ''; }, 40);
+  return a;
+}
+function move(id, x, y, s) { const a = actors[id]; if (!a) return; if (x != null) a.x = x; if (y != null) a.y = y; if (s != null) a.s = s; place(a); }
+function look(id, f) {
+  const a = actors[id]; if (!a) return; a.f = f;
+  a.inner.innerHTML = charSVG(id, f);
+  // 換表情只替換畫面，不重播彈出動畫（使用者回饋：說話時一直彈出會視覺疲勞）
+  a.inner.classList.remove('pop');
+}
+function removeActor(id) { const a = actors[id]; if (a) { a.g.remove(); delete actors[id]; } }
+function setState(id, cls, on) { actors[id] && actors[id].g.classList.toggle(cls, on); }
+function setBg(html) {
+  const old = [...$('bg').children];
+  if (instant) { old.forEach(o => o.remove()); return $('bg').appendChild(el('g', {}, html)); }
+  const g = el('g', { class: 'fade', opacity: 0 }, html);
+  $('bg').appendChild(g);
+  setTimeout(() => g.setAttribute('opacity', 1), 40);
+  setTimeout(() => old.forEach(o => o.remove()), 800);
+  return g;
+}
+let props = {};
+function addProp(key, html, layer = 'mid', cls = 'pop') { if (instant) cls = cls === 'fade' ? '' : cls.replace('pop', ''); const g = el('g', {}, `<g class="${cls}">${html}</g>`); $(layer).appendChild(g); props[key] = g; return g; }
+function dropProp(...keys) { keys.forEach(k => { props[k] && props[k].remove(); delete props[k]; }); }
+function clearScene(keep = ['yamato', 'tailime']) {
+  Object.values(props).forEach(p => p.remove()); props = {};
+  Object.keys(actors).filter(id => !keep.includes(id)).forEach(removeActor);
+}
+const label = (x, y, t, size = 22, fill = 'var(--ink)', w = 'normal') => `<text x="${x}" y="${y}" text-anchor="middle" font-family="Huninn, sans-serif" font-size="${size}" font-weight="${w}" fill="${fill}">${t}</text>`;
+const tag = (x, y, t, bg = '#2f2b33', fg = '#fff', size = 20) => { const w = t.length * size * 1.05 + 28; return `<rect x="${x - w / 2}" y="${y - size - 2}" width="${w}" height="${size + 14}" rx="${(size + 14) / 2}" fill="${bg}"/>${label(x, y + 2, t, size, fg)}`; };
+const pin = (x, y, t, dx = 0, dy = -18) => `<g><circle cx="${x}" cy="${y}" r="7" fill="#d23b33" stroke="var(--ink)" stroke-width="2.4"/>${label(x + dx, y + dy, t, 18, '#5a4a3a')}</g>`;
+const arrow = (x1, y, x2, c = 'var(--ink)') => `<path d="M${x1},${y} H${x2} m-12,-10 l12,10 l-12,10" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+const box = (x, y, w, h, t, sub, c = '#fff') => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="16" fill="${c}" stroke="var(--ink)" stroke-width="3.2"/>${label(x, y + (sub ? -4 : 8), t, 22)}${sub ? label(x, y + 22, sub, 15, '#6a6470') : ''}`;
+
+// ===== 場景背景 =====
+const BG = {
+  title: `<rect width="800" height="450" fill="#f7f1e3"/>
+    <g fill="#efe2c4">${[[120, 90], [690, 70], [400, 34], [610, 190], [170, 230], [720, 300]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5"/>`).join('')}</g>
+    <rect y="392" width="800" height="58" fill="#eadcbf"/>`,
+  plain: `<rect width="800" height="450" fill="#f7f1e3"/><rect y="400" width="800" height="50" fill="#ece0c6"/>`,
+};
+
+// ===== 地圖 =====
+// 用真實的經緯度投影（緯度方向乘 1.22，對應北緯 35 度附近的經緯比例）。海岸線簡化成主要轉折點，
+// 但半島、海灣的位置照實際。VIEW 是三種縮放：本州全景、近畿、關東
+const GEO = {
+  honshu: [[131.4,34.42],[131.85,34.7],[132.08,34.9],[132.22,35.02],[132.63,35.43],[132.75,35.5],[133,35.58],[133.33,35.57],[133.24,35.54],[133.33,35.45],[133.6,35.5],[134.23,35.54],[134.35,35.58],[134.62,35.64],[134.82,35.65],[135.18,35.78],[135.28,35.67],[135.2,35.55],[135.38,35.5],[135.55,35.5],[135.75,35.5],[135.9,35.62],[136.06,35.66],[136,35.9],[136.15,36.22],[136.3,36.3],[136.6,36.62],[136.77,36.9],[136.75,37.28],[136.9,37.4],[137.33,37.53],[137.2,37.35],[136.92,37.22],[136.97,37.05],[136.98,36.86],[137.22,36.77],[137.4,36.83],[137.86,37.04],[138.25,37.18],[138.55,37.37],[138.75,37.63],[139.05,37.92],[139.3,38.05],[139.48,38.23],[139.6,38.7],[141.6,38.7],[141,37],[140.9,36.95],[140.65,36.6],[140.58,36.3],[140.68,35.95],[140.86,35.71],[140.7,35.7],[140.45,35.5],[140.4,35.3],[140.32,35.15],[140.1,35.1],[139.88,34.9],[139.85,34.99],[139.82,35.3],[139.9,35.38],[140.1,35.6],[139.98,35.68],[139.8,35.65],[139.78,35.55],[139.65,35.45],[139.67,35.28],[139.75,35.26],[139.62,35.13],[139.58,35.27],[139.55,35.31],[139.48,35.3],[139.35,35.31],[139.16,35.25],[139.15,35.15],[139.08,35.1],[139.1,34.97],[139.03,34.77],[138.85,34.6],[138.77,34.75],[138.77,34.92],[138.79,34.97],[138.85,35.1],[138.68,35.13],[138.52,35.02],[138.33,34.87],[138.22,34.6],[137.73,34.66],[137.02,34.58],[137.25,34.68],[137.22,34.82],[136.98,34.88],[136.9,34.7],[136.83,34.88],[136.88,35.05],[136.7,35.06],[136.62,34.97],[136.52,34.72],[136.55,34.58],[136.72,34.5],[136.85,34.48],[136.89,34.27],[136.2,34.07],[136.1,33.88],[135.99,33.72],[135.95,33.62],[135.77,33.43],[135.5,33.55],[135.37,33.68],[135.15,33.88],[135.12,34.08],[135.15,34.23],[135.1,34.32],[135.37,34.47],[135.45,34.58],[135.42,34.67],[135.4,34.7],[135.2,34.68],[134.98,34.65],[134.68,34.78],[134.4,34.75],[133.8,34.47],[133.37,34.45],[133.2,34.4],[132.57,34.23],[132.45,34.35],[132.22,34.17],[131.8,34.05],[131.2,34.0]],
+  shikoku: [[134.62,34.2],[134.58,34.07],[134.7,33.9],[134.17,33.25],[133.55,33.5],[133.28,33.38],[133,32.72],[132.72,32.92],[132.55,33.22],[132.42,33.45],[132,33.35],[132.35,33.45],[132.7,33.85],[133,34.08],[133.3,33.97],[133.65,34.12],[133.8,34.3],[134.05,34.35],[134.4,34.25]],
+  awaji: [[134.98,34.6],[135,34.45],[134.92,34.3],[134.82,34.17],[134.68,34.27],[134.78,34.42],[134.9,34.55]],
+  biwa: [[136.05,35.52],[136.22,35.45],[136.27,35.35],[136.12,35.2],[135.95,35.03],[135.88,35.05],[135.93,35.25],[136,35.4]],
+};
+const PLACE = { 奈良: [135.8, 34.68], 京都: [135.76, 35.01], 鎌倉: [139.55, 35.32], 江戶: [139.76, 35.68], 浦賀: [139.72, 35.24] };
+const VIEW = { wide: { lon0: 132.3, lat0: 37.75, k: 88.9 }, kansai: { lon0: 134.4, lat0: 35.75, k: 300 }, kanto: { lon0: 138.6, lat0: 36.05, k: 300 } };
+const proj = (v, [lon, lat]) => [(lon - v.lon0) * v.k, (v.lat0 - lat) * v.k * 1.22];
+const P = (v, name) => proj(VIEW[v], PLACE[name]);
+const MAP_LABELS = {
+  wide: [['日本海', 134.6, 36.7, 18, '#6f98ad'], ['太平洋', 138.2, 33.9, 20, '#6f98ad'], ['瀨戶內海', 133.4, 34.27, 13, '#6f98ad'], ['本州', 137.6, 36.1, 22, '#9b8461'], ['琵琶湖', 136.55, 35.35, 12, '#6f98ad']],
+  kansai: [['大阪灣', 135.22, 34.47, 16, '#6f98ad'], ['琵琶湖', 136.1, 35.28, 15, '#5f8fab'], ['淡路島', 134.84, 34.33, 13, '#9b8461']],
+  kanto: [], // 黑船這場只標江戶與浦賀，其他地名拿掉
+};
+function mapBg(v) {
+  const V = VIEW[v], d = pts => 'M' + pts.map(q => proj(V, q).map(n => n.toFixed(1)).join(',')).join(' L') + ' Z';
+  const land = k => `<path d="${d(GEO[k])}" fill="#f1e7cd" stroke="#b39d74" stroke-width="2.6" stroke-linejoin="round"/>`;
+  return `<rect width="800" height="450" fill="#cfe4ee"/>
+    <g fill="none" stroke="#b8d6e4" stroke-width="1.4" opacity=".7">${[70, 190, 330, 420].map(y => `<path d="M0,${y} ${Array.from({ length: 20 }, () => 'q20,-7 40,0').join(' ')}"/>`).join('')}</g>
+    ${land('honshu')}${land('shikoku')}${land('awaji')}<path d="${d(GEO.biwa)}" fill="#cfe4ee" stroke="#9cc0d4" stroke-width="2"/>
+    ${MAP_LABELS[v].map(([t, lon, lat, sz, c]) => { const [x, y] = proj(V, [lon, lat]); return label(x.toFixed(0), y.toFixed(0), t, sz, c); }).join('')}`;
+}
+const pinAt = (v, name, dx = 0, dy = -16, t = name) => { const [x, y] = P(v, name); return pin(x, y, t, dx, dy); };
+const link = (x1, y1, x2, y2) => `<path d="M${x1},${y1} L${x2},${y2}" stroke="#7a6a5a" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>`;
+
+// ===== 腳本 =====
+// who：說話的角色 id；t：中文字幕；ja：日語配音（VOICEVOX 讀這一行）；a：音檔
+const SPK = {
+  yamato: { name: '大和國', c: '#5f8a4a' }, tailime: { name: '台萊姆君', c: '#c9902a' },
+  heijokyo: { name: '平城京', c: '#6b8e7a' }, heiankyo: { name: '平安京', c: '#7a5a9a' },
+  kamakura: { name: '鎌倉', c: '#3a4a6a' }, edo: { name: '江戶', c: '#8a5a3a' }, meiji: { name: '東京（明治）', c: '#9a3a32' },
+};
+const NAR = (x = 82, y = 438, s = .5) => addActor('yamato', '常態', x, y, s, 'front');
+const ERAS = [['heijokyo', '奈良'], ['heiankyo', '平安'], ['kamakura', '鎌倉'], ['muromachi', '室町'], ['azuchi', '安土桃山'], ['edo', '江戶'], ['meiji', '明治以後']];
+const SCRIPT = [
+  // 1. 開場
+  { who: 'yamato', t: '今天來搭日本史的骨架。', ja: '今日は、にほんしの骨組みを作ろう。', act() {
+      setBg(BG.title);
+      addActor('yamato', '常態', 250, 400, .9, 'front');
+      addProp('title', label(400, 92, '日本史的骨架', 46, 'var(--ink)') + label(400, 132, '權力在誰手上？', 26, '#6a6470'));
+    } },
+  { who: 'tailime', t: '骨架？可是時代的名字好多，記不住啊。', ja: 'ほねぐみ？でも時代の名前、多すぎて覚えられないよ。', act() {
+      addActor('tailime', '踩雷', 560, 400, .9, 'front');
+    } },
+  { who: 'yamato', t: '有個訣竅：時代的名字，就是政府所在的地方。', ja: 'コツがある。時代の名前は、政府があった場所の名前なんじゃ。', act() {
+      look('yamato', 'やまと'); look('tailime', '好奇');
+      addProp('hint', tag(400, 200, '時代名稱 ＝ 政府在哪裡', '#5f8a4a', '#fff', 24));
+    } },
+  // 2. 地圖（本州全景）
+  { who: 'yamato', t: '奈良時代，政府在奈良的平城京。', ja: '奈良時代は奈良の平城京に政府があった。', act() {
+      clearScene(); setBg(mapBg('wide'));
+      move('yamato', 82, 440, .5); move('tailime', 718, 440, .5); look('yamato', '常態');
+      const [x, y] = P('wide', '奈良');
+      addProp('p-nara', pinAt('wide', '奈良', -30, 10));
+      later(() => { addProp('l-nara', link(x, y, 372, 396), 'mid', ''); addActor('heijokyo', 'あをによし', 372, 404, .42); }, 400);
+    } },
+  { who: 'heijokyo', t: '「青丹美麗」的奈良都城，就是我。', ja: 'あをによし。奈良のみやこじゃ。', act() {} },
+  { who: 'yamato', t: '平安時代，政府搬到京都，當時叫平安京。', ja: '平安時代は京都。当時は、平安京と呼ばれた。', act() {
+      const [x, y] = P('wide', '京都');
+      addProp('p-kyoto', pinAt('wide', '京都', 30, -8));
+      later(() => { addProp('l-kyoto', link(x, y, 246, 270), 'mid', ''); addActor('heiankyo', '雅', 246, 280, .42); }, 400);
+    } },
+  { who: 'yamato', t: '鎌倉時代，武士在鎌倉開了幕府。', ja: '鎌倉時代は、武士が鎌倉に幕府を開いた。', act() {
+      const [x, y] = P('wide', '鎌倉');
+      addProp('p-kama', pinAt('wide', '鎌倉', 30, 22));
+      later(() => { addProp('l-kama', link(x, y, 590, 372), 'mid', ''); addActor('kamakura', '常態', 590, 380, .42); }, 400);
+    } },
+  { who: 'yamato', t: '江戶時代的江戶，就是今天的東京。', ja: '江戸時代の江戸は、今の東京じゃ。', act() {
+      const [x, y] = P('wide', '江戶');
+      addProp('p-edo', pinAt('wide', '江戶', 30, 2));
+      later(() => { addProp('l-edo', link(x, y, 700, 196), 'mid', ''); addActor('edo', '常態', 700, 204, .42); }, 400);
+    } },
+  { who: 'tailime', t: '原來時代名就是地名！', ja: '時代の名前って、地名だったんだ！', act() { look('tailime', '懂了'); } },
+  { who: 'yamato', t: '明治以後改用年號來叫，政府一直在東京。', ja: '明治からは年号で呼ぶ。政府はずっと東京じゃ。', act() {
+      look('tailime', '好奇');
+      look('edo', { face: 'flat' }); move('edo', 770, 140, .3);
+      later(() => { dropProp('p-edo'); addProp('p-tokyo', pinAt('wide', '江戶', 30, 2, '東京')); addActor('meiji', '文明開化', 700, 204, .42); }, 500);
+    } },
+  // 3. 時間軸與三大階段
+  { who: 'yamato', t: '把主要的時代排成一列。', ja: '主な時代を一列に並べてみよう。', act() {
+      clearScene(); setBg(BG.plain);
+      ERAS.forEach(([id, n], i) => later(() => {
+        const x = 106 + i * 98;
+        addActor(id, null, x, 262, .44);
+        addProp('lb' + i, label(x, 294, n, n.length > 3 ? 15 : 18, '#4a4450'));
+      }, i * 260));
+    } },
+  { who: 'yamato', t: '顏色分成三段：朝廷、武士、近代國家。', ja: '色で三つに分かれる。朝廷、武士、そして近代国家。', act() {
+      addProp('band1', `<rect x="54" y="104" width="200" height="206" rx="14" fill="#fbf7ee" stroke="#d8ccb0" stroke-width="2"/>${label(154, 132, '朝廷的時代', 20, '#6a5a3a')}`, 'bg', 'fade');
+      later(() => addProp('band2', `<rect x="254" y="104" width="392" height="206" rx="14" fill="#f6d9d2" stroke="#e0b0a6" stroke-width="2"/>${label(450, 132, '武士的時代', 20, '#a8463a')}`, 'bg', 'fade'), 700);
+      later(() => addProp('band3', `<rect x="646" y="104" width="104" height="206" rx="14" fill="#e6eef6" stroke="#b8c8d8" stroke-width="2"/>${label(698, 132, '近代國家', 18, '#4a6a8a')}`, 'bg', 'fade'), 1400);
+    } },
+  { who: 'tailime', t: '中間那段武士的時代好長！', ja: '真ん中の武士の時代、ながっ！', act() { look('tailime', '踩雷'); } },
+  { who: 'yamato', t: '大約七百年。掌權的是武士的政府，叫「幕府」。', ja: 'およそ七百年。権力を握ったのは、武士の政府、幕府じゃ。', act() {
+      addProp('700', tag(450, 76, '約 700 年', '#a8463a'));
+      ['kamakura', 'muromachi', 'azuchi', 'edo'].forEach(id => setState(id, 'hop', true));
+      later(() => ['kamakura', 'muromachi', 'azuchi', 'edo'].forEach(id => setState(id, 'hop', false)), 1600);
+    } },
+  // 4. 兩種交替
+  { who: 'yamato', t: '時代交替有兩種。第一種：政府搬家。', ja: '時代の変わり方は二つ。一つ目は、政府の引っ越し。', act() {
+      clearScene(); setBg(mapBg('kansai')); look('tailime', '好奇');
+      const [nx, ny] = P('kansai', '奈良'), [kx, ky] = P('kansai', '京都');
+      addProp('p-nara', pinAt('kansai', '奈良', 34, 8)); addProp('p-kyoto', pinAt('kansai', '京都', 34, 8));
+      addProp('k1', tag(400, 40, '① 搬家', '#5f8a4a'));
+      addActor('heijokyo', { face: 'smileW', extra: MOVING_BOX }, nx - 46, ny + 8, .5);
+      later(() => addProp('route', `<path d="M${nx},${ny - 10} L${kx},${ky + 12}" stroke="#5f8a4a" stroke-width="4" stroke-dasharray="6 8" stroke-linecap="round"/>`, 'mid', ''), 500);
+      later(() => move('heijokyo', kx - 46, ky + 8, .5), 900);
+      later(() => { removeActor('heijokyo'); addActor('heiankyo', '雅', kx - 46, ky + 8, .5); }, 2100);
+      later(() => addProp('same', tag(400, 88, '主人都是天皇的朝廷', '#7a5a9a', '#fff', 18)), 2500);
+    } },
+  { who: 'heiankyo', t: '從那之後一千年，天皇都住在我這裡。', ja: 'それから千年、天皇はずっとここに住んだ。', act() {} },
+  { who: 'yamato', t: '第二種：掌權的人換了。', ja: '二つ目は、権力を持つ人が変わること。', act() {
+      clearScene(); setBg(mapBg('wide'));
+      const [kx, ky] = P('wide', '京都'), [mx, my] = P('wide', '鎌倉');
+      addProp('p-kyoto', pinAt('wide', '京都', 30, -8)); addProp('p-kama', pinAt('wide', '鎌倉', 30, 22));
+      addProp('k2', tag(400, 40, '② 換主人', '#a8463a'));
+      addActor('heiankyo', { face: 'sweat' }, kx - 50, ky + 6, .5);
+      later(() => addActor('kamakura', '第一個幕府', mx - 56, my + 6, .6), 500);
+      later(() => addProp('who2', tag(400, 88, '貴族 → 武士', '#a8463a', '#fff', 22)), 1100);
+    } },
+  { who: 'kamakura', t: '從今天起，政事由鎌倉處理。', ja: 'これからの政治は鎌倉で行う。', act() {
+      const [mx, my] = P('wide', '鎌倉');
+      addProp('kama', tag(mx - 56, my + 36, '鎌倉的幕府', '#3a4a6a', '#fff', 15));
+    } },
+  { who: 'tailime', t: '那天皇呢？被趕走了嗎？', ja: 'じゃあ天皇は？追い出されたの？', act() { look('tailime', '踩雷'); } },
+  { who: 'yamato', t: '沒有。天皇一直留在京都。為什麼？以後再講。', ja: 'いや。天皇はずっと京都にいた。なぜかはまた今度話そう。', act() {
+      const [kx, ky] = P('wide', '京都');
+      look('heiankyo', '雅'); look('kamakura', '天皇還在京都');
+      addProp('kyo', tag(kx - 50, ky + 36, '天皇仍在京都', '#7a5a9a', '#fff', 15));
+      addProp('q', label(436, 306, '？', 60, '#c9902a', 'bold'));
+    } },
+  // 5. 交替的模式：江戶 → 明治（關東地圖）
+  { who: 'yamato', t: '每次交替，都是同一個模式。', ja: '時代が変わるときは、いつも同じ型がある。', act() {
+      clearScene(); setBg(mapBg('kanto')); look('tailime', '好奇');
+      [['問題', 70], ['舊權力撐不住', 168], ['新權力補上', 266]].forEach(([t, y], i) => later(() => {
+        addProp('b' + i, box(668, y, 210, 66, t));
+        if (i < 2) addProp('ba' + i, `<path d="M668,${y + 36} v18 m-8,-8 l8,8 l8,-8" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`);
+      }, i * 450));
+    } },
+  { who: 'yamato', t: '例如 1853 年，美國的黑船來了。', ja: 'たとえば、千八百五十三年。アメリカの黒船が来た。', act() {
+      const [ex, ey] = P('kanto', '江戶');
+      addProp('p-edo', pinAt('kanto', '江戶', 34, 8)); addProp('p-uraga', pinAt('kanto', '浦賀', -36, 6));
+      addActor('edo', '常態', ex - 64, ey + 10, .5);
+      addProp('ship', `<g id="ship" transform="translate(420 480) scale(.8)">${KUROFUNE}</g>`, 'mid', '');
+      shipIn(); addProp('hl0', hl(70)); swapBox(0, '1853 黑船來航');
+    } },
+  { who: 'edo', t: '這、這要怎麼應付……', ja: 'こ、これは、どうすれば……', act() {
+      look('edo', { face: 'sweat' }); dropProp('hl0'); addProp('hl1', hl(168)); swapBox(1, '江戶幕府應付不了');
+    } },
+  { who: 'yamato', t: '幕府應付不了，以天皇為名的新政府接手。', ja: '幕府は対応できず、天皇の名のもとに、新しい政府ができた。', act() {
+      const [ex, ey] = P('kanto', '江戶');
+      dropProp('hl1'); addProp('hl2', hl(266)); swapBox(2, '以天皇為名的明治政府');
+      look('edo', { face: 'flat' }); move('edo', ex - 150, ey + 30, .38);
+      later(() => { dropProp('p-edo'); addProp('p-tokyo', pinAt('kanto', '江戶', 34, 8, '東京')); addActor('meiji', '常態', ex - 64, ey + 10, .5); }, 600);
+    } },
+  { who: 'meiji', t: '這就是明治政府。', ja: 'これが明治政府です。', act() { look('meiji', '文明開化'); } },
+  { who: 'tailime', t: '出了問題、舊的撐不住、新的補上！', ja: '問題が起きて、古いのがもたなくて、新しいのが埋める！', act() { look('tailime', '懂了'); } },
+  // 6. 總結
+  { who: 'yamato', t: '今天記住三件事。', ja: '今日覚えるのは三つじゃ。', act() {
+      clearScene(); setBg(BG.title); look('tailime', '好奇');
+      move('yamato', 82, 440, .5); move('tailime', 718, 440, .5);
+      [['時代名 ＝ 地名', '奈良、平安、鎌倉、江戶'], ['三大階段', '朝廷 → 武士 → 近代國家'], ['交替的模式', '問題 → 撐不住 → 補上']].forEach(([t, s], i) => later(() => {
+        addProp('s' + i, box(400, 96 + i * 92, 380, 74, t, s));
+      }, i * 600));
+    } },
+  { who: 'yamato', t: '下次從一粒米開始，講國家怎麼誕生。', ja: '次は、ひとつぶのこめから、国の始まりを話そう。', act() {
+      look('yamato', 'やまと');
+      addProp('next', `<rect x="266" y="372" width="268" height="48" rx="16" fill="none" stroke="#b9a58c" stroke-width="3" stroke-dasharray="8 8"/>${label(400, 404, '下一課：稻米造出國家', 20, '#8a7468')}`);
+    } },
+  { who: 'tailime', t: '好！', ja: 'はーい！', act() { look('tailime', '懂了'); setState('tailime', 'hop', true); later(() => setState('tailime', 'hop', false), 900); } },
+];
+SCRIPT.forEach((L, i) => { L.a = `audio/${String(i + 1).padStart(2, '0')}.wav`; });
+
+function shipIn() {
+  const g = document.getElementById('ship'); if (!g) return;
+  const [ux, uy] = P('kanto', '浦賀');
+  const tx = ux + 22, ty = uy + 50, c0 = instant ? clock - 4000 : clock;
+  const step = () => {
+    const p = Math.min(1, (clock - c0) / 2800), e = 1 - Math.pow(1 - p, 2);
+    g.setAttribute('transform', `translate(${420 + (tx - 420) * e} ${480 + (ty - 480) * e + Math.sin(clock / 300) * 2}) scale(.8)`);
+    if (document.contains(g)) setTimeout(step, 40);
+  };
+  step();
+}
+const hl = y => `<rect x="559" y="${y - 37}" width="218" height="74" rx="18" fill="none" stroke="#d23b33" stroke-width="5" class="glow"/>`;
+const BOX_T = ['問題', '舊權力撐不住', '新權力補上'];
+function swapBox(i, sub) { const y = [70, 168, 266][i]; dropProp('b' + i); addProp('b' + i, box(668, y, 210, 66, BOX_T[i], sub), 'mid', ''); }
+
+// ===== 播放控制 =====
+let paused = true, started = false, run = 0, idx = 0, instant = false;
+let clock = 0, last = performance.now();
+setInterval(() => { const now = performance.now(); if (!paused) clock += now - last; last = now; }, 30);
+const later = (fn, ms) => { if (instant) return fn(); const r = run; sleep(ms, r).then(() => { if (r === run) fn(); }); };
+const sleep = (ms, r) => new Promise(res => { const end = clock + ms; (function chk() { if (r !== run) return res(); if (clock >= end) res(); else setTimeout(chk, 30); })(); });
+
+// 音檔先載好；播放中暫停時一起暫停
+const AUDIO = SCRIPT.map(L => { const a = new Audio(); a.preload = 'auto'; a.src = L.a; return a; });
+let cur = null;
+function speak(i, r) {
+  return new Promise(res => {
+    if (!$('voice').checked) return res();
+    const a = AUDIO[i]; cur = a;
+    let done = false; const fin = () => { if (!done) { done = true; cur = null; res(); } };
+    a.onended = fin; a.onerror = fin;
+    try { a.currentTime = 0; } catch (e) {}
+    const p = a.play(); if (p && p.catch) p.catch(fin);
+    // 逾時保護：音檔長度不明時，以字數估
+    sleep(((isFinite(a.duration) && a.duration) ? a.duration * 1000 : SCRIPT[i].ja.length * 260) + 2500, r).then(fin);
+  });
+}
+async function playFrom(r) {
+  while (idx < SCRIPT.length && r === run) {
+    const L = SCRIPT[idx];
+    L.act && L.act();
+    const sp = SPK[L.who];
+    $('who').textContent = sp.name; $('who').style.background = sp.c;
+    $('line').textContent = L.t;
+    $('seek').value = idx; $('pos').textContent = `${idx + 1} / ${SCRIPT.length}`;
+    setState(L.who, 'talk', true);
+    const minMs = $('voice').checked ? 900 : L.t.length * 170 + 900;
+    await Promise.all([sleep(minMs, r), speak(idx, r)]);
+    setState(L.who, 'talk', false);
+    await sleep(380, r);
+    if (r !== run) return; // 已經跳句或重播：舊的迴圈不能再動 idx
+    idx++;
+  }
+  if (r === run && idx >= SCRIPT.length) { Object.keys(actors).forEach(id => { setState(id, 'hop', false); setState(id, 'talk', false); }); paused = true; $('play').textContent = '再看一次'; $('stage').classList.add('paused'); started = false; }
+}
+function reset() {
+  run++; idx = 0; instant = false;
+  if (cur) { cur.pause(); cur = null; }
+  Object.keys(actors).forEach(removeActor);
+  Object.values(props).forEach(p => p.remove()); props = {};
+  ['bg', 'mid', 'front'].forEach(id => $(id).innerHTML = '');
+  $('seek').value = 0;
+}
+function start() { reset(); started = true; paused = false; $('stage').classList.remove('paused'); $('play').textContent = '暫停'; playFrom(run); }
+$('play').onclick = () => {
+  if (!started) return start();
+  paused = !paused;
+  $('stage').classList.toggle('paused', paused);
+  $('play').textContent = paused ? '繼續' : '暫停';
+  if (cur) paused ? cur.pause() : cur.play().catch(() => {});
+};
+
+// 拖進度條：重設舞台後，把前面每一句的畫面動作瞬間跑完，再從選的那一句開始播
+function seekTo(n) {
+  reset(); started = true;
+  instant = true; $('stage').classList.add('instant');
+  for (let i = 0; i < n; i++) SCRIPT[i].act && SCRIPT[i].act();
+  instant = false; setTimeout(() => $('stage').classList.remove('instant'), 60);
+  idx = n; paused = false; $('stage').classList.remove('paused'); $('play').textContent = '暫停';
+  playFrom(run);
+}
+$('seek').max = SCRIPT.length - 1; $('pos').textContent = `0 / ${SCRIPT.length}`;
+$('seek').oninput = () => { $('pos').textContent = `${+$('seek').value + 1} / ${SCRIPT.length}`; };
+$('seek').onchange = () => seekTo(+$('seek').value);
+
+// 封面
+setBg(BG.title);
+addProp('cover', label(400, 92, '日本史的骨架', 46) + label(400, 132, '權力在誰手上？', 26, '#6a6470'), 'mid', '');
+addActor('yamato', '常態', 250, 400, .9, 'front');
+addActor('tailime', '好奇', 560, 400, .9, 'front');
+</script>
+<script>const RV_LESSON = 1;</script>
+<script src="../kit.js"></script>

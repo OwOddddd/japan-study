@@ -1,0 +1,54 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>和萊姆動畫試看</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="kit.css">
+<style>
+:root {
+  --bg: #e9ebee; --fg: #1e2329; --muted: #5d6670; --chip: #dfe3e8;
+  --ink: #2f2b33; --paper: #fbf7ef;
+  --display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --text: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.7 var(--text); margin: 0; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 18px; }
+h1 { font: 1.7rem/1.25 var(--display); margin: 0; }
+.intro { margin: 0; color: var(--muted); }
+.steps { margin: 0; padding-left: 1.4em; display: grid; gap: 4px; }
+.videos { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.videos a { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; align-items: center; background: var(--paper); color: var(--ink); text-decoration: none; border-radius: 16px; padding: 14px 18px; box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.08); }
+.videos a:hover { outline: 2px solid #5f8a4a; }
+.videos .no { grid-row: span 2; font: 1rem/1 var(--display); color: #fff; background: #5f8a4a; border-radius: 999px; padding: 8px 12px; }
+.videos .t { font: 1.1rem/1.4 var(--display); }
+.videos .d { font-size: .9rem; color: #8a7468; }
+</style>
+
+<div class="wrap">
+  <h1>和萊姆歷史動畫・試看</h1>
+  <p class="intro">三部日本史的短動畫，還在修改中。看到畫面、字幕、配音哪裡怪怪的，請直接在畫面上圈出來寫下建議。</p>
+  <ol class="steps">
+    <li>點下面任一部影片，按「播放」。</li>
+    <li>看到要改的地方，按影片下方紅色的「標註這個畫面」，影片會暫停。</li>
+    <li>用滑鼠（手機用手指）在畫面上圈出位置，寫下要怎麼改，按「儲存」。</li>
+    <li>三部都看完後，在下面填名字，按「匯出標註」，把下載的檔案傳給我。</li>
+  </ol>
+  <ul class="videos">
+    <li><a href="1/"><span class="no">第 1 課</span><span class="t">日本史的骨架：權力在誰手上？</span><span class="d">約 2 分鐘</span></a></li>
+    <li><a href="2/"><span class="no">第 2 課</span><span class="t">稻米造出一個國家：日本的國家怎麼來的</span><span class="d">約 2 分半</span></a></li>
+    <li><a href="3/"><span class="no">第 3 課</span><span class="t">照著中國改造自己：飛鳥到奈良</span><span class="d">約 3 分半</span></a></li>
+  </ul>
+  <section class="rv" id="foot">
+    <p class="hint">標註只存在這台裝置的瀏覽器裡，換手機或電腦就看不到。請在同一台裝置上看完再匯出。</p>
+  </section>
+</div>
+<script src="kit.js"></script>
+<script>
+document.getElementById('foot').insertAdjacentHTML('beforeend', RV_FOOT_HTML);
+rvFoot(document.getElementById('foot'));
+</script>

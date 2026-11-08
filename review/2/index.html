@@ -1,0 +1,563 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>稻米造出一個國家</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../kit.css">
+<style>
+/* 一支短片播放器。舞台和字幕在深淺色主題都維持原色 */
+:root {
+  --bg: #e9ebee; --fg: #1e2329; --muted: #5d6670; --chip: #dfe3e8;
+  --ink: #2f2b33; --paper: #fbf7ef;
+  --display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --text: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #16191d; --fg: #e4e7ea; --muted: #9aa3ad; --chip: #262b31; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.7 var(--text); margin: 0; }
+.wrap { max-width: 900px; margin: 0 auto; padding-block: 24px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; }
+h1 { font: 1.7rem/1.25 var(--display); margin: 0; }
+.intro, .note { margin: 0; color: var(--muted); max-width: 64ch; }
+.note { font-size: .88rem; }
+.player { background: var(--paper); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.08); }
+#stage { display: block; width: 100%; height: auto; background: #f4ead2; }
+.cap { min-height: 4.6em; padding: 12px 16px 10px; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; border-top: 1px solid #eadfcd; }
+.who { font: .85rem/1.6 var(--display); color: #fff; padding: 1px 10px; border-radius: 999px; background: #8a7468; white-space: nowrap; margin-top: 2px; }
+.who:empty { visibility: hidden; }
+.line { font: 1.12rem/1.6 var(--display); color: var(--ink); text-wrap: pretty; }
+.seek { display: flex; align-items: center; gap: 10px; padding: 6px 14px 0; }
+.seek input { flex: 1; min-width: 0; accent-color: #5f8a4a; height: 24px; cursor: pointer; }
+.seek span { font: .85rem/1 var(--display); color: #8a7468; white-space: nowrap; }
+.instant .actor, .instant .fade { transition: none !important; }
+.instant .pop { animation: none !important; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 14px 14px; }
+.controls button { font: 1rem/1 var(--display); border: 0; border-radius: 999px; padding: 10px 18px; background: var(--ink); color: #fff; cursor: pointer; }
+.controls button.ghost { background: #eadfcd; color: var(--ink); }
+.controls label { display: flex; align-items: center; gap: 6px; color: var(--ink); font-size: .95rem; cursor: pointer; }
+
+/* 角色動作 */
+.actor { transition: transform .9s cubic-bezier(.45,.05,.3,1.2); }
+.wl { transform-box: fill-box; transform-origin: 50% 100%; }
+.talk .wl { animation: talk .32s ease-in-out infinite alternate; }
+@keyframes talk { from { transform: scale(1, 1); } to { transform: scale(1.03, .96); } }
+.hop .wl { animation: hop .45s ease-in-out infinite alternate; }
+@keyframes hop { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+.pop { animation: pop .45s cubic-bezier(.3,1.6,.5,1) both; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes pop { from { transform: scale(.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.fade { transition: opacity .7s; }
+.glow { animation: glow 1s ease-in-out infinite alternate; }
+@keyframes glow { from { opacity: 1; } to { opacity: .55; } }
+
+/* 和萊姆的配件動畫（和圖鑑相同） */
+.bob { animation: bob 2.6s ease-in-out infinite alternate; }
+.float { animation: float 3.4s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.swing { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 1.8s ease-in-out infinite alternate; }
+@keyframes swing { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+.shake { transform-box: fill-box; transform-origin: 50% 100%; animation: shake .25s linear infinite alternate; }
+@keyframes shake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.nod { transform-box: fill-box; transform-origin: 100% 40%; animation: nod 1.6s ease-in-out infinite alternate; }
+@keyframes nod { from { transform: rotate(-6deg); } to { transform: rotate(10deg); } }
+.paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .talk .wl, .hop .wl, .pop, .bob, .float, .blink, .swing, .shake, .nod, .glow { animation: none; } .actor { transition: none; } }
+</style>
+
+<div class="wrap">
+  <h1>稻米造出一個國家：日本的國家怎麼來的</h1>
+  <p class="intro">第 2 課的和萊姆動畫版，約三分鐘。從繩文、稻作傳入、彌生的爭戰與小國，一路講到卑彌呼和古墳時代的大和聯盟。</p>
+  <div class="player">
+    <svg id="stage" viewBox="0 0 800 450" role="img" aria-label="動畫舞台">
+      <defs>
+        <pattern id="mame" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="2.75" cy="2.75" r="2.1" fill="#eef2f7"/><circle cx="8.25" cy="8.25" r="2.1" fill="#eef2f7"/></pattern>
+        <clipPath id="c-stage"><rect width="800" height="450"/></clipPath>
+      </defs>
+      <g clip-path="url(#c-stage)"><g id="bg"></g><g id="mid"></g><g id="front"></g></g>
+    </svg>
+    <div class="seek"><input type="range" id="seek" min="0" max="1" value="0" step="1" aria-label="跳到第幾句"><span id="pos">0 / 0</span></div>
+    <div class="cap"><span class="who" id="who"></span><div class="line" id="line">按「播放」開始。</div></div>
+    <div class="controls">
+      <button id="play">播放</button>
+      <label><input type="checkbox" id="voice" checked> 配音</label>
+    </div>
+  </div>
+  <p class="note">配音是日語（VOICEVOX），字幕是繁體中文。進度條可以拖曳，跳到任一句。地圖依真實經緯度簡化繪製。卑彌呼等歷史人物不畫成角色，用器物或旗幟代表。VOICEVOX：青山龍星、ずんだもん、剣崎雌雄、玄野武宏。</p>
+</div>
+
+<script src="../walime.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const $ = id => document.getElementById(id);
+
+// ===== 和萊姆角色 =====
+// 角色以腳底為原點：walime 的畫布是 0 -4 200 214，腳底約在 y=205
+const CH = id => CHARS.find(c => c.id === id);
+function charSVG(id, f) {
+  const c = CH(id);
+  const face = typeof f === 'string' ? (c.faces.find(x => x.name === f) || {}) : (f || {});
+  // 動畫 class 和 transform 分在兩層，否則 CSS 動畫會蓋掉位移
+  return `<g class="wl"><g transform="translate(-100 -205)">${c.look(face)}</g></g>`;
+}
+const actors = {};
+function el(tag, attrs = {}, html = '') { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (html) e.innerHTML = html; return e; }
+function place(a) { a.g.style.transform = `translate(${a.x}px, ${a.y}px) scale(${a.flip ? -a.s : a.s}, ${a.s})`; }
+function addActor(id, f, x, y, s, layer = 'mid') {
+  removeActor(id);
+  const g = el('g', { class: 'actor' });
+  const inner = el('g', { class: instant ? '' : 'pop' }, charSVG(id, f));
+  g.appendChild(inner);
+  const a = actors[id] = { g, inner, f, x, y, s, flip: false };
+  g.style.transition = 'none'; place(a); $(layer).appendChild(g);
+  g.getBBox(); setTimeout(() => { g.style.transition = ''; }, 40);
+  return a;
+}
+function move(id, x, y, s) { const a = actors[id]; if (!a) return; if (x != null) a.x = x; if (y != null) a.y = y; if (s != null) a.s = s; place(a); }
+function look(id, f) {
+  const a = actors[id]; if (!a) return; a.f = f;
+  a.inner.innerHTML = charSVG(id, f);
+  // 換表情只替換畫面，不重播彈出動畫（使用者回饋：說話時一直彈出會視覺疲勞）
+  a.inner.classList.remove('pop');
+}
+function removeActor(id) { const a = actors[id]; if (a) { a.g.remove(); delete actors[id]; } }
+function setState(id, cls, on) { actors[id] && actors[id].g.classList.toggle(cls, on); }
+function setBg(html) {
+  const old = [...$('bg').children];
+  if (instant) { old.forEach(o => o.remove()); return $('bg').appendChild(el('g', {}, html)); }
+  const g = el('g', { class: 'fade', opacity: 0 }, html);
+  $('bg').appendChild(g);
+  setTimeout(() => g.setAttribute('opacity', 1), 40);
+  setTimeout(() => old.forEach(o => o.remove()), 800);
+  return g;
+}
+let props = {};
+function addProp(key, html, layer = 'mid', cls = 'pop') { if (instant) cls = cls === 'fade' ? '' : cls.replace('pop', ''); const g = el('g', {}, `<g class="${cls}">${html}</g>`); $(layer).appendChild(g); props[key] = g; return g; }
+function dropProp(...keys) { keys.forEach(k => { props[k] && props[k].remove(); delete props[k]; }); }
+function clearScene(keep = ['yamato', 'tailime']) {
+  Object.values(props).forEach(p => p.remove()); props = {};
+  Object.keys(actors).filter(id => !keep.includes(id)).forEach(removeActor);
+}
+const label = (x, y, t, size = 22, fill = 'var(--ink)', w = 'normal') => `<text x="${x}" y="${y}" text-anchor="middle" font-family="Huninn, sans-serif" font-size="${size}" font-weight="${w}" fill="${fill}">${t}</text>`;
+const tag = (x, y, t, bg = '#2f2b33', fg = '#fff', size = 20) => { const w = t.length * size * 1.05 + 28; return `<rect x="${x - w / 2}" y="${y - size - 2}" width="${w}" height="${size + 14}" rx="${(size + 14) / 2}" fill="${bg}"/>${label(x, y + 2, t, size, fg)}`; };
+const pin = (x, y, t, dx = 0, dy = -18) => `<g><circle cx="${x}" cy="${y}" r="7" fill="#d23b33" stroke="var(--ink)" stroke-width="2.4"/>${label(x + dx, y + dy, t, 18, '#5a4a3a')}</g>`;
+const arrow = (x1, y, x2, c = 'var(--ink)') => `<path d="M${x1},${y} H${x2} m-12,-10 l12,10 l-12,10" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+const box = (x, y, w, h, t, sub, c = '#fff') => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="16" fill="${c}" stroke="var(--ink)" stroke-width="3.2"/>${label(x, y + (sub ? -4 : 8), t, 22)}${sub ? label(x, y + 22, sub, 15, '#6a6470') : ''}`;
+
+// ===== 場景背景 =====
+const BG = {
+  title: `<rect width="800" height="450" fill="#f7f1e3"/>
+    <g fill="#efe2c4">${[[120, 90], [690, 70], [400, 34], [610, 190], [170, 230], [720, 300]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5"/>`).join('')}</g>
+    <rect y="392" width="800" height="58" fill="#eadcbf"/>`,
+  plain: `<rect width="800" height="450" fill="#f7f1e3"/><rect y="400" width="800" height="50" fill="#ece0c6"/>`,
+};
+
+// ===== 地圖 =====
+const GEO = {
+  honshu: [[131.4,34.42],[131.85,34.7],[132.08,34.9],[132.22,35.02],[132.63,35.43],[132.75,35.5],[133,35.58],[133.33,35.57],[133.24,35.54],[133.33,35.45],[133.6,35.5],[134.23,35.54],[134.35,35.58],[134.62,35.64],[134.82,35.65],[135.18,35.78],[135.28,35.67],[135.2,35.55],[135.38,35.5],[135.55,35.5],[135.75,35.5],[135.9,35.62],[136.06,35.66],[136,35.9],[136.15,36.22],[136.3,36.3],[136.6,36.62],[136.77,36.9],[136.75,37.28],[136.9,37.4],[137.33,37.53],[137.2,37.35],[136.92,37.22],[136.97,37.05],[136.98,36.86],[137.22,36.77],[137.4,36.83],[137.86,37.04],[138.25,37.18],[138.55,37.37],[138.75,37.63],[139.05,37.92],[139.3,38.05],[139.48,38.23],[139.6,38.7],[141.6,38.7],[141,37],[140.9,36.95],[140.65,36.6],[140.58,36.3],[140.68,35.95],[140.86,35.71],[140.7,35.7],[140.45,35.5],[140.4,35.3],[140.32,35.15],[140.1,35.1],[139.88,34.9],[139.85,34.99],[139.82,35.3],[139.9,35.38],[140.1,35.6],[139.98,35.68],[139.8,35.65],[139.78,35.55],[139.65,35.45],[139.67,35.28],[139.75,35.26],[139.62,35.13],[139.58,35.27],[139.55,35.31],[139.48,35.3],[139.35,35.31],[139.16,35.25],[139.15,35.15],[139.08,35.1],[139.1,34.97],[139.03,34.77],[138.85,34.6],[138.77,34.75],[138.77,34.92],[138.79,34.97],[138.85,35.1],[138.68,35.13],[138.52,35.02],[138.33,34.87],[138.22,34.6],[137.73,34.66],[137.02,34.58],[137.25,34.68],[137.22,34.82],[136.98,34.88],[136.9,34.7],[136.83,34.88],[136.88,35.05],[136.7,35.06],[136.62,34.97],[136.52,34.72],[136.55,34.58],[136.72,34.5],[136.85,34.48],[136.89,34.27],[136.2,34.07],[136.1,33.88],[135.99,33.72],[135.95,33.62],[135.77,33.43],[135.5,33.55],[135.37,33.68],[135.15,33.88],[135.12,34.08],[135.15,34.23],[135.1,34.32],[135.37,34.47],[135.45,34.58],[135.42,34.67],[135.4,34.7],[135.2,34.68],[134.98,34.65],[134.68,34.78],[134.4,34.75],[133.8,34.47],[133.37,34.45],[133.2,34.4],[132.57,34.23],[132.45,34.35],[132.22,34.17],[131.8,34.05],[131.2,34.0]],
+  shikoku: [[134.62,34.2],[134.58,34.07],[134.7,33.9],[134.17,33.25],[133.55,33.5],[133.28,33.38],[133,32.72],[132.72,32.92],[132.55,33.22],[132.42,33.45],[132,33.35],[132.35,33.45],[132.7,33.85],[133,34.08],[133.3,33.97],[133.65,34.12],[133.8,34.3],[134.05,34.35],[134.4,34.25]],
+  awaji: [[134.98,34.6],[135,34.45],[134.92,34.3],[134.82,34.17],[134.68,34.27],[134.78,34.42],[134.9,34.55]],
+  biwa: [[136.05,35.52],[136.22,35.45],[136.27,35.35],[136.12,35.2],[135.95,35.03],[135.88,35.05],[135.93,35.25],[136,35.4]],
+};
+
+// ===== 地圖（第 2、3 課加上九州、對馬、壹岐、朝鮮半島與中國沿岸）=====
+Object.assign(GEO, {
+  kyushu: [[130.95,33.95],[131.0,33.85],[131.2,33.62],[131.5,33.67],[131.7,33.6],[131.66,33.4],[131.55,33.27],[131.85,33.1],[131.9,32.95],[131.7,32.6],[131.6,32.2],[131.47,31.8],[131.35,31.4],[131.1,31.37],[130.66,31.0],[130.72,31.55],[130.55,31.25],[130.2,31.25],[130.15,31.6],[130.35,32.1],[130.55,32.45],[130.67,32.85],[130.4,33.15],[130.2,32.95],[130.3,32.65],[130.15,32.6],[129.9,32.75],[129.75,33.0],[129.65,33.2],[129.85,33.35],[130.05,33.45],[130.35,33.6],[130.5,33.85],[130.75,33.9]],
+  tsushima: [[129.2,34.15],[129.35,34.3],[129.5,34.68],[129.35,34.7],[129.25,34.45]],
+  iki: [[129.65,33.72],[129.78,33.72],[129.8,33.85],[129.68,33.86]],
+  jeju: [[126.16,33.3],[126.5,33.2],[126.95,33.4],[126.6,33.55],[126.3,33.5]],
+  continent: [[108,43],[131,43],[129.9,41.0],[129.7,40.8],[128.6,40.2],[127.6,39.8],[127.4,39.3],[128.3,38.6],[128.6,38.2],[129.3,37.3],[129.45,36.5],[129.5,35.9],[129.35,35.4],[129.05,35.1],[128.6,34.9],[127.8,34.75],[127.4,34.5],[126.5,34.3],[126.3,34.7],[126.5,35.2],[126.5,35.8],[126.75,36.0],[126.5,36.6],[126.2,36.9],[126.8,37.2],[126.6,37.6],[126.1,37.7],[125.3,37.7],[125.0,38.0],[124.8,38.3],[125.4,38.7],[125.2,39.4],[124.4,39.85],[123.5,39.75],[122.3,39.4],[121.4,38.85],[121.6,39.4],[121.9,40.0],[122.2,40.5],[121.0,40.8],[119.5,39.9],[118.5,39.1],[117.7,38.9],[118.0,38.2],[118.9,37.4],[119.8,37.15],[120.7,37.8],[121.6,37.45],[122.6,37.4],[122.5,36.9],[121.0,36.5],[120.3,36.0],[119.4,35.0],[120.3,34.3],[120.85,32.7],[121.9,31.9],[121.9,31.6],[121.1,31.0],[121.9,30.85],[121.9,30.0],[108,29]],
+});
+const PLACE = {
+  奈良: [135.8, 34.68], 飛鳥: [135.82, 34.47], 堺: [135.49, 34.56], 北九州: [130.4, 33.6], 長江下游: [121.0, 31.5],
+  百濟: [126.9, 36.3], 新羅: [129.2, 35.85], 白村江: [126.62, 35.98], 對馬: [129.3, 34.42], 壹岐: [129.72, 33.79], 大野城: [130.52, 33.55],
+};
+// west：東亞（中國沿岸、朝鮮半島、西日本）；japan：九州到關東
+const VIEW = { west: { lon0: 114, lat0: 41, k: 34 }, japan: { lon0: 128.6, lat0: 37.3, k: 60 } };
+const proj = (v, [lon, lat]) => [(lon - v.lon0) * v.k, (v.lat0 - lat) * v.k * 1.22];
+const P = (v, name) => proj(VIEW[v], PLACE[name]);
+const PJ = (v, ll) => proj(VIEW[v], ll);
+const SEA = '#6f98ad', LAND = '#9b8461';
+const MAP_LABELS = {
+  west: [['朝鮮半島', 127.6, 38.6, 15, LAND], ['中國', 116.3, 34.2, 22, LAND]],
+  japan: [],
+};
+function mapBg(v) {
+  const V = VIEW[v], d = pts => 'M' + pts.map(q => proj(V, q).map(n => n.toFixed(1)).join(',')).join(' L') + ' Z';
+  const land = k => `<path d="${d(GEO[k])}" fill="#f1e7cd" stroke="#b39d74" stroke-width="2.4" stroke-linejoin="round"/>`;
+  return `<rect width="800" height="450" fill="#cfe4ee"/>
+    <g fill="none" stroke="#b8d6e4" stroke-width="1.4" opacity=".7">${[70, 190, 330, 420].map(y => `<path d="M0,${y} ${Array.from({ length: 20 }, () => 'q20,-7 40,0').join(' ')}"/>`).join('')}</g>
+    ${['continent', 'kyushu', 'honshu', 'shikoku', 'awaji', 'tsushima', 'iki', 'jeju'].map(land).join('')}<path d="${d(GEO.biwa)}" fill="#cfe4ee" stroke="#9cc0d4" stroke-width="2"/>
+    ${MAP_LABELS[v].map(([t, lon, lat, sz, c]) => { const [x, y] = proj(V, [lon, lat]); return label(x.toFixed(0), y.toFixed(0), t, sz, c); }).join('')}`;
+}
+const pinAt = (v, name, dx = 0, dy = -16, t = name) => { const [x, y] = P(v, name); return pin(x, y, t, dx, dy); };
+const link = (x1, y1, x2, y2) => `<path d="M${x1},${y1} L${x2},${y2}" stroke="#7a6a5a" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>`;
+const at = (x, y, s, html) => `<g transform="translate(${x} ${y}) scale(${s})">${html}</g>`;
+const card = (x, y, w, h) => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="18" fill="#fbf7ef" stroke="var(--ink)" stroke-width="3"/>`;
+const STK = 'stroke="var(--ink)" stroke-linejoin="round"';
+
+// 從 a 滑到 b 的道具（拖進度條時直接放在終點）
+function glide(key, html, a, b, delay = 300, ms = 1600, layer = 'mid') {
+  const g = addProp(key, html, layer, '');
+  g.style.transition = 'none';
+  const to = `translate(${b[0]}px, ${b[1]}px)`;
+  if (instant) { g.style.transform = to; return g; }
+  g.style.transform = `translate(${a[0]}px, ${a[1]}px)`;
+  g.getBBox();
+  later(() => { g.style.transition = `transform ${ms}ms ease-in-out`; g.style.transform = to; }, delay);
+  return g;
+}
+
+// ===== 道具（都以 0,0 為中心）=====
+const RICE = (() => { // 稻穗
+  const g = [[2, 18], [4, 8], [7, -2], [10, -11], [14, -19], [18, -26]].map(([x, y], i) => `<ellipse cx="${x + (i % 2 ? 6 : -5)}" cy="${y}" rx="4.2" ry="7" transform="rotate(${i % 2 ? 30 : -30} ${x + (i % 2 ? 6 : -5)} ${y})" fill="#e8c35a" stroke="var(--ink)" stroke-width="1.6"/>`).join('');
+  return `<path d="M-2,40 C0,20 6,0 20,-32" fill="none" stroke="#8a7a3a" stroke-width="3" stroke-linecap="round"/>${g}<path d="M-2,40 C-8,24 -18,14 -26,10" fill="none" stroke="#7fa463" stroke-width="3" stroke-linecap="round"/>`;
+})();
+const POT = `<path d="M-23,-20 Q-25,-8 -17,-3 Q-21,14 -11,32 H11 Q21,14 17,-3 Q25,-8 23,-20 Z" fill="#c98a5a" ${STK} stroke-width="2.6"/>
+  <path d="M-12,-20 l3,-12 l3,6 l3,-12 l3,6 l3,-12 l3,6 l3,-12 l3,6 l1,22 Z" fill="#c98a5a" ${STK} stroke-width="2"/>
+  <path d="M-24,-20 Q-31,-30 -28,-42 l-3,-4 l5,0 Q-20,-52 -14,-44 Q-11,-36 -14,-27 L-12,-20 Z M24,-20 Q31,-30 28,-42 l3,-4 l-5,0 Q20,-52 14,-44 Q11,-36 14,-27 L12,-20 Z" fill="#c98a5a" ${STK} stroke-width="2.4"/>
+  <path d="M-19,-33 a3.5,3.5 0 1,1 3,-5 M19,-33 a3.5,3.5 0 1,0 -3,-5" fill="none" stroke="#8a5432" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M-25,-26 q3,-3 6,0 M25,-26 q-3,-3 -6,0" fill="none" stroke="#8a5432" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M-22,-13 H22" stroke="#8a5432" stroke-width="2"/>
+  <path d="M-14,-4 a5,5 0 1,1 6,5 q-4,6 2,9 M14,-4 a5,5 0 1,0 -6,5 q4,6 -2,9 M0,-10 V16" fill="none" stroke="#8a5432" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M-15,20 l3,4 M-10,20 l3,4 M-5,20 l3,4 M0,20 l3,4 M5,20 l3,4 M10,20 l3,4" stroke="#8a5432" stroke-width="1.6" stroke-linecap="round"/>`;
+const GRANARY = `<path d="M-24,8 V40 M-8,8 V40 M8,8 V40 M24,8 V40" stroke="#7a5a3a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-30,10 H30" stroke="#7a5a3a" stroke-width="3"/><ellipse cx="-24" cy="10" rx="6" ry="2.5" fill="#a8844e" stroke="var(--ink)" stroke-width="1.4"/><ellipse cx="24" cy="10" rx="6" ry="2.5" fill="#a8844e" stroke="var(--ink)" stroke-width="1.4"/>
+  <rect x="-28" y="-14" width="56" height="24" fill="#c9a06a" ${STK} stroke-width="2.6"/><path d="M-18,-14 V10 M-6,-14 V10 M6,-14 V10 M18,-14 V10" stroke="#a8844e" stroke-width="1.6"/>
+  <path d="M-40,-12 L-10,-44 H10 L40,-12 Z" fill="#d9bf6a" ${STK} stroke-width="2.6"/><path d="M-30,-20 H30 M-20,-32 H20" stroke="#b89a4a" stroke-width="1.6"/>
+  <path d="M34,42 L44,10 M42,42 L52,10 M36,34 h9 M38,26 h9 M40,18 h9" stroke="#7a5a3a" stroke-width="2.2" stroke-linecap="round"/>`;
+const BALE = `<rect x="-17" y="-10" width="34" height="20" rx="10" fill="#e6cf8a" ${STK} stroke-width="2.2"/><path d="M-8,-10 V10 M8,-10 V10" stroke="#a8884a" stroke-width="2"/>`;
+const HUT = `<path d="M-30,14 Q-26,-6 -10,-17 H10 Q26,-6 30,14 Z" fill="#c9a26a" ${STK} stroke-width="2.4"/>
+  <path d="M-10,-17 L-6,-26 H6 L10,-17 Z" fill="#a8844e" ${STK} stroke-width="2"/><path d="M-7,-23 L-12,-32 M7,-23 L12,-32" stroke="#7a5a3a" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M-21,7 Q-16,-3 -7,-11 M-11,12 Q-7,0 -3,-13 M11,12 Q7,0 3,-13 M21,7 Q16,-3 7,-11" fill="none" stroke="#a07a44" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M-7,14 V5 Q0,-1 7,5 V14 Z" fill="#5a4a3a"/>`;
+const SPEARS = `<path d="M-34,30 L30,-30 M34,30 L-30,-30" stroke="#7a5a3a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M30,-30 l-2,-12 l10,4 Z M-30,-30 l2,-12 l-10,4 Z" fill="#b8bec6" ${STK} stroke-width="2"/>`;
+const FIELD = `<rect x="-12" y="-9" width="24" height="18" rx="2" fill="#a9cdb8" stroke="#8a7a4a" stroke-width="2.4"/>${[[-6, -2], [0, -2], [6, -2], [-6, 6], [0, 6], [6, 6]].map(([x, y]) => `<path d="M${x},${y} l-1.6,-4 M${x},${y} v-4.5 M${x},${y} l1.6,-4" stroke="#4f8a3a" stroke-width="1.4" stroke-linecap="round"/>`).join('')}`;
+const PAWN = (c = '#e8c9a0') => `<circle cx="0" cy="-8" r="5" fill="${c}" stroke="var(--ink)" stroke-width="1.8"/><path d="M-7,8 Q-7,-2 0,-2 Q7,-2 7,8 Z" fill="${c}" stroke="var(--ink)" stroke-width="1.8" stroke-linejoin="round"/>`;
+const SEAL = `<path d="M-16,-2 L-8,-8 H20 L12,-2 Z" fill="#f0d473" ${STK} stroke-width="2"/><path d="M12,-2 L20,-8 V8 L12,14 Z" fill="#c9a23e" ${STK} stroke-width="2"/>
+  <rect x="-16" y="-2" width="28" height="16" fill="#e1bf55" ${STK} stroke-width="2.2"/>
+  <path d="M-9,-5 C-12,-15 4,-17 8,-11 C11,-6 2,-4 -1,-8 C-3,-11 1,-15 5,-18" fill="none" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M-9,-5 C-12,-15 4,-17 8,-11 C11,-6 2,-4 -1,-8 C-3,-11 1,-15 5,-18" fill="none" stroke="#e8c860" stroke-width="3.4" stroke-linecap="round"/>
+  <ellipse cx="7" cy="-19" rx="3.6" ry="2.6" fill="#e8c860" stroke="var(--ink)" stroke-width="1.6"/><circle cx="8" cy="-19.6" r=".9" fill="var(--ink)"/>`;
+const MIRROR = `<g class="glow"><circle r="26" fill="#f6e7a8" opacity=".5"/></g><circle r="18" fill="#b08a3e" ${STK} stroke-width="2.4"/>
+  <circle r="14.5" fill="none" stroke="#e6c870" stroke-width="2.6" stroke-dasharray="2.2 1.6"/><circle r="11" fill="#c9a24e" stroke="#7a5a2a" stroke-width="1.4"/>
+  ${[0, 90, 180, 270].map(a => `<circle cx="${(7 * Math.cos(a * Math.PI / 180)).toFixed(1)}" cy="${(7 * Math.sin(a * Math.PI / 180)).toFixed(1)}" r="1.6" fill="#e6c870" stroke="#7a5a2a" stroke-width="1"/>`).join('')}
+  <circle r="3.6" fill="#e6c870" stroke="#7a5a2a" stroke-width="1.4"/>`;
+const TOWER = `<path d="M-40,40 H40" stroke="#7a5a3a" stroke-width="3"/><path d="M-30,40 V4 M30,40 V4 M-12,40 V4 M12,40 V4" stroke="#8a6a4a" stroke-width="4"/>
+  <rect x="-32" y="-26" width="64" height="30" fill="#d9b88a" ${STK} stroke-width="2.4"/>
+  <path d="M-26,-26 H26 V0 q-6.5,-5 -13,0 q-6.5,-5 -13,0 q-6.5,-5 -13,0 q-6.5,-5 -13,0 Z" fill="#c25a4a" ${STK} stroke-width="1.8"/>
+  <path d="M-46,-24 L-30,-44 H30 L46,-24 Z" fill="#a8844e" ${STK} stroke-width="2.4"/><path d="M-36,-34 H36" stroke="#8a6a3a" stroke-width="1.6"/>`;
+const khPath = (r, hw, yb, cy = -8, yj = 4) => { const a = Math.sqrt(r * r - (yj - cy) ** 2).toFixed(1); return `M-${a},${yj} L-${hw},${yb} H${hw} L${a},${yj} A${r},${r} 0 1,0 -${a},${yj} Z`; };
+const KEYHOLE = `<path d="${khPath(20, 25, 40)}" fill="#7fa86a" ${STK} stroke-width="2.4"/><path d="${khPath(14, 18, 33, -8, 3)}" fill="#8db877" stroke="#5f8a4a" stroke-width="1.6"/>
+  <path d="${khPath(8, 11, 26, -8, -2)}" fill="#9cc585" stroke="#5f8a4a" stroke-width="1.4"/>`;
+const KEYHOLE_MOAT = `<path d="${khPath(28, 34, 48, -8, 6)}" fill="#9fc6d8" stroke="#6f98ad" stroke-width="2"/>` + KEYHOLE;
+const KH_ICON = `<path d="${khPath(27, 33, 48, -8, 6)}" fill="#9fc6d8" stroke="#6f98ad" stroke-width="3"/><path d="${khPath(20, 25, 40)}" fill="#7fa86a" ${STK} stroke-width="3.4"/><path d="${khPath(10, 13, 28, -8, -1)}" fill="#9cc585"/>`;
+const FLAG = c => `<path d="M0,10 V-16" stroke="#6a5a4a" stroke-width="2.4" stroke-linecap="round"/><path d="M0,-16 L14,-11 L0,-6 Z" fill="${c}" ${STK} stroke-width="1.6"/>`;
+const CLASH = `<path d="M0,-12 L3,-4 L12,-6 L5,1 L10,9 L1,5 L-4,12 L-4,3 L-12,2 L-5,-3 Z" fill="#f2a33a" stroke="#c0392b" stroke-width="1.6" stroke-linejoin="round"/>`;
+const FLAG_C = ['#c0392b', '#3f6fa8', '#5f8a4a', '#c9902a', '#7a5a9a', '#2f2b33'];
+// 環濠聚落：外圍壕溝、柵欄、望樓、豎穴住居
+const MOAT_VILLAGE = `<ellipse rx="150" ry="74" fill="#cfe4ee" stroke="#6f98ad" stroke-width="3"/><ellipse rx="132" ry="62" fill="#e8dcb8" stroke="#b39d74" stroke-width="2.4"/>
+  <ellipse rx="124" ry="56" fill="none" stroke="#8a6a4a" stroke-width="5" stroke-dasharray="3 5"/>
+  ${[[-70, -6], [-30, 18], [20, -20], [64, 10], [-80, 26]].map(([x, y]) => at(x, y, .8, HUT)).join('')}
+  <g transform="translate(-6 10)"><path d="M-10,22 L-6,-34 M10,22 L6,-34 M-8,6 H8 M-7,-12 H7" stroke="#7a5a3a" stroke-width="3" stroke-linecap="round"/><rect x="-12" y="-44" width="24" height="12" fill="#c9a06a" ${STK} stroke-width="2"/><path d="M-16,-44 L0,-56 L16,-44 Z" fill="#d9bf6a" ${STK} stroke-width="2"/></g>`;
+const LOTUS = `<path d="M0,-22 C8,-12 8,0 0,8 C-8,0 -8,-12 0,-22 Z" fill="#f2b8c6" ${STK} stroke-width="2"/>
+  <path d="M-3,8 C-16,4 -22,-6 -22,-14 C-12,-12 -4,-4 -3,8 Z M3,8 C16,4 22,-6 22,-14 C12,-12 4,-4 3,8 Z" fill="#f6ccd6" ${STK} stroke-width="2"/>
+  <path d="M-24,10 Q0,18 24,10" fill="none" stroke="#7fa463" stroke-width="3" stroke-linecap="round"/>`;
+const SHIP = `<path d="M-14,-40 H10 V-10 H-14 Z" fill="#e9dcb6" ${STK} stroke-width="2"/><path d="M-14,-33 H10 M-14,-26 H10 M-14,-19 H10" stroke="#b9a274" stroke-width="1.4"/>
+  <path d="M14,-30 H28 V-10 H14 Z" fill="#e9dcb6" ${STK} stroke-width="2"/><path d="M14,-23 H28 M14,-16 H28" stroke="#b9a274" stroke-width="1.4"/>
+  <path d="M-2,-10 V-46 M21,-10 V-35" stroke="#6a4a2a" stroke-width="2.6" stroke-linecap="round"/>
+  <rect x="-30" y="-9" width="14" height="9" fill="#c8463a" ${STK} stroke-width="1.8"/>
+  <path d="M-40,-6 Q-36,12 -22,14 H24 Q36,12 42,-8 L32,0 H-32 Z" fill="#a8743e" ${STK} stroke-width="2.4"/><path d="M-30,6 H32" stroke="#7a5230" stroke-width="1.4"/>`;
+const PALACE = `<rect x="-56" y="10" width="112" height="22" fill="#d9cdb4" ${STK} stroke-width="2.4"/><path d="M-12,32 V18 Q0,8 12,18 V32 Z" fill="#6a5a4a"/>
+  <rect x="-40" y="-14" width="80" height="24" fill="#f3ead6" ${STK} stroke-width="2.2"/>${[-32, -16, 0, 16, 32].map(x => `<rect x="${x - 2.5}" y="-14" width="5" height="24" fill="#c8463a"/>`).join('')}
+  <path d="M-58,-12 Q-50,-14 -44,-22 H44 Q50,-14 58,-12 Q0,-18 -58,-12 Z" fill="#4a4e56" ${STK} stroke-width="2.2"/>
+  <rect x="-26" y="-34" width="52" height="12" fill="#f3ead6" ${STK} stroke-width="2"/><path d="M-40,-32 Q-34,-34 -30,-42 H30 Q34,-34 40,-32 Q0,-38 -40,-32 Z" fill="#4a4e56" ${STK} stroke-width="2.2"/>`;
+const FIRE = `<path d="M-10,14 L-6,0 H6 L10,14 Z" fill="#8a7a6a" ${STK} stroke-width="2"/><path d="M0,0 C-10,-6 -8,-16 -2,-24 C-2,-16 4,-16 4,-22 C10,-14 10,-6 0,0 Z" fill="#f2a33a" stroke="#c0392b" stroke-width="1.8" stroke-linejoin="round"/>`;
+const YAMAJIRO = `<path d="M-40,20 Q-20,-20 0,-24 Q20,-20 40,20 Z" fill="#9bbf7f" ${STK} stroke-width="2.4"/><path d="M-26,0 Q0,-18 26,0" fill="none" stroke="#8a8478" stroke-width="5" stroke-dasharray="6 3"/>`;
+const SCROLL = `<rect x="-96" y="-44" width="192" height="88" fill="#f6eed6" ${STK} stroke-width="2.6"/>
+  ${[-104, 92].map(x => `<rect x="${x}" y="-52" width="12" height="104" rx="5" fill="#8a5a3a" ${STK} stroke-width="2.2"/>`).join('')}
+  <path d="M0,-36 V36" stroke="#d8c8a0" stroke-width="2"/>
+  ${label(-48, -14, '律', 26, '#a8463a')}${label(48, -14, '令', 26, '#3f6fa8')}
+  ${[-76, -66, -56, -46, -36, -26, -16].map(x => `<path d="M${x},2 V32 M${x + 92},2 V32" stroke="#b9a58c" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 3"/>`).join('')}`;
+// 豪族居館：高床建築、千木、外圍柵欄
+const HALL = `<path d="M-34,22 H34" stroke="#8a6a4a" stroke-width="3"/><path d="M-26,22 V2 M-9,22 V2 M9,22 V2 M26,22 V2" stroke="#7a5a3a" stroke-width="3.4"/>
+  <rect x="-28" y="-14" width="56" height="16" fill="#c9a06a" ${STK} stroke-width="2.4"/><path d="M-6,2 V-10 H6 V2" fill="#5a4a3a"/>
+  <path d="M-38,-12 L-22,-34 H22 L38,-12 Z" fill="#b89a5a" ${STK} stroke-width="2.4"/><path d="M-30,-22 H30" stroke="#9a7a3a" stroke-width="1.4"/>
+  <path d="M-22,-34 L-30,-46 M-18,-34 L-26,-46 M22,-34 L30,-46 M18,-34 L26,-46" stroke="#6a4a2a" stroke-width="2.6" stroke-linecap="round"/>
+  ${[-46, -40, 40, 46].map(x => `<path d="M${x},24 V8" stroke="#8a6a4a" stroke-width="2.4" stroke-linecap="round"/>`).join('')}<path d="M-48,14 H-38 M38,14 H48" stroke="#8a6a4a" stroke-width="2"/>`;
+const XMARK = `<path d="M-10,-10 L10,10 M10,-10 L-10,10" stroke="#d23b33" stroke-width="5" stroke-linecap="round"/>`;
+const banner = (txt, c) => `<path d="M0,0 V-200" stroke="#6a4a2a" stroke-width="5" stroke-linecap="round"/><path d="M-6,-196 H6" stroke="#6a4a2a" stroke-width="4"/>
+  <rect x="4" y="-190" width="62" height="130" fill="${c}" ${STK} stroke-width="2.6"/>${[...txt].map((ch, i) => label(35, -146 + i * 46, ch, 34, '#fff')).join('')}`;
+const arrowTo = (x1, y1, x2, y2, c = '#d23b33', w = 5, dash = '') => { const a = Math.atan2(y2 - y1, x2 - x1), h = 14;
+  const p1 = [x2 - h * Math.cos(a - .5), y2 - h * Math.sin(a - .5)], p2 = [x2 - h * Math.cos(a + .5), y2 - h * Math.sin(a + .5)];
+  return `<path d="M${x1},${y1} L${x2},${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" ${dash ? `stroke-dasharray="${dash}"` : ''}/><path d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} L${x2},${y2} L${p2[0].toFixed(1)},${p2[1].toFixed(1)}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`; };
+
+// ===== 腳本：第 2 課 稻米造出一個國家 =====
+const SPK = {
+  yamato: { name: '大和國', c: '#5f8a4a' }, tailime: { name: '台萊姆君', c: '#c9902a' },
+  saga: { name: '佐賀君', c: '#3f6fa8' }, fukuoka: { name: '福岡君', c: '#c0392b' },
+};
+const CHAIN = ['稻作傳入', '剩餘糧食', '貧富階級', '村落爭戰', '小國林立', '共立女王', '大和聯盟'];
+const chainBar = n => CHAIN.map((t, i) => { const x = 70 + i * 110, on = i < n;
+  return `<rect x="${x - 48}" y="20" width="96" height="34" rx="17" fill="${on ? '#5f8a4a' : '#efe6d2'}" stroke="${on ? '#4a6e3a' : '#d8ccb0'}" stroke-width="2"/>${label(x, 43, t, 15, on ? '#fff' : '#a89a80')}${i < 6 ? `<path d="M${x + 50},37 h8" stroke="#b9a58c" stroke-width="3" stroke-linecap="round"/>` : ''}`; }).join('');
+function setChain(n) { dropProp('chain'); addProp('chain', chainBar(n), 'bg', ''); }
+const COUNTRIES = [[130.4,33.5],[130.6,33.2],[130.9,32.9],[131.4,33.3],[130.6,32.6],[131.3,32.3],[130.5,31.8],[131.5,34.2],[132.4,34.5],[133.0,35.3],[133.8,34.7],[132.8,34.7],[134.3,34.9],[134.5,35.1],[133.0,33.8],[133.6,34.1],[134.3,34.0],[132.8,33.4],[135.5,34.7],[135.8,34.5],[135.7,35.0],[136.1,34.8],[135.3,35.0],[136.7,35.3],[137.2,35.0],[136.4,36.2],[137.8,35.4],[138.4,35.2],[139.2,35.8],[139.6,36.3]];
+const KOFUN_SITES = [[136.0,34.4],[135.45,34.5],[133.77,34.68],[132.8,35.3],[136.3,36.2],[137.0,35.1],[130.6,33.4],[131.4,32.1],[139.3,36.3],[139.9,35.6]];
+const JP_NAR = () => { move('yamato', 110, 168, .45); move('tailime', 718, 440, .5); };
+const SCRIPT = [
+  // 1. 開場
+  { who: 'yamato', t: '今天從一粒米講起：日本的國家是怎麼來的。', ja: '今日はひとつぶのこめから話そう。日本の国は、どうやってできたのか。', act() {
+      setBg(BG.title);
+      addActor('yamato', '銅鏡', 250, 400, .9, 'front');
+      addProp('title', label(400, 92, '稻米造出一個國家', 46) + label(400, 132, '繩文 → 彌生 → 古墳', 26, '#6a6470'));
+      addProp('rice', at(400, 290, 1.6, RICE));
+    } },
+  { who: 'tailime', t: '一粒米？米跟國家有什麼關係？', ja: 'こめ？こめと国になんの関係があるの？', act() {
+      addActor('tailime', '好奇', 560, 400, .9, 'front');
+    } },
+  // 2. 繩文
+  { who: 'yamato', t: '先看最早的繩文時代，陶器上有繩子壓出的花紋。', ja: 'まずはいちばん古い、じょうもん時代。土器に縄の模様がついておる。', act() {
+      clearScene(); setBg(BG.plain);
+      move('yamato', 82, 440, .5); move('tailime', 718, 440, .5); look('yamato', '常態');
+      addProp('jt', tag(400, 60, '繩文時代', '#9a6a3a', '#fff', 24));
+      addProp('pot', at(400, 236, 2.6, POT));
+    } },
+  { who: 'yamato', t: '人們靠狩獵、採集、捕魚過活，持續了一萬多年。', ja: '狩りや木の実あつめ、魚とりで暮らし、それが一万年以上つづいた。', act() {
+      dropProp('pot');
+      const x0 = 70, x1 = 730, j = x0 + (x1 - x0) * 13700 / 16000;
+      addProp('tl', `${label(400, 150, '狩獵・採集・捕魚', 22, '#8a5432')}
+        <rect x="${x0}" y="196" width="${j - x0}" height="56" rx="10" fill="#c98a5a" stroke="var(--ink)" stroke-width="3"/>${label((x0 + j) / 2, 233, '繩文：一萬多年', 24, '#fff')}
+        <rect x="${j}" y="196" width="${x1 - j}" height="56" rx="10" fill="#7fa86a" stroke="var(--ink)" stroke-width="3"/>
+        ${label(x0, 282, '約前 14000', 15, '#6a6470')}${label(j, 282, '約前 300', 15, '#6a6470')}${label(x1, 282, '現在', 15, '#6a6470')}`);
+    } },
+  { who: 'tailime', t: '一萬年！後面的時代加起來都沒那麼長。', ja: 'いちまんねん！あとの時代をぜんぶ足しても、そんなに長くないよ。', act() {
+      look('tailime', { face: 'excited' });
+      const j = 70 + 660 * 13700 / 16000;
+      addProp('rest', `<rect x="${j - 6}" y="188" width="${736 - j}" height="72" rx="14" fill="none" stroke="#d23b33" stroke-width="4" class="glow"/>` + tag(560, 340, '第一課的時代全擠在這一小段', '#5f8a4a', '#fff', 18));
+    } },
+  // 3. 稻作傳入（東亞地圖）
+  { who: 'yamato', t: '改變一切的，是從大陸傳來的稻作。', ja: 'すべてを変えたのは、大陸から伝わったいなさくじゃ。', act() {
+      clearScene(); setBg(mapBg('west')); look('tailime', '好奇');
+      const [x, y] = P('west', '長江下游');
+      addProp('rice0', at(x, y - 34, .9, RICE));
+    } },
+  { who: 'yamato', t: '稻米可能源自中國長江下游，最早落腳在北九州。', ja: 'こめは中国の長江の下流あたりから来たらしい。最初に着いたのは北九州じゃ。', act() {
+      const [x0, y0] = P('west', '長江下游'), [x1, y1] = P('west', '北九州');
+      addProp('p-cj', pinAt('west', '長江下游', 0, 26));
+      addProp('route', `<path d="M${x0},${y0} Q${(x0 + x1) / 2},${y0 - 120} ${x1},${y1}" fill="none" stroke="#c9902a" stroke-width="4" stroke-dasharray="6 8" stroke-linecap="round"/>`, 'mid', '');
+      dropProp('rice0');
+      glide('rice', at(0, -34, .9, RICE), [x0, y0], [x1, y1], 300, 1800);
+      later(() => addProp('p-kk', pinAt('west', '北九州', 44, 30)), 1900);
+    } },
+  { who: 'yamato', t: '青銅和鐵也一起來了。這個新時代叫彌生。', ja: '青銅や鉄もいっしょに来た。この新しい時代をやよいという。', act() {
+      const [x, y] = P('west', '北九州');
+      addProp('metal', tag(x + 70, y + 70, '＋青銅・鐵', '#6a6470', '#fff', 16));
+      addProp('yayoi', tag(400, 50, '彌生時代　約前 300 年起', '#5f8a4a', '#fff', 22));
+    } },
+  // 4. 稻米一路改變社會
+  { who: 'tailime', t: '只是改吃米而已，有那麼大不了嗎？', ja: 'こめを食べるようになっただけでしょ？そんなにおおごと？', act() {
+      clearScene(); setBg(BG.plain); look('tailime', '踩雷'); look('yamato', '常態');
+      setChain(1);
+      addProp('rice', at(400, 240, 1.4, RICE));
+    } },
+  { who: 'yamato', t: '米可以存起來。豐收的年頭，就有吃不完的剩餘。', ja: 'こめはたくわえられる。豊作の年には食べきれないほどあまる。', act() {
+      dropProp('rice'); setChain(2); look('tailime', '好奇');
+      addProp('granary', at(300, 230, 1.8, GRANARY));
+      [[450, 300], [492, 300], [534, 300], [471, 280], [513, 280], [492, 260]].forEach(([x, y], i) => later(() => addProp('bale' + i, at(x, y, 1.1, BALE)), 300 + i * 260));
+    } },
+  { who: 'yamato', t: '管倉庫、分配剩餘的人，就有了權力。', ja: '倉を管理してあまりを分ける人が、力を持つようになった。', act() {
+      setChain(3);
+      ['bale0', 'bale1', 'bale2', 'bale3', 'bale4', 'bale5'].forEach(k => dropProp(k));
+      addProp('pyr', `<path d="M600,130 L680,310 H520 Z" fill="#efe6d2" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M573,190 H627 M547,250 H653" stroke="var(--ink)" stroke-width="2.4"/><path d="M600,130 L573,190 H627 Z" fill="#e1bf55" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/>
+        ${label(600, 230, '貧富', 20, '#6a5a3a')}${label(600, 288, '階級', 20, '#6a5a3a')}`);
+      addProp('ar', arrowTo(400, 230, 500, 230, '#5f8a4a', 5));
+    } },
+  { who: 'yamato', t: '田和水源值得搶，村落之間開始打仗。', ja: '田んぼと水は、うばい合うねうちがある。村どうしでいくさが始まった。', act() {
+      ['granary', 'pyr', 'ar'].forEach(k => dropProp(k)); setChain(4);
+      addProp('vl', at(200, 250, 1.3, HUT) + at(250, 290, 1.1, HUT) + at(170, 300, 1, HUT));
+      addProp('vr', at(600, 250, 1.3, HUT) + at(550, 290, 1.1, HUT) + at(630, 300, 1, HUT));
+      addProp('fd', at(380, 300, 1.4, FIELD) + at(412, 300, 1.4, FIELD) + `<path d="M330,330 Q400,318 470,334" fill="none" stroke="#7fb3cf" stroke-width="7" stroke-linecap="round"/>`);
+      later(() => addProp('sp', at(396, 190, 1.4, SPEARS)), 600);
+    } },
+  { who: 'saga', t: '我這裡的吉野之里，就挖了一圈壕溝防敵人。', ja: 'わしのところのよしのがりも、まわりにほりを掘って敵を防いだんじゃ。', act() {
+      ['vl', 'vr', 'fd', 'sp'].forEach(k => dropProp(k));
+      addProp('moat', at(360, 230, 1, MOAT_VILLAGE));
+      addProp('yg', tag(360, 340, '吉野之里（佐賀）', '#3f6fa8', '#fff', 18));
+      addActor('saga', 'がばい', 590, 410, .55);
+    } },
+  { who: 'tailime', t: '佐賀不是說自己什麼都沒有嗎？', ja: 'さがってなにもないって言ってなかった？', act() {
+      look('tailime', '好奇');
+    } },
+  { who: 'saga', t: '這個倒是有！', ja: 'これはあるばい！', act() { look('saga', { face: 'grumpy' }); } },
+  // 5. 小國與金印（東亞地圖）
+  { who: 'yamato', t: '打贏的村落併成小國，還去中國討認可。', ja: 'かった村は小さな国になった。そして中国に、お墨付きをもらいに行った。', act() {
+      clearScene(); setBg(mapBg('west')); look('tailime', '好奇');
+      addProp('han', `<g transform="translate(100 150) scale(.9)">${PALACE}</g>` + tag(100, 210, '東漢', '#9a3a32', '#fff', 18));
+      addProp('p-na', pinAt('west', '北九州', 40, 30, '奴國'));
+    } },
+  { who: 'fukuoka', t: '西元 57 年，奴國的使者從東漢帶回一枚金印！', ja: 'せいれき五十七年、なこくの使いがごかんから、金印をもらって帰ったんよ！', act() {
+      const [x, y] = P('west', '北九州');
+      addProp('l-fk', link(x, y, 606, 236), 'mid', '');
+      addActor('fukuoka', '熱い', 612, 246, .45);
+      glide('seal', at(0, -10, 1.3, SEAL), [100, 120], [x - 2, y - 26], 400, 2000);
+    } },
+  { who: 'fukuoka', t: '這枚金印，1784 年在福岡外海的島上出土。', ja: 'その金印は千七百八十四年に、福岡の島で見つかったんよ。', act() {
+      const [x, y] = P('west', '北九州');
+      addProp('kin', tag(x - 30, y + 74, '「漢委奴國王」金印', '#c9902a', '#fff', 16));
+    } },
+  { who: 'tailime', t: '有中國皇帝背書，在列島裡就更有份量？', ja: '中国の皇帝のお墨付きがあれば、島の中でえらくなれるってこと？', act() { look('tailime', '好奇'); } },
+  { who: 'yamato', t: '正是如此。', ja: 'そのとおりじゃ。', act() { look('yamato', 'やまと'); } },
+  // 6. 倭國大亂與卑彌呼（日本地圖）
+  { who: 'yamato', t: '二世紀後半，倭國大亂，三十來個小國打個不停。', ja: '二世紀の後半、わこくは大きく乱れた。三十ほどの小さな国が、たたかいつづけた。', act() {
+      clearScene(); setBg(mapBg('japan')); JP_NAR(); look('yamato', '常態');
+      addProp('wa', tag(400, 420, '倭國大亂　二世紀後半', '#a8463a', '#fff', 20));
+      COUNTRIES.forEach((ll, i) => later(() => { const [x, y] = PJ('japan', ll); addProp('f' + i, at(x, y, 1, FLAG(FLAG_C[i % 6]))); }, i * 60));
+      later(() => COUNTRIES.forEach((ll, i) => { if (i % 3) return; const [x, y] = PJ('japan', ll); addProp('c' + i, `<g class="glow">${at(x + 12, y - 14, 1, CLASH)}</g>`, 'mid', ''); }), 2000);
+    } },
+  { who: 'yamato', t: '打累了，大家一起推舉一位女王：卑彌呼。', ja: '戦いに疲れて、みんなでひとりの女王を立てた。ひみこじゃ。', act() {
+      COUNTRIES.forEach((_, i) => dropProp('c' + i)); dropProp('wa');
+      addProp('lines', COUNTRIES.map(ll => { const [x, y] = PJ('japan', ll); return `<path d="M${x},${y} L385,120" stroke="#c9902a" stroke-width="1.6" stroke-dasharray="3 5" opacity=".8"/>`; }).join(''), 'mid', 'fade');
+      addProp('tw', card(385, 92, 230, 170) + at(385, 106, .95, TOWER) + label(385, 36, '卑彌呼', 22, '#a8463a'));
+      addProp('note', label(385, 166, '都城「邪馬台國」在哪裡至今未定', 13, '#5a4a3a'));
+    } },
+  { who: 'yamato', t: '她靠祭祀讓眾人信服，自己幾乎不露面。', ja: 'ひみこはまつりの力で人々をまとめた。そして、ほとんどすがたを見せなかった。', act() {
+      look('yamato', '銅鏡');
+      addProp('mirror', at(466, 74, .8, MIRROR));
+    } },
+  { who: 'tailime', t: '這就是上一課的三格：問題、撐不住、補上！', ja: 'これって前回の三つの型だ！問題、もたない、うめる！', act() {
+      clearScene(); setBg(BG.plain); look('tailime', '懂了'); look('yamato', '常態');
+      move('yamato', 82, 440, .5); move('tailime', 718, 440, .5);
+      [['問題', '小國長年互戰', 80], ['舊秩序撐不住', '各自為政只會繼續打', 180], ['新權力補上', '眾國共立一位女王', 280]].forEach(([t, s, y], i) => later(() => {
+        addProp('b' + i, box(400, y, 360, 70, t, s));
+        if (i < 2) addProp('ba' + i, `<path d="M400,${y + 37} v20 m-8,-8 l8,8 l8,-8" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`);
+      }, i * 450));
+    } },
+  // 7. 古墳時代（日本地圖）
+  { who: 'yamato', t: '大約 250 年起，各地開始蓋巨大的墳墓。', ja: '二百五十年ごろから、各地で大きなお墓が作られ始めた。', act() {
+      clearScene(); setBg(mapBg('japan')); JP_NAR(); look('tailime', '好奇');
+      addProp('kt', tag(560, 40, '古墳時代　約 250–592', '#5f8a4a', '#fff', 20));
+      addProp('kcard', card(440, 355, 250, 150));
+    } },
+  { who: 'yamato', t: '從上空看像鑰匙孔，叫前方後圓墳。', ja: '空から見るとかぎあなの形。ぜんぽうこうえんふんという。', act() {
+      addProp('khole', at(380, 342, .9, KEYHOLE_MOAT) + label(490, 336, '前方後圓墳', 18, '#4a6e3a') + label(490, 360, '（從上空看）', 14, '#6a6470'));
+    } },
+  { who: 'tailime', t: '墳墓越大，代表什麼？', ja: 'お墓が大きいと、どういう意味なの？', act() { look('tailime', '好奇'); } },
+  { who: 'yamato', t: '代表能動員的人越多，權力就越大。', ja: 'たくさんの人を動かせる。つまり、ちからが大きいということじゃ。', act() {
+      look('yamato', 'やまと');
+      Array.from({ length: 10 }, (_, i) => later(() => addProp('pw' + i, at(350 + i * 20, 404, .85, PAWN())), i * 120));
+    } },
+  { who: 'yamato', t: '同樣的鑰匙孔，從奈良一帶擴散到各地。', ja: '同じかぎあなの形が、奈良のあたりから各地へ広がった。', act() {
+      ['kcard', 'khole'].forEach(k => dropProp(k)); Array.from({ length: 10 }, (_, i) => dropProp('pw' + i));
+      addProp('p-nara', pinAt('japan', '奈良', -6, -40, '大和（奈良）'));
+      KOFUN_SITES.forEach((ll, i) => later(() => { const [x, y] = PJ('japan', ll); addProp('k' + i, at(x, y - 10, i < 2 ? .5 : .42, KH_ICON)); }, 300 + i * 260));
+    } },
+  { who: 'yamato', t: '意思是各地首領，加入了以大和為中心的聯盟。', ja: 'それは各地のリーダーが、大和を中心にした連合に加わった、ということじゃ。', act() {
+      const [nx, ny] = P('japan', '奈良');
+      addProp('kl', KOFUN_SITES.slice(2).map(ll => { const [x, y] = PJ('japan', ll); return `<path d="M${x},${y} L${nx},${ny}" stroke="#5f8a4a" stroke-width="2.4" stroke-dasharray="4 6" stroke-linecap="round"/>`; }).join(''), 'bg', 'fade');
+      addProp('ren', tag(590, 340, '以大和為中心的聯盟', '#5f8a4a', '#fff', 20));
+      dropProp('kt');
+    } },
+  { who: 'yamato', t: '這個聯盟的領袖，就是天皇家的源頭。', ja: 'この連合のリーダーが天皇家の始まりじゃ。', act() {
+      look('yamato', 'やまと');
+      addProp('ten', tag(590, 386, '→ 天皇家的源頭', '#7a5a9a', '#fff', 18));
+    } },
+  // 8. 總結
+  { who: 'yamato', t: '把整條鏈排一次。', ja: 'まとめてならべてみよう。', act() {
+      clearScene(); setBg(BG.title); look('tailime', '好奇'); look('yamato', '常態');
+      move('yamato', 82, 440, .5); move('tailime', 718, 440, .5);
+      const pos = [[130, 110], [303, 110], [476, 110], [649, 110], [216, 230], [400, 230], [584, 230]];
+      CHAIN.forEach((t, i) => later(() => {
+        const [x, y] = pos[i];
+        addProp('s' + i, box(x, y, 146, 62, t, '', i === 6 ? '#e3eed8' : '#fff'));
+        if (i < 6) addProp('sa' + i, i === 3 ? `<path d="M649,145 C649,175 216,165 216,190" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-dasharray="2 7" stroke-linecap="round"/>` : arrowTo(x + 76, y, x + 96, y, 'var(--ink)', 4));
+      }, i * 380));
+    } },
+  { who: 'tailime', t: '一粒米，真的造出了一個國家！', ja: 'ひとつぶのこめが、ほんとうに国を作ったんだ！', act() { look('tailime', '懂了'); setState('tailime', 'hop', true); later(() => setState('tailime', 'hop', false), 900); } },
+  { who: 'yamato', t: '下次看大和怎麼照著中國，把自己改造一番。', ja: 'つぎは、大和が中国をお手本に自分を作りかえる話じゃ。', act() {
+      look('yamato', 'やまと');
+      addProp('next', `<rect x="246" y="330" width="308" height="48" rx="16" fill="none" stroke="#b9a58c" stroke-width="3" stroke-dasharray="8 8"/>${label(400, 362, '下一課：照著中國改造自己', 20, '#8a7468')}`);
+    } },
+];
+SCRIPT.forEach((L, i) => { L.a = `audio/${String(i + 1).padStart(2, '0')}.wav`; });
+
+// ===== 播放控制 =====
+let paused = true, started = false, run = 0, idx = 0, instant = false;
+let clock = 0, last = performance.now();
+setInterval(() => { const now = performance.now(); if (!paused) clock += now - last; last = now; }, 30);
+const later = (fn, ms) => { if (instant) return fn(); const r = run; sleep(ms, r).then(() => { if (r === run) fn(); }); };
+const sleep = (ms, r) => new Promise(res => { const end = clock + ms; (function chk() { if (r !== run) return res(); if (clock >= end) res(); else setTimeout(chk, 30); })(); });
+
+// 音檔先載好；播放中暫停時一起暫停
+const AUDIO = SCRIPT.map(L => { const a = new Audio(); a.preload = 'auto'; a.src = L.a; return a; });
+let cur = null;
+function speak(i, r) {
+  return new Promise(res => {
+    if (!$('voice').checked) return res();
+    const a = AUDIO[i]; cur = a;
+    let done = false; const fin = () => { if (!done) { done = true; cur = null; res(); } };
+    a.onended = fin; a.onerror = fin;
+    try { a.currentTime = 0; } catch (e) {}
+    const p = a.play(); if (p && p.catch) p.catch(fin);
+    // 逾時保護：音檔長度不明時，以字數估
+    sleep(((isFinite(a.duration) && a.duration) ? a.duration * 1000 : SCRIPT[i].ja.length * 260) + 2500, r).then(fin);
+  });
+}
+async function playFrom(r) {
+  while (idx < SCRIPT.length && r === run) {
+    const L = SCRIPT[idx];
+    L.act && L.act();
+    const sp = SPK[L.who];
+    $('who').textContent = sp.name; $('who').style.background = sp.c;
+    $('line').textContent = L.t;
+    $('seek').value = idx; $('pos').textContent = `${idx + 1} / ${SCRIPT.length}`;
+    setState(L.who, 'talk', true);
+    const minMs = $('voice').checked ? 900 : L.t.length * 170 + 900;
+    await Promise.all([sleep(minMs, r), speak(idx, r)]);
+    setState(L.who, 'talk', false);
+    await sleep(380, r);
+    if (r !== run) return; // 已經跳句或重播：舊的迴圈不能再動 idx
+    idx++;
+  }
+  if (r === run && idx >= SCRIPT.length) { Object.keys(actors).forEach(id => { setState(id, 'hop', false); setState(id, 'talk', false); }); paused = true; $('play').textContent = '再看一次'; $('stage').classList.add('paused'); started = false; }
+}
+function reset() {
+  run++; idx = 0; instant = false;
+  if (cur) { cur.pause(); cur = null; }
+  Object.keys(actors).forEach(removeActor);
+  Object.values(props).forEach(p => p.remove()); props = {};
+  ['bg', 'mid', 'front'].forEach(id => $(id).innerHTML = '');
+  $('seek').value = 0;
+}
+function start() { reset(); started = true; paused = false; $('stage').classList.remove('paused'); $('play').textContent = '暫停'; playFrom(run); }
+$('play').onclick = () => {
+  if (!started) return start();
+  paused = !paused;
+  $('stage').classList.toggle('paused', paused);
+  $('play').textContent = paused ? '繼續' : '暫停';
+  if (cur) paused ? cur.pause() : cur.play().catch(() => {});
+};
+
+// 拖進度條：重設舞台後，把前面每一句的畫面動作瞬間跑完，再從選的那一句開始播
+function seekTo(n) {
+  reset(); started = true;
+  instant = true; $('stage').classList.add('instant');
+  for (let i = 0; i < n; i++) SCRIPT[i].act && SCRIPT[i].act();
+  instant = false; setTimeout(() => $('stage').classList.remove('instant'), 60);
+  idx = n; paused = false; $('stage').classList.remove('paused'); $('play').textContent = '暫停';
+  playFrom(run);
+}
+$('seek').max = SCRIPT.length - 1; $('pos').textContent = `0 / ${SCRIPT.length}`;
+$('seek').oninput = () => { $('pos').textContent = `${+$('seek').value + 1} / ${SCRIPT.length}`; };
+$('seek').onchange = () => seekTo(+$('seek').value);
+
+// 封面：前兩句的畫面
+instant = true; SCRIPT[0].act(); SCRIPT[1].act(); instant = false;
+</script>
+<script>const RV_LESSON = 2;</script>
+<script src="../kit.js"></script>
