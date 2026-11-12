@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>飲食文化程度診斷</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>飲食文化程度診斷</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">飲食文化</a></nav>
+  <h1>飲食文化程度診斷</h1>
+  <p class="lede">8 課各出 2 題，共 16 題，大約 10 分鐘。用途是找出哪幾課你已經會了，可以跳過或快速看過。</p>
+
+  <div class="callout">
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你需要的課。<br>
+    作答會自動存在這個瀏覽器裡。交卷後按「複製結果」，貼到對話框給老師。
+  </div>
+
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+</main>
+
+<script>
+const facets = [
+  { id: 'l1', name: '第 1 課・和食的骨架', desc: '一汁三菜、高湯、過去為什麼少吃肉。' },
+  { id: 'l2', name: '第 2 課・昆布與柴魚', desc: '關東關西的高湯差異與北前船。' },
+  { id: 'l3', name: '第 3 課・醬油、味噌、清酒', desc: '發酵、麴、地區差異。' },
+  { id: 'l4', name: '第 4 課・壽司', desc: '壽司的起源與握壽司的誕生。' },
+  { id: 'l5', name: '第 5 課・江戶的外食', desc: '江戶為什麼外食發達。' },
+  { id: 'l6', name: '第 6 課・洋食與拉麵', desc: '明治以後傳進來的料理。' },
+  { id: 'l7', name: '第 7 課・地方料理', desc: '用地理解釋地方名物。' },
+  { id: 'l8', name: '第 8 課・外食的形式與規矩', desc: '居酒屋、食券機、筷子的禁忌。' },
+];
+
+// choice：options[0] 是正解，顯示時會打亂。
+const questions = [
+  { id: 'l1-1', facet: 'l1', level: 1, type: 'choice',
+    prompt: '定食常說的「一汁三菜」，「一汁」指的是什麼？',
+    options: ['一碗湯（例如味噌湯）', '一碗白飯', '一杯茶', '一碟醬油'],
+    explain: '一汁是一碗湯，三菜是三道配菜。白飯是基本盤，不算在數字裡。' },
+  { id: 'l1-2', facet: 'l1', level: 2, type: 'choice',
+    prompt: '江戶時代以前，日本人整體上很少吃牛肉。主要原因是？',
+    options: ['朝廷下令禁止，加上牛是耕田的勞動力', '日本的氣候養不活牛', '牛肉當時全部出口到中國', '日本本土沒有牛這種動物'],
+    explain: '675 年天武天皇下令禁吃牛、馬、犬、猿、雞；牛馬又是耕作和運輸的重要勞動力。佛教的不殺生思想是背景。' },
+
+  { id: 'l2-1', facet: 'l2', level: 1, type: 'choice',
+    prompt: '在大阪和東京各吃一碗烏龍麵，湯色通常哪裡比較淡？',
+    options: ['大阪', '東京', '兩地差不多', '看季節而定'],
+    explain: '關西以昆布高湯配淡口醬油，湯色淺；關東以柴魚高湯配濃口醬油，湯色深。' },
+  { id: 'l2-2', facet: 'l2', level: 3, type: 'choice',
+    prompt: '昆布幾乎都產在北海道，關西卻成了昆布高湯的中心。最主要的原因是？',
+    options: ['江戶時代北前船從北海道沿日本海把昆布運到大阪', '關西的海也產很多昆布', '明治以後才用鐵路運到關西', '關東人不喜歡海藻的味道'],
+    explain: '北前船從蝦夷地經日本海、下關、瀨戶內海到大坂，昆布跟著這條航路集中到大坂。' },
+
+  { id: 'l3-1', facet: 'l3', level: 2, type: 'choice',
+    prompt: '醬油、味噌、清酒的發酵，共同靠的是哪一種微生物？',
+    options: ['麴菌', '乳酸菌', '納豆菌', '醋酸菌'],
+    explain: '三者都先用麴菌把澱粉、蛋白質分解。2006 年日本釀造學會把麴菌定為「國菌」。' },
+  { id: 'l3-2', facet: 'l3', level: 2, type: 'choice',
+    prompt: '名古屋的味噌湯和京都的味噌湯顏色差很多。哪一個比較深？',
+    options: ['名古屋（豆味噌）', '京都（白味噌）', '兩地一樣', '要看季節'],
+    explain: '名古屋一帶用八丁味噌等豆味噌，熟成久、色深；京都的西京味噌米麴多、熟成短，色淡偏甜。' },
+
+  { id: 'l4-1', facet: 'l4', level: 2, type: 'choice',
+    prompt: '壽司最早的形態是什麼？',
+    options: ['用米把魚醃起來發酵的保存食', '江戶的屋台小吃', '從中國傳來的生魚片', '寺院裡的素食'],
+    explain: '最早是「熟壽司」（なれずし），米只是讓魚發酵的材料，吃的時候米常常不吃。滋賀的鮒壽司還留著這種形態。' },
+  { id: 'l4-2', facet: 'l4', level: 3, type: 'choice',
+    prompt: '江戶時代的握壽司跟今天比起來，最大的差別是？',
+    options: ['魚多半先醃過或煮過，而且一貫比較大', '當時不用米', '當時只用淡水魚', '當時只在高級料亭吃得到'],
+    explain: '沒有冰箱，魚要用醬油醃（漬け）、用醋或煮過才放得住；一貫大約是現在的兩到三倍。' },
+
+  { id: 'l5-1', facet: 'l5', level: 2, type: 'choice',
+    prompt: '江戶的外食特別發達，下列哪一個<b>不是</b>主要原因？',
+    options: ['江戶人家裡普遍有大廚房', '單身男性多', '常發生大火，屋台能快速復原', '參勤交代帶來大批武士與隨從'],
+    explain: '長屋的灶很小，男性人口多又常是單身，外食最划算。' },
+  { id: 'l5-2', facet: 'l5', level: 3, type: 'choice',
+    prompt: '天婦羅一開始多在屋台賣，不在店裡炸，最常見的解釋是？',
+    options: ['大量熱油容易起火，屋外比較安全', '天婦羅是給武士吃的', '屋台的油比較便宜', '天婦羅要邊走邊吃才好吃'],
+    explain: '江戶是木造密集都市，大火頻繁，在室內用大鍋熱油風險高。' },
+
+  { id: 'l6-1', facet: 'l6', level: 2, type: 'choice',
+    prompt: '日本的咖哩是經由哪裡傳進來的？',
+    options: ['英國（經過英國海軍等管道）', '直接從印度傳入', '從中國傳入', '從葡萄牙傳入'],
+    explain: '咖哩是英國人從印度帶回去改良的，用麵粉勾芡的濃稠咖哩在明治時代傳進日本，海軍把它當成兵食推廣。' },
+  { id: 'l6-2', facet: 'l6', level: 2, type: 'choice',
+    prompt: '拉麵在日本一開始叫什麼？',
+    options: ['南京そば或支那そば（中國的蕎麥麵）', '札幌麵', '和風蕎麥', '洋麵'],
+    explain: '早期由橫濱中華街等地的華人帶入，叫南京そば、支那そば，戰後才普遍叫ラーメン或中華そば。' },
+
+  { id: 'l7-1', facet: 'l7', level: 2, type: 'choice',
+    prompt: '北海道的乳製品很有名。最主要的原因是？',
+    options: ['天氣涼、不適合種稻，明治時代引進酪農', '北海道自古就有養牛的傳統', '北海道人口最多', '北海道離歐洲最近'],
+    explain: '北海道涼爽、草地廣，明治時代開拓使引進美國式的酪農與畜牧。' },
+  { id: 'l7-2', facet: 'l7', level: 3, type: 'choice',
+    prompt: '沖繩料理大量用豬肉，和本州差很大。最主要的原因是？',
+    options: ['琉球王國和中國往來密切，沒有受到本州肉食禁忌的影響', '沖繩太熱，不能吃魚', '美軍戰後才把豬帶進沖繩', '沖繩人不信佛教'],
+    explain: '琉球王國長期和中國往來，接待冊封使要大量豬肉，養豬普及。戰後的午餐肉、塔可飯則是美軍影響。' },
+
+  { id: 'l8-1', facet: 'l8', level: 2, type: 'choice',
+    prompt: '在居酒屋坐下後沒點就送上一小碟菜，結帳時也算錢。它叫什麼？',
+    options: ['お通し（關西多稱突き出し）', 'おしぼり', 'おまかせ', 'おかわり'],
+    explain: 'お通し是入座費兼下酒小菜，通常每人幾百日圓，不能退。' },
+  { id: 'l8-2', facet: 'l8', level: 2, type: 'choice',
+    prompt: '用筷子把食物直接遞到別人的筷子上，在日本是大忌。為什麼？',
+    options: ['這是火葬後撿骨時才有的動作', '因為筷子會碰在一起發出聲音', '因為這樣會弄髒食物', '因為代表要和對方吵架'],
+    explain: '火葬後家屬用筷子一個傳一個地夾起遺骨放進骨灰罈（箸渡し），所以平常吃飯要避開這個動作。' },
+];
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '飲食文化程度診斷',
+  facets, questions,
+  storageKey: 'food-diagnostic-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+});
+</script>
+</body>
+</html>
