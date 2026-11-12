@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日文程度診斷</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>日文程度診斷</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日文</a></nav>
+  <h1>日文程度診斷</h1>
+  <p class="lede">三個部分：背景問答、假名朗讀計時、7 個面向 64 題選擇題。這不是考試，是幫老師找出第一課該從哪裡開始。全部大約 25 分鐘。</p>
+
+  <div class="callout">
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    看得懂題目但要想很久才認出假名，也算是有用的資訊，可以在背景問答最後一格寫下來。<br>
+    作答會自動存在這個瀏覽器裡，中途關掉或切到別的 App 也不會不見。最後要貼回<b>兩段</b>文字給老師：第一部分的「複製背景與計時」和交卷後的「複製結果」。
+  </div>
+
+  <h2>第一部分：背景問答</h2>
+  <p class="small">寫得很簡短也沒關係，想不起來就寫「忘了」。</p>
+  <div class="recall-box exercise">1. 以前用過哪些方式學日文（教材、App、補習、看動畫自學……）？大概學了多久、停在哪裡？
+    <textarea id="bg-1"></textarea></div>
+  <div class="recall-box exercise">2. 平常會看日本動畫、日劇或日文書嗎？看哪些作品？開什麼字幕？
+    <textarea id="bg-2"></textarea></div>
+  <div class="recall-box exercise">3. 有沒有特別想看懂的作品？（之後可以拿來當上課材料）
+    <textarea id="bg-3"></textarea></div>
+
+  <h2>第二部分：假名朗讀計時</h2>
+  <p>按「開始」後，用正常說話的音量把下面的字<b>全部念出聲</b>，念完馬上按字下方的「念完了」。不會念的字跳過，念完後寫在下面的格子裡。</p>
+
+  <h3>平假名（20 個字）</h3>
+  <p><button class="btn" data-start="hira">開始</button> <span class="small" id="t-hira">尚未計時</span></p>
+  <p class="kana-list" lang="ja" style="font-size:1.35rem;line-height:2.1">さくら　ともだち　ねこ　はなび　つくえ　ゆめ　ぬいぐるみ　ろうそく　へや　おにぎり　みそしる　ふゆやすみ　でんしゃ　きっぷ　びょういん　じゅぎょう　ぎゅうにゅう　ちょっと　まっすぐ　おおきい</p>
+  <p><button class="btn" data-stop="hira" disabled>念完了</button></p>
+
+  <h3>片假名（18 個字）</h3>
+  <p><button class="btn" data-start="kata">開始</button> <span class="small" id="t-kata">尚未計時</span></p>
+  <p class="kana-list" lang="ja" style="font-size:1.35rem;line-height:2.1">アイス　カメラ　ケーキ　ホテル　メロン　ネクタイ　ソファ　ツアー　ラーメン　レシート　ヌードル　ワイン　シャワー　チョコレート　パスポート　コンピューター　フィルム　ウェブサイト</p>
+  <p><button class="btn" data-stop="kata" disabled>念完了</button></p>
+
+  <div class="recall-box exercise">念的時候卡住、念不出來或不確定的字（直接把字寫下來；沒有就寫「沒有」）：
+    <textarea id="bg-stuck"></textarea></div>
+
+  <p><button class="btn" id="copy-bg">複製背景與計時</button> <span class="small" id="copy-bg-msg"></span></p>
+
+  <h2>第三部分：選擇題</h2>
+  <p class="small">假名題的選項用羅馬拼音，ā、ō 這類上面有橫線的字母代表長音（拉長一拍）。</p>
+
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
+  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
+</main>
+
+<script>
+// ---------- 朗讀計時 ----------
+// 手機窄螢幕上，字詞不要從中間斷行。
+document.querySelectorAll('.kana-list').forEach(p => {
+  p.innerHTML = p.textContent.trim().split(/\s+/)
+    .map(w => `<span style="display:inline-block;margin-right:.9em">${w}</span>`).join('');
+});
+
+const times = {}, starts = {};
+document.querySelectorAll('[data-start]').forEach(btn => {
+  const k = btn.dataset.start;
+  const stop = document.querySelector(`[data-stop="${k}"]`);
+  const out = document.getElementById('t-' + k);
+  btn.onclick = () => {
+    starts[k] = performance.now();
+    btn.textContent = '重新開始';
+    out.textContent = '計時中…念完按下方「念完了」';
+    stop.disabled = false;
+  };
+  stop.onclick = () => {
+    const sec = Math.round((performance.now() - starts[k]) / 100) / 10;
+    times[k] = sec;
+    stop.disabled = true;
+    btn.textContent = '重新計時';
+    out.textContent = `${sec} 秒`;
+    saveBg();
+  };
+});
+
+// 背景問答與計時存在瀏覽器裡，手機切換 App 後頁面重新載入也不會不見。
+const BG_KEY = 'jp-diagnostic-bg-v1';
+const bgIds = ['bg-1', 'bg-2', 'bg-3', 'bg-stuck'];
+function saveBg() {
+  try { localStorage.setItem(BG_KEY, JSON.stringify({ text: Object.fromEntries(bgIds.map(id => [id, document.getElementById(id).value])), times })); } catch (e) {}
+}
+try {
+  const saved = JSON.parse(localStorage.getItem(BG_KEY) || 'null');
+  if (saved) {
+    bgIds.forEach(id => { document.getElementById(id).value = saved.text?.[id] || ''; });
+    Object.assign(times, saved.times || {});
+    Object.entries(times).forEach(([k, sec]) => {
+      document.getElementById('t-' + k).textContent = `${sec} 秒`;
+      document.querySelector(`[data-start="${k}"]`).textContent = '重新計時';
+    });
+  }
+} catch (e) {}
+bgIds.forEach(id => document.getElementById(id).addEventListener('input', saveBg));
+
+document.getElementById('copy-bg').onclick = async () => {
+  const v = id => document.getElementById(id).value.trim().replace(/\s+/g, ' ') || '（空白）';
+  const t = k => times[k] !== undefined ? `${times[k]} 秒` : '未計時';
+  const text = [
+    '【日文程度診斷：背景與計時】',
+    `1. 以前怎麼學：${v('bg-1')}`,
+    `2. 平常看的作品：${v('bg-2')}`,
+    `3. 想看懂的作品：${v('bg-3')}`,
+    `平假名 20 字：${t('hira')}`,
+    `片假名 18 字：${t('kata')}`,
+    `卡住的字：${v('bg-stuck')}`,
+  ].join('\n');
+  const msg = document.getElementById('copy-bg-msg');
+  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製，直接貼到對話框即可。'; }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    msg.textContent = document.execCommand('copy') ? '已複製，直接貼到對話框即可。' : '複製失敗，請手動選取文字。';
+    ta.remove();
+  }
+};
+
+// ---------- 選擇題 ----------
+// choice：options[0] 是正解，顯示時會打亂。
+const J = s => `<span lang="ja" style="font-size:1.3em">${s}</span>`;
+
+const facets = [
+  { id: 'hira',  name: '平假名：清音、濁音、半濁音', desc: '選出正確的讀音。' },
+  { id: 'kata',  name: '片假名', desc: '選出正確的讀音或意思。外來語念出來，常常就猜得到是哪個英文字。' },
+  { id: 'sound', name: '拗音、長音、促音', desc: '小字（ゃゅょっ）和拉長的音。' },
+  { id: 'vocab', name: '基本單字', desc: '只用假名寫，不給漢字，看你以前學過的字還留下多少。' },
+  { id: 'kanji', name: '漢字詞的讀音', desc: '沒學過也可以憑感覺選，但完全沒頭緒就按「我不知道」。' },
+  { id: 'gram',  name: '基本文法', desc: '課本前半段會教的句型。' },
+  { id: 'talk',  name: '動畫、日劇的口語', desc: '朋友之間的說話方式，課本通常很晚才教。' },
+];
+
+const questions = [
+  // ---------- 平假名 ----------
+  { id: 'hira-1', facet: 'hira', level: 1, type: 'choice',
+    prompt: `${J('さかな')} 怎麼念？`,
+    options: ['sakana', 'sakama', 'sanaka', 'sakara'],
+    explain: 'さかな（魚）。な和ま、ら的形狀都有圈，容易看錯。' },
+  { id: 'hira-2', facet: 'hira', level: 1, type: 'choice',
+    prompt: `${J('いぬ')} 怎麼念？`,
+    options: ['inu', 'ime', 'ine', 'iru'],
+    explain: 'いぬ（狗）。ぬ、め、ね、れ、わ是最常混的一群，ぬ的尾巴有打結。' },
+  { id: 'hira-3', facet: 'hira', level: 1, type: 'choice',
+    prompt: `${J('わたし')} 怎麼念？`,
+    options: ['watashi', 'wanashi', 'wakashi', 'watasa'],
+    explain: 'わたし（我）。' },
+  { id: 'hira-4', facet: 'hira', level: 2, type: 'choice',
+    prompt: `${J('きもち')} 怎麼念？`,
+    options: ['kimochi', 'samochi', 'kimosa', 'kinochi'],
+    explain: 'きもち（心情、感覺）。き和さ、ち和さ是常見的混淆。' },
+  { id: 'hira-5', facet: 'hira', level: 2, type: 'choice',
+    prompt: `${J('ふるい')} 怎麼念？`,
+    options: ['furui', 'furoi', 'fuwai', 'funui'],
+    explain: 'ふるい（舊的）。る的尾巴有圈，ろ沒有。' },
+  { id: 'hira-6', facet: 'hira', level: 2, type: 'choice',
+    prompt: `${J('ぜんぶ')} 怎麼念？`,
+    options: ['zenbu', 'senbu', 'zenpu', 'genbu'],
+    explain: 'ぜんぶ（全部）。兩點是濁音（s→z、h→b），圈圈是半濁音（h→p）。' },
+  { id: 'hira-7', facet: 'hira', level: 2, type: 'choice',
+    prompt: `${J('さんぽ')} 怎麼念？`,
+    options: ['sanpo', 'sanbo', 'sanho', 'sango'],
+    explain: 'さんぽ（散步）。ぽ的右上是圈，所以是 p。' },
+  { id: 'hira-8', facet: 'hira', level: 3, type: 'choice',
+    prompt: `${J('つづく')} 怎麼念？`,
+    options: ['tsuzuku', 'tsutsuku', 'tsuzumu', 'suzuku'],
+    explain: 'つづく（繼續）。づ念起來和ず一樣是 zu。' },
+
+  // ---------- 片假名 ----------
+  { id: 'kata-1', facet: 'kata', level: 1, type: 'choice',
+    prompt: `${J('テレビ')} 怎麼念？`,
+    options: ['terebi', 'tenebi', 'terehi', 'terepi'],
+    explain: 'テレビ（電視，television）。' },
+  { id: 'kata-2', facet: 'kata', level: 1, type: 'choice',
+    prompt: `${J('アニメ')} 怎麼念？`,
+    options: ['anime', 'anine', 'amime', 'anisu'],
+    explain: 'アニメ（動畫）。メ和ヌ很像，メ是一撇加一點，ヌ下面多一個勾。' },
+  { id: 'kata-3', facet: 'kata', level: 2, type: 'choice',
+    prompt: `${J('キツネ')} 怎麼念？`,
+    options: ['kitsune', 'kishine', 'kisone', 'kitsume'],
+    explain: 'キツネ（狐狸）。ツ的點在上面、撇從右上往左下；シ的點在左邊、撇從左下往右上。ソ和ン也是同樣的差別。' },
+  { id: 'kata-4', facet: 'kata', level: 2, type: 'choice',
+    prompt: `${J('タクシー')} 怎麼念？`,
+    options: ['takushī', 'kakushī', 'tasushī', 'takutsū'],
+    explain: 'タクシー（計程車，taxi）。タ比ク多一點，ク和ケ、ワ也要分清楚。' },
+  { id: 'kata-5', facet: 'kata', level: 2, type: 'choice',
+    prompt: `${J('ドラマ')} 怎麼念？`,
+    options: ['dorama', 'torama', 'dosama', 'dorana'],
+    explain: 'ドラマ（連續劇，drama）。日劇就叫「日本のドラマ」。' },
+  { id: 'kata-6', facet: 'kata', level: 2, type: 'choice',
+    prompt: `${J('コンビニ')} 是什麼意思？`,
+    options: ['便利商店', '電腦教室', '組合套餐', '公車站牌'],
+    explain: 'コンビニ＝convenience store 的縮寫。日文外來語常截掉後半，例如パソコン（personal computer）、リモコン（remote control）。' },
+  { id: 'kata-7', facet: 'kata', level: 3, type: 'choice',
+    prompt: `${J('パーティー')} 怎麼念？`,
+    options: ['pātī', 'pāchī', 'bātī', 'hātei'],
+    explain: 'パーティー（派對，party）。ティ是為了外來語造的組合，念 ti，不是 chi。' },
+  { id: 'kata-8', facet: 'kata', level: 3, type: 'choice',
+    prompt: `${J('ファイル')} 怎麼念？`,
+    options: ['fairu', 'hairu', 'fuairu', 'wairu'],
+    explain: 'ファイル（檔案，file）。フ加小ァ合成一拍 fa。英文的 l 和 r 在日文都變成ら行。' },
+
+  // ---------- 拗音、長音、促音 ----------
+  { id: 'sound-1', facet: 'sound', level: 1, type: 'choice',
+    prompt: `${J('きょう')} 怎麼念？`,
+    options: ['kyō', 'kiyō', 'kyū', 'chō'],
+    explain: 'きょう（今天）。小ょ和前面的き合成一拍 kyo，後面的う讓 o 拉長。' },
+  { id: 'sound-2', facet: 'sound', level: 2, type: 'choice',
+    prompt: `${J('びょういん')} 怎麼念？`,
+    options: ['byōin', 'biyōin', 'byoin', 'byūin'],
+    explain: 'びょういん（醫院）。寫成大字的びよういん就變成「美容院」，小字大字差一個就是另一個詞。' },
+  { id: 'sound-3', facet: 'sound', level: 2, type: 'choice',
+    prompt: `${J('きって')} 怎麼念？`,
+    options: ['kitte', 'kite', 'kitto', 'kiite'],
+    explain: 'きって（郵票）。小っ是停頓一拍，羅馬拼音寫成下一個子音重複。沒有っ的きて是「來」的變化形。' },
+  { id: 'sound-4', facet: 'sound', level: 2, type: 'choice',
+    prompt: `${J('おばあさん')} 是什麼意思？`,
+    options: ['奶奶、老婆婆', '阿姨、大嬸', '姊姊', '媽媽'],
+    explain: 'おばあさん（ba 拉長）是奶奶；おばさん（ba 不拉長）是阿姨。長音也會改變意思。' },
+  { id: 'sound-5', facet: 'sound', level: 2, type: 'choice',
+    prompt: `${J('ニュース')} 怎麼念？`,
+    options: ['nyūsu', 'niyūsu', 'nyusu', 'nūsu'],
+    explain: 'ニュース（新聞，news）。片假名的長音用「ー」表示。' },
+  { id: 'sound-6', facet: 'sound', level: 3, type: 'choice',
+    prompt: `${J('ちょっと')} 怎麼念？`,
+    options: ['chotto', 'choto', 'chiyotto', 'chitto'],
+    explain: 'ちょっと（一點點、稍微）。動畫裡最常聽到的字之一。' },
+  { id: 'sound-7', facet: 'sound', level: 3, type: 'choice',
+    prompt: `${J('チョコレート')} 怎麼念？`,
+    options: ['chokorēto', 'chokoreto', 'chiyokorēto', 'chokorōto'],
+    explain: 'チョコレート（巧克力）。レー的「ー」讓 re 拉長。' },
+  { id: 'sound-8', facet: 'sound', level: 3, type: 'choice',
+    prompt: `${J('えいが')}（電影）平常說話時，「えい」的部分念起來最接近哪一種？`,
+    options: ['ē（e 拉長一拍）', 'e-i（e 和 i 分開念）', 'e（短短一個 e）', 'ai（像英文 eye）'],
+    explain: 'え段後面接い，平常說話時多半念成長音 ē：せんせい念 sensē、とけい念 tokē。拼寫照舊寫い。' },
+
+  // ---------- 基本單字 ----------
+  { id: 'vocab-1', facet: 'vocab', level: 1, type: 'choice',
+    prompt: `${J('みず')} 是什麼意思？`,
+    options: ['水', '火', '山', '店'],
+    explain: 'みず＝水。' },
+  { id: 'vocab-2', facet: 'vocab', level: 1, type: 'choice',
+    prompt: `${J('たべる')} 是什麼意思？`,
+    options: ['吃', '喝', '看', '睡'],
+    explain: 'たべる＝食べる（吃）。喝是のむ，看是みる，睡是ねる。' },
+  { id: 'vocab-3', facet: 'vocab', level: 1, type: 'choice',
+    prompt: `${J('ともだち')} 是什麼意思？`,
+    options: ['朋友', '老師', '家人', '同事'],
+    explain: 'ともだち＝友達（朋友）。' },
+  { id: 'vocab-4', facet: 'vocab', level: 2, type: 'choice',
+    prompt: `${J('わかる')} 是什麼意思？`,
+    options: ['懂、知道', '等待', '帶來', '告別'],
+    explain: 'わかる＝分かる（懂、明白）。動畫裡的「わかった」就是「知道了」。' },
+  { id: 'vocab-5', facet: 'vocab', level: 2, type: 'choice',
+    prompt: `${J('すき')} 是什麼意思？`,
+    options: ['喜歡', '討厭', '需要', '擅長'],
+    explain: 'すき＝好き（喜歡）。討厭是きらい。' },
+  { id: 'vocab-6', facet: 'vocab', level: 2, type: 'choice',
+    prompt: `${J('きのう')} 是什麼意思？`,
+    options: ['昨天', '明天', '今天', '前天'],
+    explain: 'きのう＝昨日。今天是きょう，明天是あした。' },
+  { id: 'vocab-7', facet: 'vocab', level: 2, type: 'choice',
+    prompt: `${J('たかい')} 是什麼意思？`,
+    options: ['高、貴', '便宜', '很寬', '很遠'],
+    explain: 'たかい＝高い，高和貴都用這個字。便宜是やすい。' },
+  { id: 'vocab-8', facet: 'vocab', level: 3, type: 'choice',
+    prompt: `${J('だいじょうぶ')} 是什麼意思？`,
+    options: ['沒問題', '很好吃', '很危險', '很麻煩'],
+    explain: 'だいじょうぶ＝大丈夫（沒事、沒問題）。' },
+  { id: 'vocab-9', facet: 'vocab', level: 3, type: 'choice',
+    prompt: `${J('やっぱり')} 是什麼意思？`,
+    options: ['果然', '終於', '突然', '其實'],
+    explain: 'やっぱり（果然、到頭來還是）。影視口語極高頻。' },
+  { id: 'vocab-10', facet: 'vocab', level: 3, type: 'choice',
+    prompt: `${J('まだ')} 是什麼意思？`,
+    options: ['還（沒）', '已經', '再一次', '剛剛'],
+    explain: 'まだ（還、仍然）。已經是もう。' },
+
+  // ---------- 漢字詞的讀音 ----------
+  { id: 'kanji-1', facet: 'kanji', level: 2, type: 'choice',
+    prompt: `${J('先生')}（老師）怎麼念？`,
+    options: ['せんせい', 'さきせい', 'せんしょう', 'ぜんせい'],
+    explain: 'せんせい。生念 sei：中文 -ng 結尾的字，日文音讀常變成 -ei 或 -ō。' },
+  { id: 'kanji-2', facet: 'kanji', level: 2, type: 'choice',
+    prompt: `${J('電話')} 怎麼念？`,
+    options: ['でんわ', 'でんか', 'てんわ', 'でんは'],
+    explain: 'でんわ。中文 -n 結尾的字（電），日文音讀也以ん結尾。' },
+  { id: 'kanji-3', facet: 'kanji', level: 3, type: 'choice',
+    prompt: `${J('新聞')}（報紙）怎麼念？`,
+    options: ['しんぶん', 'しんもん', 'あたらぶん', 'しんぶ'],
+    explain: 'しんぶん。新、聞都是 -n 結尾，日文也是ん結尾。' },
+  { id: 'kanji-4', facet: 'kanji', level: 3, type: 'choice',
+    prompt: `${J('大学')} 怎麼念？`,
+    options: ['だいがく', 'たいがく', 'おおがく', 'だいかく'],
+    explain: 'だいがく。學在中文古音以 -k 結尾（台語念 ha̍k），日文音讀就多出一個く。' },
+  { id: 'kanji-5', facet: 'kanji', level: 3, type: 'choice',
+    prompt: `沒學過的詞 ${J('経営')}（經營），讀音最可能是哪一個？`,
+    options: ['けいえい', 'けんえん', 'きんいん', 'けいあん'],
+    explain: 'けいえい。經、營都是 -ng 結尾，日文常變成 -ei。之後會專門教這類規律。' },
+
+  // ---------- 基本文法 ----------
+  { id: 'gram-1', facet: 'gram', level: 1, type: 'choice',
+    prompt: `${J('わたしは がくせいです。')} 裡的「は」怎麼念？`,
+    options: ['wa', 'ha', 'ga', 'o'],
+    explain: '當助詞（標示主題）時，は念 wa。' },
+  { id: 'gram-2', facet: 'gram', level: 1, type: 'choice',
+    prompt: `${J('わたしは がくせいです。')} 是什麼意思？`,
+    options: ['我是學生。', '我不是學生。', '我以前是學生。', '我想當學生。'],
+    explain: '〜は〜です＝〜是〜。' },
+  { id: 'gram-3', facet: 'gram', level: 1, type: 'choice',
+    prompt: `${J('パンを たべます。')} 這句的「を」有什麼作用？`,
+    options: ['標示動作的對象', '標示動作的地點', '標示動作的時間', '標示是誰做的'],
+    explain: 'を標示動作直接作用的對象：吃的是麵包。' },
+  { id: 'gram-4', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('がっこうに いきます。')} 這句的「に」有什麼作用？`,
+    options: ['標示移動的目的地', '標示動作進行的場所', '標示使用的工具', '標示是誰做的'],
+    explain: 'に標示移動的終點：去學校。' },
+  { id: 'gram-5', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('としょかんで べんきょうします。')} 這句的「で」有什麼作用？`,
+    options: ['標示動作進行的場所', '標示移動的目的地', '標示動作的時間', '標示動作的對象'],
+    explain: 'で標示動作在哪裡發生：在圖書館讀書。' },
+  { id: 'gram-6', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('なにも たべません。')} 是什麼意思？`,
+    options: ['什麼都不吃。', '什麼都吃了。', '什麼都想吃。', '正在吃東西。'],
+    explain: '〜ません是〜ます的否定。' },
+  { id: 'gram-7', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('ラーメンを たべました。')} 是什麼意思？`,
+    options: ['吃了拉麵。', '不吃拉麵。', '正在吃拉麵。', '請吃拉麵。'],
+    explain: '〜ました是〜ます的過去式。' },
+  { id: 'gram-8', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('この みせは たかくないです。')} 是什麼意思？`,
+    options: ['這家店不貴。', '這家店很貴。', '這家店以前很貴。', '這家店太貴了吧？'],
+    explain: 'い形容詞的否定：たかい → たかくない。' },
+  { id: 'gram-9', facet: 'gram', level: 2, type: 'choice',
+    prompt: `${J('にほんへ いきたいです。')} 是什麼意思？`,
+    options: ['想去日本。', '去過日本。', '正要去日本。', '不去日本。'],
+    explain: '動詞ます形去掉ます，加〜たい＝想做某事。' },
+  { id: 'gram-10', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('だれ ＿ きましたか。')}（誰來了？）空格要填哪個助詞？`,
+    options: ['が', 'は', 'を', 'で'],
+    explain: '疑問詞（だれ、なに、どこ）當主語時用が，不能用は。は和が的差別之後會專門講。' },
+  { id: 'gram-11', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('まどを あけて ください。')} 是什麼意思？`,
+    options: ['請打開窗戶。', '窗戶打開了。', '請不要開窗。', '可以開窗嗎？'],
+    explain: 'て形＋ください＝請做某事。' },
+  { id: 'gram-12', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('いま ごはんを たべて います。')} 是什麼意思？`,
+    options: ['現在正在吃飯。', '現在已經吃完飯了。', '現在打算去吃飯。', '現在不吃飯。'],
+    explain: 'て形＋いる＝正在做（或處於某狀態）。口語會縮成〜てる。' },
+  { id: 'gram-13', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('ここで しゃしんを とっても いいですか。')} 是什麼意思？`,
+    options: ['可以在這裡拍照嗎？', '這裡禁止拍照。', '必須在這裡拍照。', '在這裡拍過照嗎？'],
+    explain: 'て形＋もいいですか＝可以做某事嗎。' },
+  { id: 'gram-14', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('きのう テレビを みた。')} 是什麼意思？`,
+    options: ['昨天看了電視。', '昨天沒看電視。', '明天要看電視。', '昨天想看電視。'],
+    explain: 'みた是みました的普通形（朋友之間的說法）。動畫裡的句子大多是普通形。' },
+  { id: 'gram-15', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('あした がっこうへ いかない。')} 是什麼意思？`,
+    options: ['明天不去學校。', '明天要去學校。', '昨天沒去學校。', '明天不去也行。'],
+    explain: 'いかない是いきません的普通形。' },
+  { id: 'gram-16', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('あめが ふって いるから、いえに いる。')} 是什麼意思？`,
+    options: ['因為在下雨，所以待在家。', '雖然在下雨，還是出門。', '如果下雨，就待在家。', '下雨之前，先回家。'],
+    explain: '〜から＝因為〜。' },
+  { id: 'gram-17', facet: 'gram', level: 3, type: 'choice',
+    prompt: `${J('かれは にほんごが はなせる。')} 是什麼意思？`,
+    options: ['他會說日語。', '他正在說日語。', '他想說日語。', '他必須說日語。'],
+    explain: 'はなす → はなせる，可能形＝能夠、會。' },
+
+  // ---------- 口語 ----------
+  { id: 'talk-1', facet: 'talk', level: 2, type: 'choice',
+    prompt: `${J('ちょっと まって。')} 是什麼意思？`,
+    options: ['等一下。', '有點累。', '過來一下。', '別走啊。'],
+    explain: 'まって是まつ（等）的て形，口語直接拿來當請求。' },
+  { id: 'talk-2', facet: 'talk', level: 2, type: 'choice',
+    prompt: `朋友問「要一起去嗎？」，對方回 ${J('ううん。')} 意思是？`,
+    options: ['不要。', '好啊。', '嗯，我想想。', '真的嗎？'],
+    explain: 'うん是「嗯，好」，ううん（尾音上揚再下降）是「不」。字幕上差一個字，意思相反。' },
+  { id: 'talk-3', facet: 'talk', level: 2, type: 'choice',
+    prompt: `${J('なに してるの？')} 是什麼意思？`,
+    options: ['你在做什麼？', '你做了什麼？', '你要做什麼？', '你不做嗎？'],
+    explain: 'してる＝している（正在做）的口語縮約，い被吃掉。語尾の上揚表示疑問。' },
+  { id: 'talk-4', facet: 'talk', level: 3, type: 'choice',
+    prompt: `${J('わかんない。')} 是什麼意思？`,
+    options: ['不知道、搞不懂。', '知道了。', '分開了。', '不要走。'],
+    explain: 'わかんない＝わからない。口語裡ら行的音常變成ん。' },
+  { id: 'talk-5', facet: 'talk', level: 3, type: 'choice',
+    prompt: `${J('ケーキ、ぜんぶ たべちゃった。')} 是什麼意思？`,
+    options: ['蛋糕不小心全吃掉了。', '蛋糕我全部都想吃。', '蛋糕不可以全部吃。', '蛋糕全部吃吃看。'],
+    explain: '〜ちゃった＝〜てしまった：做完了，常帶「糟了、不小心」的語氣。' },
+  { id: 'talk-6', facet: 'talk', level: 3, type: 'choice',
+    prompt: `${J('もう いかなきゃ。')} 是什麼意思？`,
+    options: ['我得走了。', '不走也沒關係。', '我還想再去。', '你去過了嗎？'],
+    explain: '〜なきゃ＝〜なければ（ならない）：不做不行。' },
+  { id: 'talk-7', facet: 'talk', level: 3, type: 'choice',
+    prompt: `朋友看到你的新衣服說 ${J('いいじゃん！')}，意思是？`,
+    options: ['不錯嘛！', '不行啦！', '這樣好嗎？', '算了吧。'],
+    explain: '〜じゃん＝〜じゃないか，用反問語氣表示「不是很〜嘛」，通常是肯定。' },
+  { id: 'talk-8', facet: 'talk', level: 3, type: 'choice',
+    prompt: `${J('あの ひとの なまえ、なんだっけ？')} 是什麼意思？`,
+    options: ['那個人叫什麼來著？', '那個人沒有名字嗎？', '為什麼問那個人的名字？', '那個人的名字很怪吧？'],
+    explain: '〜っけ表示想不起來、跟對方確認：「是什麼來著」。' },
+];
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '日文程度診斷',
+  facets, questions,
+  storageKey: 'jp-diagnostic-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+});
+</script>
+</body>
+</html>
