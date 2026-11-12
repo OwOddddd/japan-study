@@ -10,16 +10,34 @@ html[data-topic="history"] { --topic: #c8432f; --stamp: "史"; }
 html[data-topic="geography"] { --topic: #2b6cb0; --stamp: "地"; }
 html[data-topic="japanese"] { --topic: #6a58b0; --stamp: "語"; }
 html[data-topic="news"] { --topic: #b4651a; --stamp: "報"; }
+html[data-topic="religion"] { --topic: #8e3b5f; --stamp: "宗"; }
+html[data-topic="architecture"] { --topic: #7a5a3a; --stamp: "建"; }
+html[data-topic="food"] { --topic: #b5730c; --stamp: "食"; }
+html[data-topic="railways"] { --topic: #2e8b57; --stamp: "鐵"; }
+html[data-topic="festivals"] { --topic: #c94a7e; --stamp: "祭"; }
+html[data-topic="society"] { --topic: #4f6575; --stamp: "社"; }
 @media (prefers-color-scheme: dark) {
   html[data-topic]:not([data-theme="light"]) { --topic: #6aa6dc; }
   html[data-topic="history"]:not([data-theme="light"]) { --topic: #e0705f; }
   html[data-topic="japanese"]:not([data-theme="light"]) { --topic: #a596e0; }
   html[data-topic="news"]:not([data-theme="light"]) { --topic: #e0a64a; }
+  html[data-topic="religion"]:not([data-theme="light"]) { --topic: #d785a8; }
+  html[data-topic="architecture"]:not([data-theme="light"]) { --topic: #c9a27a; }
+  html[data-topic="food"]:not([data-theme="light"]) { --topic: #e8b04a; }
+  html[data-topic="railways"]:not([data-theme="light"]) { --topic: #6cc08a; }
+  html[data-topic="festivals"]:not([data-theme="light"]) { --topic: #f09ab8; }
+  html[data-topic="society"]:not([data-theme="light"]) { --topic: #9fb3c2; }
 }
 html[data-theme="dark"][data-topic] { --topic: #6aa6dc; }
 html[data-theme="dark"][data-topic="history"] { --topic: #e0705f; }
 html[data-theme="dark"][data-topic="japanese"] { --topic: #a596e0; }
 html[data-theme="dark"][data-topic="news"] { --topic: #e0a64a; }
+html[data-theme="dark"][data-topic="religion"] { --topic: #d785a8; }
+html[data-theme="dark"][data-topic="architecture"] { --topic: #c9a27a; }
+html[data-theme="dark"][data-topic="food"] { --topic: #e8b04a; }
+html[data-theme="dark"][data-topic="railways"] { --topic: #6cc08a; }
+html[data-theme="dark"][data-topic="festivals"] { --topic: #f09ab8; }
+html[data-theme="dark"][data-topic="society"] { --topic: #9fb3c2; }
 
 /* ---------- 外觀選單 ---------- */
 .skin-pick { font-size: .8rem; color: inherit; display: inline-flex; align-items: center; gap: .4em; margin-left: auto; }
@@ -84,6 +102,12 @@ html[data-skin="wa"] .toc li { border-radius: 2px; border-left: 6px solid var(--
 :root[data-skin="pixel"][data-topic="history"] { --px-topic: #ff7a5c; }
 :root[data-skin="pixel"][data-topic="geography"] { --px-topic: #6fb6ff; }
 :root[data-skin="pixel"][data-topic="japanese"] { --px-topic: #b7a2ff; }
+:root[data-skin="pixel"][data-topic="religion"] { --px-topic: #f08fbc; }
+:root[data-skin="pixel"][data-topic="architecture"] { --px-topic: #e0b88a; }
+:root[data-skin="pixel"][data-topic="food"] { --px-topic: #ffc65a; }
+:root[data-skin="pixel"][data-topic="railways"] { --px-topic: #7ddc8a; }
+:root[data-skin="pixel"][data-topic="festivals"] { --px-topic: #ff9ec4; }
+:root[data-skin="pixel"][data-topic="society"] { --px-topic: #a9c4d6; }
 html[data-skin="pixel"] h1, html[data-skin="pixel"] h2, html[data-skin="pixel"] h3,
 html[data-skin="pixel"] nav.site-nav, html[data-skin="pixel"] .tag, html[data-skin="pixel"] .toc li a { font-family: var(--dot); font-weight: 400; }
 html[data-skin="pixel"] h1 { text-shadow: 3px 3px 0 #000; letter-spacing: .04em; }

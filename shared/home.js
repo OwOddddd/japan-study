@@ -10,9 +10,27 @@
       desc: '山、海、氣候、人口與交通為什麼長這樣', planned: [] },
     { id: 'japanese', code: 'J', name: '日文', icon: 'bubble', stamp: '語', pat: 'yagasuri',
       desc: '以文法為主幹，看懂日常的動畫、日劇和書籍',
-      planned: ['動詞的兩種臉', '〜ない', '〜た 與 〜て', '〜てる・〜ちゃう', '助詞'] }
+      planned: ['動詞的兩種臉', '〜ない', '〜た 與 〜て', '〜てる・〜ちゃう', '助詞'] },
+    { id: 'religion', code: 'R', name: '宗教與信仰', icon: 'torii', stamp: '宗', pat: 'seigaiha',
+      desc: '神社和寺院怎麼分、佛像怎麼看、參拜的規矩從哪來',
+      planned: ['神社和寺院怎麼分', '神道的世界觀', '神社的種類', '奈良與平安的佛教', '鎌倉新佛教', '佛像怎麼看', '神佛習合與分離', '參拜規矩與信仰用品', '日本人的宗教生活'] },
+    { id: 'architecture', code: 'A', name: '建築', icon: 'pagoda', stamp: '建', pat: 'ichimatsu',
+      desc: '寺院、神社、城和老街，樣式與構造為什麼長這樣',
+      planned: ['木造建築的共同條件', '寺院的配置', '寺院樣式', '神社建築', '住宅與茶室', '城的構造', '城下町與町家', '庭園', '明治的洋風建築'] },
+    { id: 'food', code: 'F', name: '飲食文化', icon: 'onigiri', stamp: '食', pat: 'yagasuri',
+      desc: '和食的結構、地方料理的成因、外食怎麼點',
+      planned: ['和食的骨架', '高湯與昆布之路', '醬油、味噌、清酒', '壽司', '江戶的外食', '洋食與拉麵', '地方料理的地理成因', '外食的形式與規矩'] },
+    { id: 'railways', code: 'T', name: '鐵道與交通', icon: 'shinkansen', stamp: '鐵', pat: 'ichimatsu',
+      desc: 'JR 與私鐵的由來、路網、車站與票價的邏輯',
+      planned: ['日本為什麼是鐵道大國', '從國鐵到 JR', '私鐵的經營模式', '東京與大阪的路網', '看懂車站', '票價結構', '新幹線', '鐵道以外的交通'] },
+    { id: 'festivals', code: 'M', name: '年中行事與祭典', icon: 'lantern', stamp: '祭', pat: 'seigaiha',
+      desc: '節令和祭典在做什麼、從哪裡來，季節感怎麼表現',
+      planned: ['新曆舊曆與五節句', '冬到春', '春到夏', '夏', '祭典的結構', '秋到冬', '季節感'] },
+    { id: 'society', code: 'S', name: '社會與生活', icon: 'vending', stamp: '社', pat: 'yagasuri',
+      desc: '住址、垃圾、便利商店、學校與職場，生活規則的成因',
+      planned: ['生活規則的根源', '住址', '垃圾', '便利商店與自動販賣機', '錢湯與溫泉', '學校', '職場', '住宅'] }
   ];
-  var FUTURE = [['宗教與信仰', '宗'], ['建築', '建'], ['飲食文化', '食'], ['鐵道與交通', '鐵'], ['年中行事與祭典', '祭'], ['社會與生活', '社']];
+  var FUTURE = [];
   var NOTE = '地圖需要網路連線。測驗的作答紀錄只存在你目前使用的瀏覽器裡。';
   var data = null, news = null;
   var box = document.getElementById('home');
@@ -73,7 +91,7 @@
       '<div></div></div><div class="sign-bottom"><span>← 台灣</span><span>日本 →</span></div></header>' +
       '<p class="lede">為了去日本旅行時看得懂眼前的東西。每個主題是一條路線，每一課是一個車站。</p>' +
       '<section><h2>路線圖 <small>實心站是已經出好的課，空心站是預定的課</small></h2><div class="lines">' + lines + '</div></section>' +
-      '<section><h2>建設中的路線</h2><div class="future">' + FUTURE.map(function (f) { return '<span>' + f[0] + '線</span>'; }).join('') + '</div></section>' +
+      (FUTURE.length ? '<section><h2>建設中的路線</h2><div class="future">' + FUTURE.map(function (f) { return '<span>' + f[0] + '線</span>'; }).join('') + '</div></section>' : '') +
       '<section><h2>本日告示</h2><div class="board"><div class="row"><span class="lbl">睡前日本新聞</span><span>' +
       (news ? esc(news.date) : '') + '</span></div><a href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') +
       '</a><a class="all" href="news/index.html">所有日期 →</a></div></section><p class="small">' + NOTE + '</p>';
@@ -82,13 +100,13 @@
     var cards = data.map(function (t) {
       var c = counts(t);
       var ls = t.stations.map(function (s) { return s.href ? '<li><a href="' + s.href + '">' + esc(s.n) + '</a></li>' : '<li class="plan">' + esc(s.n) + '</li>'; }).join('');
-      return '<article class="topic t-' + t.id + '"><div class="pat ' + t.pat + '"></div><div class="body"><h3><a href="' + t.id + '/index.html">' + t.name + '</a></h3>' +
+      return '<article class="topic" style="--pc: var(--' + t.code + ')"><div class="pat ' + t.pat + '"></div><div class="body"><h3><a href="' + t.id + '/index.html">' + t.name + '</a></h3>' +
         '<p>' + t.desc + '</p><ul class="lessons">' + ls + '</ul><div class="count">已開 ' + c[0] + ' 課・預定 ' + c[1] + ' 課</div></div>' +
         '<div class="stamp"><span class="hanko">' + t.stamp + '</span></div></article>';
     }).join('');
     return '<header class="hero seigaiha"><div class="tanzaku"><div><h1>日本學習</h1><p>為了去日本旅行時，看得懂眼前的東西。</p></div><div class="hanko big">學以致用</div></div></header>' +
       '<section><h2>主題</h2><div class="topics">' + cards + '</div></section>' +
-      '<section><h2>之後會開的主題</h2><div class="future">' + FUTURE.map(function (f) { return '<div><span class="hanko">' + f[1] + '</span>' + f[0] + '</div>'; }).join('') + '</div></section>' +
+      (FUTURE.length ? '<section><h2>之後會開的主題</h2><div class="future">' + FUTURE.map(function (f) { return '<div><span class="hanko">' + f[1] + '</span>' + f[0] + '</div>'; }).join('') + '</div></section>' : '') +
       '<section><h2>每日</h2><div class="news koushi"><div class="card"><div class="date">睡前日本新聞・' + (news ? esc(news.date) : '') + '</div>' +
       '<a class="t" href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') + '</a><a class="all" href="news/index.html">所有日期 →</a></div></div></section>' +
       '<p class="small">' + NOTE + '</p>';
@@ -105,7 +123,7 @@
       '<canvas data-sprite="torii"></canvas><canvas class="big" data-sprite="castle"></canvas><canvas class="big" data-sprite="fuji"></canvas>' +
       '<canvas data-sprite="lantern"></canvas><canvas data-sprite="shinkansen"></canvas></div><div class="ground"></div></header>' +
       '<section class="window"><h2>進行中的任務</h2><div class="quests">' + quests + '</div></section>' +
-      '<section class="window"><h2>尚未開放的地區</h2><div class="locked">' + FUTURE.map(function (f) { return '<div>？？？<small>' + f[0] + '</small></div>'; }).join('') + '</div></section>' +
+      (FUTURE.length ? '<section class="window"><h2>尚未開放的地區</h2><div class="locked">' + FUTURE.map(function (f) { return '<div>？？？<small>' + f[0] + '</small></div>'; }).join('') + '</div></section>' : '') +
       '<section class="window"><h2>今日情報</h2><div class="news"><canvas data-sprite="lantern"></canvas><div><div class="date">睡前日本新聞・' + (news ? esc(news.date) : '') + '</div>' +
       '<a class="t" href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') + '</a><a class="all" href="news/index.html">所有日期 →</a></div></div></section>' +
       '<p class="small">' + NOTE + '</p>';

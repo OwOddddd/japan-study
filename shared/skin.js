@@ -13,7 +13,7 @@
   root.setAttribute('data-skin', skin);
 
   var topic = 'home';
-  ['history', 'geography', 'japanese', 'news'].forEach(function (k) {
+  ['history', 'geography', 'japanese', 'news', 'religion', 'architecture', 'food', 'railways', 'festivals', 'society'].forEach(function (k) {
     if (location.pathname.indexOf('/' + k + '/') >= 0) topic = k;
   });
   root.setAttribute('data-topic', topic);
@@ -52,7 +52,20 @@
     shinkansen: { pal: { k: '#2d2a33', w: '#f4f6f8', b: '#2f5fa8', s: '#9fc3e8' }, rows: [
       '................', '........wwwwwwww', '.....wwwwwwwwwww', '...wwssswwswwsww',
       '..wwwwwwwwwwwwww', '.wwwwwwwwwwwwwww', 'bbbbbbbbbbbbbbbb', 'wwwwwwwwwwwwwwww',
-      '..kk....kk...kk.'] }
+      '..kk....kk...kk.'] },
+    pagoda: { pal: { k: '#2d2a33', r: '#c8432f', w: '#f4f1ea', g: '#8a8f98' }, rows: [
+      '.......kk.......', '.......kk.......', '....kkkkkkkk....', '......rwwr......',
+      '...kkkkkkkkkk...', '......rwwr......', '..kkkkkkkkkkkk..', '.....rrwwrr.....',
+      '.kkkkkkkkkkkkkk.', '.....rrwwrr.....', 'kkkkkkkkkkkkkkkk', '....rrrwwrrr....',
+      '..gggggggggggg..'] },
+    onigiri: { pal: { w: '#fdfbf5', s: '#d9d3c4', k: '#1f2a24' }, rows: [
+      '.......ww.......', '......wwww......', '.....wwwwww.....', '....wwwwwwww....',
+      '...wwwwwwwwww...', '..wwwwwwwwwwww..', '..wwwwwwwwwwsw..', '.wwwwkkkkkkwwww.',
+      '.wwwwkkkkkkwwsw.', '.wwwwkkkkkkwwww.', '..wwwkkkkkkwww..'] },
+    vending: { pal: { b: '#2f5fa8', w: '#e8eef6', r: '#d2442f', y: '#ffd76a', g: '#5f9e5a', k: '#1b1f2a' }, rows: [
+      '..bbbbbbbbbbbb..', '..bwwwwwwwwwwb..', '..brywgrywgryb..', '..bwwwwwwwwwwb..',
+      '..bgryrwygrwyb..', '..bwwwwwwwwwwb..', '..bbbbbbbbbbbb..', '..bbkkbbbbyybb..',
+      '..bbbbbbbbbbbb..', '..bbkkkkkkkkbb..', '..bbbbbbbbbbbb..', '..kk........kk..'] }
   };
   window.drawSprites = function (scope) {
     (scope || document).querySelectorAll('canvas[data-sprite]').forEach(function (c) {
@@ -68,7 +81,8 @@
     });
   };
 
-  var ICON = { history: 'castle', geography: 'fuji', japanese: 'bubble', news: 'lantern' };
+  var ICON = { history: 'castle', geography: 'fuji', japanese: 'bubble', news: 'lantern',
+    religion: 'torii', architecture: 'pagoda', food: 'onigiri', railways: 'shinkansen', festivals: 'lantern', society: 'vending' };
 
   function ui() {
     var label = document.createElement('label');

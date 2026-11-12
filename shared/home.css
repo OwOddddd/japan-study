@@ -1,8 +1,8 @@
 /* 網站首頁專用（只有根目錄 index.html 引用）。版型由 shared/home.js 依外觀產生。 */
-:root { --H: #c8432f; --G: #2b6cb0; --J: #6a58b0; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; } }
-:root[data-theme="dark"] { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; }
-:root[data-skin="pixel"][data-topic] { --H: #ff7a5c; --G: #6fb6ff; --J: #b7a2ff; }
+:root { --H: #c8432f; --G: #2b6cb0; --J: #6a58b0; --R: #8e3b5f; --A: #7a5a3a; --F: #b5730c; --T: #2e8b57; --M: #c94a7e; --S: #4f6575; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; --R: #d785a8; --A: #c9a27a; --F: #e8b04a; --T: #6cc08a; --M: #f09ab8; --S: #9fb3c2; } }
+:root[data-theme="dark"] { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; --R: #d785a8; --A: #c9a27a; --F: #e8b04a; --T: #6cc08a; --M: #f09ab8; --S: #9fb3c2; }
+:root[data-skin="pixel"][data-topic] { --H: #ff7a5c; --G: #6fb6ff; --J: #b7a2ff; --R: #f08fbc; --A: #e0b88a; --F: #ffc65a; --T: #7ddc8a; --M: #ff9ec4; --S: #a9c4d6; }
 main.home-main { max-width: 960px; }
 .home canvas { image-rendering: pixelated; display: block; }
 .home section { margin-top: 28px; }
@@ -63,13 +63,13 @@ main.home-main { max-width: 960px; }
 .home-wa .tanzaku p { margin: 8px 0 0; color: var(--muted); }
 .home-wa .hanko { width: 56px; height: 56px; border: 3px solid #c0432e; color: #c0432e; border-radius: 6px; display: grid; place-items: center; font-family: var(--serif); font-weight: 900; font-size: 1.6rem; transform: rotate(-6deg); flex: none; }
 .home-wa .hanko.big { width: 68px; height: 68px; font-size: .92rem; line-height: 1.1; writing-mode: vertical-rl; letter-spacing: .1em; }
-.home-wa .ichimatsu { background: conic-gradient(var(--H) 25%, var(--bg) 0 50%, var(--H) 0 75%, var(--bg) 0) 0 0 / 24px 24px; }
-.home-wa .pat.seigaiha { --c: var(--G); --b: var(--bg); }
+.home-wa .ichimatsu { background: conic-gradient(var(--pc) 25%, var(--bg) 0 50%, var(--pc) 0 75%, var(--bg) 0) 0 0 / 24px 24px; }
+.home-wa .pat.seigaiha { --c: var(--pc); --b: var(--bg); }
 .home-wa .yagasuri { background:
-    linear-gradient(135deg, var(--J) 25%, transparent 25%) 0 0 / 24px 48px,
-    linear-gradient(225deg, var(--J) 25%, transparent 25%) 0 0 / 24px 48px,
-    linear-gradient(315deg, var(--J) 25%, transparent 25%) 0 24px / 24px 48px,
-    linear-gradient(45deg, var(--J) 25%, transparent 25%) 0 24px / 24px 48px, var(--bg); }
+    linear-gradient(135deg, var(--pc) 25%, transparent 25%) 0 0 / 24px 48px,
+    linear-gradient(225deg, var(--pc) 25%, transparent 25%) 0 0 / 24px 48px,
+    linear-gradient(315deg, var(--pc) 25%, transparent 25%) 0 24px / 24px 48px,
+    linear-gradient(45deg, var(--pc) 25%, transparent 25%) 0 24px / 24px 48px, var(--bg); }
 .home-wa .topics { display: grid; gap: 16px; }
 .home-wa .topic { display: grid; grid-template-columns: 96px 1fr auto; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; min-width: 0; }
 .home-wa .topic .body { padding: 14px 18px; min-width: 0; }
@@ -79,9 +79,7 @@ main.home-main { max-width: 960px; }
 .home-wa .topic p { margin: 4px 0 10px; color: var(--muted); font-size: .92rem; }
 .home-wa .count { margin-top: 8px; font-size: .82rem; color: var(--muted); }
 .home-wa .stamp { padding: 16px 18px 0 0; }
-.home-wa .t-history .hanko { border-color: var(--H); color: var(--H); }
-.home-wa .t-geography .hanko { border-color: var(--G); color: var(--G); }
-.home-wa .t-japanese .hanko { border-color: var(--J); color: var(--J); }
+.home-wa .topic .hanko { border-color: var(--pc); color: var(--pc); }
 .home-wa .lessons { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .home-wa .lessons li { font-size: .82rem; border: 1px solid var(--line); border-radius: 2px; padding: 1px 8px; }
 .home-wa .lessons li a { text-decoration: none; color: var(--ink); }
