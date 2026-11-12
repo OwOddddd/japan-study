@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>年中行事與祭典程度診斷</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>年中行事與祭典・程度診斷</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
+  <h1>程度診斷</h1>
+  <p class="lede">18 題選擇題，涵蓋全部 7 課，大約 10 分鐘。老師會照結果刪掉你已經會的課，把時間留給不會的。</p>
+
+  <div class="callout">
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    作答會自動存在這個瀏覽器裡。交卷後按「複製結果，貼給老師」，貼到對話框時順便回答兩件事：
+    <br>1. 你在日本碰過哪些節令或祭典（例如看過櫻花、逛過夏祭、新年去過神社）？
+    <br>2. 接下來預計什麼月份去日本？（老師會優先排那個季節的課）
+  </div>
+
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
+  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
+</main>
+
+<script>
+Quiz.mount(document.getElementById('quiz'), {
+  title: '年中行事與祭典・程度診斷',
+  storageKey: 'fest-diagnostic-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [
+    { id: 'l1', name: '第 1 課：曆法與五節句' },
+    { id: 'l2', name: '第 2 課：正月、節分、雛祭' },
+    { id: 'l3', name: '第 3 課：梅、櫻、端午、梅雨' },
+    { id: 'l4', name: '第 4 課：七夕、盂蘭盆、煙火' },
+    { id: 'l5', name: '第 5 課：祭典的結構' },
+    { id: 'l6', name: '第 6 課：秋到除夕' },
+    { id: 'l7', name: '第 7 課：季節感與旅遊旺季' },
+  ],
+  questions: [
+    { id: 'd1', facet: 'l1', level: 1, type: 'choice',
+      prompt: '日本現在用的日曆（和台灣國曆一樣的太陽曆），是從什麼時候開始用的？',
+      options: ['明治時代初期（1873 年）', '江戶時代初期（1603 年）', '二戰結束後（1945 年）', '平安時代初期（794 年）'] },
+    { id: 'd2', facet: 'l1', level: 2, type: 'choice',
+      prompt: '東京有些地方 7 月中過盂蘭盆，全國多數地方卻在 8 月中過。為什麼差一個月？',
+      options: ['改曆後有的照新曆日期，有的延後一個月', '東京人的祖先比較早回家，習俗不同', '8 月中有國定假日，所以各地都移過去', '東京夏天比較熱，所以提早一個月舉行'] },
+    { id: 'd3', facet: 'l1', level: 2, type: 'choice',
+      prompt: '「五節句」指的是哪一組日子？',
+      options: ['1/7、3/3、5/5、7/7、9/9', '1/1、3/3、5/5、7/7、9/9', '1/1、2/3、3/3、5/5、7/7', '3/3、5/5、7/7、8/15、11/15'] },
+
+    { id: 'd4', facet: 'l2', level: 2, type: 'choice',
+      prompt: '新年在家門口擺的「門松」，原本的用意是什麼？',
+      options: ['讓年神找得到這戶人家的標記', '擋住惡鬼從大門進來的柵欄', '向鄰居宣告家裡有人成年了', '告訴路人這戶人家正在服喪'] },
+    { id: 'd5', facet: 'l2', level: 1, type: 'choice',
+      prompt: '2 月初「節分」撒豆子時，大家喊的是什麼意思？',
+      options: ['鬼出去，福進來', '福出去，鬼進來', '神進來，佛出去', '冬出去，春進來'] },
+    { id: 'd6', facet: 'l2', level: 3, type: 'choice',
+      prompt: '3 月 3 日擺雛人形的「雛祭」，源頭跟哪一種習俗有關？',
+      options: ['把紙人放進河裡，讓災厄跟著流走', '祭拜家中女性祖先，請她們回家', '慶祝桃子收成的春季豐年祭典', '女孩滿七歲時進入社會的成年禮'] },
+
+    { id: 'd7', facet: 'l3', level: 2, type: 'choice',
+      prompt: '奈良時代的貴族作詩賞花，最常寫的是哪一種花？',
+      options: ['梅花', '櫻花', '菊花', '紫藤'] },
+    { id: 'd8', facet: 'l3', level: 2, type: 'choice',
+      prompt: '同一個城市裡的染井吉野（最常見的櫻花），為什麼幾乎同時開、同時謝？',
+      options: ['全是同一棵樹接枝繁殖出來的', '氣象廳規定了統一的開花日期', '都種在日照條件一樣的地方', '園藝業者噴藥控制了開花時間'] },
+    { id: 'd9', facet: 'l3', level: 1, type: 'choice',
+      prompt: '端午節家裡掛鯉魚旗，是在祈求什麼？',
+      options: ['男孩像逆流而上的鯉魚般成材', '河裡的魚今年能夠大豐收', '家裡的女孩能平安長大', '梅雨季的河水不要氾濫'] },
+
+    { id: 'd10', facet: 'l4', level: 2, type: 'choice',
+      prompt: '盂蘭盆期間，人們在家門口點的「迎火」是做什麼用的？',
+      options: ['讓回家的祖先靈魂找得到路', '驅趕夏天的蚊蟲和各種疫病', '慶祝稻子開始結穗的日子', '紀念在戰爭中過世的家人'] },
+    { id: 'd11', facet: 'l4', level: 2, type: 'choice',
+      prompt: '京都 8 月 16 日夜裡，山上燒出「大」字的五山送火是在做什麼？',
+      options: ['送祖先的靈魂回去', '迎接新年的年神', '祈求秋天的豐收', '宣告祇園祭結束'] },
+    { id: 'd12', facet: 'l4', level: 3, type: 'choice',
+      prompt: '東京隅田川煙火大會的源頭（1733 年）跟什麼有關？',
+      options: ['為饑荒和疫病的死者慰靈', '慶祝當時將軍的生日', '歡迎來訪的外國使節', '慶祝兩國橋落成通行'] },
+
+    { id: 'd13', facet: 'l5', level: 2, type: 'choice',
+      prompt: '祭典裡大家扛著搖晃的「神轎」（神輿），裡面載的是什麼？',
+      options: ['神社的神，暫時移到神轎上', '當年選出來的祭典主角', '要供奉給神的米和酒', '神社收藏的寶物古書'] },
+    { id: 'd14', facet: 'l5', level: 3, type: 'choice',
+      prompt: '京都祇園祭是從 869 年的什麼活動發展來的？',
+      options: ['為了平息疫病舉行的御靈會', '慶祝平安京建成的大典禮', '新天皇即位時的城內遊行', '秋天稻米收成的感謝祭典'] },
+
+    { id: 'd15', facet: 'l6', level: 1, type: 'choice',
+      prompt: '11 月 15 日前後，神社裡穿和服的小孩拿著細長的紅白糖果袋。這是什麼行事？',
+      options: ['七五三', '成人式', '雛祭', '端午'] },
+    { id: 'd16', facet: 'l6', level: 1, type: 'choice',
+      prompt: '除夕夜寺院敲的「除夜之鐘」，通常敲幾下？',
+      options: ['108 下', '12 下', '88 下', '365 下'] },
+
+    { id: 'd17', facet: 'l7', level: 3, type: 'choice',
+      prompt: '京都的和菓子店 6 月底會賣三角形的「水無月」。它是配合哪個行事吃的？',
+      options: ['6/30 去除半年污穢的「夏越之祓」', '5/5 祈求男孩成長的端午節', '7/7 牛郎織女相會的七夕', '7 月中宣告梅雨結束的那天'] },
+    { id: 'd18', facet: 'l7', level: 1, type: 'choice',
+      prompt: '日本一年裡旅遊人潮最擠、住宿最貴的三段時期是？',
+      options: ['年底年初、黃金週、盂蘭盆', '春分、七夕、秋分前後', '梅雨、颱風季、聖誕節', '2 月、6 月、11 月中旬'] },
+  ],
+});
+</script>
+</body>
+</html>
