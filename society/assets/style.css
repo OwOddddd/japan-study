@@ -1,0 +1,21 @@
+/* 社會與生活主題專用的元件樣式（待總管合併進 shared/style.css） */
+
+/* 住址拆解：一列色塊，每塊上面是原文、下面是說明 */
+.addr { display: flex; flex-wrap: wrap; gap: 6px; margin: 1em 0; }
+.addr > span { display: flex; flex-direction: column; align-items: center; padding: .35em .6em; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); line-height: 1.35; }
+.addr > span b { font-size: 1.05rem; }
+.addr > span small { font-size: .72rem; color: var(--muted); }
+.addr > span.lv1 { background: var(--accent-soft); }
+.addr > span.lv2 { background: var(--mid-soft); }
+.addr > span.lv3 { background: var(--good-soft); }
+
+/* 街區示意：方格，外圈數字表示基礎番號 */
+.block-demo { display: grid; grid-template-columns: repeat(5, 2.4em); grid-template-rows: repeat(5, 2.4em); gap: 2px; margin: 1em auto; width: max-content; font-size: .85rem; }
+.block-demo > div { display: flex; align-items: center; justify-content: center; }
+.block-demo .num { border: 1px dashed var(--line); color: var(--muted); }
+.block-demo .num.door { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+.block-demo .in { background: var(--mid-soft); }
+.block-demo .road { background: transparent; color: var(--muted); font-size: .7rem; }
+
+/* 行內的「▶ 聽」小按鈕（夾在句子裡時不要撐開行高） */
+.btn.say { padding: .05em .55em; font-size: .75rem; margin: 0 .15em; min-height: 0; line-height: 1.5; vertical-align: .1em; white-space: nowrap; }
