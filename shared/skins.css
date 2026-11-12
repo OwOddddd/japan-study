@@ -38,8 +38,8 @@ html[data-skin] nav.site-nav { display: flex; flex-wrap: wrap; align-items: cent
 html[data-skin="route"] nav.site-nav { background: var(--topic); color: var(--surface); padding: 6px 12px; border-radius: 6px; }
 html[data-skin="route"] nav.site-nav a { color: var(--surface); }
 html[data-skin="route"] main > h1::after { content: ""; display: block; width: 3.2em; height: 6px; border-radius: 3px; background: var(--topic); margin-top: .35em; }
-html[data-skin="route"] h2 { position: relative; padding-left: 1.5em; }
-html[data-skin="route"] h2::before { content: ""; position: absolute; left: 0; top: .32em; width: .95em; height: .95em; box-sizing: border-box; border: 4px solid var(--topic); border-radius: 50%; background: var(--surface); }
+html[data-skin="route"]:not([data-topic="home"]) h2 { position: relative; padding-left: 1.5em; }
+html[data-skin="route"]:not([data-topic="home"]) h2::before { content: ""; position: absolute; left: 0; top: .32em; width: .95em; height: .95em; box-sizing: border-box; border: 4px solid var(--topic); border-radius: 50%; background: var(--surface); }
 html[data-skin="route"] .toc li { border-left: 6px solid var(--topic); }
 
 /* ==================== 和柄 ==================== */

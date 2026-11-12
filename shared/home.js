@@ -64,18 +64,18 @@
         var nm = s.href ? '<a href="' + s.href + '">' + esc(s.n) + '</a>' : esc(s.n);
         return '<li class="' + (s.href ? 'open' : 'plan') + '"><span class="dot"></span><span class="code">' + code + '</span><span class="name">' + nm + '</span></li>';
       }).join('');
-      return '<article class="route" style="--c: var(--' + t.code + ')"><div class="route-head"><span class="icon"><canvas data-sprite="' + t.icon + '"></canvas></span>' +
-        '<div><div class="nm"><span class="badge">' + t.code + '</span><a href="' + t.id + '/index.html">' + t.name + '線</a></div>' +
+      return '<article class="route" style="--c: var(--' + t.code + ')"><div class="route-head"><span class="badge">' + t.code + '</span>' +
+        '<div><a href="' + t.id + '/index.html">' + t.name + '線</a>' +
         '<div class="meta">' + c[0] + ' 站開通・預定 ' + c[1] + ' 站</div></div></div><p class="desc">' + t.desc + '</p><ul class="stops">' + stops + '</ul></article>';
     }).join('');
     return '<header class="sign"><div class="sign-top"></div><div class="sign-body"><div class="sign-no"><span>JP<big>00</big></span></div>' +
       '<div class="sign-name"><div class="kana">にほんがくしゅう</div><h1>日本學習</h1><div class="roman">Nihon Gakushū</div></div>' +
-      '<div class="sign-fuji"><canvas data-sprite="fuji"></canvas></div></div><div class="sign-bottom"><span>← 台灣</span><span>日本 →</span></div></header>' +
+      '<div></div></div><div class="sign-bottom"><span>← 台灣</span><span>日本 →</span></div></header>' +
       '<p class="lede">為了去日本旅行時看得懂眼前的東西。每個主題是一條路線，每一課是一個車站。</p>' +
       '<section><h2>路線圖 <small>實心站是已經出好的課，空心站是預定的課</small></h2><div class="lines">' + lines + '</div></section>' +
       '<section><h2>建設中的路線</h2><div class="future">' + FUTURE.map(function (f) { return '<span>' + f[0] + '線</span>'; }).join('') + '</div></section>' +
-      '<section><h2>本日告示</h2><div class="board"><canvas data-sprite="lantern"></canvas><div><span class="lbl">睡前日本新聞</span>　' +
-      (news ? esc(news.date) : '') + '</div><a href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') +
+      '<section><h2>本日告示</h2><div class="board"><div class="row"><span class="lbl">睡前日本新聞</span><span>' +
+      (news ? esc(news.date) : '') + '</span></div><a href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') +
       '</a><a class="all" href="news/index.html">所有日期 →</a></div></section><p class="small">' + NOTE + '</p>';
   };
   R.wa = function () {

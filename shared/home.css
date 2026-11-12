@@ -18,16 +18,14 @@ main.home-main { max-width: 960px; }
 .home-route .sign-name .kana { font-size: .9rem; letter-spacing: .4em; color: var(--muted); }
 .home-route .sign-name h1 { font-size: clamp(2.1rem, 7vw, 3.2rem); letter-spacing: .25em; margin: 0; line-height: 1.2; padding-left: .25em; }
 .home-route .sign-name .roman { font-size: .82rem; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; }
-.home-route .sign-fuji canvas { width: 60px; height: auto; }
 .home-route .sign-bottom { display: flex; justify-content: space-between; gap: 12px; padding: 7px 22px; background: var(--ink); color: var(--surface); font-weight: 500; font-size: .9rem; }
 .home-route .lede { margin-top: 20px; }
+.home-route h2 { font-family: var(--sans); font-size: 1.05rem; letter-spacing: .1em; margin: 0 0 12px; padding: 0; border: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.home-route h2 small { letter-spacing: 0; }
 .home-route .lines { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-.home-route .route { background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--c); border-radius: 8px; padding: 14px 16px 12px; min-width: 0; }
-.home-route .route-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-.home-route .icon { width: 52px; height: 52px; flex: none; background: var(--bg); border-radius: 8px; display: grid; place-items: center; }
-.home-route .icon canvas { width: 40px; height: auto; }
-.home-route .nm { display: flex; align-items: center; gap: 8px; }
-.home-route .badge { width: 26px; height: 26px; border-radius: 50%; border: 4px solid var(--c); display: grid; place-items: center; font-weight: 700; font-size: .75rem; }
+.home-route .route { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 16px 12px; min-width: 0; }
+.home-route .route-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.home-route .badge { width: 42px; height: 42px; flex: none; border-radius: 50%; border: 5px solid var(--c); display: grid; place-items: center; font-weight: 700; font-size: 1.1rem; background: var(--surface); color: var(--ink); }
 .home-route .route-head a { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
 .home-route .route-head a:hover { text-decoration: underline; }
 .home-route .meta { font-size: .78rem; color: var(--muted); }
@@ -46,15 +44,15 @@ main.home-main { max-width: 960px; }
 .home-route .stops li.plan .name { color: var(--muted); }
 .home-route .future { display: flex; flex-wrap: wrap; gap: 8px; }
 .home-route .future span { border: 2px dashed var(--line); border-radius: 999px; padding: 2px 12px; font-size: .88rem; color: var(--muted); }
-.home-route .board { background: #15181b; border-radius: 6px; padding: 14px 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: center; color: #ffb43d; font-family: var(--dot); }
-.home-route .board canvas { width: 40px; height: auto; grid-row: span 3; }
+.home-route .board { background: #15181b; border-radius: 6px; padding: 14px 18px; display: grid; gap: 6px; color: #ffb43d; font-family: var(--dot); }
+.home-route .board .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; }
 .home-route .board .lbl { color: #8fd18a; font-size: .85rem; }
 .home-route .board a { color: #ffb43d; text-decoration: none; font-size: 1.15rem; line-height: 1.5; }
 .home-route .board a:hover { text-decoration: underline; }
 .home-route .board .all { font-size: .85rem; color: #c9ced2; }
 @media (max-width: 520px) {
   .home-route .sign-body { grid-template-columns: 1fr; justify-items: center; padding: 16px; }
-  .home-route .sign-no, .home-route .sign-fuji { display: none; }
+  .home-route .sign-no { width: 54px; height: 54px; }
 }
 
 /* ---------- 和柄 ---------- */
