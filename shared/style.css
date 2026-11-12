@@ -237,6 +237,16 @@ svg.jmap .pref[class*=" c"]:hover { stroke: var(--ink); stroke-width: 1.5; }
 .toc li .small { display: block; }
 .toc li.todo { opacity: .6; }
 
+/* ---------- 每日新聞（news/） ---------- */
+.news-item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+.news-item h3 { margin: .45em 0 .2em; }
+.news-item p { margin: .4em 0; }
+.news-link { background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-size: .94rem; }
+.news-link b { color: var(--accent); }
+.news-ja .line { font-size: 1.2rem; line-height: 2.3; margin: .4em 0; }
+.news-ja rt { font-size: .6em; color: var(--muted); }
+.news-ja ul { font-size: .94rem; padding-left: 1.2em; }
+
 /* ---------- 列印與手機 ---------- */
 @media print {
   .sticky, .btn, .override, .exercise, nav.site-nav { display: none; }
