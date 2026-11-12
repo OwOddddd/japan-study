@@ -1,0 +1,7 @@
+/* 建築主題專用樣式（之後由總管合併進 shared/style.css）
+   table.plan：寺院配置等平面示意格子。td.b 主建築（朱）、td.t 塔（黃）、td.w 空白無框 */
+table.plan { width: auto; margin: 10px auto 4px; table-layout: fixed; }
+table.plan td { width: 5.2em; height: 2.4em; text-align: center; padding: 2px; font-size: .85rem; border: 1px dashed var(--line); }
+table.plan td.b { background: var(--accent-soft); border: 1px solid var(--accent); font-weight: 700; }
+table.plan td.t { background: var(--mid-soft); border: 1px solid var(--mid); font-weight: 700; }
+table.plan td.w { border: none; }
