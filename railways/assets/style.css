@@ -1,0 +1,9 @@
+/* 鐵道與交通主題專用的小元件。總管之後合併進 shared/style.css。 */
+
+/* 色塊：JR 公司代表色、路線顏色 */
+.jr-dot { display: inline-block; width: .9em; height: .9em; border-radius: 3px; vertical-align: -1px; margin-right: .35em; }
+
+/* 車站編號標誌的示意：圓角方框，外框用路線顏色 */
+.st-num { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 2.6em; padding: .15em .3em; border: 3px solid currentColor; border-radius: 8px; font-weight: 700; line-height: 1.05; background: #fff; }
+.st-num small { font-size: .65em; }
+.st-num b { font-size: 1.1em; color: #222; }
