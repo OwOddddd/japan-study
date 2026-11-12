@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宗教與信仰程度診斷</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>宗教與信仰・程度診斷</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">宗教與信仰</a></nav>
+  <h1>程度診斷</h1>
+  <p class="lede">20 題，大約 10 分鐘。題目涵蓋全部九課，用來找出哪幾課你已經會了、可以跳過。</p>
+
+  <div class="callout">
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    作答會自動存在這個瀏覽器裡。交卷後按「複製結果，貼給老師」，把文字貼到對話框。
+  </div>
+
+  <h2>背景問答</h2>
+  <p class="small">寫得很簡短也沒關係。</p>
+  <div class="recall-box exercise">1. 去過日本哪些神社或寺院？還記得哪些畫面（例如一整排紅色鳥居、大佛、很多木牌）？
+    <textarea id="bg-1"></textarea></div>
+  <div class="recall-box exercise">2. 在台灣有沒有拜拜的經驗？有沒有哪些日本參拜的動作讓你覺得跟台灣不一樣、或看不懂？
+    <textarea id="bg-2"></textarea></div>
+  <p><button class="btn ghost" id="copy-bg">複製背景問答</button> <span class="small" id="copy-bg-msg"></span></p>
+
+  <h2>選擇題與簡答</h2>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
+  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
+</main>
+
+<script>
+// ---------- 背景問答：自動保存與複製 ----------
+const BG_KEY = 'rel-diag-bg-v1';
+let bg = {};
+try { bg = JSON.parse(localStorage.getItem(BG_KEY) || '{}'); } catch (e) {}
+['bg-1', 'bg-2'].forEach(id => {
+  const ta = document.getElementById(id);
+  ta.value = bg[id] || '';
+  ta.addEventListener('input', () => { bg[id] = ta.value; try { localStorage.setItem(BG_KEY, JSON.stringify(bg)); } catch (e) {} });
+});
+document.getElementById('copy-bg').onclick = async () => {
+  const text = `宗教診斷・背景問答\n1. ${bg['bg-1'] || '（未填）'}\n2. ${bg['bg-2'] || '（未填）'}`;
+  const msg = document.getElementById('copy-bg-msg');
+  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製，直接貼到對話框即可。'; }
+  catch (e) { msg.textContent = '複製失敗，請手動選取文字。'; }
+};
+
+// ---------- 診斷題 ----------
+Quiz.mount(document.getElementById('quiz'), {
+  title: '宗教與信仰・程度診斷',
+  storageKey: 'rel-diag-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [
+    { id: 'tell', name: '分辨神社與寺院（第 1–2 課）' },
+    { id: 'kinds', name: '神社的種類（第 3 課）' },
+    { id: 'sects', name: '佛教宗派（第 4–5 課）' },
+    { id: 'statue', name: '佛像（第 6 課）' },
+    { id: 'mix', name: '神佛習合與分離（第 7 課）' },
+    { id: 'life', name: '參拜與宗教生活（第 8–9 課）' },
+  ],
+  questions: [
+    // ---------- 第 1–2 課 ----------
+    { id: 't-1', facet: 'tell', level: 1, type: 'choice',
+      prompt: '入口立著兩根柱子、上面架兩道橫木的門（常漆成朱紅色），通常代表這裡是？',
+      options: ['神社', '寺院', '城郭', '墓地'],
+      explain: '這是鳥居，標示神的領域的入口，是神社的記號。寺院的入口是有屋頂的山門。' },
+    { id: 't-2', facet: 'tell', level: 2, type: 'choice',
+      prompt: '下列哪一組東西，最能說明你走進的是<b>寺院</b>？',
+      options: ['山門、香爐、墓地', '鳥居、狛犬、注連繩', '鳥居、手水舍、繪馬', '參道、拜殿、神樂殿'],
+      explain: '燒香用的香爐與墓地是佛教的東西。狛犬、注連繩、神樂殿屬於神社；手水舍、繪馬兩邊都常見。' },
+    { id: 't-3', facet: 'tell', level: 2, type: 'choice',
+      prompt: '奈良的大神神社沒有本殿，參拜者隔著拜殿直接拜後面的山。為什麼？',
+      options: ['山本身就是神所在的地方', '本殿在戰爭中燒掉沒重建', '山上另有一座隱藏的本殿', '神社太窮蓋不起本殿建築'],
+      explain: '神道最早的信仰對象是山、巨石、大樹這些自然物本身，三輪山就是神體，所以不需要另蓋本殿。' },
+    { id: 't-4', facet: 'tell', level: 2, type: 'choice',
+      prompt: '神社裡綁在大樹或巨石上、垂著白色鋸齒紙條的粗繩叫注連繩。它表示什麼？',
+      options: ['這裡是神聖的領域', '這棵樹即將被砍伐', '這裡禁止拍照攝影', '這是寺院的財產'],
+      explain: '注連繩用來劃出神聖與日常的界線，綁在樹或石頭上，表示神降臨或寄宿在這裡。' },
+    // ---------- 第 3 課 ----------
+    { id: 'k-1', facet: 'kinds', level: 1, type: 'choice',
+      prompt: '京都伏見稻荷大社有上千座鳥居連成隧道，門口有狐狸像。稻荷神原本是保佑什麼的？',
+      options: ['稻米豐收', '學業考試', '航海平安', '戰爭勝利'],
+      explain: '「稻荷」原本就和稻米有關，是農業的神；後來才擴大成保佑生意興隆。狐狸是神的使者。' },
+    { id: 'k-2', facet: 'kinds', level: 2, type: 'choice',
+      prompt: '天滿宮（天神）供奉菅原道真，考生會去參拜。天滿宮供奉他的最初原因是？',
+      options: ['怕他死後的怨靈作祟', '他發明了日本的文字', '他是第一位天皇之子', '他捐地蓋了很多學校'],
+      explain: '道真被貶到太宰府後死去，京都接連出事，人們認為是他的怨靈，才把他當神祭祀安撫。學問之神是後來的形象。' },
+    { id: 'k-3', facet: 'kinds', level: 2, type: 'choice',
+      prompt: '八幡神在武士時代特別受崇敬，鎌倉的鶴岡八幡宮就是一例。為什麼武士特別信八幡？',
+      options: ['源氏把八幡當成家族守護神', '八幡神原本是一位武士', '八幡宮都建在城堡旁邊', '八幡神專門保佑農民'],
+      explain: '源氏奉八幡神為氏神，源賴朝在鎌倉建鶴岡八幡宮，武士階層跟著崇敬，八幡神成了「弓矢之神」。' },
+    // ---------- 第 4–5 課 ----------
+    { id: 's-1', facet: 'sects', level: 2, type: 'choice',
+      prompt: '比叡山延曆寺和高野山金剛峯寺，分別是哪兩個宗派的根據地？',
+      options: ['天台宗、真言宗', '真言宗、天台宗', '淨土宗、禪宗', '日蓮宗、淨土宗'],
+      explain: '最澄在比叡山開天台宗，空海在高野山開真言宗，兩人都在平安初期從唐朝學成回國。' },
+    { id: 's-2', facet: 'sects', level: 2, type: 'choice',
+      prompt: '「只要念『南無阿彌陀佛』就能往生極樂」是哪一派的主張？',
+      options: ['淨土宗、淨土真宗', '臨濟宗、曹洞宗', '日蓮宗', '天台宗、真言宗'],
+      explain: '法然的淨土宗與親鸞的淨土真宗主張念佛。日蓮宗念的是「南無妙法蓮華經」，禪宗重坐禪。' },
+    { id: 's-3', facet: 'sects', level: 3, type: 'choice',
+      prompt: '京都的枯山水庭園（白砂、石頭，不用水）多半屬於哪一派的寺院？',
+      options: ['禪宗', '淨土宗', '真言宗', '日蓮宗'],
+      explain: '枯山水和禪宗寺院關係最深，例如龍安寺石庭（臨濟宗妙心寺派）。' },
+    { id: 's-4', facet: 'sects', level: 3, type: 'short',
+      prompt: '鎌倉時代出現的新宗派（淨土、禪、日蓮）和奈良、平安的佛教比起來，最大的不同是什麼？為什麼會在那個時代出現？',
+      keywords: [['簡單', '容易', '簡化', '一個', '只要', '專'], ['庶民', '百姓', '平民', '一般人', '武士'], ['戰亂', '亂世', '末法', '不安', '飢荒']],
+      need: 2,
+      answer: '奈良、平安佛教以國家、貴族為對象，修行要讀經、做複雜的儀式；鎌倉新佛教把修行簡化成一件事（念佛、坐禪、唱題目），武士與庶民也做得到。背景是平安末期戰亂、飢荒，人們相信進入「末法」時代，需要人人都能得救的方法。' },
+    // ---------- 第 6 課 ----------
+    { id: 'p-1', facet: 'statue', level: 2, type: 'choice',
+      prompt: '一尊佛像頭戴寶冠、身上有項鍊瓔珞，打扮得像王子。它最可能是？',
+      options: ['菩薩', '如來', '明王', '羅漢'],
+      explain: '菩薩的造型來自出家前的釋迦（印度王子），所以有寶冠和飾品。如來已經開悟，只穿一件衣服、沒有飾品。' },
+    { id: 'p-2', facet: 'statue', level: 2, type: 'choice',
+      prompt: '不動明王一臉怒相、背後有火焰、手拿劍和繩子。明王為什麼要這麼兇？',
+      options: ['用威嚇降伏不聽教化的人', '他是佛教的敵人被收服', '表示他負責懲罰死者', '他是印度戰神的原貌'],
+      explain: '明王是如來為了降伏難以教化的眾生而現出的憤怒相，劍斬煩惱、繩索綁住迷途的人。' },
+    { id: 'p-3', facet: 'statue', level: 3, type: 'choice',
+      prompt: '佛像的「階層」由上到下，哪一個排列正確？',
+      options: ['如來 → 菩薩 → 明王 → 天', '菩薩 → 如來 → 天 → 明王', '明王 → 如來 → 菩薩 → 天', '天 → 明王 → 菩薩 → 如來'],
+      explain: '如來（已開悟）→ 菩薩（修行中、救度眾生）→ 明王（如來的憤怒相）→ 天（守護佛法的神）。' },
+    // ---------- 第 7 課 ----------
+    { id: 'm-1', facet: 'mix', level: 2, type: 'choice',
+      prompt: '日本有些寺院境內立著鳥居，有些神社旁邊有佛塔。為什麼會混在一起？',
+      options: ['一千年來神佛被當成一體祭拜', '明治政府規定兩者要合併', '只是因為土地不夠而共用', '戰後為了觀光才蓋在一起'],
+      explain: '佛教傳入後，神和佛漸漸被視為一體（神佛習合），在同一個地方一起祭拜超過一千年。' },
+    { id: 'm-2', facet: 'mix', level: 3, type: 'choice',
+      prompt: '1868 年明治政府下令「神佛分離」。這道命令造成了什麼？',
+      options: ['各地出現破壞寺院、佛像的運動', '所有神社都改成了寺院', '佛教被禁止，僧侶被驅逐出境', '神社與寺院從此合併管理'],
+      explain: '命令本身是要把神社裡的佛教元素分開，卻引發各地「廢佛毀釋」，大量寺院、佛像、經典被毀。' },
+    // ---------- 第 8–9 課 ----------
+    { id: 'l-1', facet: 'life', level: 1, type: 'choice',
+      prompt: '在一般神社的拜殿前，現在常見的拜法是？',
+      options: ['二拜、二拍手、一拜', '合掌、低頭默念不拍手', '三拜、一拍手、三拜', '點香、三鞠躬、插香'],
+      explain: '二拜二拍手一拜是現在神社的基本拜法。寺院不拍手，雙手合掌。少數神社（例如出雲大社）是四拍手。' },
+    { id: 'l-2', facet: 'life', level: 2, type: 'choice',
+      prompt: '寺社的「御朱印」最早是什麼？',
+      options: ['抄寫經文獻給寺院的收據', '寺院給觀光客的紀念章', '進入寺院要繳的門票', '江戶幕府頒發的通行證'],
+      explain: '御朱印源自納經：把抄好的經文獻給寺院後拿到的證明印。後來不獻經也能領，成了參拜的證明。' },
+    { id: 'l-3', facet: 'life', level: 2, type: 'choice',
+      prompt: '很多日本人出生後去神社參拜，婚禮辦在教堂，喪禮請寺院的僧侶。這種分工的主要原因是？',
+      options: ['神道管生、佛教管死的長期分工', '法律規定不同儀式由不同宗教辦', '日本人大多同時是三個宗教的信徒', '寺院與神社收費不同所以選便宜的'],
+      explain: '神道重視潔淨、避開死亡的「穢」，喪葬自古交給佛教；江戶時代的寺請制度讓每家都屬於一座寺院，鞏固了佛式喪葬。教堂婚禮是戰後流行的。' },
+    { id: 'l-4', facet: 'life', level: 3, type: 'choice',
+      prompt: '江戶時代每個家庭都必須登記在某一座寺院（寺請制度）。幕府這麼做的主要目的是？',
+      options: ['證明不是基督徒', '向寺院收取稅金', '鼓勵人民出家', '統一佛教宗派'],
+      explain: '幕府禁止基督教，要求寺院證明每個人是佛教徒，寺院因此掌握戶籍，也和家家戶戶的喪葬綁在一起。' },
+  ],
+});
+</script>
+</body>
+</html>
