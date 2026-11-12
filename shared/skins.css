@@ -1,0 +1,96 @@
+/* 外觀（skin）：由 style.css 開頭 @import，所有頁面共用。
+   html[data-skin] = route（路線圖）／wa（和柄）／pixel（像素）／plain（簡潔，不加任何東西）
+   html[data-topic] = history／geography／japanese／news／home，由 shared/skin.js 依網址設定。
+   這裡的規則都以 html[data-skin=…] 開頭，特異度高於 style.css 的基本規則；新頁面只要用 style.css 的 class 就會自動套上外觀。 */
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Serif+TC:wght@900&display=swap');
+
+/* ---------- 主題色與印章字 ---------- */
+:root { --topic: #2b6cb0; --stamp: "學"; --dot: 'DotGothic16', 'Noto Sans TC', monospace; }
+html[data-topic="history"] { --topic: #c8432f; --stamp: "史"; }
+html[data-topic="geography"] { --topic: #2b6cb0; --stamp: "地"; }
+html[data-topic="japanese"] { --topic: #6a58b0; --stamp: "語"; }
+html[data-topic="news"] { --topic: #b4651a; --stamp: "報"; }
+@media (prefers-color-scheme: dark) {
+  html[data-topic]:not([data-theme="light"]) { --topic: #6aa6dc; }
+  html[data-topic="history"]:not([data-theme="light"]) { --topic: #e0705f; }
+  html[data-topic="japanese"]:not([data-theme="light"]) { --topic: #a596e0; }
+  html[data-topic="news"]:not([data-theme="light"]) { --topic: #e0a64a; }
+}
+html[data-theme="dark"][data-topic] { --topic: #6aa6dc; }
+html[data-theme="dark"][data-topic="history"] { --topic: #e0705f; }
+html[data-theme="dark"][data-topic="japanese"] { --topic: #a596e0; }
+html[data-theme="dark"][data-topic="news"] { --topic: #e0a64a; }
+
+/* ---------- 外觀選單 ---------- */
+.skin-pick { font-size: .8rem; color: inherit; display: inline-flex; align-items: center; gap: .4em; margin-left: auto; }
+.skin-pick select { font: inherit; padding: 1px 4px; border-radius: 4px; border: 1px solid currentColor; background: transparent; color: inherit; }
+.skin-pick option { color: #1f1d1a; background: #fff; }
+html[data-skin] nav.site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .35em; }
+.px-strip { display: none; }
+@media print { .skin-pick, .px-strip { display: none !important; } }
+
+/* ==================== 路線圖 ==================== */
+:root[data-skin="route"] { --bg: #eef0ef; --surface: #ffffff; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 13%, var(--surface)); }
+@media (prefers-color-scheme: dark) {
+  :root[data-skin="route"][data-topic]:not([data-theme="light"]) { --bg: #15181b; --surface: #1d2125; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 18%, var(--surface)); }
+}
+:root[data-skin="route"][data-topic][data-theme="dark"] { --bg: #15181b; --surface: #1d2125; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 18%, var(--surface)); }
+html[data-skin="route"] nav.site-nav { background: var(--topic); color: var(--surface); padding: 6px 12px; border-radius: 6px; }
+html[data-skin="route"] nav.site-nav a { color: var(--surface); }
+html[data-skin="route"] main > h1::after { content: ""; display: block; width: 3.2em; height: 6px; border-radius: 3px; background: var(--topic); margin-top: .35em; }
+html[data-skin="route"] h2 { position: relative; padding-left: 1.5em; }
+html[data-skin="route"] h2::before { content: ""; position: absolute; left: 0; top: .32em; width: .95em; height: .95em; box-sizing: border-box; border: 4px solid var(--topic); border-radius: 50%; background: var(--surface); }
+html[data-skin="route"] .toc li { border-left: 6px solid var(--topic); }
+
+/* ==================== 和柄 ==================== */
+:root[data-skin="wa"] { --bg: #f6f4ef; --surface: #fffdf8; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 12%, var(--surface)); --wave-b: #f6f4ef; }
+@media (prefers-color-scheme: dark) {
+  :root[data-skin="wa"][data-topic]:not([data-theme="light"]) { --bg: #171615; --surface: #201f1d; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 18%, var(--surface)); --wave-b: #2b2925; }
+}
+:root[data-skin="wa"][data-topic][data-theme="dark"] { --bg: #171615; --surface: #201f1d; --accent: var(--topic); --accent-soft: color-mix(in srgb, var(--topic) 18%, var(--surface)); --wave-b: #2b2925; }
+.seigaiha { --c: var(--topic); --b: var(--wave-b, #f6f4ef);
+  background-color: var(--c);
+  background-image:
+    radial-gradient(circle at 100% 150%, var(--c) 24%, var(--b) 24% 28%, var(--c) 28% 36%, var(--b) 36% 40%, transparent 40%),
+    radial-gradient(circle at 0 150%, var(--c) 24%, var(--b) 24% 28%, var(--c) 28% 36%, var(--b) 36% 40%, transparent 40%),
+    radial-gradient(circle at 50% 100%, var(--b) 10%, var(--c) 10% 23%, var(--b) 23% 30%, var(--c) 30% 43%, var(--b) 43% 50%, var(--c) 50% 63%, var(--b) 63% 71%, transparent 71%),
+    radial-gradient(circle at 100% 50%, var(--b) 5%, var(--c) 5% 15%, var(--b) 15% 20%, var(--c) 20% 29%, var(--b) 29% 34%, var(--c) 34% 44%, var(--b) 44% 49%, transparent 49%),
+    radial-gradient(circle at 0 50%, var(--b) 5%, var(--c) 5% 15%, var(--b) 15% 20%, var(--c) 20% 29%, var(--b) 29% 34%, var(--c) 34% 44%, var(--b) 44% 49%, transparent 49%);
+  background-size: 60px 30px; }
+html[data-skin="wa"]:not([data-topic="home"]) body::before {
+  content: ""; display: block; height: 96px; --c: var(--topic); --b: var(--wave-b);
+  background-color: var(--c);
+  background-image:
+    radial-gradient(circle at 100% 150%, var(--c) 24%, var(--b) 24% 28%, var(--c) 28% 36%, var(--b) 36% 40%, transparent 40%),
+    radial-gradient(circle at 0 150%, var(--c) 24%, var(--b) 24% 28%, var(--c) 28% 36%, var(--b) 36% 40%, transparent 40%),
+    radial-gradient(circle at 50% 100%, var(--b) 10%, var(--c) 10% 23%, var(--b) 23% 30%, var(--c) 30% 43%, var(--b) 43% 50%, var(--c) 50% 63%, var(--b) 63% 71%, transparent 71%),
+    radial-gradient(circle at 100% 50%, var(--b) 5%, var(--c) 5% 15%, var(--b) 15% 20%, var(--c) 20% 29%, var(--b) 29% 34%, var(--c) 34% 44%, var(--b) 44% 49%, transparent 49%),
+    radial-gradient(circle at 0 50%, var(--b) 5%, var(--c) 5% 15%, var(--b) 15% 20%, var(--c) 20% 29%, var(--b) 29% 34%, var(--c) 34% 44%, var(--b) 44% 49%, transparent 49%);
+  background-size: 60px 30px; }
+html[data-skin="wa"] main > h1 { display: flex; align-items: center; justify-content: space-between; gap: .5em; font-weight: 900; }
+html[data-skin="wa"] main > h1::after { content: var(--stamp); flex: none; width: 1.8em; height: 1.8em; display: grid; place-items: center; border: 3px solid var(--accent); color: var(--accent); border-radius: 6px; font-size: .8em; line-height: 1; transform: rotate(-6deg); }
+html[data-skin="wa"] h2 { border-bottom: 0; display: flex; align-items: center; gap: 12px; }
+html[data-skin="wa"] h2::after { content: ""; flex: 1; min-width: 2em; height: 6px; background: conic-gradient(var(--line) 25%, transparent 0 50%, var(--line) 0 75%, transparent 0) 0 0 / 6px 6px; }
+html[data-skin="wa"] .toc li { border-radius: 2px; border-left: 6px solid var(--accent); }
+
+/* ==================== 像素（只有深色） ==================== */
+:root[data-skin="pixel"][data-topic] {
+  --bg: #121733; --surface: #1b2250; --ink: #f3f1ea; --muted: #a7acc9; --line: #39407a;
+  --accent: var(--px-topic); --accent-soft: #262e66;
+  --good: #7ddc8a; --good-soft: #1d3a3a; --mid: #ffd76a; --mid-soft: #3a3420; --bad: #ff7a5c; --bad-soft: #3d2240;
+  --map-land: #2b3370; --map-stroke: #6f78b8; --map-sea: #10153a; --map-hl: #ff7a5c; --map-sel: #6fb6ff;
+  --q0: #2a2f5e; --q1: #4b3f7a; --q2: #8a4b7a; --q3: #d0646a; --q4: #ffb08a;
+  --px-topic: #ffd76a; color-scheme: dark; }
+:root[data-skin="pixel"][data-topic="history"] { --px-topic: #ff7a5c; }
+:root[data-skin="pixel"][data-topic="geography"] { --px-topic: #6fb6ff; }
+:root[data-skin="pixel"][data-topic="japanese"] { --px-topic: #b7a2ff; }
+html[data-skin="pixel"] h1, html[data-skin="pixel"] h2, html[data-skin="pixel"] h3,
+html[data-skin="pixel"] nav.site-nav, html[data-skin="pixel"] .tag, html[data-skin="pixel"] .toc li a { font-family: var(--dot); font-weight: 400; }
+html[data-skin="pixel"] h1 { text-shadow: 3px 3px 0 #000; letter-spacing: .04em; }
+html[data-skin="pixel"] h2 { border-bottom: 4px solid var(--line); color: var(--accent); }
+html[data-skin="pixel"] .toc li, html[data-skin="pixel"] .goal, html[data-skin="pixel"] .callout, html[data-skin="pixel"] .note { border: 3px solid var(--ink); border-radius: 0; box-shadow: 4px 4px 0 #000; }
+html[data-skin="pixel"] .tag { border-radius: 0; }
+html[data-skin="pixel"] .px-strip { display: block; margin: -32px -16px 20px; }
+html[data-skin="pixel"] .px-props { display: flex; justify-content: center; align-items: flex-end; gap: 18px; padding-top: 18px; background: linear-gradient(#0b0f26, #232c6b); }
+html[data-skin="pixel"] .px-props canvas { width: 48px; height: auto; image-rendering: pixelated; display: block; }
+html[data-skin="pixel"] .px-ground { height: 16px; background: conic-gradient(#3f7a3c 25%, #5f9e5a 0 50%, #3f7a3c 0 75%, #5f9e5a 0) 0 0 / 8px 8px; border-top: 4px solid #8fd18a; }

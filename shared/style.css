@@ -2,6 +2,7 @@
    基準：日本地理的風格（內文黑體、標題明體）。
    分區：變數 → 基本排版 → 網站導覽 → 文章元件 → 互動練習 → 測驗引擎 → 地圖 → 示意圖 → 降水量小圖 → 目錄頁 → 列印與手機 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+@import url('skins.css');   /* 外觀切換，見 skins.css 與 skin.js */
 
 /* ---------- 變數 ---------- */
 :root {

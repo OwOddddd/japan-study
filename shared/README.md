@@ -7,6 +7,11 @@
 | `style.css` | 唯一的樣式表。含深色模式（跟隨系統）與手機寬度。 |
 | `quiz.js` | 單題選擇（`.exercise.quiz`，載入即啟用）＋整份測驗引擎 `Quiz.mount(root, cfg)` |
 | `order.js` | 排序題（`.exercise.order`） |
+| `skin.js` | 外觀切換（路線圖／和柄／像素／簡潔）。每頁 `<head>` 都要引用，放在 style.css 後面 |
+| `skins.css` | 三種外觀的樣式，由 style.css 開頭 `@import`，不用另外引用 |
+| `home.js`、`home.css` | 只給網站首頁用。首頁的課程清單從各主題 `index.html` 的「課程」區自動讀取 |
+
+外觀是全站共用的：頁面只要引用 `skin.js`、用這裡列出的 class，新課就會自動套上目前選的外觀，不需要另外做。新增一種全新的元件（新的 class）時，在三種外觀下各看一次，不協調再到 `skins.css` 補規則。
 
 只屬於單一主題的元件留在該主題的 `assets/`（例如日本地理的 `japan-map.js`、`climate-chart.js`），但樣式一律寫進這裡的 `style.css`。
 
@@ -20,7 +25,7 @@
 
 1. 確認新課已加進主題的 `index.html`。
 2. `git status` 檢查要提交的檔案，確定沒有私人檔案。
-3. `git add -A`，`git commit -m "新增 xxx 第 N 課"`。
+3. 只 `git add` 自己這次改的檔案（不要用 `git add -A`：其他主題的對話可能有改到一半的檔案），`git commit -m "新增 xxx 第 N 課"`。
 4. `git push`。約一到兩分鐘後網站自動更新。
 
 ## 網站結構
@@ -43,6 +48,7 @@
 2. 課程與參考文件的 `<head>` 引用：
    ```html
    <link rel="stylesheet" href="../../shared/style.css">
+   <script src="../../shared/skin.js"></script>
    <!-- 有選擇題時 -->
    <script src="../../shared/quiz.js"></script>
    <!-- 有排序題時 -->
@@ -53,8 +59,8 @@
    ```html
    <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">主題名</a></nav>
    ```
-4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。
-5. 在網站首頁 `日本學習/index.html` 的「主題」列表加一行連結。
+4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css` 與 `../shared/skin.js`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。課程列在 `<h2>課程</h2>` 下的 `ul.toc`，首頁靠這個讀取；預定的課可以寫成 `<li class="todo">`。
+5. 新主題要出現在首頁：在 `shared/home.js` 的 `TOPICS` 加一筆，並在 `index.html` 的 `#home` 靜態清單加一行連結（給不能執行 JS 時看）。
 6. 在主題的 `NOTES.md`「工作筆記」寫入網站規則（可照抄 history/NOTES.md 的那一段，改主題名）。
 7. 主題的 `.claude/launch.json` 用 `python -m http.server <埠號> --directory ..`，讓伺服器根目錄是 `日本學習/`，才讀得到 `shared/`。直接用 `file://` 開啟時 script 不會正常運作。
 
