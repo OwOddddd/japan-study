@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>社會與生活程度診斷</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>社會與生活程度診斷</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
+  <h1>社會與生活程度診斷</h1>
+  <p class="lede">9 個面向、19 題，對應課程的 9 課。這不是考試，是幫老師判斷哪幾課你已經會了，可以直接刪掉。大約 10 分鐘。</p>
+
+  <div class="callout">
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    簡答題寫重點即可。作答會自動存在這個瀏覽器裡，中途關掉也不會不見。<br>
+    交卷後按「複製結果，貼給老師」，把文字貼回對話框，老師會依結果調整課程。
+  </div>
+
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
+  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
+</main>
+
+<script>
+const facets = [
+  { id: 'base',    name: '第 1 課・都市密度與地方自治' },
+  { id: 'address', name: '第 2 課・住址' },
+  { id: 'garbage', name: '第 3 課・垃圾' },
+  { id: 'konbini', name: '第 4 課・便利商店與自動販賣機' },
+  { id: 'bath',    name: '第 5 課・錢湯與溫泉' },
+  { id: 'school',  name: '第 6 課・學校' },
+  { id: 'work',    name: '第 7 課・職場' },
+  { id: 'house',   name: '第 8 課・住宅' },
+  { id: 'manner',  name: '第 9 課・公共空間的規矩' },
+];
+
+const questions = [
+  // ---------- 骨架 ----------
+  { id: 'base-1', facet: 'base', level: 1, type: 'choice',
+    prompt: '日本最基層的地方自治單位，統稱為什麼？',
+    options: ['市町村（加上東京的特別區）', '都道府縣（共 47 個）', '藩（江戶時代留下來）', '州（依地方區分設置）'],
+    explain: '全國約 1,700 多個市町村，加上東京 23 個特別區。垃圾收集、住民登記、小學都由它們負責。' },
+  { id: 'base-2', facet: 'base', level: 2, type: 'choice',
+    prompt: '在日本搬家後，垃圾分類方式、垃圾袋都可能跟著改變。最主要的原因是？',
+    options: ['垃圾由各市町村自己負責處理', '每個縣的法律規定都完全不同', '各地的垃圾車是不同公司製造', '中央政府每年重新指定分類法'],
+    explain: '家庭垃圾的收集與處理是市町村的責任，各地焚化爐、掩埋場條件不同，分類規則也跟著不同。' },
+
+  // ---------- 住址 ----------
+  { id: 'address-1', facet: 'address', level: 1, type: 'choice',
+    prompt: '「新宿區西新宿二丁目 8 番 1 號」裡的「8 番」指的是什麼？',
+    options: ['一個街區（被道路圍起來的區塊）', '一條道路的名稱或路的編號', '建築物的樓層或房間的號碼', '郵局指定的投遞區域號碼'],
+    explain: '多數都市用「街區方式」：丁目裡的每個街區編一個番號，街區裡的每棟建築再編號。' },
+  { id: 'address-2', facet: 'address', level: 2, type: 'short',
+    prompt: '台灣的地址多半靠路名（○○路○段○號），日本大部分地方卻不用路名。你覺得可能的原因是什麼？想不出來就按「我不知道」。',
+    keywords: [['街區', '區塊', '土地', '地番', '町'], ['路名', '道路沒有名字', '沒有名字', '小路', '巷'], ['登記', '明治', '1962', '法律', '住居表示']],
+    need: 2,
+    answer: '日本的住址從「土地」編號長出來：明治時代為了登記土地，給每塊地編了地番；大多數道路本來就沒有名字。1962 年的住居表示法改成按街區編號，仍然以「區塊」為單位，不以道路為單位。' },
+
+  // ---------- 垃圾 ----------
+  { id: 'garbage-1', facet: 'garbage', level: 1, type: 'choice',
+    prompt: '在日本街上走一整天，常常找不到垃圾桶。下列哪一個是常被提到的原因？',
+    options: ['1995 年地鐵沙林事件後的防恐措施', '日本法律規定街上不准設垃圾桶', '日本人的垃圾比其他國家少很多', '垃圾桶的稅金高到沒有人願意設'],
+    explain: '1995 年東京地鐵沙林事件後，車站一度撤掉垃圾桶以防有人藏放危險物，之後又因各國恐攻再撤。另一個原因是維護成本，加上「垃圾自己帶回家」的習慣。' },
+  { id: 'garbage-2', facet: 'garbage', level: 2, type: 'choice',
+    prompt: '早上在住宅區看到一角堆著垃圾袋、上面蓋著網子，那個地方叫什麼？誰管？',
+    options: ['集積所，多半由附近住戶輪流管', '回收站，由清潔公司派人看守', '垃圾場，由警察局負責巡邏', '中繼站，由環境省直接管理'],
+    explain: '垃圾集積所（ごみ集積所）多由町內會或住戶輪流清掃、管理，網子是防烏鴉。' },
+
+  // ---------- 便利商店 ----------
+  { id: 'konbini-1', facet: 'konbini', level: 1, type: 'choice',
+    prompt: '下列哪一件事，在日本便利商店<b>通常辦不到</b>？',
+    options: ['辦理護照與簽證', '繳水電瓦斯費', '寄宅急便包裹', '領錢、印文件'],
+    explain: '繳費（收納代行）、寄件、ATM、影印列印都是便利商店的標準服務；護照要到各都道府縣的護照窗口。' },
+  { id: 'konbini-2', facet: 'konbini', level: 2, type: 'choice',
+    prompt: '日本自動販賣機（含自動服務機）大約有多少台？',
+    options: ['約 400 萬台', '約 40 萬台', '約 4,000 萬台', '約 4 萬台'],
+    explain: '日本自動販賣系統機械工業會統計，2023 年底含自動服務機約 393 萬台，其中飲料自動販賣機約 222 萬台。' },
+
+  // ---------- 錢湯 ----------
+  { id: 'bath-1', facet: 'bath', level: 1, type: 'choice',
+    prompt: '在錢湯或溫泉的大浴池，下列哪一件事是規矩？',
+    options: ['下池前先在洗身區把身體洗乾淨', '穿著泳衣下池以免造成他人困擾', '把小毛巾泡進池裡一起暖身體', '池裡用肥皂搓洗身體再起來沖'],
+    explain: '浴池是大家共用的熱水，所以要先洗乾淨再進去，毛巾也不放進池裡。' },
+  { id: 'bath-2', facet: 'bath', level: 2, type: 'choice',
+    prompt: '關於刺青入浴，下列哪一句最接近目前的狀況？',
+    options: ['各設施自己決定，不少地方會拒絕或要求遮住', '日本法律明文禁止有刺青的人進入澡堂', '2020 年後全國的溫泉都已經開放刺青', '只有外國人的刺青可以入浴，日本人不行'],
+    explain: '法律沒有禁止。2015 年觀光廳調查，約 56% 的住宿設施拒絕；觀光廳 2016 年起建議用貼紙遮蓋、包租浴池等方式應對。一般錢湯多半不拒絕。' },
+
+  // ---------- 學校 ----------
+  { id: 'school-1', facet: 'school', level: 1, type: 'choice',
+    prompt: '日本的學年從幾月開始？',
+    options: ['4 月', '9 月', '1 月', '2 月'],
+    explain: '4 月開學、3 月畢業。和政府的會計年度（4 月起）一致。' },
+  { id: 'school-2', facet: 'school', level: 2, type: 'choice',
+    prompt: '動畫裡常聽到「<span lang="ja">ぶかつ</span>」，指的是什麼？',
+    options: ['社團活動', '補習班', '學生會', '打工'],
+    explain: '部活（ぶかつ）＝部活動，學校的社團。運動社團多半每天放學後練習，週末也有比賽。' },
+
+  // ---------- 職場 ----------
+  { id: 'work-1', facet: 'work', level: 1, type: 'choice',
+    prompt: '「年功序列」指的是什麼？',
+    options: ['薪水和職位隨年資往上爬', '員工依照年齡輪流當主管', '公司依成立年份排列順序', '每年依考績重新分配職位'],
+    explain: '年功（ねんこう）＝年資。和終身雇用、企業工會合稱「日本式雇用」的三種神器。' },
+  { id: 'work-2', facet: 'work', level: 2, type: 'choice',
+    prompt: '關於終身雇用，下列哪一句最接近事實？',
+    options: ['主要在大企業的正職員工身上，現在轉職越來越普遍', '日本所有上班族都會在同一家公司待到退休', '這是江戶時代商家就有的制度，從沒改變過', '法律規定公司不得在員工退休前讓員工離職'],
+    explain: '終身雇用是 1950–60 年代在大企業定型的慣例，從來沒有涵蓋所有人。2024 年轉職者約 331 萬人，連續三年增加。' },
+
+  // ---------- 住宅 ----------
+  { id: 'house-1', facet: 'house', level: 1, type: 'choice',
+    prompt: '租屋廣告寫「6 帖」，大約是多大？',
+    options: ['約 10 平方公尺', '約 6 平方公尺', '約 20 平方公尺', '約 3 平方公尺'],
+    explain: '1 帖（畳）以 1.62 m² 以上計算，6 帖約 9.7 m²，大概是一間單人房。' },
+  { id: 'house-2', facet: 'house', level: 2, type: 'choice',
+    prompt: '租屋廣告上的「1LDK」是什麼意思？',
+    options: ['一間房＋客廳餐廳廚房', '一樓、有獨立的大門', '一間房、只有廚房', '一人住、附家具家電'],
+    explain: 'L＝客廳、D＝餐廳、K＝廚房。1K、1DK、1LDK 的差別在廚房那一塊有多大。' },
+  { id: 'house-3', facet: 'house', level: 2, type: 'short',
+    prompt: '日本人進家門要在「玄關」脫鞋。玄關的地板為什麼比屋內低一階？',
+    keywords: [['外', '土', '鞋'], ['內', '室內', '屋內', '乾淨'], ['分', '界', '區隔', '高低']],
+    need: 2,
+    answer: '玄關的低處（土間）算「外面」，可以穿鞋；踏上去的那一階才是「屋內」。高低差把內外劃清楚，也擋住外面的泥土和濕氣。' },
+
+  // ---------- 公共空間 ----------
+  { id: 'manner-1', facet: 'manner', level: 1, type: 'choice',
+    prompt: '在日本的電車上，下列哪一件事最容易被認為是「迷惑（めいわく）」？',
+    options: ['在車廂裡講手機', '在車廂裡看書', '在車廂裡睡覺', '在車廂裡站著'],
+    explain: '各鐵道公司都廣播請乘客把手機調成靜音、不要通話。原因和車廂擁擠、聲音在密閉空間特別明顯有關。' },
+  { id: 'manner-2', facet: 'manner', level: 2, type: 'short',
+    prompt: '很多人說「日本人很守規矩」。你覺得這些規矩除了個性，還可能是什麼條件造成的？想不出來就按「我不知道」。',
+    keywords: [['密', '擠', '人多', '都市'], ['制度', '規定', '罰', '自治', '町內會'], ['空間', '小', '共用'], ['教育', '學校', '打掃']],
+    need: 2,
+    answer: '例如：人口密度高、空間共用（電車、集合住宅），一個人的行為馬上影響很多人；垃圾、噪音有地方自治和町內會的具體規定；學校從小讓學生打掃、輪值。規矩也有例外：深夜的居酒屋、祭典、新年參拜都很吵。' },
+];
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '社會與生活程度診斷',
+  facets, questions,
+  storageKey: 'society-diagnostic-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+});
+</script>
+</body>
+</html>
