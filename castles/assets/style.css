@@ -61,3 +61,5 @@
 .profile .hill { position: absolute; bottom: 0; background: var(--map-land); border: 2px solid var(--map-stroke); border-bottom: 0; }
 .profile .keep { position: absolute; width: 14px; height: 16px; background: var(--accent); }
 .profile .town { position: absolute; bottom: 18px; height: 6px; background: var(--good); }
+.plan .st { background: var(--muted); color: var(--surface); }
+.swatch.st { background: var(--muted); }
