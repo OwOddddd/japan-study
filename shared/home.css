@@ -4,6 +4,17 @@
 :root[data-theme="dark"] { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; --R: #d785a8; --A: #c9a27a; --F: #e8b04a; --T: #6cc08a; --M: #f09ab8; --S: #9fb3c2; --C: #6cc4c4; }
 :root[data-skin="pixel"][data-topic] { --H: #ff7a5c; --G: #6fb6ff; --J: #b7a2ff; --R: #f08fbc; --A: #e0b88a; --F: #ffc65a; --T: #7ddc8a; --M: #ff9ec4; --S: #a9c4d6; --C: #7fe0e0; }
 main.home-main { max-width: 960px; }
+/* 最近三期新聞：三欄，手機上變一欄 */
+.home .news3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 6px 0 8px; }
+.home .news3 .ni { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--ink); min-width: 0; }
+.home .news3 .ni:hover { border-color: var(--accent); }
+.home .news3 .nd { font-size: .78rem; color: var(--muted); }
+.home .news3 .nt { line-height: 1.5; }
+.home a.all { font-size: .85rem; }
+@media (max-width: 640px) { .home .news3 { grid-template-columns: 1fr; } }
+.home-route .board .news3 .ni { border-color: #3a3f45; color: #ffb43d; }
+.home-route .board .news3 .nd { color: #c9ced2; }
+.home-pixel .news3 .ni { border: 2px solid var(--line); border-radius: 0; }
 .home canvas { image-rendering: pixelated; display: block; }
 .home section { margin-top: 28px; }
 .home h2 small { font-family: var(--sans); font-weight: 400; color: var(--muted); font-size: .8rem; }

@@ -59,7 +59,7 @@
    ```html
    <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">主題名</a></nav>
    ```
-4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css` 與 `../shared/skin.js`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。課程列在 `<h2>課程</h2>` 下的 `ul.toc`，首頁靠這個讀取；預定的課可以寫成 `<li class="todo">`。
+4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css` 與 `../shared/skin.js`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。目錄頁分三段：`<h2>起點</h2>`（診斷頁，不算課）、`<h2>課程</h2>`（`ul.toc`，首頁靠這段讀取站點；預定的課寫成 `<li class="todo">`）、`<h2>速查表</h2>`。課號與檔名的規則見根目錄 CURRICULUM.md「課號規則」。
 5. 新主題要出現在首頁：在 `shared/home.js` 的 `TOPICS` 加一筆，並在 `index.html` 的 `#home` 靜態清單加一行連結（給不能執行 JS 時看）。
 6. 在主題的 `NOTES.md`「工作筆記」寫入網站規則（可照抄 history/NOTES.md 的那一段，改主題名）。
 7. 主題的 `.claude/launch.json` 用 `python -m http.server <埠號> --directory ..`，讓伺服器根目錄是 `日本學習/`，才讀得到 `shared/`。直接用 `file://` 開啟時 script 不會正常運作。

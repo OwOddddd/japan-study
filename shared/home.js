@@ -41,8 +41,15 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function clean(t) { return t.replace(/^第\s*\d+\s*課\s*[・·]\s*/, '').trim(); }
 
+  // 網站根目錄：從本檔的網址推回去，不受頁面網址有沒有結尾斜線影響
+  var ROOT = ((document.currentScript && document.currentScript.src) || '').replace(/shared\/home\.js.*$/, '');
+  var failed = 0;
+  function get(path) {
+    return fetch(ROOT + path).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+  }
+
   function load(t) {
-    return fetch(t.id + '/index.html').then(function (r) { return r.text(); }).then(function (html) {
+    return get(t.id + '/index.html').then(function (html) {
       var doc = new DOMParser().parseFromString(html, 'text/html');
       var ul = null;
       doc.querySelectorAll('h2').forEach(function (h) {
@@ -56,15 +63,26 @@
       });
       (todo.length ? todo : t.planned).forEach(function (n) { st.push({ n: n }); });
       return Object.assign({}, t, { stations: st });
-    }).catch(function () { return Object.assign({}, t, { stations: t.planned.map(function (n) { return { n: n }; }) }); });
+    }).catch(function () { failed++; return Object.assign({}, t, { stations: t.planned.map(function (n) { return { n: n }; }) }); });
   }
+  // 最近三期新聞
   function loadNews() {
-    return fetch('news/index.html').then(function (r) { return r.text(); }).then(function (html) {
-      var a = new DOMParser().parseFromString(html, 'text/html').querySelector('.toc li a');
-      if (!a) return null;
-      var parts = a.textContent.split('・');
-      return { date: parts[0], title: parts.slice(1).join('・') || parts[0], href: 'news/' + a.getAttribute('href') };
-    }).catch(function () { return null; });
+    return get('news/index.html').then(function (html) {
+      return [].slice.call(new DOMParser().parseFromString(html, 'text/html').querySelectorAll('.toc li a'), 0, 3).map(function (a) {
+        var parts = a.textContent.split('・');
+        return { date: parts[0], title: parts.slice(1).join('・') || parts[0], href: 'news/' + a.getAttribute('href') };
+      });
+    }).catch(function () { failed++; return []; });
+  }
+  // 新聞清單：三欄，最後一格是「更多」
+  function newsList(cls) {
+    var items = news.map(function (n) {
+      return '<a class="ni" href="' + n.href + '"><span class="nd">' + esc(n.date) + '</span><span class="nt">' + esc(n.title) + '</span></a>';
+    }).join('');
+    return '<div class="' + cls + '">' + (items || '<span class="nt">每天三到五則日本新聞</span>') + '</div><a class="all" href="news/index.html">更多日期 →</a>';
+  }
+  function warn() {
+    return failed ? '<p class="note">讀不到各主題的課程清單，下面只列出預定的課。用檔案直接開啟首頁時會這樣，請從網站網址開啟：https://owoddddd.github.io/japan-study/</p>' : '';
   }
   function counts(t) { var o = t.stations.filter(function (s) { return s.href; }).length; return [o, t.stations.length - o]; }
 
@@ -73,8 +91,7 @@
     return '<h1>日本學習</h1><p class="lede">為了去日本旅行時看得懂眼前的東西：歷史、地理、日文，之後還會加上其他主題。</p>' +
       '<h2>主題</h2><ul class="toc">' + data.map(function (t) {
         return '<li><a href="' + t.id + '/index.html">' + t.name + '</a><span class="small">' + t.desc + '</span></li>'; }).join('') + '</ul>' +
-      '<h2>每日</h2><ul class="toc"><li><a href="news/index.html">睡前日本新聞</a><span class="small">' +
-      (news ? esc(news.date + '・' + news.title) : '每天三到五則日本新聞，連到學過的課程') + '</span></li></ul>' +
+      '<h2>睡前日本新聞</h2>' + newsList('news3') +
       '<p class="small">' + NOTE + '</p>';
   };
   R.route = function () {
@@ -95,9 +112,7 @@
       '<p class="lede">為了去日本旅行時看得懂眼前的東西。每個主題是一條路線，每一課是一個車站。</p>' +
       '<section><h2>路線圖 <small>實心站是已經出好的課，空心站是預定的課</small></h2><div class="lines">' + lines + '</div></section>' +
       (FUTURE.length ? '<section><h2>建設中的路線</h2><div class="future">' + FUTURE.map(function (f) { return '<span>' + f[0] + '線</span>'; }).join('') + '</div></section>' : '') +
-      '<section><h2>本日告示</h2><div class="board"><div class="row"><span class="lbl">睡前日本新聞</span><span>' +
-      (news ? esc(news.date) : '') + '</span></div><a href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') +
-      '</a><a class="all" href="news/index.html">所有日期 →</a></div></section><p class="small">' + NOTE + '</p>';
+      '<section><h2>本日告示</h2><div class="board"><span class="lbl">睡前日本新聞</span>' + newsList('news3') + '</div></section><p class="small">' + NOTE + '</p>';
   };
   R.wa = function () {
     var cards = data.map(function (t) {
@@ -110,8 +125,7 @@
     return '<header class="hero seigaiha"><div class="tanzaku"><div><h1>日本學習</h1><p>為了去日本旅行時，看得懂眼前的東西。</p></div><div class="hanko big">學以致用</div></div></header>' +
       '<section><h2>主題</h2><div class="topics">' + cards + '</div></section>' +
       (FUTURE.length ? '<section><h2>之後會開的主題</h2><div class="future">' + FUTURE.map(function (f) { return '<div><span class="hanko">' + f[1] + '</span>' + f[0] + '</div>'; }).join('') + '</div></section>' : '') +
-      '<section><h2>每日</h2><div class="news koushi"><div class="card"><div class="date">睡前日本新聞・' + (news ? esc(news.date) : '') + '</div>' +
-      '<a class="t" href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') + '</a><a class="all" href="news/index.html">所有日期 →</a></div></div></section>' +
+      '<section><h2>睡前日本新聞</h2><div class="news koushi"><div class="card">' + newsList('news3') + '</div></div></section>' +
       '<p class="small">' + NOTE + '</p>';
   };
   R.pixel = function () {
@@ -127,8 +141,7 @@
       '<canvas data-sprite="lantern"></canvas><canvas data-sprite="shinkansen"></canvas></div><div class="ground"></div></header>' +
       '<section class="window"><h2>進行中的任務</h2><div class="quests">' + quests + '</div></section>' +
       (FUTURE.length ? '<section class="window"><h2>尚未開放的地區</h2><div class="locked">' + FUTURE.map(function (f) { return '<div>？？？<small>' + f[0] + '</small></div>'; }).join('') + '</div></section>' : '') +
-      '<section class="window"><h2>今日情報</h2><div class="news"><canvas data-sprite="lantern"></canvas><div><div class="date">睡前日本新聞・' + (news ? esc(news.date) : '') + '</div>' +
-      '<a class="t" href="' + (news ? news.href : 'news/index.html') + '">' + (news ? esc(news.title) : '每天三到五則日本新聞') + '</a><a class="all" href="news/index.html">所有日期 →</a></div></div></section>' +
+      '<section class="window"><h2>今日情報</h2><div class="news"><canvas data-sprite="lantern"></canvas><div>' + newsList('news3') + '</div></div></section>' +
       '<p class="small">' + NOTE + '</p>';
   };
 
@@ -136,7 +149,7 @@
     if (!data) return;
     var skin = document.documentElement.getAttribute('data-skin');
     box.className = 'home home-' + skin;
-    box.innerHTML = (R[skin] || R.plain)();
+    box.innerHTML = warn() + (R[skin] || R.plain)();
     if (window.drawSprites) window.drawSprites(box);
   }
   Promise.all([Promise.all(TOPICS.map(load)), loadNews()]).then(function (res) { data = res[0]; news = res[1]; render(); });
