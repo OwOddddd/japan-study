@@ -22,6 +22,7 @@
     <p>2. 分辨淨土、禪、日蓮三大系統各自要人做什麼。</p>
     <p>3. 走進一座寺院，用文字、本尊、庭園等線索猜出它的宗派。</p>
   </div>
+  <p class="small">頁面上的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
 
   <h2>暖身：第 4 課回想</h2>
   <div class="recall-box exercise">奈良、平安的佛教，服務的對象主要是誰？平安末期的人為什麼覺得「靠修行已經得救不了」？
@@ -43,7 +44,7 @@
   <table class="cmp">
     <tr><th></th><th>淨土宗</th><th>淨土真宗</th></tr>
     <tr><td>開創者</td><td><b>法然</b></td><td><b>親鸞</b>（法然的弟子）</td></tr>
-    <tr><td>做什麼</td><td>專心念「南無阿彌陀佛」（<span lang="ja">なむあみだぶつ</span>），念佛就能往生極樂</td><td>連念佛都不是靠自己的功勞，<b>相信</b>阿彌陀佛的救度那一刻就已經得救</td></tr>
+    <tr><td>做什麼</td><td>專心念「南無阿彌陀佛」（<span lang="ja">なむあみだぶつ</span> <button class="btn ghost say" data-audio="audio/0006/01.wav">▶</button>），念佛就能往生極樂</td><td>連念佛都不是靠自己的功勞，<b>相信</b>阿彌陀佛的救度那一刻就已經得救</td></tr>
     <tr><td>特色</td><td>不需要學問、不需要捐錢蓋寺，念佛誰都做得到</td><td>僧侶可以結婚、吃肉（親鸞自己就娶妻）。「善人都能往生，何況惡人」</td></tr>
     <tr><td>總本山</td><td>京都・知恩院</td><td>京都・西本願寺、東本願寺</td></tr>
   </table>
@@ -51,7 +52,7 @@
   <p class="note">另有一遍開創的<b>時宗</b>，邊跳舞邊念佛（踊念佛），走遍全國發念佛札。今天規模很小。</p>
 
   <h2>3. 禪系：坐禪，自己開悟</h2>
-  <p>和淨土系相反，禪宗認為答案在自己身上：靠<b>坐禪</b>（<span lang="ja">ざぜん</span>）直接體悟，不必依賴經典的文字。</p>
+  <p>和淨土系相反，禪宗認為答案在自己身上：靠<b>坐禪</b>（<span lang="ja">ざぜん</span> <button class="btn ghost say" data-audio="audio/0006/02.wav">▶</button>）直接體悟，不必依賴經典的文字。</p>
   <table class="cmp">
     <tr><th></th><th>臨濟宗</th><th>曹洞宗</th></tr>
     <tr><td>開創者</td><td><b>榮西</b>（從宋朝傳回）</td><td><b>道元</b>（從宋朝傳回）</td></tr>
@@ -70,7 +71,7 @@
   <h2>4. 日蓮宗：只有《法華經》</h2>
   <table class="cmp">
     <tr><td>開創者</td><td><b>日蓮</b>（也在比叡山學過）</td></tr>
-    <tr><td>做什麼</td><td>唱誦《法華經》的經題「南無妙法蓮華經」（<span lang="ja">なむみょうほうれんげきょう</span>），叫「唱題目」</td></tr>
+    <tr><td>做什麼</td><td>唱誦《法華經》的經題「南無妙法蓮華經」（<span lang="ja">なむみょうほうれんげきょう</span> <button class="btn ghost say" data-audio="audio/0006/03.wav">▶</button>），叫「唱題目」</td></tr>
     <tr><td>主張</td><td>只有《法華經》是真正的教法。國家災難不斷，是因為大家信了錯誤的教法（他特別猛烈批評念佛）</td></tr>
     <tr><td>總本山</td><td>山梨・身延山久遠寺</td></tr>
   </table>
@@ -146,6 +147,13 @@
 </main>
 
 <script>
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.style.padding = '2px 10px';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教第 5 課・鎌倉新佛教',
   storageKey: 'rel-l5-v1',
