@@ -248,6 +248,37 @@ svg.jmap .pref[class*=" c"]:hover { stroke: var(--ink); stroke-width: 1.5; }
 .news-ja rt { font-size: .6em; color: var(--muted); }
 .news-ja ul { font-size: .94rem; padding-left: 1.2em; }
 
+/* ---------- 各主題做出來的小元件（2026-11-13 由各主題 assets/style.css 合併） ---------- */
+/* 平面示意格子（建築：寺院配置）。td.b 主建築、td.t 塔、td.w 空白無框 */
+table.plan { width: auto; margin: 10px auto 4px; table-layout: fixed; }
+table.plan td { width: 5.2em; height: 2.4em; text-align: center; padding: 2px; font-size: .85rem; border: 1px dashed var(--line); }
+table.plan td.b { background: var(--accent-soft); border: 1px solid var(--accent); font-weight: 700; }
+table.plan td.t { background: var(--mid-soft); border: 1px solid var(--mid); font-weight: 700; }
+table.plan td.w { border: none; }
+/* 色塊：公司或路線的代表色（鐵道） */
+.jr-dot { display: inline-block; width: .9em; height: .9em; border-radius: 3px; vertical-align: -1px; margin-right: .35em; }
+/* 車站編號標誌示意：外框用路線顏色（鐵道） */
+.st-num { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 2.6em; padding: .15em .3em; border: 3px solid currentColor; border-radius: 8px; font-weight: 700; line-height: 1.05; background: #fff; }
+.st-num small { font-size: .65em; }
+.st-num b { font-size: 1.1em; color: #222; }
+/* 住址拆解：每塊上面原文、下面說明（社會） */
+.addr { display: flex; flex-wrap: wrap; gap: 6px; margin: 1em 0; }
+.addr > span { display: flex; flex-direction: column; align-items: center; padding: .35em .6em; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); line-height: 1.35; }
+.addr > span b { font-size: 1.05rem; }
+.addr > span small { font-size: .72rem; color: var(--muted); }
+.addr > span.lv1 { background: var(--accent-soft); }
+.addr > span.lv2 { background: var(--mid-soft); }
+.addr > span.lv3 { background: var(--good-soft); }
+/* 街區示意方格，外圈是番號（社會） */
+.block-demo { display: grid; grid-template-columns: repeat(5, 2.4em); grid-template-rows: repeat(5, 2.4em); gap: 2px; margin: 1em auto; width: max-content; font-size: .85rem; }
+.block-demo > div { display: flex; align-items: center; justify-content: center; }
+.block-demo .num { border: 1px dashed var(--line); color: var(--muted); }
+.block-demo .num.door { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+.block-demo .in { background: var(--mid-soft); }
+.block-demo .road { background: transparent; color: var(--muted); font-size: .7rem; }
+/* 句子裡的行內「▶ 聽」按鈕（任何主題都可用） */
+.btn.say { padding: .05em .55em; font-size: .75rem; margin: 0 .15em; min-height: 0; line-height: 1.5; vertical-align: .1em; white-space: nowrap; }
+
 /* ---------- 列印與手機 ---------- */
 @media print {
   .sticky, .btn, .override, .exercise, nav.site-nav { display: none; }
