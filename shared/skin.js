@@ -13,7 +13,7 @@
   root.setAttribute('data-skin', skin);
 
   var topic = 'home';
-  ['history', 'geography', 'japanese', 'news', 'religion', 'architecture', 'food', 'railways', 'festivals', 'society'].forEach(function (k) {
+  ['history', 'geography', 'japanese', 'news', 'religion', 'architecture', 'food', 'railways', 'festivals', 'society', 'castles'].forEach(function (k) {
     if (location.pathname.indexOf('/' + k + '/') >= 0) topic = k;
   });
   root.setAttribute('data-topic', topic);
@@ -53,6 +53,10 @@
       '................', '........wwwwwwww', '.....wwwwwwwwwww', '...wwssswwswwsww',
       '..wwwwwwwwwwwwww', '.wwwwwwwwwwwwwww', 'bbbbbbbbbbbbbbbb', 'wwwwwwwwwwwwwwww',
       '..kk....kk...kk.'] },
+    scroll: { pal: { b: '#7a4a2a', w: '#f4ead2', k: '#3a3330', r: '#c8432f' }, rows: [
+      '.bb..........bb.', '.bbwwwwwwwwwwbb.', '.bbwkkkwwkkkwbb.', '.bbwwwwwwwwwwbb.',
+      '.bbwkkwkkkkwwbb.', '.bbwwwwwwwwwwbb.', '.bbwkkkkwkkwwbb.', '.bbwwwwwwwwwwbb.',
+      '.bbwwwwwwwrrwbb.', '.bbwwwwwwwrrwbb.', '.bb..........bb.'] },
     pagoda: { pal: { k: '#2d2a33', r: '#c8432f', w: '#f4f1ea', g: '#8a8f98' }, rows: [
       '.......kk.......', '.......kk.......', '....kkkkkkkk....', '......rwwr......',
       '...kkkkkkkkkk...', '......rwwr......', '..kkkkkkkkkkkk..', '.....rrwwrr.....',
@@ -81,8 +85,8 @@
     });
   };
 
-  var ICON = { history: 'castle', geography: 'fuji', japanese: 'bubble', news: 'lantern',
-    religion: 'torii', architecture: 'pagoda', food: 'onigiri', railways: 'shinkansen', festivals: 'lantern', society: 'vending' };
+  var ICON = { history: 'scroll', geography: 'fuji', japanese: 'bubble', news: 'lantern',
+    religion: 'torii', architecture: 'pagoda', food: 'onigiri', railways: 'shinkansen', festivals: 'lantern', society: 'vending', castles: 'castle' };
 
   function ui() {
     var label = document.createElement('label');

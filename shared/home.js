@@ -3,7 +3,7 @@
    預定的課：目錄頁有 li.todo 就用它，沒有就用下面的 PLANNED。PLANNED 和 FUTURE 由課程總管對照 CURRICULUM.md 與各主題 NOTES.md 維護。 */
 (function () {
   var TOPICS = [
-    { id: 'history', code: 'H', name: '日本歷史', icon: 'castle', stamp: '史', pat: 'ichimatsu',
+    { id: 'history', code: 'H', name: '日本歷史', icon: 'scroll', stamp: '史', pat: 'ichimatsu',
       desc: '因果主線：每個時代為什麼開始、為什麼結束',
       planned: ['第一個幕府', '室町與戰國', '統一與江戶', '黑船與明治', '近代到戰後'] },
     { id: 'geography', code: 'G', name: '日本地理', icon: 'fuji', stamp: '地', pat: 'seigaiha',
@@ -28,7 +28,10 @@
       planned: ['新曆舊曆與五節句', '冬到春', '春到夏', '夏', '祭典的結構', '秋到冬', '季節感'] },
     { id: 'society', code: 'S', name: '社會與生活', icon: 'vending', stamp: '社', pat: 'yagasuri',
       desc: '住址、垃圾、便利商店、學校與職場，生活規則的成因',
-      planned: ['生活規則的根源', '住址', '垃圾', '便利商店與自動販賣機', '錢湯與溫泉', '學校', '職場', '住宅'] }
+      planned: ['生活規則的根源', '住址', '垃圾', '便利商店與自動販賣機', '錢湯與溫泉', '學校', '職場', '住宅'] },
+    { id: 'castles', code: 'C', name: '城與城下町', icon: 'castle', stamp: '城', pat: 'ichimatsu',
+      desc: '城為什麼蓋在那裡、怎麼防守，城下町的街道與今天的城市',
+      planned: ['怎麼看任何一座城', '繩張：曲輪、虎口、堀', '石垣的砌法與年代', '天守：現存、復元、模擬', '城的一生：築城到廢城', '城下町的設計', '今天的城下町怎麼看'] }
   ];
   var FUTURE = [];
   var NOTE = '地圖需要網路連線。測驗的作答紀錄只存在你目前使用的瀏覽器裡。';

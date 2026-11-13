@@ -16,6 +16,7 @@ html[data-topic="food"] { --topic: #b5730c; --stamp: "食"; }
 html[data-topic="railways"] { --topic: #2e8b57; --stamp: "鐵"; }
 html[data-topic="festivals"] { --topic: #c94a7e; --stamp: "祭"; }
 html[data-topic="society"] { --topic: #4f6575; --stamp: "社"; }
+html[data-topic="castles"] { --topic: #1f7a7a; --stamp: "城"; }
 @media (prefers-color-scheme: dark) {
   html[data-topic]:not([data-theme="light"]) { --topic: #6aa6dc; }
   html[data-topic="history"]:not([data-theme="light"]) { --topic: #e0705f; }
@@ -27,6 +28,7 @@ html[data-topic="society"] { --topic: #4f6575; --stamp: "社"; }
   html[data-topic="railways"]:not([data-theme="light"]) { --topic: #6cc08a; }
   html[data-topic="festivals"]:not([data-theme="light"]) { --topic: #f09ab8; }
   html[data-topic="society"]:not([data-theme="light"]) { --topic: #9fb3c2; }
+  html[data-topic="castles"]:not([data-theme="light"]) { --topic: #6cc4c4; }
 }
 html[data-theme="dark"][data-topic] { --topic: #6aa6dc; }
 html[data-theme="dark"][data-topic="history"] { --topic: #e0705f; }
@@ -38,6 +40,7 @@ html[data-theme="dark"][data-topic="food"] { --topic: #e8b04a; }
 html[data-theme="dark"][data-topic="railways"] { --topic: #6cc08a; }
 html[data-theme="dark"][data-topic="festivals"] { --topic: #f09ab8; }
 html[data-theme="dark"][data-topic="society"] { --topic: #9fb3c2; }
+html[data-theme="dark"][data-topic="castles"] { --topic: #6cc4c4; }
 
 /* ---------- 外觀選單 ---------- */
 .skin-pick { font-size: .8rem; color: inherit; display: inline-flex; align-items: center; gap: .4em; margin-left: auto; }
@@ -108,6 +111,7 @@ html[data-skin="wa"] .toc li { border-radius: 2px; border-left: 6px solid var(--
 :root[data-skin="pixel"][data-topic="railways"] { --px-topic: #7ddc8a; }
 :root[data-skin="pixel"][data-topic="festivals"] { --px-topic: #ff9ec4; }
 :root[data-skin="pixel"][data-topic="society"] { --px-topic: #a9c4d6; }
+:root[data-skin="pixel"][data-topic="castles"] { --px-topic: #7fe0e0; }
 html[data-skin="pixel"] h1, html[data-skin="pixel"] h2, html[data-skin="pixel"] h3,
 html[data-skin="pixel"] nav.site-nav, html[data-skin="pixel"] .tag, html[data-skin="pixel"] .toc li a { font-family: var(--dot); font-weight: 400; }
 html[data-skin="pixel"] h1 { text-shadow: 3px 3px 0 #000; letter-spacing: .04em; }
