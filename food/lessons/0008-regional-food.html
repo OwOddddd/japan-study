@@ -85,19 +85,19 @@
 
   <h2>菜單上的日文</h2>
   <table>
-    <tr><th>寫法</th><th>讀音</th><th>意思</th></tr>
-    <tr><td lang="ja">味噌ラーメン</td><td>みそラーメン miso rāmen</td><td>味噌拉麵</td></tr>
-    <tr><td lang="ja">豚骨</td><td>とんこつ tonkotsu</td><td>豬骨（湯頭）</td></tr>
-    <tr><td lang="ja">替え玉</td><td>かえだま kaedama</td><td>加麵（一球）</td></tr>
-    <tr><td lang="ja">麺の硬さ：バリカタ・カタ・ふつう</td><td>barikata / kata / futsū</td><td>麵的軟硬：超硬、硬、普通（博多拉麵店）</td></tr>
-    <tr><td lang="ja">ジンギスカン</td><td>jingisukan</td><td>北海道烤羊肉</td></tr>
-    <tr><td lang="ja">泡盛</td><td>あわもり awamori</td><td>泡盛（沖繩蒸餾酒）</td></tr>
-    <tr><td lang="ja">沖縄そば</td><td>おきなわそば okinawa soba</td><td>沖繩麵（小麥麵，不是蕎麥）</td></tr>
-    <tr><td lang="ja">ゴーヤーチャンプルー</td><td>gōyā chanpurū</td><td>苦瓜炒豆腐</td></tr>
-    <tr><td lang="ja">いぶりがっこ</td><td>iburigakko</td><td>秋田煙燻醃蘿蔔</td></tr>
-    <tr><td lang="ja">讃岐うどん</td><td>さぬきうどん sanuki udon</td><td>讃岐（香川）烏龍麵</td></tr>
+    <tr><th>寫法</th><th>讀音</th><th>意思</th><th></th></tr>
+    <tr><td lang="ja">味噌ラーメン</td><td>みそラーメン miso rāmen</td><td>味噌拉麵</td><td><button class="btn ghost say" data-audio="audio/0008/01.wav">▶</button></td></tr>
+    <tr><td lang="ja">豚骨</td><td>とんこつ tonkotsu</td><td>豬骨（湯頭）</td><td><button class="btn ghost say" data-audio="audio/0008/02.wav">▶</button></td></tr>
+    <tr><td lang="ja">替え玉</td><td>かえだま kaedama</td><td>加麵（一球）</td><td><button class="btn ghost say" data-audio="audio/0008/03.wav">▶</button></td></tr>
+    <tr><td lang="ja">麺の硬さ：バリカタ・カタ・ふつう</td><td>barikata / kata / futsū</td><td>麵的軟硬：超硬、硬、普通（博多拉麵店）</td><td><button class="btn ghost say" data-audio="audio/0008/04.wav">▶</button></td></tr>
+    <tr><td lang="ja">ジンギスカン</td><td>jingisukan</td><td>北海道烤羊肉</td><td><button class="btn ghost say" data-audio="audio/0008/05.wav">▶</button></td></tr>
+    <tr><td lang="ja">泡盛</td><td>あわもり awamori</td><td>泡盛（沖繩蒸餾酒）</td><td><button class="btn ghost say" data-audio="audio/0008/06.wav">▶</button></td></tr>
+    <tr><td lang="ja">沖縄そば</td><td>おきなわそば okinawa soba</td><td>沖繩麵（小麥麵，不是蕎麥）</td><td><button class="btn ghost say" data-audio="audio/0008/07.wav">▶</button></td></tr>
+    <tr><td lang="ja">ゴーヤーチャンプルー</td><td>gōyā chanpurū</td><td>苦瓜炒豆腐</td><td><button class="btn ghost say" data-audio="audio/0008/08.wav">▶</button></td></tr>
+    <tr><td lang="ja">いぶりがっこ</td><td>iburigakko</td><td>秋田煙燻醃蘿蔔</td><td><button class="btn ghost say" data-audio="audio/0008/09.wav">▶</button></td></tr>
+    <tr><td lang="ja">讃岐うどん</td><td>さぬきうどん sanuki udon</td><td>讃岐（香川）烏龍麵</td><td><button class="btn ghost say" data-audio="audio/0008/10.wav">▶</button></td></tr>
   </table>
-  <p class="small">本課的發音音檔待補（製作時 VOICEVOX 沒有開啟）。</p>
+  <p class="small">語音：VOICEVOX:青山龍星</p>
 
   <h2>到現場看什麼</h2>
   <ul>
@@ -124,6 +124,13 @@
 </main>
 
 <script>
+// ---------- 發音（VOICEVOX:青山龍星） ----------
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化第 7 課 小測驗：地方料理的地理成因',
   facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],

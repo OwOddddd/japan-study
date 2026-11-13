@@ -85,20 +85,20 @@
 
   <h2>菜單上的日文</h2>
   <table>
-    <tr><th>寫法</th><th>讀音</th><th>意思</th></tr>
-    <tr><td lang="ja">洋食</td><td>ようしょく yōshoku</td><td>日式西餐</td></tr>
-    <tr><td lang="ja">牛鍋</td><td>ぎゅうなべ gyūnabe</td><td>牛鍋（壽喜燒的前身）</td></tr>
-    <tr><td lang="ja">すき焼き</td><td>すきやき sukiyaki</td><td>壽喜燒</td></tr>
-    <tr><td lang="ja">カレーライス</td><td>karē raisu</td><td>咖哩飯</td></tr>
-    <tr><td lang="ja">とんかつ</td><td>tonkatsu</td><td>炸豬排（とん＝豚）</td></tr>
-    <tr><td lang="ja">ロース・ヒレ</td><td>rōsu / hire</td><td>里肌（帶油）/ 腰內（瘦）</td></tr>
-    <tr><td lang="ja">オムライス</td><td>omuraisu</td><td>蛋包飯</td></tr>
-    <tr><td lang="ja">ハヤシライス</td><td>hayashi raisu</td><td>牛肉燴飯</td></tr>
-    <tr><td lang="ja">中華そば</td><td>ちゅうかそば chūka soba</td><td>（醬油）拉麵的老派叫法</td></tr>
-    <tr><td lang="ja">餃子</td><td>ぎょうざ gyōza</td><td>煎餃</td></tr>
-    <tr><td lang="ja">大盛り</td><td>おおもり ōmori</td><td>大份</td></tr>
+    <tr><th>寫法</th><th>讀音</th><th>意思</th><th></th></tr>
+    <tr><td lang="ja">洋食</td><td>ようしょく yōshoku</td><td>日式西餐</td><td><button class="btn ghost say" data-audio="audio/0007/01.wav">▶</button></td></tr>
+    <tr><td lang="ja">牛鍋</td><td>ぎゅうなべ gyūnabe</td><td>牛鍋（壽喜燒的前身）</td><td><button class="btn ghost say" data-audio="audio/0007/02.wav">▶</button></td></tr>
+    <tr><td lang="ja">すき焼き</td><td>すきやき sukiyaki</td><td>壽喜燒</td><td><button class="btn ghost say" data-audio="audio/0007/03.wav">▶</button></td></tr>
+    <tr><td lang="ja">カレーライス</td><td>karē raisu</td><td>咖哩飯</td><td><button class="btn ghost say" data-audio="audio/0007/04.wav">▶</button></td></tr>
+    <tr><td lang="ja">とんかつ</td><td>tonkatsu</td><td>炸豬排（とん＝豚）</td><td><button class="btn ghost say" data-audio="audio/0007/05.wav">▶</button></td></tr>
+    <tr><td lang="ja">ロース・ヒレ</td><td>rōsu / hire</td><td>里肌（帶油）/ 腰內（瘦）</td><td><button class="btn ghost say" data-audio="audio/0007/06.wav">▶</button></td></tr>
+    <tr><td lang="ja">オムライス</td><td>omuraisu</td><td>蛋包飯</td><td><button class="btn ghost say" data-audio="audio/0007/07.wav">▶</button></td></tr>
+    <tr><td lang="ja">ハヤシライス</td><td>hayashi raisu</td><td>牛肉燴飯</td><td><button class="btn ghost say" data-audio="audio/0007/08.wav">▶</button></td></tr>
+    <tr><td lang="ja">中華そば</td><td>ちゅうかそば chūka soba</td><td>（醬油）拉麵的老派叫法</td><td><button class="btn ghost say" data-audio="audio/0007/09.wav">▶</button></td></tr>
+    <tr><td lang="ja">餃子</td><td>ぎょうざ gyōza</td><td>煎餃</td><td><button class="btn ghost say" data-audio="audio/0007/10.wav">▶</button></td></tr>
+    <tr><td lang="ja">大盛り</td><td>おおもり ōmori</td><td>大份</td><td><button class="btn ghost say" data-audio="audio/0007/11.wav">▶</button></td></tr>
   </table>
-  <p class="small">本課的發音音檔待補（製作時 VOICEVOX 沒有開啟）。</p>
+  <p class="small">語音：VOICEVOX:青山龍星</p>
 
   <h2>到現場看什麼</h2>
   <ul>
@@ -124,6 +124,13 @@
 </main>
 
 <script>
+// ---------- 發音（VOICEVOX:青山龍星） ----------
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化第 6 課 小測驗：洋食與拉麵',
   facets: [{ id: 'l6', name: '本課' }, { id: 'review', name: '複習' }],

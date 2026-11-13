@@ -72,21 +72,21 @@
 
   <h2>菜單上的日文</h2>
   <table>
-    <tr><th>寫法</th><th>讀音</th><th>意思</th></tr>
-    <tr><td lang="ja">寿司・鮨</td><td>すし sushi</td><td>壽司</td></tr>
-    <tr><td lang="ja">なれずし</td><td>narezushi</td><td>熟壽司（發酵型）</td></tr>
-    <tr><td lang="ja">握りずし</td><td>にぎりずし nigirizushi</td><td>握壽司</td></tr>
-    <tr><td lang="ja">江戸前</td><td>えどまえ edomae</td><td>江戶前（東京灣的、江戶風格的）</td></tr>
-    <tr><td lang="ja">シャリ</td><td>shari</td><td>醋飯（壽司店的說法）</td></tr>
-    <tr><td lang="ja">ネタ</td><td>neta</td><td>壽司上的料</td></tr>
-    <tr><td lang="ja">漬け</td><td>づけ zuke</td><td>醬油醃的魚（多是鮪魚）</td></tr>
-    <tr><td lang="ja">わさび</td><td>wasabi</td><td>山葵</td></tr>
-    <tr><td lang="ja">ガリ</td><td>gari</td><td>醋漬嫩薑片</td></tr>
-    <tr><td lang="ja">さび抜き</td><td>さびぬき sabinuki</td><td>不加山葵</td></tr>
-    <tr><td lang="ja">おまかせ</td><td>omakase</td><td>交給師傅決定</td></tr>
-    <tr><td lang="ja">回転寿司</td><td>かいてんずし kaitenzushi</td><td>迴轉壽司</td></tr>
+    <tr><th>寫法</th><th>讀音</th><th>意思</th><th></th></tr>
+    <tr><td lang="ja">寿司・鮨</td><td>すし sushi</td><td>壽司</td><td><button class="btn ghost say" data-audio="audio/0005/01.wav">▶</button></td></tr>
+    <tr><td lang="ja">なれずし</td><td>narezushi</td><td>熟壽司（發酵型）</td><td><button class="btn ghost say" data-audio="audio/0005/02.wav">▶</button></td></tr>
+    <tr><td lang="ja">握りずし</td><td>にぎりずし nigirizushi</td><td>握壽司</td><td><button class="btn ghost say" data-audio="audio/0005/03.wav">▶</button></td></tr>
+    <tr><td lang="ja">江戸前</td><td>えどまえ edomae</td><td>江戶前（東京灣的、江戶風格的）</td><td><button class="btn ghost say" data-audio="audio/0005/04.wav">▶</button></td></tr>
+    <tr><td lang="ja">シャリ</td><td>shari</td><td>醋飯（壽司店的說法）</td><td><button class="btn ghost say" data-audio="audio/0005/05.wav">▶</button></td></tr>
+    <tr><td lang="ja">ネタ</td><td>neta</td><td>壽司上的料</td><td><button class="btn ghost say" data-audio="audio/0005/06.wav">▶</button></td></tr>
+    <tr><td lang="ja">漬け</td><td>づけ zuke</td><td>醬油醃的魚（多是鮪魚）</td><td><button class="btn ghost say" data-audio="audio/0005/07.wav">▶</button></td></tr>
+    <tr><td lang="ja">わさび</td><td>wasabi</td><td>山葵</td><td><button class="btn ghost say" data-audio="audio/0005/08.wav">▶</button></td></tr>
+    <tr><td lang="ja">ガリ</td><td>gari</td><td>醋漬嫩薑片</td><td><button class="btn ghost say" data-audio="audio/0005/09.wav">▶</button></td></tr>
+    <tr><td lang="ja">さび抜き</td><td>さびぬき sabinuki</td><td>不加山葵</td><td><button class="btn ghost say" data-audio="audio/0005/10.wav">▶</button></td></tr>
+    <tr><td lang="ja">おまかせ</td><td>omakase</td><td>交給師傅決定</td><td><button class="btn ghost say" data-audio="audio/0005/11.wav">▶</button></td></tr>
+    <tr><td lang="ja">回転寿司</td><td>かいてんずし kaitenzushi</td><td>迴轉壽司</td><td><button class="btn ghost say" data-audio="audio/0005/12.wav">▶</button></td></tr>
   </table>
-  <p class="small">本課的發音音檔待補（製作時 VOICEVOX 沒有開啟）。</p>
+  <p class="small">語音：VOICEVOX:青山龍星</p>
 
   <h2>到現場看什麼</h2>
   <ul>
@@ -112,6 +112,13 @@
 </main>
 
 <script>
+// ---------- 發音（VOICEVOX:青山龍星） ----------
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化第 4 課 小測驗：壽司',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],

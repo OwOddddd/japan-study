@@ -83,19 +83,19 @@
 
   <h2>菜單上的日文</h2>
   <table>
-    <tr><th>寫法</th><th>讀音</th><th>意思</th></tr>
-    <tr><td lang="ja">屋台</td><td>やたい yatai</td><td>路邊攤</td></tr>
-    <tr><td lang="ja">長屋</td><td>ながや nagaya</td><td>江戶的排屋</td></tr>
-    <tr><td lang="ja">もりそば・ざるそば</td><td>morisoba / zarusoba</td><td>冷蕎麥沾麵（ざる多半加海苔）</td></tr>
-    <tr><td lang="ja">かけそば</td><td>kakesoba</td><td>熱湯蕎麥麵</td></tr>
-    <tr><td lang="ja">天ぷら</td><td>てんぷら tenpura</td><td>天婦羅</td></tr>
-    <tr><td lang="ja">天丼</td><td>てんどん tendon</td><td>天婦羅蓋飯</td></tr>
-    <tr><td lang="ja">蒲焼</td><td>かばやき kabayaki</td><td>刷醬汁烤的鰻魚</td></tr>
-    <tr><td lang="ja">うな重・うな丼</td><td>うなじゅう / うなどん</td><td>鰻魚飯（方盒裝 / 碗裝）</td></tr>
-    <tr><td lang="ja">土用の丑の日</td><td>どようのうしのひ</td><td>夏天吃鰻魚的日子（7 月下旬前後）</td></tr>
-    <tr><td lang="ja">江戸っ子</td><td>えどっこ edokko</td><td>道地的江戶（東京）人</td></tr>
+    <tr><th>寫法</th><th>讀音</th><th>意思</th><th></th></tr>
+    <tr><td lang="ja">屋台</td><td>やたい yatai</td><td>路邊攤</td><td><button class="btn ghost say" data-audio="audio/0006/01.wav">▶</button></td></tr>
+    <tr><td lang="ja">長屋</td><td>ながや nagaya</td><td>江戶的排屋</td><td><button class="btn ghost say" data-audio="audio/0006/02.wav">▶</button></td></tr>
+    <tr><td lang="ja">もりそば・ざるそば</td><td>morisoba / zarusoba</td><td>冷蕎麥沾麵（ざる多半加海苔）</td><td><button class="btn ghost say" data-audio="audio/0006/03.wav">▶</button></td></tr>
+    <tr><td lang="ja">かけそば</td><td>kakesoba</td><td>熱湯蕎麥麵</td><td><button class="btn ghost say" data-audio="audio/0006/04.wav">▶</button></td></tr>
+    <tr><td lang="ja">天ぷら</td><td>てんぷら tenpura</td><td>天婦羅</td><td><button class="btn ghost say" data-audio="audio/0006/05.wav">▶</button></td></tr>
+    <tr><td lang="ja">天丼</td><td>てんどん tendon</td><td>天婦羅蓋飯</td><td><button class="btn ghost say" data-audio="audio/0006/06.wav">▶</button></td></tr>
+    <tr><td lang="ja">蒲焼</td><td>かばやき kabayaki</td><td>刷醬汁烤的鰻魚</td><td><button class="btn ghost say" data-audio="audio/0006/07.wav">▶</button></td></tr>
+    <tr><td lang="ja">うな重・うな丼</td><td>うなじゅう / うなどん</td><td>鰻魚飯（方盒裝 / 碗裝）</td><td><button class="btn ghost say" data-audio="audio/0006/08.wav">▶</button></td></tr>
+    <tr><td lang="ja">土用の丑の日</td><td>どようのうしのひ</td><td>夏天吃鰻魚的日子（7 月下旬前後）</td><td><button class="btn ghost say" data-audio="audio/0006/09.wav">▶</button></td></tr>
+    <tr><td lang="ja">江戸っ子</td><td>えどっこ edokko</td><td>道地的江戶（東京）人</td><td><button class="btn ghost say" data-audio="audio/0006/10.wav">▶</button></td></tr>
   </table>
-  <p class="small">本課的發音音檔待補（製作時 VOICEVOX 沒有開啟）。</p>
+  <p class="small">語音：VOICEVOX:青山龍星</p>
 
   <h2>到現場看什麼</h2>
   <ul>
@@ -121,6 +121,13 @@
 </main>
 
 <script>
+// ---------- 發音（VOICEVOX:青山龍星） ----------
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化第 5 課 小測驗：江戶的外食',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
