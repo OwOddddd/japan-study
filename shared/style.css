@@ -247,6 +247,8 @@ svg.jmap .pref[class*=" c"]:hover { stroke: var(--ink); stroke-width: 1.5; }
 .news-ja .line { font-size: 1.2rem; line-height: 2.3; margin: .4em 0; }
 .news-ja rt { font-size: .6em; color: var(--muted); }
 .news-ja ul { font-size: .94rem; padding-left: 1.2em; }
+.news-ja audio { display: block; width: 100%; max-width: 360px; margin: .2em 0 .6em; }
+.news-ja h3 { font-size: 1rem; margin: 1.1em 0 .3em; }
 
 /* ---------- 各主題做出來的小元件（2026-11-13 由各主題 assets/style.css 合併） ---------- */
 /* 平面示意格子（建築：寺院配置）。td.b 主建築、td.t 塔、td.w 空白無框 */
