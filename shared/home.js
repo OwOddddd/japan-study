@@ -1,6 +1,6 @@
 /* 網站首頁：依外觀畫出不同版型。
    已出的課從各主題 index.html「課程」區自動讀取（各主題對話照規則把新課加進目錄頁，首頁就會跟著更新）。
-   預定的課：目錄頁有 li.todo 就用它，沒有就用下面的 PLANNED。PLANNED 和 FUTURE 由課程總管對照 CURRICULUM.md 與各主題 NOTES.md 維護。 */
+   預定的課：目錄頁有 li.todo 就用它，沒有就用下面的 planned。主題的課全部做完時要把 planned 清成 []。PLANNED 和 FUTURE 由課程總管對照 CURRICULUM.md 與各主題 NOTES.md 維護。 */
 (function () {
   var TOPICS = [
     { id: 'history', code: 'H', name: '日本歷史', icon: 'scroll', stamp: '史', pat: 'ichimatsu',
@@ -31,7 +31,7 @@
       planned: [] },
     { id: 'castles', code: 'C', name: '城與城下町', icon: 'castle', stamp: '城', pat: 'ichimatsu',
       desc: '城為什麼蓋在那裡、怎麼防守，城下町的街道與今天的城市',
-      planned: ['怎麼看任何一座城', '繩張：曲輪、虎口、堀', '石垣的砌法與年代', '天守：現存、復元、模擬', '城的一生：築城到廢城', '城下町的設計', '今天的城下町怎麼看'] }
+      planned: [] }
   ];
   var FUTURE = [];
   var NOTE = '地圖需要網路連線。測驗的作答紀錄只存在你目前使用的瀏覽器裡。';
@@ -61,6 +61,7 @@
         if (a) st.push({ n: clean(a.textContent), href: t.id + '/' + a.getAttribute('href') });
         else if (li.classList.contains('todo')) todo.push(clean(li.firstChild ? li.firstChild.textContent : li.textContent));
       });
+      // 目錄頁沒有 li.todo 時才用 planned。主題的課全部做完時，planned 必須清成 []，否則會重複出現空心站（11/15 城主題出過一次）
       (todo.length ? todo : t.planned).forEach(function (n) { st.push({ n: n }); });
       return Object.assign({}, t, { stations: st });
     }).catch(function () { failed++; return Object.assign({}, t, { stations: t.planned.map(function (n) { return { n: n }; }) }); });

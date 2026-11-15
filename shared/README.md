@@ -87,4 +87,4 @@
 
 **測驗引擎**（整份小測驗、診斷考卷）：`Quiz.mount(root, { title, storageKey, facets, questions, resultsEl, progressEl, submitBtn })`，用法見 `quiz.js` 開頭註解與日本地理的課程。配套 class：`.sticky`（頂部進度列）、`.results`、`.btn`、`.btn.ghost`。
 
-**目錄頁**：`ul.toc` > `li`（`a` + `.small` 說明），未完成的課程用 `li.todo`。
+**目錄頁**：`ul.toc` > `li`（`a` + `.small` 說明），未完成的課程用 `li.todo`。首頁的站點從 `<h2>課程</h2>` 下的清單讀：已出的課是連結，預定的課是 `li.todo`。目錄頁沒有 `li.todo` 時，首頁改用 `shared/home.js` 的 `planned` 顯示預定站，所以**主題的最後一課做完、目錄頁不再有 `li.todo` 時，總管要同一次提交把該主題的 `planned` 清成 `[]`**，否則舊課名會在已開通的站後面再出現一排空心站（11/13 六個主題、11/15 城都出過）。
