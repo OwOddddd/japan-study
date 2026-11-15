@@ -112,6 +112,32 @@
       main.insertBefore(strip, main.firstChild);
       window.drawSprites(strip);
     }
+    arrive(main);
+  }
+
+  // 每課最下方的「到站確認」。選項記進這台裝置的瀏覽器（jp-done：1 學完了、0 還想多逛逛），首頁的發車看板和路線圖依此顯示進度
+  function arrive(main) {
+    var m = location.pathname.match(/\/([a-z]+)\/lessons\/([^\/]+\.html)$/);
+    if (!main || !m || m[1] === 'news') return;
+    var key = m[1] + '/lessons/' + m[2], done = {};
+    try { done = JSON.parse(localStorage.getItem('jp-done') || '{}'); } catch (e) {}
+    var box = document.createElement('section');
+    box.className = 'arrive';
+    box.innerHTML = '<p class="arrive-q">到站了嗎？</p><div class="arrive-btns">' +
+      '<button type="button" data-v="1">我學完了</button><button type="button" data-v="0">我還想多逛逛</button></div>' +
+      '<p class="arrive-note">進度只存在這台裝置的瀏覽器裡。</p>';
+    function show() {
+      box.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(done[key] === +b.getAttribute('data-v'))); });
+    }
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      done[key] = +b.getAttribute('data-v');
+      try { localStorage.setItem('jp-done', JSON.stringify(done)); } catch (e2) {}
+      show();
+    });
+    show();
+    var nav = main.querySelector('nav.lesson-nav');
+    if (nav) nav.parentNode.insertBefore(box, nav); else main.appendChild(box);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ui);
   else ui();

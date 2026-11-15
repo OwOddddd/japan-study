@@ -3,39 +3,42 @@
    預定的課：目錄頁有 li.todo 就用它，沒有就用下面的 planned。主題的課全部做完時要把 planned 清成 []。PLANNED 和 FUTURE 由課程總管對照 CURRICULUM.md 與各主題 NOTES.md 維護。 */
 (function () {
   var TOPICS = [
-    { id: 'history', code: 'H', name: '日本歷史', icon: 'scroll', stamp: '史', pat: 'ichimatsu',
+    { id: 'history', line: '歷史', code: 'H', name: '日本歷史', icon: 'scroll', stamp: '史', pat: 'ichimatsu',
       desc: '因果主線：每個時代為什麼開始、為什麼結束',
       planned: ['第一個幕府', '室町與戰國', '統一與江戶', '黑船與明治', '近代到戰後'] },
-    { id: 'geography', code: 'G', name: '日本地理', icon: 'fuji', stamp: '地', pat: 'seigaiha',
+    { id: 'geography', line: '地理', code: 'G', name: '日本地理', icon: 'fuji', stamp: '地', pat: 'seigaiha',
       desc: '山、海、氣候、人口與交通為什麼長這樣', planned: [] },
-    { id: 'japanese', code: 'J', name: '日文', icon: 'bubble', stamp: '語', pat: 'yagasuri',
+    { id: 'japanese', line: '日文', code: 'J', name: '日文', icon: 'bubble', stamp: '語', pat: 'yagasuri',
       desc: '以文法為主幹，看懂日常的動畫、日劇和書籍',
       planned: ['動詞的兩種臉', '〜ない', '〜た 與 〜て', '〜てる・〜ちゃう', '助詞'] },
-    { id: 'religion', code: 'R', name: '宗教與信仰', icon: 'torii', stamp: '宗', pat: 'seigaiha',
+    { id: 'religion', line: '宗教', code: 'R', name: '宗教與信仰', icon: 'torii', stamp: '宗', pat: 'seigaiha',
       desc: '神社和寺院怎麼分、佛像怎麼看、參拜的規矩從哪來',
       planned: [] },
-    { id: 'architecture', code: 'A', name: '建築', icon: 'pagoda', stamp: '建', pat: 'ichimatsu',
+    { id: 'architecture', line: '建築', code: 'A', name: '建築', icon: 'pagoda', stamp: '建', pat: 'ichimatsu',
       desc: '寺院、神社、城和老街，樣式與構造為什麼長這樣',
       planned: [] },
-    { id: 'food', code: 'F', name: '飲食文化', icon: 'onigiri', stamp: '食', pat: 'yagasuri',
+    { id: 'food', line: '飲食', code: 'F', name: '飲食文化', icon: 'onigiri', stamp: '食', pat: 'yagasuri',
       desc: '和食的結構、地方料理的成因、外食怎麼點',
       planned: [] },
-    { id: 'railways', code: 'T', name: '鐵道與交通', icon: 'shinkansen', stamp: '鐵', pat: 'ichimatsu',
+    { id: 'railways', line: '鐵道', code: 'T', name: '鐵道與交通', icon: 'shinkansen', stamp: '鐵', pat: 'ichimatsu',
       desc: 'JR 與私鐵的由來、路網、車站與票價的邏輯',
       planned: [] },
-    { id: 'festivals', code: 'M', name: '年中行事與祭典', icon: 'lantern', stamp: '祭', pat: 'seigaiha',
+    { id: 'festivals', line: '祭典', code: 'M', name: '年中行事與祭典', icon: 'lantern', stamp: '祭', pat: 'seigaiha',
       desc: '節令和祭典在做什麼、從哪裡來，季節感怎麼表現',
       planned: [] },
-    { id: 'society', code: 'S', name: '社會與生活', icon: 'vending', stamp: '社', pat: 'yagasuri',
+    { id: 'society', line: '社會', code: 'S', name: '社會與生活', icon: 'vending', stamp: '社', pat: 'yagasuri',
       desc: '住址、垃圾、便利商店、學校與職場，生活規則的成因',
       planned: [] },
-    { id: 'castles', code: 'C', name: '城與城下町', icon: 'castle', stamp: '城', pat: 'ichimatsu',
+    { id: 'castles', line: '城', code: 'C', name: '城與城下町', icon: 'castle', stamp: '城', pat: 'ichimatsu',
       desc: '城為什麼蓋在那裡、怎麼防守，城下町的街道與今天的城市',
       planned: [] }
   ];
   var FUTURE = [];
   var NOTE = '地圖需要網路連線。測驗的作答紀錄只存在你目前使用的瀏覽器裡。';
   var data = null, news = null;
+  // 學習進度：每課最下方「到站了嗎？」的選項（skin.js 寫入，1＝學完了）
+  var DONE = {};
+  try { DONE = JSON.parse(localStorage.getItem('jp-done') || '{}'); } catch (e) {}
   var box = document.getElementById('home');
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -63,6 +66,7 @@
       });
       // 目錄頁沒有 li.todo 時才用 planned。主題的課全部做完時，planned 必須清成 []，否則會重複出現空心站（11/15 城主題出過一次）
       (todo.length ? todo : t.planned).forEach(function (n) { st.push({ n: n }); });
+      st.forEach(function (s) { if (s.href && DONE[s.href] === 1) s.done = true; });
       return Object.assign({}, t, { stations: st });
     }).catch(function () { failed++; return Object.assign({}, t, { stations: t.planned.map(function (n) { return { n: n }; }) }); });
   }
@@ -95,25 +99,37 @@
       '<h2>睡前日本新聞</h2>' + newsList('news3') +
       '<p class="small">' + NOTE + '</p>';
   };
+  // 路線圖：車站大廳的發車看板。一行一條線，顯示學到哪一站；跳過沒學的站算「通過」，這條車就是快速。點一行展開全部站點
   R.route = function () {
-    var lines = data.map(function (t) {
-      var c = counts(t);
-      var stops = t.stations.map(function (s, i) {
-        var code = t.code + String(i + 1).padStart(2, '0');
-        var nm = s.href ? '<a href="' + s.href + '">' + esc(s.n) + '</a>' : esc(s.n);
-        return '<li class="' + (s.href ? 'open' : 'plan') + '"><span class="dot"></span><span class="code">' + code + '</span><span class="name">' + nm + '</span></li>';
+    var rows = data.map(function (t, k) {
+      var st = t.stations, cur = -1;
+      var code = function (i) { return t.code + String(i + 1).padStart(2, '0'); };
+      st.forEach(function (s, i) { if (s.done) cur = i; });
+      var skip = st.filter(function (s, i) { return s.href && !s.done && i < cur; }).length;
+      var ni = -1;
+      st.forEach(function (s, i) { if (ni < 0 && i > cur && !s.done) ni = i; });
+      var next = st[ni];
+      var kind = cur < 0 ? ['idle', '未乘車'] : skip ? ['rapid', '快速'] : ['local', '各停'];
+      var now = cur < 0 ? '起點' : '<b>' + code(cur) + '</b> ' + esc(st[cur].n);
+      var nx = next ? code(ni) + ' ' + esc(next.n) + (next.href ? '' : ' <em>施工中</em>') : '<span class="end">終點到着</span>';
+      var strip = st.map(function (s, i) {
+        var c = s.done ? 'done' : !s.href ? 'p' : i < cur ? 'skip' : '';
+        return '<li class="' + c + '"><code>' + code(i) + (c === 'skip' ? ' 通過' : '') + '</code>' + (s.href ? '<a href="' + s.href + '">' + esc(s.n) + '</a>' : esc(s.n)) + '</li>';
       }).join('');
-      return '<article class="route" style="--c: var(--' + t.code + ')"><div class="route-head"><span class="badge">' + t.code + '</span>' +
-        '<div><a href="' + t.id + '/index.html">' + t.name + '線</a>' +
-        '<div class="meta">' + c[0] + ' 站開通・預定 ' + c[1] + ' 站</div></div></div><p class="desc">' + t.desc + '</p><ul class="stops">' + stops + '</ul></article>';
+      return '<button class="row" type="button" aria-expanded="false" style="--c: var(--' + t.code + ')">' +
+        '<span class="no"><i>' + t.code + '</i> ' + (k + 1) + '</span>' +
+        '<span class="kind ' + kind[0] + '">' + kind[1] + '</span>' +
+        '<span class="dest"><small>' + esc(t.line) + '線</small>' + now + '</span>' +
+        '<span class="next">' + nx + '</span></button>' +
+        '<div class="strip" hidden style="--c: var(--' + t.code + ')"><a class="toline" href="' + t.id + '/index.html">' + esc(t.name) + ' 目錄 →</a>' +
+        '<p class="desc">' + esc(t.desc) + '</p><ol>' + strip + '</ol></div>';
     }).join('');
-    return '<header class="sign"><div class="sign-top"></div><div class="sign-body"><div class="sign-no"><span>JP<big>00</big></span></div>' +
-      '<div class="sign-name"><div class="kana">にほんがくしゅう</div><h1>日本學習</h1><div class="roman">Nihon Gakushū</div></div>' +
-      '<div></div></div><div class="sign-bottom"><span>← 台灣</span><span>日本 →</span></div></header>' +
-      '<p class="lede">為了去日本旅行時看得懂眼前的東西。每個主題是一條路線，每一課是一個車站。</p>' +
-      '<section><h2>路線圖 <small>實心站是已經出好的課，空心站是預定的課</small></h2><div class="lines">' + lines + '</div></section>' +
-      (FUTURE.length ? '<section><h2>建設中的路線</h2><div class="future">' + FUTURE.map(function (f) { return '<span>' + f[0] + '線</span>'; }).join('') + '</div></section>' : '') +
-      '<section><h2>本日告示</h2><div class="board"><span class="lbl">睡前日本新聞</span>' + newsList('news3') + '</div></section><p class="small">' + NOTE + '</p>';
+    var tick = news.map(function (n) { return '<a href="' + n.href + '">【睡前日本新聞 ' + esc(n.date) + '】' + esc(n.title) + '</a>'; }).join('<span class="sep">◆</span>');
+    return '<header class="hang"><div class="pic">学</div><div class="txt"><h1>日本學習</h1><span>のりば・PLATFORMS</span></div><div class="ex">⇦ 台灣　日本 ⇨</div></header>' +
+      '<div class="board"><div class="bhead"><span>番線</span><span>種別</span><span>現在地</span><span>次の停車駅</span></div>' + rows + '</div>' +
+      '<div class="ticker"><a class="tk-tag" href="news/index.html">告示</a><div class="run"><p>' + (tick || '每天三到五則日本新聞') + '</p></div></div>' +
+      (window.HomeMap ? window.HomeMap.svg(data) : '') +
+      '<details class="booth"><summary><i>i</i>案內所</summary><p>每個主題是一條線，每一課是一站。每課最下方選「我學完了」，看板就會顯示你坐到哪一站；跳過沒學的站算「通過」，這條車就變成快速。下面的路線圖把滑鼠移到線上（手機點一下）會顯示站名。</p><p>' + NOTE + '</p></details>';
   };
   R.wa = function () {
     var cards = data.map(function (t) {
@@ -152,7 +168,13 @@
     box.className = 'home home-' + skin;
     box.innerHTML = warn() + (R[skin] || R.plain)();
     if (window.drawSprites) window.drawSprites(box);
+    if (skin === 'route' && window.HomeMap) window.HomeMap.bind(box);
   }
   Promise.all([Promise.all(TOPICS.map(load)), loadNews()]).then(function (res) { data = res[0]; news = res[1]; render(); });
   document.addEventListener('skinchange', render);
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('button.row');
+    if (!b) return;
+    var s = b.nextElementSibling; s.hidden = !s.hidden; b.setAttribute('aria-expanded', String(!s.hidden));
+  });
 })();

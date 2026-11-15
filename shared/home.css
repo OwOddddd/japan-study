@@ -1,4 +1,5 @@
 /* 網站首頁專用（只有根目錄 index.html 引用）。版型由 shared/home.js 依外觀產生。 */
+@import url('https://fonts.googleapis.com/css2?family=Huninn&display=swap');
 :root { --H: #c8432f; --G: #2b6cb0; --J: #6a58b0; --R: #8e3b5f; --A: #7a5a3a; --F: #b5730c; --T: #2e8b57; --M: #c94a7e; --S: #4f6575; --C: #1f7a7a; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; --R: #d785a8; --A: #c9a27a; --F: #e8b04a; --T: #6cc08a; --M: #f09ab8; --S: #9fb3c2; --C: #6cc4c4; } }
 :root[data-theme="dark"] { --H: #e0705f; --G: #6aa6dc; --J: #a596e0; --R: #d785a8; --A: #c9a27a; --F: #e8b04a; --T: #6cc08a; --M: #f09ab8; --S: #9fb3c2; --C: #6cc4c4; }
@@ -12,58 +13,85 @@ main.home-main { max-width: 960px; }
 .home .news3 .nt { line-height: 1.5; }
 .home a.all { font-size: .85rem; }
 @media (max-width: 640px) { .home .news3 { grid-template-columns: 1fr; } }
-.home-route .board .news3 .ni { border-color: #3a3f45; color: #ffb43d; }
-.home-route .board .news3 .nd { color: #c9ced2; }
 .home-pixel .news3 .ni { border: 2px solid var(--line); border-radius: 0; }
 .home canvas { image-rendering: pixelated; display: block; }
 .home section { margin-top: 28px; }
 .home h2 small { font-family: var(--sans); font-weight: 400; color: var(--muted); font-size: .8rem; }
 
-/* ---------- 路線圖 ---------- */
-.home-route .sign { background: var(--surface); border-radius: 6px; overflow: hidden; box-shadow: 0 1px 0 var(--line), 0 6px 20px rgba(0,0,0,.08); }
-.home-route .sign-top { height: 10px; background: linear-gradient(90deg, var(--H) 0 33.3%, var(--G) 0 66.6%, var(--J) 0); }
-.home-route .sign-body { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 20px 22px 16px; }
-.home-route .sign-no { display: grid; place-items: center; width: 60px; height: 60px; border: 4px solid var(--ink); border-radius: 10px; font-weight: 700; line-height: 1.05; text-align: center; font-size: .75rem; }
-.home-route .sign-no big { display: block; font-size: 1.4rem; }
-.home-route .sign-name { text-align: center; min-width: 0; }
-.home-route .sign-name .kana { font-size: .9rem; letter-spacing: .4em; color: var(--muted); }
-.home-route .sign-name h1 { font-size: clamp(2.1rem, 7vw, 3.2rem); letter-spacing: .25em; margin: 0; line-height: 1.2; padding-left: .25em; }
-.home-route .sign-name .roman { font-size: .82rem; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; }
-.home-route .sign-bottom { display: flex; justify-content: space-between; gap: 12px; padding: 7px 22px; background: var(--ink); color: var(--surface); font-weight: 500; font-size: .9rem; }
-.home-route .lede { margin-top: 20px; }
-.home-route h2 { font-family: var(--sans); font-size: 1.05rem; letter-spacing: .1em; margin: 0 0 12px; padding: 0; border: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.home-route h2 small { letter-spacing: 0; }
-.home-route .lines { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-.home-route .route { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 16px 12px; min-width: 0; }
-.home-route .route-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-.home-route .badge { width: 42px; height: 42px; flex: none; border-radius: 50%; border: 5px solid var(--c); display: grid; place-items: center; font-weight: 700; font-size: 1.1rem; background: var(--surface); color: var(--ink); }
-.home-route .route-head a { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
-.home-route .route-head a:hover { text-decoration: underline; }
-.home-route .meta { font-size: .78rem; color: var(--muted); }
-.home-route .desc { margin: 0 0 8px; font-size: .88rem; color: var(--muted); }
-.home-route .stops { list-style: none; margin: 0; padding: 0; }
-.home-route .stops li { position: relative; display: grid; grid-template-columns: 22px 2.6em 1fr; align-items: center; gap: 8px; min-height: 34px; }
-.home-route .stops li::before { content: ""; position: absolute; left: 9px; top: 0; bottom: 0; width: 4px; background: var(--c); }
-.home-route .stops li:first-child::before { top: 50%; }
-.home-route .stops li:last-child::before { bottom: 50%; }
-.home-route .stops li.plan::before { background: repeating-linear-gradient(var(--c) 0 5px, transparent 5px 9px); opacity: .55; }
-.home-route .dot { position: relative; z-index: 1; width: 22px; height: 22px; border-radius: 50%; border: 4px solid var(--c); background: var(--surface); }
-.home-route .stops li.open .dot { background: var(--c); box-shadow: inset 0 0 0 3px var(--surface); }
-.home-route .code { font-size: .72rem; font-weight: 700; color: var(--c); font-variant-numeric: tabular-nums; }
-.home-route .stops a { text-decoration: none; color: var(--ink); }
-.home-route .stops a:hover { text-decoration: underline; }
-.home-route .stops li.plan .name { color: var(--muted); }
-.home-route .future { display: flex; flex-wrap: wrap; gap: 8px; }
-.home-route .future span { border: 2px dashed var(--line); border-radius: 999px; padding: 2px 12px; font-size: .88rem; color: var(--muted); }
-.home-route .board { background: #15181b; border-radius: 6px; padding: 14px 18px; display: grid; gap: 6px; color: #ffb43d; font-family: var(--dot); }
-.home-route .board .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; }
-.home-route .board .lbl { color: #8fd18a; font-size: .85rem; }
-.home-route .board a { color: #ffb43d; text-decoration: none; font-size: 1.15rem; line-height: 1.5; }
-.home-route .board a:hover { text-decoration: underline; }
-.home-route .board .all { font-size: .85rem; color: #c9ced2; }
-@media (max-width: 520px) {
-  .home-route .sign-body { grid-template-columns: 1fr; justify-items: center; padding: 16px; }
-  .home-route .sign-no { width: 54px; height: 54px; }
+/* ---------- 路線圖：車站大廳的發車看板。看板固定深色，大廳地面隨深淺色主題換 ---------- */
+html[data-skin="route"][data-topic="home"] { --conc: #c9ccc8; --tile: #bfc3bf; --booth: #ffffff; --booth-ink: #23262b; }
+@media (prefers-color-scheme: dark) { html[data-skin="route"][data-topic="home"]:not([data-theme="light"]) { --conc: #24282b; --tile: #2e3337; --booth: #1d2125; --booth-ink: #e8eaec; } }
+html[data-skin="route"][data-topic="home"][data-theme="dark"] { --conc: #24282b; --tile: #2e3337; --booth: #1d2125; --booth-ink: #e8eaec; }
+html[data-skin="route"][data-topic="home"] body { background: repeating-linear-gradient(90deg, var(--tile) 0 1px, transparent 1px 64px), repeating-linear-gradient(0deg, var(--tile) 0 1px, var(--conc) 1px 32px); }
+.home-route { --round: 'Huninn', var(--sans); --board: #101418; --frame: #8d949b; --amber: #ffb02e; --green: #4ee07a; --red: #ff5a4f; --white: #f1f3ef; --dim: #6b7781; font-family: var(--round); }
+.home-route .hang { display: flex; align-items: stretch; border-radius: 3px; overflow: hidden; background: #1c2a4a; color: #fff; box-shadow: 0 8px 0 -4px rgba(0,0,0,.25); }
+.home-route .hang .pic { display: grid; place-items: center; width: 64px; flex: none; background: #f2b705; color: #1c2a4a; font-family: var(--sans); font-weight: 700; font-size: 30px; }
+.home-route .hang .txt { padding: 10px 16px; min-width: 0; }
+.home-route .hang h1 { margin: 0; font-family: var(--sans); font-weight: 700; font-size: clamp(22px, 5vw, 32px); letter-spacing: .08em; line-height: 1.15; color: #fff; }
+.home-route .hang h1::after { display: none; }
+.home-route .hang span { font-size: 13px; opacity: .8; letter-spacing: .12em; }
+.home-route .hang .ex { margin-left: auto; display: flex; align-items: center; padding: 0 16px; font-family: var(--sans); font-weight: 700; font-size: 15px; border-left: 2px solid rgba(255,255,255,.25); white-space: nowrap; }
+.home-route .board { margin-top: 22px; background: var(--board); border: 10px solid var(--frame); border-radius: 4px; box-shadow: inset 0 0 0 2px #000, 0 10px 24px rgba(0,0,0,.25); }
+.home-route .bhead, .home-route .row { display: grid; grid-template-columns: 52px 76px 1fr 1.3fr; gap: 0 10px; align-items: center; padding: 9px 12px; }
+.home-route .bhead { padding-block: 8px; background: #1d2a52; color: #fff; font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: .1em; }
+.home-route .row { width: 100%; text-align: left; border: 0; border-top: 1px solid #23303a; background: transparent; cursor: pointer; font-family: var(--dot); font-size: 17px; color: var(--amber); }
+.home-route .row:hover, .home-route .row[aria-expanded="true"] { background: #17202a; }
+.home-route .row:focus-visible, .home-route .board a:focus-visible, .home-route .ticker a:focus-visible { outline: 3px solid #f2b705; outline-offset: -3px; }
+.home-route .row .no { color: var(--white); font-size: 15px; }
+.home-route .row .no i { display: inline-block; width: 1.1em; text-align: center; font-style: normal; border-radius: 2px; background: var(--c); color: #000; }
+.home-route .row .kind { font-size: 15px; }
+.home-route .row .kind.local { color: var(--green); }
+.home-route .row .kind.rapid { color: var(--red); }
+.home-route .row .kind.idle { color: var(--dim); }
+.home-route .row .dest { color: var(--white); }
+.home-route .row .dest small { font-size: 13px; color: #a9b3ba; margin-right: .6em; }
+.home-route .row .dest b { font-weight: 400; color: var(--amber); }
+.home-route .row .next .end { color: var(--green); }
+.home-route .row .dest, .home-route .row .next { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.home-route .row .next em { font-style: normal; color: var(--dim); }
+.home-route .strip { background: #0b0e11; border-top: 1px dashed #23303a; padding: 12px 12px 16px; color: var(--white); }
+.home-route .strip .toline { font-family: var(--sans); font-weight: 700; color: var(--amber); text-decoration: none; font-size: 14px; }
+.home-route .strip .toline:hover { text-decoration: underline; }
+.home-route .strip .desc { margin: 2px 0 12px; font-size: 13px; color: #a9b3ba; }
+.home-route .strip ol { list-style: none; margin: 0; padding: 0 0 4px; display: flex; overflow-x: auto; }
+.home-route .strip li { position: relative; flex: none; width: 112px; padding: 22px 8px 0 0; font-size: 13px; line-height: 1.35; }
+.home-route .strip li::before { content: ""; position: absolute; top: 7px; left: 0; right: 0; height: 4px; background: var(--c); }
+.home-route .strip li::after { content: ""; position: absolute; top: 1px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: #0b0e11; border: 3px solid var(--c); }
+.home-route .strip li.p { color: var(--dim); }
+.home-route .strip li.p::before { background: repeating-linear-gradient(90deg, var(--c) 0 6px, transparent 6px 11px); }
+.home-route .strip li.p::after { background: #0b0e11; }
+.home-route .strip li code { display: block; font-family: var(--dot); color: var(--amber); font-size: 12px; }
+.home-route .strip li.p code { color: var(--dim); }
+.home-route .strip li.done::after { background: #fff; }
+.home-route .strip li.skip { color: var(--dim); }
+.home-route .strip li.skip::after { width: 6px; height: 6px; top: 4px; left: 3px; border-width: 2px; background: #0b0e11; }
+.home-route .strip li.skip code { color: var(--dim); }
+.home-route .strip li.skip a { color: #a9b3ba; }
+.home-route .strip li a { color: var(--white); text-decoration: none; }
+.home-route .strip li a:hover { text-decoration: underline; }
+.home-route .ticker { margin-top: 18px; background: var(--board); border: 8px solid var(--frame); border-radius: 4px; overflow: hidden; display: flex; align-items: center; }
+.home-route .ticker .tk-tag { flex: none; font-family: var(--dot); color: var(--red); font-size: 17px; padding: 8px 12px; border-right: 1px solid #2c3a45; text-decoration: none; }
+.home-route .ticker .tk-tag:hover { text-decoration: underline; }
+.home-route .ticker .run { overflow: hidden; flex: 1; min-width: 0; }
+.home-route .ticker p { margin: 0; white-space: nowrap; font-family: var(--dot); color: var(--amber); font-size: 17px; padding: 8px 0 8px 100%; display: inline-block; animation: tick 38s linear infinite; }
+.home-route .ticker:hover p, .home-route .ticker:focus-within p { animation-play-state: paused; }
+.home-route .ticker a { color: var(--amber); text-decoration: none; }
+.home-route .ticker a:hover { text-decoration: underline; }
+.home-route .ticker .sep { margin: 0 2em; color: var(--dim); }
+@keyframes tick { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) { .home-route .ticker p { animation: none; padding-left: 12px; } }
+.home-route .booth { margin-top: 18px; max-width: 440px; background: var(--booth); color: var(--booth-ink); border-radius: 3px; border-top: 6px solid #1d2a52; padding: 12px 14px; box-shadow: 0 4px 0 rgba(0,0,0,.12); }
+.home-route .booth summary { cursor: pointer; font-family: var(--sans); font-weight: 700; font-size: 16px; list-style: none; display: flex; align-items: center; gap: 8px; }
+.home-route .booth summary::-webkit-details-marker { display: none; }
+.home-route .booth summary i { font-style: normal; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #1d2a52; color: #fff; font-size: 14px; }
+.home-route .booth p { margin: 8px 0 0; font-size: 14px; line-height: 1.7; }
+@media (max-width: 640px) {
+  .home-route .bhead { display: none; }
+  .home-route .row { grid-template-columns: 4.4em minmax(0, 1fr); grid-template-areas: "no dest" "kind next"; row-gap: 2px; padding-inline: 10px; }
+  .home-route .row .no { grid-area: no; } .home-route .row .kind { grid-area: kind; font-size: 13px; white-space: nowrap; }
+  .home-route .row .dest { grid-area: dest; } .home-route .row .next { grid-area: next; font-size: 15px; }
+  .home-route .hang .ex { display: none; }
+  .home-route .board { border-width: 6px; }
 }
 
 /* ---------- 和柄 ---------- */
@@ -156,3 +184,47 @@ main.home-main { max-width: 960px; }
   .home-pixel .props canvas:nth-child(2n) { animation-delay: -1.5s; }
   @keyframes px-bob { 50% { transform: translateY(-3px); } }
 }
+
+/* ---------- 路線圖：地鐵路線圖（shared/home-map.js） ---------- */
+html[data-skin="route"][data-topic="home"] { --map: #ffffff; --map-ink: #1d2124; --map-sub: #7a8288; }
+@media (prefers-color-scheme: dark) { html[data-skin="route"][data-topic="home"]:not([data-theme="light"]) { --map: #1a1e22; --map-ink: #e8eaec; --map-sub: #8d969d; } }
+html[data-skin="route"][data-topic="home"][data-theme="dark"] { --map: #1a1e22; --map-ink: #e8eaec; --map-sub: #8d969d; }
+.home-route .metro { margin-top: 26px; background: var(--map); color: var(--map-ink); border: 8px solid var(--frame); border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,.18); }
+.home-route .metro-head { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px 0; }
+.home-route .metro-head h2 { margin: 0; padding: 0; border: 0; font-family: var(--sans); font-weight: 700; font-size: 20px; letter-spacing: .15em; color: var(--map-ink); }
+.home-route .metro-head span { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: .3em; color: var(--map-sub); }
+.home-route .metro-scroll { overflow-x: auto; }
+.home-route .metro svg { display: block; width: 100%; min-width: 760px; height: auto; font-family: var(--round); }
+.home-route .metro .ln { transition: opacity .15s; }
+.home-route .metro svg.focus .ln:not(.on) { opacity: .12; }
+.home-route .metro .hit { fill: none; stroke: transparent; stroke-width: 24; pointer-events: stroke; }
+/* 選中的線在最上層，感應範圍放寬，沿線移動時偏一點不會跳到別條線 */
+.home-route .metro .ln.on .hit { stroke-width: 60; }
+.home-route .metro .ln.on .near { r: 24px; }
+.home-route .metro .st.done .mk { fill: var(--c); }
+.home-route .metro .track { fill: none; stroke: var(--c); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.home-route .metro .track.plan { stroke-dasharray: 10 8; stroke-linecap: butt; opacity: .55; }
+.home-route .metro .near { fill: transparent; }
+.home-route .metro .mk { fill: var(--map); stroke: var(--c); stroke-width: 3.5; }
+.home-route .metro .mk.term { stroke-width: 4; }
+.home-route .metro .mk-t { font-family: var(--sans); font-weight: 700; font-size: 15px; text-anchor: middle; fill: var(--map-ink); pointer-events: none; }
+.home-route .metro .st.p .mk { stroke-dasharray: 3 3; }
+.home-route .metro .lbl { opacity: 0; pointer-events: none; transition: opacity .15s; }
+.home-route .metro .ln.on .lbl { opacity: 1; pointer-events: auto; }
+.home-route .metro .lbl text { font-size: 14px; fill: var(--map-ink); paint-order: stroke; stroke: var(--map); stroke-width: 4px; stroke-linejoin: round; }
+.home-route .metro .lbl .cd { font-family: var(--dot); font-size: 11px; fill: var(--c); }
+.home-route .metro .st.p .lbl text { fill: var(--map-sub); }
+.home-route .metro .box { fill: none; }
+.home-route .metro .st.hot .box, .home-route .metro a.st:focus-visible .box { fill: #fff; stroke: var(--map-ink); stroke-width: 2; }
+.home-route .metro .st.hot .lbl text, .home-route .metro a.st:focus-visible .lbl text { fill: #1d2124; stroke: none; }
+.home-route .metro a.st.hot .mk { stroke-width: 5; }
+.home-route .metro a.st { cursor: pointer; outline: none; }
+.home-route .metro .tname text.tn { font-family: var(--sans); font-weight: 700; font-size: 17px; fill: var(--c); paint-order: stroke; stroke: var(--map); stroke-width: 5px; }
+.home-route .metro .tname { cursor: pointer; outline: none; }
+.home-route .metro .tname:hover .box, .home-route .metro .tname:focus-visible .box { fill: #fff; stroke: var(--map-ink); stroke-width: 2; }
+.home-route .metro .tname:hover text.tn, .home-route .metro .tname:focus-visible text.tn { fill: #1d2124; stroke: none; }
+.home-route .metro-legend { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 14px 14px; border-top: 1px solid color-mix(in srgb, var(--map-sub) 35%, transparent); }
+.home-route .metro-legend button { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 13px; color: var(--map-ink); background: transparent; border: 1px solid color-mix(in srgb, var(--map-sub) 50%, transparent); border-radius: 3px; padding: 3px 8px 3px 4px; cursor: pointer; }
+.home-route .metro-legend button i { font-style: normal; font-family: var(--sans); font-weight: 700; font-size: 12px; line-height: 1; width: 20px; height: 20px; display: grid; place-items: center; border: 3px solid var(--c); border-radius: 4px; }
+.home-route .metro-legend button[aria-pressed="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); }
+@media (max-width: 640px) { .home-route .metro { border-width: 5px; } }
