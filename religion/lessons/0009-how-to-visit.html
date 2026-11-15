@@ -34,7 +34,7 @@
   <h2>1. 神社的參拜</h2>
   <p>第 2 課已經走過鳥居、參道、手水舍。到了拜殿前：</p>
   <ol class="chain">
-    <li><b>投賽錢</b>（<span lang="ja">さいせん</span> <button class="btn ghost say" data-audio="audio/0009/01.wav">▶</button>）：輕輕放進賽錢箱。這不是「付錢買保佑」，而是獻給神的供品，古代獻的是米或布。很多人投 5 圓，因為「五圓」（ごえん）和「緣分」（ご縁）同音。</li>
+    <li><b>投賽錢</b>（<span lang="ja">さいせん</span> <button class="btn ghost say" data-audio="audio/0009/01.wav">▶</button>）：輕輕放進賽錢箱。賽錢是獻給神的供品，古代獻的是米或布，現在換成錢。很多人投 5 圓，因為「五圓」（ごえん）和「緣分」（ご縁）同音。</li>
     <li><b>搖鈴</b>：通知神「我來了」，鈴聲也有祓除的意思（第 2 課）。</li>
     <li><b>二拜二拍手一拜</b>（<span lang="ja">にはいにはくしゅいっぱい</span> <button class="btn ghost say" data-audio="audio/0009/02.wav">▶</button>）：深深鞠躬兩次 → 拍手兩次 → 雙手合起來祈願 → 再鞠躬一次。</li>
   </ol>
@@ -76,7 +76,7 @@
     <li><b>御札</b>：比較大的紙或木牌，帶回家供在神龕（神棚）上，保佑全家。</li>
   </ul>
   <p><b>為什麼一年換一次？</b>沒有硬性規定，但習慣上一年後把舊的送回神社或寺院，燒掉（お焚き上げ），再請新的。這和第 2 課、第 3 課的觀念一致：神的力量要保持<b>新鮮、乾淨</b>，就像伊勢神宮每 20 年重建。正月時神社常設置收舊御守、御札的箱子。</p>
-  <p><b>為什麼說「請」不說「買」？</b>神社寺院把御守叫「授與品」，是神佛「授給」你的，付的錢是獻給神佛的「初穗料」（<span lang="ja">はつほりょう</span> <button class="btn ghost say" data-audio="audio/0009/08.wav">▶</button>）。「初穗」就是當年最早收成的稻穗，古代用它來獻神（稻作和神道的關係，第 2 課）。</p>
+  <p><b>為什麼說「請」不說「買」？</b>神社寺院把御守叫「授與品」，是神佛「授給」你的，付的錢在神社叫「初穗料」，寺院多半叫「志納金」（初穗料讀作 <span lang="ja">はつほりょう</span> <button class="btn ghost say" data-audio="audio/0009/08.wav">▶</button>）。「初穗」就是當年最早收成的稻穗，古代用它來獻神（稻作和神道的關係，第 2 課）。</p>
   <p class="note">同時帶好幾個不同神社的御守，一般認為沒有問題。神道本來就是多神的（第 2 課）。</p>
 
   <h2>5. 繪馬：用畫的馬代替真的馬</h2>
@@ -118,7 +118,7 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout">有不懂的地方，或想延伸問（例如「御守可以送人嗎」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+  <div class="callout"><b>延伸想想</b>：御守可以送人嗎？</div>
 
   <nav class="lesson-nav">
     <a href="0008-shinbutsu-shugo.html">← 第 7 課：神佛習合與神佛分離</a>
@@ -135,7 +135,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '宗教第 8 課・參拜規矩與信仰用品',
+  title: '宗教與信仰 第 8 課・參拜規矩與信仰用品',
   storageKey: 'rel-l8-v1',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -170,7 +170,7 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '朋友說「神社的御守要用買的」。用本課內容說明日本人為什麼說「請」或「授與」，付的錢又叫什麼？',
       keywords: [['授', '神給', '佛給', '賜'], ['初穗', '初穂', '供品', '獻', '奉納']],
       need: 2,
-      answer: '御守是神佛「授給」人的授與品，不是商品；付的錢是獻給神佛的「初穗料」（初穗是古代獻神的第一批稻穗）。' },
+      answer: '御守是神佛「授給」人的授與品，不是商品；在神社付的錢叫「初穗料」（初穗是古代獻神的第一批稻穗），寺院多半叫「志納金」。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 7 課）「熊野權現」「東照大權現」的「權現」來自哪個想法？',
       options: ['本地垂跡：佛化身為神', '御靈信仰：怨靈變成神', '鎮護國家：佛保護國家', '末法思想：佛法衰退'],

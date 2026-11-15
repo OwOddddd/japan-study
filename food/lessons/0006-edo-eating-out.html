@@ -33,7 +33,7 @@
 
   <h2>2. 長屋的廚房只有一個灶</h2>
   <p>
-    庶民住的是<span lang="ja">長屋</span>（ながや）：一排木造平房隔成很多小間，一間大約四坪半，門口一小塊泥土地就是廚房，通常只有一個灶。
+    庶民住的是<span lang="ja">長屋</span>（ながや）：一排木造平房隔成很多小間，一間是四疊半加一小塊泥土地（約 3 坪），泥土地就是廚房，通常只有一個灶。
     煮一鍋飯就佔滿了，要再做菜、炸東西根本不可能。配菜、點心、宵夜，買外面的最划算。
   </p>
 
@@ -112,7 +112,7 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout">有不懂的地方，或想延伸問（例如「為什麼關西是烏龍麵、關東是蕎麥麵」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+  <div class="callout"><b>延伸想想</b>：為什麼關西是烏龍麵、關東是蕎麥麵？</div>
 
   <nav class="lesson-nav">
     <a href="0005-sushi.html">← 第 4 課：壽司</a>
@@ -129,7 +129,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '飲食文化第 5 課 小測驗：江戶的外食',
+  title: '飲食文化 第 5 課・江戶的外食',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
   storageKey: 'food-lesson-0006-v1',
   resultsEl: document.getElementById('results'),
@@ -143,7 +143,7 @@ Quiz.mount(document.getElementById('quiz'), {
     { id: 'l5-2', facet: 'l5', level: 1, type: 'choice',
       prompt: '江戶庶民住的長屋，廚房最大的限制是？',
       options: ['通常只有一個灶，煮飯就佔滿了', '沒有水可以用', '法律禁止在家煮飯', '廚房在屋外，冬天不能用'],
-      explain: '一間大約四坪半，門口的小泥土地就是廚房。煮完飯就沒辦法再做菜，配菜買外面的最划算。' },
+      explain: '一間約 3 坪，門口的小泥土地就是廚房。煮完飯就沒辦法再做菜，配菜買外面的最划算。' },
     { id: 'l5-3', facet: 'l5', level: 2, type: 'choice',
       prompt: '蕎麥特別適合當江戶的街頭速食，主要是因為？',
       options: ['麵先切好，燙一下淋醬就能吃，幾分鐘吃完', '蕎麥只能在江戶種', '蕎麥麵是給武士吃的高級食物', '幕府規定每天要吃蕎麥'],

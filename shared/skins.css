@@ -2,7 +2,13 @@
    html[data-skin] = route（路線圖）／wa（和柄）／pixel（像素）／plain（簡潔，不加任何東西）
    html[data-topic] = history／geography／japanese／news／home，由 shared/skin.js 依網址設定。
    這裡的規則都以 html[data-skin=…] 開頭，特異度高於 style.css 的基本規則；新頁面只要用 style.css 的 class 就會自動套上外觀。 */
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Serif+TC:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Serif+TC:wght@900&family=Huninn&family=LXGW+WenKai+TC:wght@400;700&display=swap');
+/* 字體（2026-11-15 使用者挑定）：路線圖 Huninn（全頁）、和柄 LXGW WenKai TC（全頁）、像素 Cubic 11 俐方體（標題、導覽、目錄；內文維持易讀的黑體）。
+   Cubic 11 不在 Google Fonts，從 jsDelivr 讀 GitHub 的 1.500 版（SIL OFL 授權）。 */
+@font-face { font-family: 'Cubic 11'; src: url('https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@1.500/fonts/web/Cubic_11.woff2') format('woff2'); font-display: swap; }
+html[data-skin="route"] { --sans: 'Huninn', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; --serif: var(--sans); }
+html[data-skin="wa"] { --sans: 'LXGW WenKai TC', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; --serif: 'LXGW WenKai TC', 'Noto Serif TC', serif; }
+html[data-skin="pixel"] { --dot: 'Cubic 11', 'DotGothic16', 'Noto Sans TC', monospace; }
 
 /* ---------- 主題色與印章字 ---------- */
 :root { --topic: #2b6cb0; --stamp: "學"; --dot: 'DotGothic16', 'Noto Sans TC', monospace; }

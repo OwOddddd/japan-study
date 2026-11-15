@@ -21,7 +21,7 @@
 
   <div class="callout">
     <b>為什麼學這個</b>：從東京搭新幹線到大阪、再往西到福岡，窗外幾乎一路都是城市，這條路線就是日本人口最密集的地帶。
-    診斷時你把日本總人口選成「約 2 億」，人口最少的縣、三大都市圈的占比也都不知道。這一課先建立幾個基準數字，再用前三課學過的地形和氣候解釋人口分布。
+    日本總人口多少、人口最少的是哪個縣、三大都市圈占全國多少？這一課先建立幾個基準數字，再用前三課學過的地形和氣候解釋人口分布。
   </div>
 
   <h2>1. 先記三個數字</h2>
@@ -59,7 +59,7 @@
   <h2>4. 為什麼擠在這裡？</h2>
   <ol class="chain">
     <li><b>能住的地不多</b>：第 2 課說過日本多山。用全部國土算，人口密度是每 km² 338 人；只算平地等「可住地」，就變成 1,021 人（<a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/586047.pdf" target="_blank">總務省「社會生活統計指標」</a>）。換句話說，能住人的土地只有國土的約三分之一。</li>
-    <li><b>大平原在太平洋側</b>：關東、濃尾、大阪這三大平原都面向太平洋，旁邊還有東京灣、伊勢灣、大阪灣，適合建港口。</li>
+    <li><b>大平原在太平洋側</b>：關東、濃尾、大阪這三大平原都在太平洋一側，各自面對東京灣、伊勢灣、大阪灣（大阪灣屬瀨戶內海），適合建港口。</li>
     <li><b>冬天的條件比較好</b>：第 3 課的季風，冬天的雪下在日本海側，太平洋側晴朗少雪，交通和工作都不容易中斷。</li>
     <li><b>越集中，就越吸引人</b>：港口旁發展出工業帶，工作機會多 → 人搬進來 → 公司、學校、交通再加碼 → 吸引更多人。這是一個自我增強的循環。</li>
   </ol>
@@ -71,12 +71,12 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。前 3 題是你在診斷時答錯或不知道的題目，最後兩題複習第 2、3 課。</p>
+  <p class="small">憑記憶作答。前 3 題是程度診斷裡出過的題目，最後兩題複習第 2、3 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout">有不懂的地方，或想延伸問（例如「為什麼沖繩人口密度這麼高」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+  <div class="callout"><b>延伸想想</b>：為什麼沖繩人口密度這麼高？</div>
 
   <nav class="lesson-nav">
     <a href="0004-monsoon-meets-mountains.html">← 第 3 課：季風與氣候</a>
@@ -113,7 +113,7 @@ document.getElementById('density-legend').innerHTML =
   BIN_LABELS.map((l, i) => `<span><i style="background:var(--q${i})"></i>${l}</span>`).join('');
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '第 4 課 小測驗：太平洋側的帶狀走廊',
+  title: '日本地理 第 4 課・太平洋側的帶狀走廊',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
   storageKey: 'jgeo-lesson-0005-v1',
   resultsEl: document.getElementById('results'),

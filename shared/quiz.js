@@ -251,8 +251,8 @@ window.Quiz = (function () {
             <div class="bar" title="${Math.round(r.ratio * 100)}%"><span class="${cls}" style="width:${Math.max(r.ratio * 100, 2)}%"></span></div>
             <div><span class="${cls}"><b>${lab}</b></span> <span class="small">${r.pts % 1 ? r.pts.toFixed(1) : r.pts}/${r.n}・不知道 ${r.idk}</span></div>`;
         }).join('')}</div>
-        <p class="small">判定規則：得分率 ≥ 75% 已經會了；40–74% 半懂；&lt; 40% 還不會。這是初步判定，老師會再看你的簡答原文調整。</p>
-        <p><button class="btn" id="copy-res">複製結果，貼給老師</button> <button class="btn ghost" id="reset-res">清空重做</button> <span class="small" id="copy-msg"></span></p>`;
+        <p class="small">判定規則：得分率 ≥ 75% 已經會了；40–74% 半懂；&lt; 40% 還不會。簡答題依關鍵字自動給分，可以對照解說自己調整。</p>
+        <p><button class="btn" id="copy-res">複製結果</button> <button class="btn ghost" id="reset-res">清空重做</button> <span class="small" id="copy-msg"></span></p>`;
       resultsEl.querySelector('#copy-res').onclick = copyReport;
       resultsEl.querySelector('#reset-res').onclick = () => {
         if (!confirm('清空所有作答並重新開始？')) return;
@@ -282,10 +282,10 @@ window.Quiz = (function () {
       }
       const text = lines.join('\n');
       const msg = resultsEl.querySelector('#copy-msg');
-      try { await navigator.clipboard.writeText(text); msg.textContent = '已複製，直接貼到對話框即可。'; }
+      try { await navigator.clipboard.writeText(text); msg.textContent = '已複製。'; }
       catch (e) {
         const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
-        msg.textContent = document.execCommand('copy') ? '已複製，直接貼到對話框即可。' : '複製失敗，請手動選取下方文字。';
+        msg.textContent = document.execCommand('copy') ? '已複製。' : '複製失敗，請手動選取下方文字。';
         ta.remove();
       }
     }

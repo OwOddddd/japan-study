@@ -13,12 +13,12 @@
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日文</a></nav>
   <h1>日文程度診斷</h1>
-  <p class="lede">三個部分：背景問答、假名朗讀計時、7 個面向 64 題選擇題。這不是考試，是幫老師找出第一課該從哪裡開始。全部大約 25 分鐘。</p>
+  <p class="lede">三個部分：背景問答、假名朗讀計時、7 個面向 64 題選擇題。這不是考試，是找出該從哪裡開始學。全部大約 25 分鐘。</p>
 
   <div class="callout">
-    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓結果比實際好，反而漏掉真正需要學的部分。<br>
     看得懂題目但要想很久才認出假名，也算是有用的資訊，可以在背景問答最後一格寫下來。<br>
-    作答會自動存在這個瀏覽器裡，中途關掉或切到別的 App 也不會不見。最後要貼回<b>兩段</b>文字給老師：第一部分的「複製背景與計時」和交卷後的「複製結果」。
+    作答會自動存在這個瀏覽器裡，中途關掉或切到別的 App 也不會不見。第一部分的「複製背景與計時」和交卷後的「複製結果」可以各保存一份文字。
   </div>
 
   <h2>第一部分：背景問答</h2>
@@ -54,7 +54,6 @@
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
-  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
 </main>
 
 <script>
@@ -118,10 +117,10 @@ document.getElementById('copy-bg').onclick = async () => {
     `卡住的字：${v('bg-stuck')}`,
   ].join('\n');
   const msg = document.getElementById('copy-bg-msg');
-  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製，直接貼到對話框即可。'; }
+  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製。'; }
   catch (e) {
     const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
-    msg.textContent = document.execCommand('copy') ? '已複製，直接貼到對話框即可。' : '複製失敗，請手動選取文字。';
+    msg.textContent = document.execCommand('copy') ? '已複製。' : '複製失敗，請手動選取文字。';
     ta.remove();
   }
 };
@@ -389,7 +388,7 @@ const questions = [
   { id: 'talk-3', facet: 'talk', level: 2, type: 'choice',
     prompt: `${J('なに してるの？')} 是什麼意思？`,
     options: ['你在做什麼？', '你做了什麼？', '你要做什麼？', '你不做嗎？'],
-    explain: 'してる＝している（正在做）的口語縮約，い被吃掉。語尾の上揚表示疑問。' },
+    explain: 'してる＝している（正在做）的口語縮約，い被吃掉。語尾的上揚表示疑問。' },
   { id: 'talk-4', facet: 'talk', level: 3, type: 'choice',
     prompt: `${J('わかんない。')} 是什麼意思？`,
     options: ['不知道、搞不懂。', '知道了。', '分開了。', '不要走。'],

@@ -16,8 +16,8 @@
   <p class="lede">20 題，大約 10 分鐘。題目涵蓋全部九課，用來找出哪幾課你已經會了、可以跳過。</p>
 
   <div class="callout">
-    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
-    作答會自動存在這個瀏覽器裡。交卷後按「複製結果，貼給老師」，把文字貼到對話框。
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓結果比實際好，反而漏掉真正需要學的部分。<br>
+    作答會自動存在這個瀏覽器裡。交卷後會依面向顯示結果，按「複製結果」可以保存一份文字。
   </div>
 
   <h2>背景問答</h2>
@@ -32,7 +32,6 @@
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
-  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
 </main>
 
 <script>
@@ -48,13 +47,13 @@ try { bg = JSON.parse(localStorage.getItem(BG_KEY) || '{}'); } catch (e) {}
 document.getElementById('copy-bg').onclick = async () => {
   const text = `宗教診斷・背景問答\n1. ${bg['bg-1'] || '（未填）'}\n2. ${bg['bg-2'] || '（未填）'}`;
   const msg = document.getElementById('copy-bg-msg');
-  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製，直接貼到對話框即可。'; }
+  try { await navigator.clipboard.writeText(text); msg.textContent = '已複製。'; }
   catch (e) { msg.textContent = '複製失敗，請手動選取文字。'; }
 };
 
 // ---------- 診斷題 ----------
 Quiz.mount(document.getElementById('quiz'), {
-  title: '宗教與信仰・程度診斷',
+  title: '宗教與信仰程度診斷',
   storageKey: 'rel-diag-v1',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),

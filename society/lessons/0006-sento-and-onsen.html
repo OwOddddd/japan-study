@@ -123,7 +123,7 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout">有不懂的地方，或想延伸問（例如「溫泉的泉質怎麼看」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+  <div class="callout"><b>延伸想想</b>：溫泉的泉質怎麼看？</div>
 
   <p class="small">語音：VOICEVOX:青山龍星</p>
   <nav class="lesson-nav">
@@ -140,7 +140,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '社會與生活第 5 課 小測驗：錢湯與溫泉',
+  title: '社會與生活 第 5 課・錢湯與溫泉',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
   storageKey: 'society-l5-v1',
   resultsEl: document.getElementById('results'),
@@ -171,7 +171,7 @@ Quiz.mount(document.getElementById('quiz'), {
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 4 課）1974 年的大店法和便利商店有什麼關係？',
       options: ['大店難開，超市集團轉做小型店', '法律規定每町都要設便利商店', '法律禁止小商店在晚上營業', '法律要求外資連鎖與日資合作'],
-      explain: '大店法限制 500 平方公尺以上的店，超市集團轉而經營便利商店。' },
+      explain: '大店法限制大型店開店，超市集團轉而經營便利商店。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 3 課）住宅區的垃圾集積所，平常由誰負責清掃？',
       options: ['附近住戶輪流，常由町內會排班', '市役所派專職的清潔員常駐', '警察局安排員警定時巡邏', '便利商店的店員順便處理'],

@@ -23,7 +23,7 @@ html[data-skin="route"][data-topic="home"] { --conc: #c9ccc8; --tile: #bfc3bf; -
 @media (prefers-color-scheme: dark) { html[data-skin="route"][data-topic="home"]:not([data-theme="light"]) { --conc: #24282b; --tile: #2e3337; --booth: #1d2125; --booth-ink: #e8eaec; } }
 html[data-skin="route"][data-topic="home"][data-theme="dark"] { --conc: #24282b; --tile: #2e3337; --booth: #1d2125; --booth-ink: #e8eaec; }
 html[data-skin="route"][data-topic="home"] body { background: repeating-linear-gradient(90deg, var(--tile) 0 1px, transparent 1px 64px), repeating-linear-gradient(0deg, var(--tile) 0 1px, var(--conc) 1px 32px); }
-.home-route { --round: 'Huninn', var(--sans); --board: #101418; --frame: #8d949b; --amber: #ffb02e; --green: #4ee07a; --red: #ff5a4f; --white: #f1f3ef; --dim: #6b7781; font-family: var(--round); }
+.home-route { --sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; --round: 'Huninn', var(--sans); --board: #101418; --frame: #8d949b; --amber: #ffb02e; --green: #4ee07a; --red: #ff5a4f; --white: #f1f3ef; --dim: #6b7781; font-family: var(--round); }
 .home-route .hang { display: flex; align-items: stretch; border-radius: 3px; overflow: hidden; background: #1c2a4a; color: #fff; box-shadow: 0 8px 0 -4px rgba(0,0,0,.25); }
 .home-route .hang .pic { display: grid; place-items: center; width: 64px; flex: none; background: #f2b705; color: #1c2a4a; font-family: var(--sans); font-weight: 700; font-size: 30px; }
 .home-route .hang .txt { padding: 10px 16px; min-width: 0; }

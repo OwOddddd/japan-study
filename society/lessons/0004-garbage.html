@@ -119,7 +119,7 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout">有不懂的地方，或想延伸問（例如「台灣的垃圾車為什麼放音樂」），直接在對話框問老師。交卷後把結果複製貼給老師。</div>
+  <div class="callout"><b>延伸想想</b>：台灣的垃圾車為什麼放音樂？</div>
 
   <p class="small">語音：VOICEVOX:青山龍星</p>
   <nav class="lesson-nav">
@@ -136,7 +136,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '社會與生活第 3 課 小測驗：垃圾分類',
+  title: '社會與生活 第 3 課・垃圾分類',
   facets: [{ id: 'l3', name: '本課' }, { id: 'review', name: '複習' }],
   storageKey: 'society-l3-v1',
   resultsEl: document.getElementById('results'),

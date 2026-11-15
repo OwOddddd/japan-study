@@ -16,18 +16,17 @@
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
   <h1>日本地理程度診斷</h1>
-  <p class="lede">12 個面向、52 題，每個面向由淺到深。這不是考試，是幫老師找出你該從哪裡開始學。</p>
+  <p class="lede">12 個面向、52 題，每個面向由淺到深。這不是考試，是找出該從哪裡開始學。</p>
 
   <div class="callout">
-    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓老師以為你會了，結果跳過你真正需要學的部分。<br>
+    <b>作答原則</b>：不確定就按「我不知道」，不要猜。猜對會讓結果比實際好，反而漏掉真正需要學的部分。<br>
     簡答題寫重點即可，不用寫完整句子。作答會自動存在這個瀏覽器裡，中途關掉也不會不見。<br>
-    交卷後按「複製結果，貼給老師」，把文字貼回對話框，老師會依結果安排課程。
+    交卷後會依面向顯示結果，按「複製結果」可以保存一份文字。
   </div>
 
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:36px"><button class="btn" id="submit">交卷</button></p>
-  <p class="small" style="text-align:center">看不懂題目或想問任何問題，隨時直接問老師（在對話框問 Claude）。</p>
 </main>
 
 <script>
@@ -36,7 +35,7 @@ const facets = [
   { id: 'city',     name: '主要城市' },
   { id: 'mountain', name: '山地與火山地形' },
   { id: 'plain',    name: '平原、河川、湖泊' },
-  { id: 'sea',      name: '國土位置、島嶼與海域', desc: '老師補充的面向：經緯度、領域的東西南北端也放在這裡。' },
+  { id: 'sea',      name: '國土位置、島嶼與海域', desc: '補充的面向：經緯度、領域的東西南北端也放在這裡。' },
   { id: 'climate',  name: '氣候與季節' },
   { id: 'disaster', name: '自然災害' },
   { id: 'people',   name: '人口分布' },
@@ -299,7 +298,7 @@ const questions = [
   { id: 'history-1', facet: 'history', level: 1, type: 'choice',
     prompt: '古代的首都奈良（平城京）和京都（平安京），都位在哪一種地形中？',
     options: ['盆地', '半島', '台地', '三角洲'],
-    explain: '奈良盆地、京都盆地四周有山圍繞，易守難攻、有河川水源，所以夏熱冬冷的「盆地氣候」也成了京都的特色。' },
+    explain: '奈良盆地、京都盆地四周有山圍繞，易守難攻、有河川水源。盆地四面被山圍住，也造成夏熱冬冷的「盆地氣候」。' },
   { id: 'history-2', facet: 'history', level: 2, type: 'choice',
     prompt: '岐阜縣白川鄉的「合掌造」房屋，屋頂又高又陡。最主要的原因是？',
     options: ['讓大量積雪容易滑落', '方便收集雨水來飲用', '抵擋颱風帶來的強風', '展示宗教信仰的象徵'],
