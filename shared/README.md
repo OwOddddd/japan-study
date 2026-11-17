@@ -9,6 +9,7 @@
 | `order.js` | 排序題（`.exercise.order`） |
 | `skin.js` | 外觀切換（路線圖／和柄／像素／簡潔）。每頁 `<head>` 都要引用，放在 style.css 後面 |
 | `skins.css` | 三種外觀的樣式，由 style.css 開頭 `@import`，不用另外引用 |
+| `study.css`、`study.js` | 課程頁的隨堂筆記（右側欄，匯出文字／Word／PDF）、全站右下的回頂端按鈕、三種外觀的課程頁美術（頁首、段號、因果鏈編號、按鈕）。`study.css` 由 style.css `@import`，`study.js` 由 skin.js 自動載入，頁面不用另外引用 |
 | `home.js`、`home.css` | 只給網站首頁用。首頁的課程清單從各主題 `index.html` 的「課程」區自動讀取 |
 | `home-map.js` | 首頁路線圖外觀的地鐵路線圖。站名用檔案裡的 `SHORT` 縮寫，新增課程時總管要補一筆（沒補會自動截短） |
 
@@ -70,6 +71,8 @@
 **版面**：`main`（一般寬度）、`main.wide`（寬圖表頁）、`.lede` / `.subtitle`（標題下的引言）、`.small`、`.muted`、`.tag`、`nav.crumbs`（課內麵包屑）、`nav.lesson-nav`（上一課 / 下一課）
 
 **文章元件**：`.goal`（本課目標）、`.callout`（提示）、`.note`（補充）、`.source`（資料來源框）、`sup.cite`、`ol.chain`（編號因果鏈）、`ul.chain` + `.why`（圓點因果鏈）、`table` / `table.cmp`、`tr.band`、`figure` / `figcaption`、`.diagram`（SVG 示意圖，配 `.d-*`）、`.legend`
+
+**資料來源**：課文裡不放來源連結。來源一律收在頁尾「語音：VOICEVOX:青山龍星」下方（沒有語音行就放在 `nav.lesson-nav` 前）的折疊區：`<details class="sources"><summary>資料來源</summary><ol><li><a href="…" target="_blank">名稱</a></li></ol></details>`。到現場看什麼的官網、延伸閱讀可以留在課文。
 
 **互動練習**：
 ```html

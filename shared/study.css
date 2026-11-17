@@ -1,0 +1,211 @@
+/* 課程頁的學習工具與三種外觀的課程頁美術（2026-11-18 使用者定案，樣本在 design-trials/lesson-*.html）
+   由 style.css 開頭 @import，搭配 shared/study.js（skin.js 自動載入）。
+   - html.study：study.js 在課程頁（lessons/ 底下、不含診斷）加上，筆記欄、段號、頁首裝飾只在這種頁面出現
+   - 回頂端按鈕（.totop）每一頁都有
+   - 路線圖＝月台（A）、和柄＝瓦版（B，頁首用暖簾）、像素＝對話框（A）；簡潔只有基本樣式 */
+
+/* ---------- 共通 ---------- */
+:root {
+  --v-navy: #1c2a4a; --v-yellow: #f2b705;
+  --tile: rgba(40, 52, 60, .05);
+  --n-bg: var(--surface); --n-line: var(--line); --n-rule: var(--line); --n-ink: var(--ink); --n-muted: var(--muted);
+  --ai: #1f3657; --shu: #b8412e; --wood: #8a6440; --wood-2: #6e4f31; --wood-hi: #b48654;
+  --paper: #f3ead2; --paper-ink: #1d1a17; --paper-line: #d8c9a4;
+  --weave: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 1px, transparent 1px 3px);
+  --weave-soft: repeating-linear-gradient(90deg, rgba(0,0,0,.022) 0 1px, transparent 1px 3px);
+  --cloth: var(--topic, #4f6575);
+  --px-frame: #e9e6ff; --gold: #ffd76a; --px-win: #0f1430; --px-deep: #0b0f26;
+  --px-num: 'Press Start 2P', 'Cubic 11', 'DotGothic16', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --tile: rgba(255, 255, 255, .035); --paper: #2a2621; --paper-ink: #ece4d2; --paper-line: #4a4236; --wood: #6e5034; --wood-2: #4e3822;
+    --weave-soft: repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px); }
+}
+:root[data-theme="dark"] { --tile: rgba(255, 255, 255, .035); --paper: #2a2621; --paper-ink: #ece4d2; --paper-line: #4a4236; --wood: #6e5034; --wood-2: #4e3822;
+  --weave-soft: repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px); }
+
+/* 依外觀顯示的小元件 */
+.only-route, .only-wa, .only-pixel { display: none !important; }
+html[data-skin="route"] .only-route, html[data-skin="wa"] .only-wa, html[data-skin="pixel"] .only-pixel { display: revert !important; }
+html[data-skin="route"] span.only-route, html[data-skin="wa"] span.only-wa, html[data-skin="pixel"] span.only-pixel { display: inline-flex !important; align-items: center; justify-content: center; }
+
+.only-plain { display: none; }
+html[data-skin="plain"] .only-plain { display: inline; }
+
+/* ---------- 版面：課文＋右側筆記 ---------- */
+html.study .sticky { align-items: center; }
+.sticky .lt { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+.sticky .lt > span { white-space: nowrap; }
+.sticky .st-title { overflow: hidden; text-overflow: ellipsis; }
+.sticky #progress { white-space: nowrap; flex: none; }
+@media (min-width: 1180px) {
+  .page { display: grid; grid-template-columns: minmax(0, 760px) 320px; gap: 32px; justify-content: center; align-items: start; }
+  .page > main { margin: 0; min-width: 0; }
+  .notes { position: sticky; top: 56px; margin-top: 32px; max-height: calc(100vh - 80px); }
+  .notes-fab, .notes .n-close { display: none !important; }
+}
+@media (max-width: 1179.98px) {
+  .notes { position: fixed; z-index: 30; right: 0; bottom: 0; width: min(380px, 100%); max-height: 78vh; margin: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px); transform: translateY(105%); visibility: hidden; transition: transform .22s ease, visibility 0s .22s; box-shadow: 0 -8px 30px rgba(0,0,0,.18); }
+  .notes.open { transform: none; visibility: visible; transition: transform .22s ease; }
+}
+@media (max-width: 759.98px) { .notes { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .notes, .notes.open { transition: none; } }
+
+/* ---------- 筆記欄（骨架） ---------- */
+.notes { display: flex; flex-direction: column; background: var(--n-bg); color: var(--n-ink); border: 1px solid var(--n-line); border-radius: 8px; font-size: .92rem; line-height: 1.6; }
+.n-head { display: flex; align-items: center; gap: 10px; padding: 8px 12px; }
+.n-head .n-title { font-size: 1rem; }
+.n-head .n-sub { font-size: .75rem; letter-spacing: .12em; opacity: .75; }
+.n-close { margin-left: auto; font: inherit; font-size: 1.2rem; line-height: 1; background: transparent; border: 0; color: inherit; cursor: pointer; padding: 4px 6px; }
+.n-body { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 12px; min-height: 0; flex: 1; }
+.n-where { font-size: .78rem; color: var(--n-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.n-where b { color: var(--n-ink); font-weight: 500; }
+.notes textarea { min-height: 76px; background: var(--n-bg); border-color: var(--n-line); color: var(--n-ink); font-size: .92rem; }
+.n-addrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.n-addrow small { color: var(--n-muted); font-size: .72rem; }
+.n-btn { font: inherit; font-size: .85rem; padding: 4px 14px; border-radius: 6px; border: 1px solid var(--n-line); background: var(--n-bg); color: var(--n-ink); cursor: pointer; }
+.n-btn.main { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 700; }
+.n-btn:focus-visible, .n-close:focus-visible, .totop:focus-visible, .notes-fab:focus-visible { outline: 3px solid var(--v-yellow); outline-offset: 2px; }
+.n-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; flex: 1; }
+.n-list li { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: start; padding: 8px 0; }
+.n-list li + li { border-top: 1px solid var(--n-rule); }
+.n-list p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.n-list .n-sec { font-size: .72rem; color: var(--n-muted); white-space: nowrap; padding-top: .2em; }
+.n-del { font: inherit; background: transparent; border: 0; color: var(--n-muted); cursor: pointer; padding: 0 4px; font-size: 1rem; line-height: 1.4; }
+.n-del:hover { color: var(--bad); }
+.n-list li.n-empty { display: block; color: var(--n-muted); font-size: .82rem; border: 0; }
+.n-export { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; border-top: 1px solid var(--n-line); padding-top: 10px; }
+.n-export > span { font-size: .78rem; color: var(--n-muted); margin-right: 2px; }
+.n-status { margin: 0; font-size: .78rem; color: var(--good); min-height: 1.2em; }
+
+/* ---------- 回頂端、筆記按鈕（骨架） ---------- */
+.totop, .notes-fab { position: fixed; z-index: 20; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); cursor: pointer; font: inherit; padding: 0; }
+.totop { right: max(16px, env(safe-area-inset-right, 0px)); width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .2s, transform .2s; }
+.totop.show { opacity: 1; pointer-events: auto; transform: none; }
+.notes-fab { right: calc(max(16px, env(safe-area-inset-right, 0px)) + 64px); height: 44px; border-radius: 22px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.notes-fab .cnt { font-size: .7rem; margin-left: 3px; }
+@media (prefers-reduced-motion: reduce) { .totop { transition: none; } }
+
+/* ---------- 資料來源（課文最下方，折疊） ---------- */
+details.sources { margin: 6px 0 0; font-size: .85rem; color: var(--muted); }
+details.sources summary { cursor: pointer; width: max-content; }
+details.sources ol { margin: 6px 0 0; padding-left: 1.6em; }
+details.sources li { margin: 2px 0; overflow-wrap: anywhere; }
+
+/* ---------- 列印：一般列印不印工具；匯出 PDF 時只印筆記 ---------- */
+#print-notes { display: none; }
+@media print {
+  .notes, .notes-fab, .totop, .rail { display: none !important; }
+  html.print-notes body > *:not(#print-notes) { display: none !important; }
+  html.print-notes #print-notes { display: block; font-family: var(--sans); color: #000; }
+  #print-notes h1 { font-size: 18pt; margin: 0 0 4pt; }
+  #print-notes h2 { font-size: 12pt; margin: 14pt 0 4pt; border-bottom: 1px solid #999; }
+  #print-notes p { margin: 0 0 4pt; white-space: pre-wrap; }
+}
+
+/* ==================== 路線圖：月台 ==================== */
+html[data-skin="route"].study body { background-image: repeating-linear-gradient(90deg, var(--tile) 0 1px, transparent 1px 64px), repeating-linear-gradient(0deg, var(--tile) 0 1px, transparent 1px 32px); }
+html[data-skin="route"].study .sticky { background: var(--v-navy); color: #fff; border-bottom: 0; padding: 0 16px 0 0; min-height: 40px; }
+html[data-skin="route"] .sticky .st-pic { width: 40px; height: 40px; flex: none; background: var(--v-yellow); color: var(--v-navy); font-weight: 700; font-size: 1.15rem; }
+html[data-skin="route"].study .sticky #progress { color: #cfd6e4; }
+html[data-skin="route"].study .page > main { background: var(--surface); box-shadow: 0 0 0 1px var(--line); position: relative; --rail-x: 26px; --h2-x: 52px; padding-left: 52px; }
+@media (min-width: 760px) { html[data-skin="route"].study .page > main { margin-top: 24px; margin-bottom: 40px; border-radius: 4px; } }
+@media (max-width: 519.98px) { html[data-skin="route"].study .page > main { --rail-x: 14px; --h2-x: 36px; padding-left: 36px; } }
+html[data-skin="route"] .rail { position: absolute; left: calc(var(--rail-x) - 2px); width: 4px; border-radius: 2px; background: color-mix(in srgb, var(--topic) 22%, var(--surface)); }
+html[data-skin="route"] .rail i { display: block; width: 100%; border-radius: 2px; background: var(--topic); }
+html[data-skin="route"].study main h2 { padding-left: 0; }
+html[data-skin="route"].study main h2::before { left: calc(var(--rail-x) - 9px - var(--h2-x)); top: .28em; width: 18px; height: 18px; border-width: 4px; }
+html[data-skin="route"].study main h2.passed::before { background: var(--topic); }
+html[data-skin="route"] .notes { border-radius: 4px; overflow: hidden; }
+html[data-skin="route"] .n-head { background: var(--v-navy); color: #fff; padding: 0 12px 0 0; }
+html[data-skin="route"] .n-head .n-pic { width: 40px; height: 40px; flex: none; background: var(--v-yellow); color: var(--v-navy); }
+html[data-skin="route"] .n-list .n-sec { display: inline-grid; place-items: center; min-width: 1.6em; height: 1.6em; padding: 0 .3em; border-radius: 50%; border: 3px solid var(--topic); color: var(--n-ink); font-weight: 700; font-size: .7rem; }
+html[data-skin="route"] .totop { width: 52px; height: 56px; border-radius: 4px; border: 0; background: var(--v-yellow); color: #111; box-shadow: 0 3px 0 rgba(0,0,0,.25); display: grid; place-items: center; align-content: center; }
+html[data-skin="route"] .totop small { font-size: .62rem; font-weight: 700; letter-spacing: .08em; line-height: 1; }
+html[data-skin="route"] .notes-fab { height: 44px; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); border: 0; border-radius: 4px; overflow: hidden; padding: 0; gap: 0; align-items: stretch; background: var(--v-navy); color: #fff; box-shadow: 0 3px 0 rgba(0,0,0,.25); }
+html[data-skin="route"] .notes-fab .fp { width: 40px; background: var(--v-yellow); color: var(--v-navy); }
+html[data-skin="route"] .notes-fab .ft { display: inline-flex; align-items: center; padding: 0 12px 0 10px; font-size: .9rem; }
+html[data-skin="route"] details.sources summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; }
+html[data-skin="route"] details.sources summary::-webkit-details-marker { display: none; }
+html[data-skin="route"] details.sources summary::before { content: "▸"; display: inline-grid; place-items: center; width: 1.4em; height: 1.4em; border-radius: 3px; background: var(--v-navy); color: #fff; font-size: .8em; }
+html[data-skin="route"] details.sources[open] summary::before { content: "▾"; }
+
+/* ==================== 和柄：瓦版（頁首用暖簾） ==================== */
+/* 布料＝首頁暖簾：主題色＋該主題的花紋（市松／青海波／矢絣）＋織紋與兩側陰影 */
+html[data-topic="history"], html[data-topic="architecture"], html[data-topic="railways"], html[data-topic="castles"] {
+  --pat: conic-gradient(rgba(255,255,255,.16) 25%, transparent 0 50%, rgba(255,255,255,.16) 0 75%, transparent 0); --pat-size: 18px 18px; --pat-pos: 0 0; }
+html[data-topic="geography"], html[data-topic="religion"], html[data-topic="festivals"], html[data-topic="news"] {
+  --pat: radial-gradient(circle at 50% 100%, transparent 0 22%, rgba(255,255,255,.22) 23% 27%, transparent 28% 40%, rgba(255,255,255,.22) 41% 45%, transparent 46% 58%, rgba(255,255,255,.22) 59% 63%, transparent 64%); --pat-size: 28px 14px; --pat-pos: 0 0; }
+html[data-topic="japanese"], html[data-topic="food"], html[data-topic="society"], html[data-topic="home"] {
+  --pat: linear-gradient(60deg, rgba(255,255,255,.2) 25%, transparent 25% 50%, rgba(255,255,255,.2) 50% 75%, transparent 75%), linear-gradient(-60deg, rgba(255,255,255,.2) 25%, transparent 25% 50%, rgba(255,255,255,.2) 50% 75%, transparent 75%); --pat-size: 16px 28px, 16px 28px; --pat-pos: 0 0, 0 14px; }
+/* 課程頁拿掉頁頂 96px 的青海波帶 */
+html[data-skin="wa"].study:not([data-topic="home"]) body::before { display: none; }
+html[data-skin="wa"].study .sticky { background-color: var(--ai); background-image: var(--weave); color: #fff; border-bottom: 0; min-height: 42px; padding: 4px 16px 0 10px; box-shadow: inset 0 4px 0 var(--wood-hi); }
+html[data-skin="wa"] .sticky .st-mon { width: 26px; height: 26px; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; font-family: var(--serif); font-weight: 700; font-size: .85rem; }
+html[data-skin="wa"].study .sticky #progress { color: #cdd6e6; }
+html[data-skin="wa"].study main h2::before { content: attr(data-k); flex: none; padding: 0 .45em; background: var(--paper); color: var(--paper-ink); border: 1px solid var(--paper-line); box-shadow: 0 2px 0 var(--wood); font-family: var(--serif); font-size: .8em; line-height: 1.6; }
+html[data-skin="wa"].study main h2 .h-num { display: none; }
+html[data-skin="wa"] main > h1::after { transform: none; width: 1.9em; height: 1.9em; border: 0; border-radius: 2px; color: #fff; font-family: var(--serif); font-weight: 700;
+  box-shadow: inset 0 -5px 0 -3px rgba(255,255,255,.22), inset 0 7px 0 rgba(0,0,0,.15); }
+html[data-skin="wa"] .goal { position: relative; border-left: 0; border-radius: 2px; padding-left: calc(1.1em + 10px); background: var(--weave-soft), color-mix(in srgb, var(--cloth) 10%, var(--surface)); }
+html[data-skin="wa"] .goal::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 10px; }
+html[data-skin="wa"] ol.chain li::before { border-radius: 2px; color: #fff; font-family: var(--serif); box-shadow: inset 0 3px 0 rgba(0,0,0,.15); }
+html[data-skin="wa"] ul.chain li::before { width: .72em; height: .72em; top: 1.17em; left: .4em; border-radius: 0; transform: rotate(45deg); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
+html[data-skin="wa"] ul.chain li::after { width: 2px; left: .72em; background: color-mix(in srgb, var(--cloth) 35%, var(--bg)); }
+html[data-skin="wa"] .btn:not(.ghost), html[data-skin="wa"] .n-btn.main, html[data-skin="wa"] .arrive-btns button[aria-pressed="true"] { border: 0; border-radius: 3px; color: #fff; box-shadow: inset 0 -3px 0 rgba(0,0,0,.2); }
+html[data-skin="wa"] main > h1::after, html[data-skin="wa"] .goal::before, html[data-skin="wa"] ol.chain li::before, html[data-skin="wa"] ul.chain li::before,
+html[data-skin="wa"] .btn:not(.ghost), html[data-skin="wa"] .n-btn.main, html[data-skin="wa"] .arrive-btns button[aria-pressed="true"] {
+  background-color: var(--cloth);
+  background-image: var(--weave), linear-gradient(90deg, rgba(0,0,0,.16), transparent 30%, rgba(255,255,255,.07) 60%, rgba(0,0,0,.13)), var(--pat);
+  background-size: auto, auto, auto, var(--pat-size); background-position: 0 0, 0 0, 0 0, var(--pat-pos);
+  text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+html[data-skin="wa"] .notes { --n-bg: var(--paper); --n-ink: var(--paper-ink); --n-line: var(--paper-line); --n-rule: var(--paper-line); border: 8px solid transparent; border-radius: 2px;
+  background: linear-gradient(var(--paper), var(--paper)) padding-box, linear-gradient(90deg, var(--wood-2), var(--wood) 50%, var(--wood-2)) border-box; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+html[data-skin="wa"] .n-head { background: #1d1a17; color: #efe3c4; margin: 8px 8px 0; padding: 6px 12px; }
+html[data-skin="wa"] .n-head .n-title { letter-spacing: .25em; font-family: var(--serif); }
+html[data-skin="wa"] .notes textarea { background: color-mix(in srgb, var(--paper) 70%, var(--surface)); }
+html[data-skin="wa"] .n-list .n-sec { padding: 0 .45em; background: var(--wood); color: #fff6e5; border-radius: 2px; font-size: .72rem; }
+html[data-skin="wa"] .totop { width: 40px; height: 64px; border: 0; border-radius: 3px; background: linear-gradient(90deg, #7a5532, #94693f 50%, #7a5532); color: #fff6e5; box-shadow: inset 0 -3px 0 #5e3f22, 0 3px 6px rgba(0,0,0,.25); display: grid; justify-items: center; align-content: start; gap: 2px; padding-top: 7px; }
+html[data-skin="wa"] .totop::before { content: ""; position: absolute; top: -13px; left: calc(50% - 8px); width: 16px; height: 14px; border: 2px solid #5e3f22; border-bottom: 0; border-radius: 50% 50% 0 0; }
+html[data-skin="wa"] .totop small { writing-mode: vertical-rl; font-size: .72rem; font-weight: 700; letter-spacing: .15em; line-height: 1; }
+html[data-skin="wa"] .notes-fab { bottom: calc(26px + env(safe-area-inset-bottom, 0px)); border: 0; border-radius: 3px; gap: 8px; padding: 0 14px 0 8px; background: linear-gradient(#94693f, #7a5532); color: #fff6e5; box-shadow: inset 0 -3px 0 #5e3f22, 0 3px 6px rgba(0,0,0,.25); }
+html[data-skin="wa"] .notes-fab .fp { padding: 1px 6px; background: #efe3c4; color: #1d1a17; font-size: .8rem; font-family: var(--serif); font-weight: 700; }
+
+/* ==================== 像素：對話框（只有深色） ==================== */
+html[data-skin="pixel"] .notes { --n-bg: var(--px-win); --n-ink: #f3f1ea; --n-line: #39407a; --n-rule: #262e66; --n-muted: #a7acc9; border: 0; border-radius: 0;
+  box-shadow: 0 -4px 0 0 var(--px-frame), 0 4px 0 0 var(--px-frame), -4px 0 0 0 var(--px-frame), 4px 0 0 0 var(--px-frame), 0 -8px 0 0 #000, 0 8px 0 0 #000, -8px 0 0 0 #000, 8px 0 0 0 #000, 0 0 0 4px #000; }
+@media (max-width: 1179.98px) { html[data-skin="pixel"] .notes { box-shadow: 0 -4px 0 0 var(--px-frame), 0 -8px 0 0 #000; } }
+html[data-skin="pixel"] .notes textarea { background: var(--px-deep); border: 2px solid var(--n-line); border-radius: 0; }
+html[data-skin="pixel"] .n-btn { border-radius: 0; border-width: 2px; background: var(--px-deep); }
+html[data-skin="pixel"] .n-btn.main { background: var(--accent); border-color: var(--accent); color: #121733; }
+html[data-skin="pixel"] .n-title, html[data-skin="pixel"] .n-sub, html[data-skin="pixel"].study .sticky, html[data-skin="pixel"] .notes-fab, html[data-skin="pixel"] .n-sec, html[data-skin="pixel"] details.sources summary { font-family: var(--dot); font-weight: 400; }
+html[data-skin="pixel"] .n-head { color: var(--gold); padding: 10px 12px 4px; }
+html[data-skin="pixel"] .n-list li + li { border-top: 2px dashed var(--n-rule); }
+html[data-skin="pixel"] .n-list .n-sec { color: var(--gold); }
+html[data-skin="pixel"] .n-list .n-sec::before { content: "▶"; font-size: .8em; margin-right: 2px; }
+html[data-skin="pixel"] .n-del:hover { color: #ff7a5c; }
+html[data-skin="pixel"].study .sticky { position: sticky; background: var(--px-win); color: #f3f1ea; border-bottom: 0; min-height: 42px; box-shadow: inset 0 -4px 0 #000, inset 0 -6px 0 var(--px-frame); padding-bottom: 12px; }
+html[data-skin="pixel"] .sticky .st-lv { padding: 7px 8px 6px; background: var(--gold); color: #121733; font-family: var(--px-num); font-size: .78rem; line-height: 1; box-shadow: inset -3px -3px 0 rgba(0,0,0,.25), inset 3px 3px 0 rgba(255,255,255,.45), 0 0 0 2px #000; }
+html[data-skin="pixel"] .sticky .st-exp { gap: 8px; }
+html[data-skin="pixel"] .sticky .st-exp i { font-style: normal; font-family: var(--px-num); font-size: .62rem; color: #7ddc8a; }
+html[data-skin="pixel"] .sticky .st-exp b { display: block; width: 130px; height: 16px; background: #000; padding: 3px; box-shadow: 0 0 0 2px var(--px-frame); }
+html[data-skin="pixel"] .sticky .st-exp u { display: block; height: 100%; width: calc(var(--read, 0) * 100%); background: repeating-linear-gradient(90deg, #7ddc8a 0 4px, #5fbf6c 4px 6px); }
+html[data-skin="pixel"].study .sticky .st-title { position: absolute; left: 50%; top: 6px; transform: translateX(-50%); max-width: calc(100% - 330px); font-size: 1.15rem; color: #f3f1ea; text-shadow: 2px 2px 0 #000; }
+@media (max-width: 759.98px) { html[data-skin="pixel"].study .sticky .st-title { max-width: calc(100% - 230px); } }
+@media (max-width: 519.98px) {
+  html[data-skin="pixel"] .sticky span.st-exp.only-pixel { display: none !important; }
+  html[data-skin="pixel"].study .sticky .st-title { font-size: 1rem; max-width: calc(100% - 170px); }
+}
+html[data-skin="pixel"].study main h2 { position: relative; padding-left: 1.2em; }
+html[data-skin="pixel"].study main h2::before { content: "▶"; position: absolute; left: 0; color: var(--gold); font-size: .8em; top: .2em; }
+html[data-skin="pixel"] ol.chain li { padding-left: 2.7em; }
+html[data-skin="pixel"] ol.chain li::before { border-radius: 0; background: var(--accent); color: #121733; font-family: var(--px-num); font-weight: 400; font-size: .62rem; line-height: 1.85rem; width: 1.85rem; height: 1.85rem; top: 2px;
+  clip-path: polygon(0 3px, 3px 3px, 3px 0, calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px));
+  box-shadow: inset -3px -3px 0 rgba(0,0,0,.28), inset 3px 3px 0 rgba(255,255,255,.35); }
+html[data-skin="pixel"] .btn:not(.ghost) { font-family: var(--dot); font-weight: 400; letter-spacing: .1em; border-radius: 0; padding: 10px 26px; background: var(--accent); color: #121733;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,.3), inset 4px 4px 0 rgba(255,255,255,.4), 0 0 0 4px #000; }
+html[data-skin="pixel"] .btn:not(.ghost):active { box-shadow: inset 4px 4px 0 rgba(0,0,0,.3), 0 0 0 4px #000; }
+html[data-skin="pixel"] .totop { width: 48px; height: 48px; border: 0; border-radius: 0; background: var(--px-win); color: var(--gold); display: grid; place-items: center; box-shadow: 0 -4px 0 0 var(--px-frame), 0 4px 0 0 var(--px-frame), -4px 0 0 0 var(--px-frame), 4px 0 0 0 var(--px-frame), 0 0 0 4px #000; }
+html[data-skin="pixel"] .notes-fab { height: 40px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); right: calc(max(16px, env(safe-area-inset-right, 0px)) + 70px); border: 0; border-radius: 0; gap: 6px; padding: 0 12px 0 8px; background: var(--px-win); color: #f3f1ea; box-shadow: 0 -4px 0 0 var(--px-frame), 0 4px 0 0 var(--px-frame), -4px 0 0 0 var(--px-frame), 4px 0 0 0 var(--px-frame), 0 0 0 4px #000; }

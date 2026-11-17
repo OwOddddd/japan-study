@@ -1,8 +1,10 @@
 /* 外觀切換（所有頁面在 <head> 引用，放在 style.css 後面）
    - 在 <html> 設定 data-skin（route 路線圖／wa 和柄／pixel 像素／plain 簡潔）與 data-topic（依網址判斷主題）
    - 在 nav.site-nav 最後放「外觀」選單；選擇存在這個瀏覽器（localStorage）
-   - 內含像素圖示資料 SPRITES 與 drawSprites()，像素外觀和首頁會用到 */
+   - 內含像素圖示資料 SPRITES 與 drawSprites()，像素外觀和首頁會用到
+   - 載入同資料夾的 study.js（隨堂筆記、回頂端、課程頁美術） */
 (function () {
+  var BASE = (document.currentScript && document.currentScript.src || '').replace(/[^\/]*$/, '');
   var SKINS = [['route', '路線圖'], ['wa', '和柄'], ['pixel', '像素'], ['plain', '簡潔']];
   var root = document.documentElement;
   var skin = 'route';
@@ -113,6 +115,10 @@
       window.drawSprites(strip);
     }
     arrive(main);
+    // 筆記、回頂端、課程頁美術（shared/study.js）
+    var st = document.createElement('script');
+    st.src = BASE + 'study.js';
+    document.body.appendChild(st);
   }
 
   // 每課最下方的「到站確認」。選項記進這台裝置的瀏覽器（jp-done：1 學完了、0 還想多逛逛），首頁的發車看板和路線圖依此顯示進度
