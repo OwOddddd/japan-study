@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>景點與人物速查</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../../geography/assets/japan-map.js"></script>
+<style>
+  main.wide { max-width: 900px; }
+  .maps { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .maps { grid-template-columns: 1fr; } }
+  .maps figure { margin: 0; }
+  .maps figure.full { grid-column: 1 / -1; }
+  td.n { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  td.era { white-space: nowrap; }
+  .maps svg.jmap .plate { fill: var(--ink); font-size: 14px; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+  .maps svg.jmap .pref { stroke: var(--surface); stroke-width: 2; }
+  .tbl-scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main class="wide">
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本歷史</a></nav>
+
+<h1>景點與人物速查</h1>
+<p class="lede">第 1–12 課出現過的景點和主要人物。景點按地區排列，標出所在的縣、屬於哪個時代，每列連回教它的那一課。人物各記一句角色，以及可以去哪裡看到他留下的東西。</p>
+
+<h2>1. 景點地圖</h2>
+<p>塗色的是有景點的府縣，圓點旁的數字對應下表。擠在一起的景點合併成一個點，數字用「·」連起來。馬籠宿・妻籠宿與沖繩的和平祈念公園不在這三張地圖範圍內，只列在表裡。</p>
+<div class="maps">
+  <figure><div id="map-A"></div><figcaption>A：九州與本州西部</figcaption></figure>
+  <figure><div id="map-B"></div><figcaption>B：近畿與福井、岐阜</figcaption></figure>
+  <figure class="full"><div id="map-C"></div><figcaption>C：關東與靜岡</figcaption></figure>
+</div>
+
+<h2>2. 景點：在哪個縣、屬於哪個時代</h2>
+<div class="tbl-scroll">
+<table>
+  <thead><tr><th></th><th>景點</th><th>府縣</th><th>時代</th><th>看什麼</th><th>課</th></tr></thead>
+  <tbody>
+    <tr class="band"><td colspan="6"><b>九州</b></td></tr>
+    <tr><td class="n">1</td><td>吉野之里歷史公園</td><td>佐賀縣</td><td class="era">彌生</td><td>復原的環濠聚落：壕溝、柵欄、望樓，證明聚落之間常爭戰</td><td><a href="../lessons/0002-rice-builds-a-state.html">2</a></td></tr>
+    <tr><td class="n">2</td><td>福岡市博物館</td><td>福岡縣</td><td class="era">彌生</td><td>「漢委奴國王」金印，57 年奴國從東漢得到</td><td><a href="../lessons/0002-rice-builds-a-state.html">2</a></td></tr>
+    <tr><td class="n">3</td><td>大野城跡</td><td>福岡縣</td><td class="era">飛鳥</td><td>663 年白村江戰敗後，怕唐軍來攻而修築的山城</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td class="n">4</td><td>生の松原・今津的元寇防壘</td><td>福岡縣</td><td class="era">鎌倉</td><td>蒙古襲來後沿博多灣築的石壘，海側垂直、陸側緩坡</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td class="n">5</td><td>出島</td><td>長崎縣</td><td class="era">江戶</td><td>復原的荷蘭商館，鎖國時期日本唯一的歐洲窗口</td><td><a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr class="band"><td colspan="6"><b>本州西部</b></td></tr>
+    <tr><td class="n">6</td><td>赤間神宮</td><td>山口縣</td><td class="era">平安末</td><td>面對壇之浦古戰場，祭祀 1185 年沉海的幼年安德天皇</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td class="n">7</td><td>嚴島神社</td><td>廣島縣</td><td class="era">平安末</td><td>海上大鳥居，平清盛整建成今天的樣貌</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td class="n">8</td><td>萩（松下村塾）</td><td>山口縣</td><td class="era">幕末</td><td>長州藩城下町，吉田松陰的松下村塾，出了多位明治政府的核心人物</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td class="n">9</td><td>廣島和平紀念公園（原爆圓頂）</td><td>廣島縣</td><td class="era">昭和</td><td>1945 年原爆後保留的建築，旁有和平紀念資料館</td><td><a href="../lessons/0011-modernization-and-war.html">11</a></td></tr>
+    <tr class="band"><td colspan="6"><b>近畿</b></td></tr>
+    <tr><td class="n">10</td><td>百舌鳥・古市古墳群</td><td>大阪府</td><td class="era">古墳</td><td>大仙古墳（傳仁德天皇陵），世界三大墳墓之一</td><td><a href="../lessons/0002-rice-builds-a-state.html">2</a></td></tr>
+    <tr><td class="n">11</td><td>明日香村</td><td>奈良縣</td><td class="era">飛鳥</td><td>飛鳥時代的政治中心，飛鳥寺與板蓋宮遺跡</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td class="n">12</td><td>法隆寺</td><td>奈良縣</td><td class="era">飛鳥</td><td>與聖德太子有關，世界現存最古老的木造建築群</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td class="n">13</td><td>平城宮跡</td><td>奈良縣</td><td class="era">奈良</td><td>710 年遷入的都城宮殿，大極殿與朱雀門已復原</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td class="n">14</td><td>東大寺大佛</td><td>奈良縣</td><td class="era">奈良</td><td>聖武天皇以佛法護國，752 年開眼；寺院勢力膨脹的起點</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td class="n">15</td><td>平等院鳳凰堂</td><td>京都府（宇治）</td><td class="era">平安</td><td>藤原賴通（道長之子）所建，十圓硬幣上的建築</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td class="n">16</td><td>京都市街・平安神宮</td><td>京都府</td><td class="era">平安</td><td>棋盤街道是 794 年平安京的格局；平安神宮是 1895 年為紀念遷都而建</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td class="n">17</td><td>京都御所</td><td>京都府</td><td class="era">平安～江戶</td><td>天皇從 794 年到 1869 年（除少數時期外）住在京都；可看紫宸殿等御所的建築</td><td><a href="../lessons/0001-skeleton-of-japanese-history.html">1</a></td></tr>
+    <tr><td class="n">18</td><td>二條城</td><td>京都府</td><td class="era">江戶</td><td>德川家康所建；二之丸大廣間是 1867 年大政奉還的地方</td><td><a href="../lessons/0001-skeleton-of-japanese-history.html">1</a>、<a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td class="n">19</td><td>比叡山延曆寺</td><td>滋賀縣</td><td class="era">平安</td><td>白河上皇管不住的僧兵就在這裡；戰國時被信長燒毀</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td class="n">20</td><td>上御靈神社與西陣</td><td>京都府</td><td class="era">室町</td><td>應仁之亂的第一場戰鬥；西軍本陣的地方後來叫「西陣」</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td class="n">21</td><td>金閣寺・銀閣寺</td><td>京都府</td><td class="era">室町</td><td>義滿的北山殿（金閣）與義政的東山山莊（銀閣）</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td class="n">22</td><td>本能寺跡</td><td>京都府</td><td class="era">安土桃山</td><td>1582 年信長被明智光秀攻殺的地方，現址立有石碑</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td class="n">23</td><td>安土城跡</td><td>滋賀縣</td><td class="era">安土桃山</td><td>信長 1576 年起建，筆直的大手道與天主台石垣</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td class="n">24</td><td>大阪城</td><td>大阪府</td><td class="era">安土桃山～江戶</td><td>豐臣秀吉所建，夏之陣燒毀後由德川重建；現存石垣多為德川時代</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td class="n">25</td><td>堂島（米市場舊址）</td><td>大阪府</td><td class="era">江戶</td><td>各藩的米在此交易，被認為是世界最早的期貨市場之一</td><td><a href="../lessons/0009-edo-economy-and-townspeople.html">9</a></td></tr>
+    <tr><td class="n">26</td><td>萬博紀念公園（太陽之塔）</td><td>大阪府</td><td class="era">昭和</td><td>1970 年大阪萬博會場，高度成長的象徵</td><td><a href="../lessons/0012-postwar-japan.html">12</a></td></tr>
+    <tr class="band"><td colspan="6"><b>中部</b></td></tr>
+    <tr><td class="n">27</td><td>一乘谷朝倉氏遺跡</td><td>福井縣</td><td class="era">戰國</td><td>朝倉氏的山城加城下町，復原了武家屋敷與町家</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td class="n">28</td><td>關原古戰場</td><td>岐阜縣</td><td class="era">安土桃山</td><td>1600 年關原之戰，東西軍陣跡立有標示</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td class="n">29</td><td>馬籠宿・妻籠宿</td><td>岐阜縣・長野縣</td><td class="era">江戶</td><td>中山道保存下來的宿場町，想像大名行列的住宿（地圖外）</td><td><a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr class="band"><td colspan="6"><b>關東</b></td></tr>
+    <tr><td class="n">30</td><td>鶴岡八幡宮・若宮大路</td><td>神奈川縣（鎌倉）</td><td class="era">鎌倉</td><td>從海邊筆直通到神社的主街，鎌倉幕府規劃的中軸線</td><td><a href="../lessons/0001-skeleton-of-japanese-history.html">1</a>、<a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td class="n">31</td><td>朝夷奈切通</td><td>神奈川縣（鎌倉）</td><td class="era">鎌倉</td><td>鎌倉通往六浦港的山路，兩邊是人工鑿開的岩壁</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td class="n">32</td><td>建長寺</td><td>神奈川縣（鎌倉）</td><td class="era">鎌倉</td><td>1253 年北條時賴建，武士引進宋朝禪宗的代表</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td class="n">33</td><td>箱根關所</td><td>神奈川縣</td><td class="era">江戶</td><td>復原的關所，箱根主要查「出女」（女性出江戶），因為大名的妻子在江戶當人質</td><td><a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr><td class="n">34</td><td>久里濱・培里公園</td><td>神奈川縣（橫須賀）</td><td class="era">幕末</td><td>培里 1853 年登陸、遞交國書的地點</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td class="n">35</td><td>下田・了仙寺</td><td>靜岡縣</td><td class="era">幕末</td><td>1854 年和親條約的補充條約簽訂處，每年 5 月有黑船祭</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td class="n">36</td><td>皇居東御苑</td><td>東京都</td><td class="era">江戶</td><td>江戶城本丸遺址，天守台石垣仍在，天守在 1657 年大火後沒有重建</td><td><a href="../lessons/0001-skeleton-of-japanese-history.html">1</a>、<a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr><td class="n">37</td><td>日本橋</td><td>東京都</td><td class="era">江戶～昭和</td><td>五街道起點；三越本店前身是越後屋；橋上有 1963 年蓋的首都高速</td><td><a href="../lessons/0009-edo-economy-and-townspeople.html">9</a>、<a href="../lessons/0012-postwar-japan.html">12</a></td></tr>
+    <tr><td class="n">38</td><td>深川江戶資料館</td><td>東京都</td><td class="era">江戶</td><td>復原江戶後期的深川街區，有長屋與商店</td><td><a href="../lessons/0009-edo-economy-and-townspeople.html">9</a></td></tr>
+    <tr><td class="n">39</td><td>昭和館</td><td>東京都</td><td class="era">昭和</td><td>戰中到戰後的日常生活展示</td><td><a href="../lessons/0012-postwar-japan.html">12</a></td></tr>
+    <tr><td class="n">40</td><td>日光東照宮</td><td>栃木縣</td><td class="era">江戶</td><td>祭祀家康，現在的華麗社殿是家光 1636 年完成的改建</td><td><a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr><td class="n">41</td><td>富岡製絲場</td><td>群馬縣</td><td class="era">明治</td><td>1872 年的官營製絲工廠，殖產興業的實例，世界遺產</td><td><a href="../lessons/0011-modernization-and-war.html">11</a></td></tr>
+    <tr class="band"><td colspan="6"><b>沖繩</b></td></tr>
+    <tr><td class="n">42</td><td>和平祈念公園</td><td>沖繩縣（糸滿市）</td><td class="era">昭和</td><td>沖繩戰最後的戰場一帶，「和平之礎」刻著沖繩戰犧牲者的名字，不分國籍，至今仍在追加（地圖外）</td><td><a href="../lessons/0011-modernization-and-war.html">11</a></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>3. 人物：一句角色</h2>
+<div class="callout">
+  <b>容易搞混的幾組</b>：<br>
+  <b>藤原道長</b>是貴族，代表攝關政治的頂峰，靠女兒嫁天皇掌權。<b>平清盛</b>是武士，學道長那一套進了朝廷，1167 年成為第一個當上太政大臣的武士。兩人做法一樣，身分不同，相隔約 150 年。<br>
+  <b>足利義滿</b>的金閣是幕府最強盛時期，<b>足利義政</b>的銀閣是應仁之亂之後，兩位將軍都建了別墅，一個盛、一個衰。<br>
+  <b>信長、秀吉、家康</b>：信長打破舊勢力，秀吉用檢地與刀狩把統一做成制度，家康用關原與大坂之陣把統一變成和平。
+</div>
+<div class="tbl-scroll">
+<table>
+  <thead><tr><th>人物</th><th>時代</th><th>一句角色</th><th>去哪裡看</th><th>課</th></tr></thead>
+  <tbody>
+    <tr><td>卑彌呼</td><td class="era">彌生末</td><td>小國互戰後被共立的女王，239 年遣使魏國受封</td><td>（邪馬台國位置未定）</td><td><a href="../lessons/0002-rice-builds-a-state.html">2</a></td></tr>
+    <tr><td>聖德太子</td><td class="era">飛鳥</td><td>推古天皇的輔政；十七條憲法、派小野妹子使隋</td><td>法隆寺</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td>蘇我入鹿</td><td class="era">飛鳥</td><td>專權豪族蘇我氏的首領，645 年被刺殺</td><td>明日香村</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td>中大兄（天智天皇）<br>中臣鎌足</td><td class="era">飛鳥</td><td>兩人發動乙巳之變，接著推行大化革新；鎌足是藤原氏的始祖</td><td>明日香村</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td>天武天皇</td><td class="era">飛鳥</td><td>中大兄的弟弟，壬申之亂（672）勝出；下令編史書</td><td></td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td>聖武天皇</td><td class="era">奈良</td><td>天花流行後靠佛法護國：國分寺、東大寺大佛</td><td>東大寺</td><td><a href="../lessons/0003-learning-from-china.html">3</a></td></tr>
+    <tr><td>桓武天皇</td><td class="era">奈良→平安</td><td>792 廢地方軍團，794 遷都平安京擺脫寺院</td><td>京都市街・平安神宮</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>菅原道真</td><td class="era">平安</td><td>894 年建議停派遣唐使</td><td></td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>藤原道長</td><td class="era">平安中</td><td><b>貴族</b>，攝關政治頂峰，三個女兒當皇后</td><td>平等院（兒子賴通建）</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>平將門</td><td class="era">平安中</td><td>關東武士，935 年起和家族私鬥，939 年攻打國府、自稱「新皇」</td><td></td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>白河上皇</td><td class="era">平安後</td><td>1086 年退位後以上皇掌權，開始院政</td><td>比叡山延曆寺</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>平清盛</td><td class="era">平安末</td><td><b>武士</b>，平治之亂勝出，1167 太政大臣，外孫即位為安德天皇</td><td>嚴島神社、赤間神宮</td><td><a href="../lessons/0004-why-the-court-lost-control.html">4</a></td></tr>
+    <tr><td>源賴朝</td><td class="era">平安末～鎌倉</td><td>1180 起兵，1185 滅平氏，在鎌倉開第一個幕府</td><td>鶴岡八幡宮・若宮大路</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td>源義經</td><td class="era">平安末</td><td>賴朝之弟，壇之浦滅平氏的功臣，後被賴朝追討，1189 年死於平泉</td><td>赤間神宮（壇之浦）</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td>北條義時、泰時</td><td class="era">鎌倉</td><td>歷任執權；義時在承久之亂（1221）擊敗後鳥羽上皇，泰時制定御成敗式目</td><td></td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td>後鳥羽上皇</td><td class="era">鎌倉</td><td>1221 年起兵討伐北條氏失敗，被流放隱岐</td><td></td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td>北條時賴</td><td class="era">鎌倉</td><td>執權，1253 年建建長寺，引進宋朝禪宗</td><td>建長寺</td><td><a href="../lessons/0005-kamakura-shogunate.html">5</a></td></tr>
+    <tr><td>後醍醐天皇</td><td class="era">鎌倉末～南北朝</td><td>討幕成功後親政（建武新政）失敗，逃到吉野另立南朝</td><td></td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td>足利尊氏</td><td class="era">鎌倉末～室町</td><td>倒戈滅鎌倉，1336 年另立天皇、開室町幕府</td><td></td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td>足利義滿</td><td class="era">室町</td><td>第三代將軍，1392 年結束南北朝，幕府最強盛時期；建金閣</td><td>金閣寺</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td>足利義政</td><td class="era">室町</td><td>第八代將軍，繼承問題引發應仁之亂；建銀閣</td><td>銀閣寺</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td>山名宗全、細川勝元</td><td class="era">室町</td><td>應仁之亂西軍、東軍的首領</td><td>上御靈神社與西陣</td><td><a href="../lessons/0006-muromachi-to-sengoku.html">6</a></td></tr>
+    <tr><td>織田信長</td><td class="era">戰國～安土桃山</td><td>桶狹間成名，進京、滅室町幕府，用鐵砲與經濟力打破舊勢力；1582 年死於本能寺</td><td>安土城跡、本能寺跡</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td>豐臣秀吉</td><td class="era">安土桃山</td><td>檢地、刀狩造成兵農分離，1590 年統一全國</td><td>大阪城</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td>德川家康</td><td class="era">安土桃山～江戶</td><td>關原之戰勝出，1603 年開江戶幕府，一國一城令與武家諸法度</td><td>關原古戰場、皇居東御苑、日光東照宮</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td>石田三成</td><td class="era">安土桃山</td><td>關原之戰的西軍首領，戰敗被處死</td><td>關原古戰場</td><td><a href="../lessons/0007-three-unifiers.html">7</a></td></tr>
+    <tr><td>德川家光</td><td class="era">江戶</td><td>三代將軍，1635 年制度化參勤交代，鎖國體制成形</td><td>日光東照宮</td><td><a href="../lessons/0008-edo-shogunate-rule.html">8</a></td></tr>
+    <tr><td>河村瑞賢</td><td class="era">江戶</td><td>整備東廻り、西廻り航路，運送年貢米</td><td></td><td><a href="../lessons/0009-edo-economy-and-townspeople.html">9</a></td></tr>
+    <tr><td>三井高利</td><td class="era">江戶</td><td>1673 年開越後屋，現金交易明碼標價；三井的起點</td><td>日本橋（三越）</td><td><a href="../lessons/0009-edo-economy-and-townspeople.html">9</a></td></tr>
+    <tr><td>培里</td><td class="era">幕末</td><td>1853 年率黑船到浦賀，要求開國</td><td>久里濱・培里公園、下田・了仙寺</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td>井伊直弼</td><td class="era">幕末</td><td>大老，未經敕許簽日美修好通商條約，1860 年被殺</td><td></td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td>吉田松陰</td><td class="era">幕末</td><td>長州藩的教育者，松下村塾培養倒幕與明治政府人才</td><td>萩（松下村塾）</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td>德川慶喜</td><td class="era">幕末</td><td>十五代將軍，1867 年大政奉還</td><td>二條城</td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td>西鄉隆盛</td><td class="era">幕末～明治</td><td>薩摩藩的倒幕主力，1877 年西南戰爭戰敗</td><td></td><td><a href="../lessons/0010-opening-and-meiji-restoration.html">10</a></td></tr>
+    <tr><td>犬養毅</td><td class="era">昭和</td><td>首相，1932 年五一五事件遇刺，政黨內閣結束</td><td></td><td><a href="../lessons/0011-modernization-and-war.html">11</a></td></tr>
+    <tr><td>麥克阿瑟</td><td class="era">戰後</td><td>盟軍占領日本的最高司令官</td><td></td><td><a href="../lessons/0012-postwar-japan.html">12</a></td></tr>
+    <tr><td>池田勇人</td><td class="era">戰後</td><td>首相，1960 年提出所得倍增計畫</td><td></td><td><a href="../lessons/0012-postwar-japan.html">12</a></td></tr>
+  </tbody>
+</table>
+</div>
+<details class="sources"><summary>資料來源</summary><ol><li><a href="https://afe.easia.columbia.edu/timelines/japan_timeline.htm" target="_blank">Columbia 年表</a></li><li>各景點與人物的出處見教它的那一課頁尾的資料來源</li></ol></details>
+</main>
+
+<script>
+const spots = [{"n": 1, "lon": 130.38, "lat": 33.33, "map": "A", "pid": 41}, {"n": 2, "lon": 130.35, "lat": 33.59, "map": "A", "pid": 40}, {"n": 3, "lon": 130.5, "lat": 33.55, "map": "A", "pid": 40}, {"n": 4, "lon": 130.3, "lat": 33.59, "map": "A", "pid": 40}, {"n": 5, "lon": 129.87, "lat": 32.74, "map": "A", "pid": 42}, {"n": 6, "lon": 130.95, "lat": 33.96, "map": "A", "pid": 35}, {"n": 7, "lon": 132.32, "lat": 34.3, "map": "A", "pid": 34}, {"n": 8, "lon": 131.4, "lat": 34.41, "map": "A", "pid": 35}, {"n": 9, "lon": 132.45, "lat": 34.39, "map": "A", "pid": 34}, {"n": 10, "lon": 135.49, "lat": 34.56, "map": "B", "pid": 27}, {"n": 11, "lon": 135.82, "lat": 34.47, "map": "B", "pid": 29}, {"n": 12, "lon": 135.73, "lat": 34.61, "map": "B", "pid": 29}, {"n": 13, "lon": 135.79, "lat": 34.69, "map": "B", "pid": 29}, {"n": 14, "lon": 135.84, "lat": 34.69, "map": "B", "pid": 29}, {"n": 15, "lon": 135.81, "lat": 34.89, "map": "B", "pid": 26}, {"n": 16, "lon": 135.77, "lat": 35.02, "map": "B", "pid": 26}, {"n": 17, "lon": 135.762, "lat": 35.025, "map": "B", "pid": 26}, {"n": 18, "lon": 135.748, "lat": 35.014, "map": "B", "pid": 26}, {"n": 19, "lon": 135.84, "lat": 35.07, "map": "B", "pid": 25}, {"n": 20, "lon": 135.748, "lat": 35.032, "map": "B", "pid": 26}, {"n": 21, "lon": 135.73, "lat": 35.04, "map": "B", "pid": 26}, {"n": 22, "lon": 135.759, "lat": 35.01, "map": "B", "pid": 26}, {"n": 23, "lon": 136.14, "lat": 35.14, "map": "B", "pid": 25}, {"n": 24, "lon": 135.52, "lat": 34.69, "map": "B", "pid": 27}, {"n": 25, "lon": 135.5, "lat": 34.7, "map": "B", "pid": 27}, {"n": 26, "lon": 135.53, "lat": 34.81, "map": "B", "pid": 27}, {"n": 27, "lon": 136.29, "lat": 36.03, "map": "B", "pid": 18}, {"n": 28, "lon": 136.46, "lat": 35.37, "map": "B", "pid": 21}, {"n": 29, "lon": null, "lat": null, "map": null, "pid": 20}, {"n": 30, "lon": 139.556, "lat": 35.325, "map": "C", "pid": 14}, {"n": 31, "lon": 139.58, "lat": 35.31, "map": "C", "pid": 14}, {"n": 32, "lon": 139.55, "lat": 35.34, "map": "C", "pid": 14}, {"n": 33, "lon": 139.02, "lat": 35.19, "map": "C", "pid": 14}, {"n": 34, "lon": 139.72, "lat": 35.22, "map": "C", "pid": 14}, {"n": 35, "lon": 138.94, "lat": 34.67, "map": "C", "pid": 22}, {"n": 36, "lon": 139.76, "lat": 35.69, "map": "C", "pid": 13}, {"n": 37, "lon": 139.774, "lat": 35.684, "map": "C", "pid": 13}, {"n": 38, "lon": 139.8, "lat": 35.68, "map": "C", "pid": 13}, {"n": 39, "lon": 139.75, "lat": 35.695, "map": "C", "pid": 13}, {"n": 40, "lon": 139.6, "lat": 36.76, "map": "C", "pid": 9}, {"n": 41, "lon": 138.89, "lat": 36.25, "map": "C", "pid": 10}, {"n": 42, "lon": null, "lat": null, "map": null, "pid": 47}];
+const prefs = [9, 10, 13, 14, 18, 21, 22, 25, 26, 27, 29, 34, 35, 40, 41, 42];
+
+// 距離很近的點合併成一個，標籤用「·」連接
+function cluster(list) {
+  const groups = [];
+  list.forEach(p => {
+    const g = groups.find(g => g.some(q => Math.abs(q.lon - p.lon) < 0.06 && Math.abs(q.lat - p.lat) < 0.06));
+    if (g) g.push(p); else groups.push([p]);
+  });
+  return groups.map(g => ({
+    label: g.map(p => p.n).join('·'),
+    lon: g.reduce((a, p) => a + p.lon, 0) / g.length,
+    lat: g.reduce((a, p) => a + p.lat, 0) / g.length,
+  }));
+}
+const of = k => cluster(spots.filter(s => s.map === k));
+
+JapanMap.render(document.getElementById('map-A'), {
+  view: [[129.6, 32.4], [133.2, 34.9]], highlight: prefs,
+  labels: [
+    { text: '佐賀', lon: 130.0, lat: 33.15 }, { text: '福岡', lon: 130.8, lat: 33.8 },
+    { text: '長崎', lon: 129.95, lat: 32.95 }, { text: '山口', lon: 131.7, lat: 34.2 }, { text: '廣島', lon: 132.75, lat: 34.7 },
+  ],
+  points: of('A'),
+});
+JapanMap.render(document.getElementById('map-B'), {
+  view: [[135.1, 34.3], [136.6, 36.2]], highlight: prefs,
+  labels: [
+    { text: '京都府', lon: 135.45, lat: 35.2 }, { text: '滋賀縣', lon: 136.15, lat: 35.35 },
+    { text: '大阪府', lon: 135.3, lat: 34.7 }, { text: '奈良縣', lon: 135.95, lat: 34.5 },
+    { text: '福井縣', lon: 136.0, lat: 35.85 }, { text: '岐阜縣', lon: 136.45, lat: 35.7 },
+  ],
+  points: of('B'),
+});
+JapanMap.render(document.getElementById('map-C'), {
+  view: [[138.5, 34.5], [140.3, 37.0]], highlight: prefs,
+  labels: [
+    { text: '栃木', lon: 139.9, lat: 36.6 }, { text: '群馬', lon: 138.9, lat: 36.55 },
+    { text: '東京', lon: 139.45, lat: 35.8 }, { text: '神奈川', lon: 139.2, lat: 35.45 }, { text: '靜岡', lon: 138.7, lat: 35.05 },
+  ],
+  points: of('C'),
+});
+</script>
+</body>
+</html>

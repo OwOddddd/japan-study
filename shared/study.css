@@ -101,6 +101,7 @@ details.sources li { margin: 2px 0; overflow-wrap: anywhere; }
   html.print-notes body > *:not(#print-notes) { display: none !important; }
   html.print-notes #print-notes { display: block; font-family: var(--sans); color: #000; }
   #print-notes h1 { font-size: 18pt; margin: 0 0 4pt; }
+  html[data-skin="pixel"] #print-notes h1 { font-family: var(--sans); font-weight: 700; text-shadow: none; letter-spacing: normal; }
   #print-notes h2 { font-size: 12pt; margin: 14pt 0 4pt; border-bottom: 1px solid #999; }
   #print-notes p { margin: 0 0 4pt; white-space: pre-wrap; }
 }

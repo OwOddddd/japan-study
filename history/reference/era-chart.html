@@ -41,15 +41,16 @@
   svg .hit:hover { stroke: var(--text); stroke-width: 1; }
   svg .cn text { fill: var(--muted); }
   svg .ev-b text.lbl { fill: var(--accent); font-weight: 500; }
+  svg a { cursor: pointer; }
+  svg a:hover text.lbl { text-decoration: underline; }
 </style>
 </head>
 <body>
 <main class="wide viz-root">
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本歷史</a></nav>
 
-<nav class="crumbs">日本史因果主線 · 參考文件 · <a href="timeline.html">年表速查（表格版）</a></nav>
 <h1>日本史時代總覽</h1>
-<p class="subtitle">由上往下是時間。中間是各時代與當時的掌權者，右邊是重大事件和年份，最右側淡色的是同時期的中國朝代，只供大致對照。滑鼠移到色帶或事件上可看詳細資訊。</p>
+<p class="lede">由上往下是時間。中間是各時代與當時的掌權者，右邊是重大事件和年份，最右側淡色的是同時期的中國朝代，只供大致對照。滑鼠移到色帶或事件上可看詳細資訊，事件文字後的「課 N」可以點進去，前往教它的那一課。</p>
 
 <div class="legend" aria-label="分類圖例">
   <span style="--c: var(--cat-1)">原始</span>
@@ -72,10 +73,10 @@
 <li><strong>最上方一段沒有照比例</strong>。舊石器和繩文加起來超過三萬年，照比例畫的話其他時代會擠成細線，所以壓縮在折線上方。折線以下（西元前 300 年起）所有欄位共用同一把尺。</li>
 <li><strong>紅線</strong>從分界事件一路拉到左側，正好落在兩個時代的交界上。</li>
 <li><strong>事件標籤有時會往下錯開</strong>。年份接近的事件擠在一起時，文字會依序往下排，用細線連回圓點；<strong>圓點的高度才是事件真正的年份</strong>。</li>
-<li><strong>南北朝、戰國</strong>畫在「細分」欄，它們是室町時代內部的時期。戰國的結束點這裡採 1590 年豐臣秀吉統一全國，所以它跨進了安土桃山時代。<sup class="cite"><a href="https://japanknowledge.com/introduction/keyword.html?i=1930">[1]</a></sup></li>
+<li><strong>南北朝、戰國</strong>畫在「細分」欄，它們是室町時代內部的時期。戰國的結束點這裡採 1590 年豐臣秀吉統一全國，所以它跨進了安土桃山時代。</li>
 <li><strong>昭和</strong>橫跨近代和現代，以 1945 年戰敗為界。</li>
 <li>明治以後一位天皇只用一個年號，<strong>天皇過世或退位就換時代名稱</strong>，所以大正、昭和、平成、令和的分界都是改元，沒有政權更替。</li>
-<li>色帶太短的時代（大正、令和等）只顯示名稱，掌權者請用滑鼠查看。</li>
+<li>色帶太短的時代（大正、令和等）只顯示名稱，掌權者見<a href="timeline.html">年表速查</a>。</li>
 </ul>
 
 <h2>有爭議的年份採用哪一說</h2>
@@ -85,7 +86,7 @@
 <tr><td>舊石器開始</td><td>約 3 萬 8 千年前</td><td>有更早的主張，證據仍有爭議</td></tr>
 <tr><td>繩文開始</td><td>約前 14000 年</td><td>約前 10000 年起算等</td></tr>
 <tr><td>彌生開始</td><td>約前 300 年</td><td>放射性碳定年支持前 10 世紀左右</td></tr>
-<tr><td>飛鳥開始</td><td>592 年（推古天皇即位）<sup class="cite"><a href="https://japanknowledge.com/introduction/keyword.html?i=537">[2]</a></sup></td><td>593 年；或以佛教傳入的 538／552 年</td></tr>
+<tr><td>飛鳥開始</td><td>592 年（推古天皇即位）</td><td>593 年；或以佛教傳入的 538／552 年</td></tr>
 <tr><td>平安結束／鎌倉開始</td><td>1185 年</td><td>舊教科書用 1192 年（源賴朝任征夷大將軍）</td></tr>
 <tr><td>戰國</td><td>1467–1590 年</td><td>結束點另有 1568、1573、1600、1615 年等說</td></tr>
 <tr><td>江戶開始</td><td>1603 年</td><td>1600 年（關原之戰）</td></tr>
@@ -94,7 +95,7 @@
 </table>
 <p class="note">中國朝代畫的是統一或主要政權的期間：隋從 589 年統一算起（建國 581），元從 1279 年滅南宋算起（定國號 1271）。1949 年以後並列中華民國（臺灣）與中華人民共和國。</p>
 
-<p class="muted" style="font-size:.8rem">引用：[1] <a href="https://japanknowledge.com/introduction/keyword.html?i=1930">JapanKnowledge：戦国時代</a>　[2] <a href="https://japanknowledge.com/introduction/keyword.html?i=537">JapanKnowledge：飛鳥時代</a>　其餘年份見 <a href="timeline.html">年表速查</a> 與各課的來源。</p>
+<details class="sources"><summary>資料來源</summary><ol><li><a href="https://japanknowledge.com/introduction/keyword.html?i=1930" target="_blank">JapanKnowledge：戦国時代</a></li><li><a href="https://japanknowledge.com/introduction/keyword.html?i=537" target="_blank">JapanKnowledge：飛鳥時代</a></li><li>其餘年份見<a href="timeline.html">年表速查</a>與各課的資料來源</li></ol></details>
 
 </main>
 
@@ -152,46 +153,65 @@
 
   // b: true 表示時代的分界事件；cy：壓縮區內的位置
   const events = [
-    { cy: C(0.45), t: "約前14000", s: "陶器出現（繩文開始）", b: true },
-    { yr: -300, t: "約前300", s: "稻作・金屬器傳入北九州（彌生開始）", b: true, off: 12 },
-    { yr: 57, s: "奴國王受東漢金印" },
-    { yr: 185, t: "2世紀後半", s: "倭國大亂 → 共立卑彌呼" },
-    { yr: 239, s: "卑彌呼遣使魏國" },
-    { yr: 250, t: "約250", s: "前方後圓墳出現（古墳開始）", b: true },
-    { yr: 538, t: "538／552", s: "佛教從朝鮮半島傳入" },
-    { yr: 587, s: "蘇我氏滅物部氏" },
-    { yr: 592, s: "推古天皇即位（飛鳥開始）", b: true },
-    { yr: 607, s: "遣隋使小野妹子" },
-    { yr: 645, s: "乙巳之變 → 大化革新（公地公民）" },
-    { yr: 663, s: "白村江戰敗 → 加速中央集權" },
-    { yr: 672, s: "壬申之亂 → 天武天皇" },
-    { yr: 701, s: "大寶律令（律令國家完成）" },
-    { yr: 710, s: "遷都平城京（奈良開始）", b: true },
-    { yr: 743, s: "墾田永年私財法 → 莊園擴大" },
-    { yr: 752, s: "東大寺大佛開眼（寺院勢力膨脹）" },
-    { yr: 784, s: "遷都長岡京（擺脫寺院干政）" },
-    { yr: 794, s: "遷都平安京（平安開始）", b: true },
-    { yr: 894, s: "停派遣唐使 → 國風文化" },
-    { yr: 939, s: "平將門之亂（朝廷靠武士平定）" },
-    { yr: 1016, s: "藤原道長任攝政（攝關全盛）" },
-    { yr: 1086, s: "白河上皇開始院政" },
-    { yr: 1156, s: "保元之亂（武士決定朝廷之爭）" },
-    { yr: 1167, s: "平清盛任太政大臣" },
-    { yr: 1185, s: "平氏滅亡、源賴朝掌權（鎌倉開始）", b: true },
-    { yr: 1333, s: "鎌倉幕府滅亡 → 建武新政", b: true },
-    { yr: 1336, s: "足利尊氏開幕府（室町開始）", b: true },
-    { yr: 1467, s: "應仁之亂（戰國開始）" },
-    { yr: 1573, s: "信長逐出將軍足利義昭（室町結束）", b: true },
-    { yr: 1590, s: "豐臣秀吉統一全國" },
-    { yr: 1600, s: "關原之戰，德川家康勝出" },
-    { yr: 1603, s: "家康任征夷大將軍（江戶開始）", b: true },
-    { yr: 1853, s: "黑船來航（西方叩關）" },
-    { yr: 1868, s: "明治維新（明治開始）", b: true },
-    { yr: 1912, s: "明治天皇逝世，改元大正", b: true },
-    { yr: 1926, s: "大正天皇逝世，改元昭和", b: true },
-    { yr: 1945, s: "戰敗投降（近代 → 現代）", b: true },
-    { yr: 1989, s: "昭和天皇逝世，改元平成", b: true },
-    { yr: 2019, s: "天皇退位，改元令和", b: true },
+    { cy: C(0.45), t: "約前14000", s: "陶器出現（繩文開始）", b: true, l: 2 },
+    { yr: -300, t: "約前300", s: "稻作・金屬器傳入北九州（彌生開始）", b: true, off: 12, l: 2 },
+    { yr: 57, s: "奴國王受東漢金印", l: 2 },
+    { yr: 185, t: "2世紀後半", s: "倭國大亂 → 共立卑彌呼", l: 2 },
+    { yr: 239, s: "卑彌呼遣使魏國", l: 2 },
+    { yr: 250, t: "約250", s: "前方後圓墳出現（古墳開始）", b: true, l: 2 },
+    { yr: 538, t: "538／552", s: "佛教從朝鮮半島傳入", l: 3 },
+    { yr: 587, s: "蘇我氏滅物部氏", l: 3 },
+    { yr: 592, s: "推古天皇即位（飛鳥開始）", b: true, l: 3 },
+    { yr: 607, s: "遣隋使小野妹子", l: 3 },
+    { yr: 645, s: "乙巳之變 → 大化革新（公地公民）", l: 3 },
+    { yr: 663, s: "白村江戰敗 → 加速中央集權", l: 3 },
+    { yr: 672, s: "壬申之亂 → 天武天皇", l: 3 },
+    { yr: 701, s: "大寶律令（律令國家完成）", l: 3 },
+    { yr: 710, s: "遷都平城京（奈良開始）", b: true, l: 3 },
+    { yr: 743, s: "墾田永年私財法 → 莊園擴大", l: 3 },
+    { yr: 752, s: "東大寺大佛開眼（寺院勢力膨脹）", l: 3 },
+    { yr: 784, s: "遷都長岡京（擺脫寺院干政）", l: 3 },
+    { yr: 794, s: "遷都平安京（平安開始）", b: true, l: 4 },
+    { yr: 894, s: "停派遣唐使 → 國風文化", l: 4 },
+    { yr: 939, s: "平將門之亂（朝廷靠武士平定）", l: 4 },
+    { yr: 1016, s: "藤原道長任攝政（攝關全盛）", l: 4 },
+    { yr: 1086, s: "白河上皇開始院政", l: 4 },
+    { yr: 1156, s: "保元之亂（武士決定朝廷之爭）", l: 4 },
+    { yr: 1167, s: "平清盛任太政大臣", l: 4 },
+    { yr: 1185, s: "平氏滅亡、源賴朝掌權（鎌倉開始）", b: true, l: 5 },
+    { yr: 1221, s: "承久之亂（幕府壓住朝廷）", l: 5 },
+    { yr: 1274, t: "1274／1281", s: "蒙古襲來 → 御家人貧困", l: 5 },
+    { yr: 1333, s: "鎌倉幕府滅亡 → 建武新政", b: true, l: 5 },
+    { yr: 1336, s: "足利尊氏開幕府（室町開始）", b: true, l: 6 },
+    { yr: 1467, s: "應仁之亂（戰國開始）", l: 6 },
+    { yr: 1543, s: "鐵砲傳入種子島", l: 6 },
+    { yr: 1560, s: "桶狹間之戰（信長崛起）", l: 7 },
+    { yr: 1573, s: "信長逐出將軍足利義昭（室町結束）", b: true, l: 7 },
+    { yr: 1590, s: "豐臣秀吉統一全國（檢地、刀狩）", l: 7 },
+    { yr: 1600, s: "關原之戰，德川家康勝出", l: 7 },
+    { yr: 1603, s: "家康任征夷大將軍（江戶開始）", b: true, l: 7 },
+    { yr: 1615, s: "大坂夏之陣、一國一城令", l: 7 },
+    { yr: 1635, s: "參勤交代制度化", l: 8 },
+    { yr: 1641, s: "荷蘭商館遷出島（鎖國體制）", l: 8 },
+    { yr: 1730, s: "堂島米市場公認（大坂成為米的中心）", l: 9 },
+    { yr: 1853, s: "黑船來航（西方叩關）", l: 10 },
+    { yr: 1858, s: "日美修好通商條約（不平等條約）", l: 10 },
+    { yr: 1867, s: "大政奉還", l: 10 },
+    { yr: 1868, s: "明治維新（明治開始）", b: true, l: 10 },
+    { yr: 1871, s: "廢藩置縣", l: 10 },
+    { yr: 1889, s: "大日本帝國憲法", l: 11 },
+    { yr: 1894, s: "日清戰爭 → 台灣割讓", l: 11 },
+    { yr: 1904, s: "日俄戰爭", l: 11 },
+    { yr: 1912, s: "明治天皇逝世，改元大正", b: true, l: 11 },
+    { yr: 1926, s: "大正天皇逝世，改元昭和", b: true, l: 11 },
+    { yr: 1931, s: "滿洲事變 → 軍部抬頭", l: 11 },
+    { yr: 1941, s: "太平洋戰爭爆發", l: 11 },
+    { yr: 1945, s: "戰敗投降（近代 → 現代）", b: true, l: 11 },
+    { yr: 1947, s: "日本國憲法施行", l: 12 },
+    { yr: 1964, s: "東京奧運、東海道新幹線", l: 12 },
+    { yr: 1973, s: "石油危機（高度成長結束）", l: 12 },
+    { yr: 1989, s: "昭和天皇逝世，改元平成", b: true, l: 12 },
+    { yr: 2019, s: "天皇退位，改元令和", b: true, l: 12 },
   ];
 
   const cn = [
@@ -223,6 +243,12 @@
   ];
 
   // ---- 版面高度：事件標籤可能往下推，最後再決定 ----
+  const LESSON = {
+    2: "0002-rice-builds-a-state.html", 3: "0003-learning-from-china.html", 4: "0004-why-the-court-lost-control.html",
+    5: "0005-kamakura-shogunate.html", 6: "0006-muromachi-to-sengoku.html", 7: "0007-three-unifiers.html",
+    8: "0008-edo-shogunate-rule.html", 9: "0009-edo-economy-and-townspeople.html", 10: "0010-opening-and-meiji-restoration.html",
+    11: "0011-modernization-and-war.html", 12: "0012-postwar-japan.html"
+  };
   const LINE = 13.5;
   let lastY = -Infinity;
   events.forEach((e) => {
@@ -348,10 +374,11 @@
       el("circle", { cx: EV_X, cy: e.dot, r: 3.2, fill: "var(--bg)", stroke: "var(--muted)", "stroke-width": 1.5 }, g);
     }
     el("path", { d: `M${EV_X + 6} ${e.dot} L${EV_X + 14} ${e.ly - 3.5} L${EV_X + 18} ${e.ly - 3.5}`, fill: "none", stroke: "var(--rule)", "stroke-width": 1 }, g);
-    const label = `${e.t ?? fmt(e.yr)}　${e.s}`;
-    txt(label, { class: "lbl", x: EV_X + 20, y: e.ly, "font-size": 10.5 }, g);
-    const hit = el("rect", { x: EV_X - 6, y: Math.min(e.dot, e.ly) - 9, width: COL.ev[1] - 4, height: Math.abs(e.ly - e.dot) + 12, fill: "transparent" }, g);
-    hover(hit, `<strong>${e.t ?? fmt(e.yr)}</strong><br>${e.s}${e.b ? "<br>（時代分界）" : ""}`);
+    const label = `${e.t ?? fmt(e.yr)}　${e.s}${e.l ? `（課${e.l}）` : ""}`;
+    const host = e.l ? el("a", { href: "../lessons/" + LESSON[e.l] }, g) : g;
+    txt(label, { class: "lbl", x: EV_X + 20, y: e.ly, "font-size": 10.5, "pointer-events": e.l ? "auto" : "none" }, host);
+    const hit = el("rect", { x: EV_X - 6, y: Math.min(e.dot, e.ly) - 9, width: COL.ev[1] - 4, height: Math.abs(e.ly - e.dot) + 12, fill: "transparent" }, host);
+    hover(hit, `<strong>${e.t ?? fmt(e.yr)}</strong><br>${e.s}${e.b ? "<br>（時代分界）" : ""}${e.l ? "<br>點擊前往第 " + e.l + " 課" : ""}`);
     hit.classList.remove("hit");
   });
 

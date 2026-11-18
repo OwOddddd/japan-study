@@ -5,7 +5,7 @@
   var TOPICS = [
     { id: 'history', line: '歷史', code: 'H', name: '日本歷史', icon: 'scroll', stamp: '史', pat: 'ichimatsu',
       desc: '因果主線：每個時代為什麼開始、為什麼結束',
-      planned: ['第一個幕府', '室町與戰國', '統一與江戶', '黑船與明治', '近代到戰後'] },
+      planned: [] },
     { id: 'geography', line: '地理', code: 'G', name: '日本地理', icon: 'fuji', stamp: '地', pat: 'seigaiha',
       desc: '山、海、氣候、人口與交通為什麼長這樣', planned: [] },
     { id: 'japanese', line: '日文', code: 'J', name: '日文', icon: 'bubble', stamp: '語', pat: 'yagasuri',
