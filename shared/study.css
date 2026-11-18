@@ -110,6 +110,14 @@ html[data-skin="route"].study body { background-image: repeating-linear-gradient
 html[data-skin="route"].study .sticky { background: var(--v-navy); color: #fff; border-bottom: 0; padding: 0 16px 0 0; min-height: 40px; }
 html[data-skin="route"] .sticky .st-pic { width: 40px; height: 40px; flex: none; background: var(--v-yellow); color: var(--v-navy); font-weight: 700; font-size: 1.15rem; }
 html[data-skin="route"].study .sticky #progress { color: #cfd6e4; }
+/* 路線圖、和柄的課名和像素一樣置中放大 */
+html[data-skin="route"].study .sticky, html[data-skin="wa"].study .sticky { position: sticky; }
+html[data-skin="route"].study .sticky .st-title, html[data-skin="wa"].study .sticky .st-title { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: calc(100% - 260px); font-size: 1.15rem; font-weight: 700; }
+html[data-skin="wa"].study .sticky .st-title { top: calc(50% + 2px); font-family: var(--serif); letter-spacing: .06em; }
+@media (max-width: 519.98px) { html[data-skin="route"].study .sticky .st-title, html[data-skin="wa"].study .sticky .st-title { position: static; transform: none; max-width: none; flex: 1; text-align: center; font-size: 1rem; }
+  html[data-skin="route"].study .sticky .lt, html[data-skin="wa"].study .sticky .lt { flex: 1; } }
+/* 記下、交卷＝鉛筆方格的黃 */
+html[data-skin="route"] .btn:not(.ghost), html[data-skin="route"] .n-btn.main { background: var(--v-yellow); border-color: var(--v-yellow); color: #111; }
 html[data-skin="route"].study .page > main { background: var(--surface); box-shadow: 0 0 0 1px var(--line); position: relative; --rail-x: 26px; --h2-x: 52px; padding-left: 52px; }
 @media (min-width: 760px) { html[data-skin="route"].study .page > main { margin-top: 24px; margin-bottom: 40px; border-radius: 4px; } }
 @media (max-width: 519.98px) { html[data-skin="route"].study .page > main { --rail-x: 14px; --h2-x: 36px; padding-left: 36px; } }

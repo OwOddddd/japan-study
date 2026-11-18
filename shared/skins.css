@@ -108,16 +108,6 @@ html[data-skin="wa"] .toc li { border-radius: 2px; border-left: 6px solid var(--
   --map-land: #2b3370; --map-stroke: #6f78b8; --map-sea: #10153a; --map-hl: #ff7a5c; --map-sel: #6fb6ff;
   --q0: #2a2f5e; --q1: #4b3f7a; --q2: #8a4b7a; --q3: #d0646a; --q4: #ffb08a;
   --px-topic: #ffd76a; color-scheme: dark; }
-:root[data-skin="pixel"][data-topic="history"] { --px-topic: #ff7a5c; }
-:root[data-skin="pixel"][data-topic="geography"] { --px-topic: #6fb6ff; }
-:root[data-skin="pixel"][data-topic="japanese"] { --px-topic: #b7a2ff; }
-:root[data-skin="pixel"][data-topic="religion"] { --px-topic: #f08fbc; }
-:root[data-skin="pixel"][data-topic="architecture"] { --px-topic: #e0b88a; }
-:root[data-skin="pixel"][data-topic="food"] { --px-topic: #ffc65a; }
-:root[data-skin="pixel"][data-topic="railways"] { --px-topic: #7ddc8a; }
-:root[data-skin="pixel"][data-topic="festivals"] { --px-topic: #ff9ec4; }
-:root[data-skin="pixel"][data-topic="society"] { --px-topic: #a9c4d6; }
-:root[data-skin="pixel"][data-topic="castles"] { --px-topic: #7fe0e0; }
 html[data-skin="pixel"] h1, html[data-skin="pixel"] h2, html[data-skin="pixel"] h3,
 html[data-skin="pixel"] nav.site-nav, html[data-skin="pixel"] .tag, html[data-skin="pixel"] .toc li a { font-family: var(--dot); font-weight: 400; }
 html[data-skin="pixel"] h1 { text-shadow: 3px 3px 0 #000; letter-spacing: .04em; }
