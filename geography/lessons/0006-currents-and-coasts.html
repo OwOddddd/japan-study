@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>海流與海岸</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 6 課・海流與海岸</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 6 課・約 25 分鐘</p>
+  <h1>海流與海岸</h1>
+  <p class="lede">為什麼三陸外海是好漁場，釧路的夏天常常起霧，鳴門海峡會出現漩渦？</p>
+
+  <div class="goal">
+    <p><b>本課目標</b></p>
+    <p>1. 說出黑潮和親潮各從哪裡來、是暖流還是寒流，並解釋「潮目」為什麼是好漁場。</p>
+    <p>2. 用海流和緯度，說明北海道和沖繩的氣候差別。</p>
+    <p>3. 說出谷灣式海岸和瀨戶內海各是怎麼形成的，以及它們的好處和風險。</p>
+  </div>
+  <p class="small">頁面上的「▶」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 3 課回想</h2>
+  <div class="exercise quiz" data-answer="b">
+    <p class="q">冬天日本海側下大雪，水氣是在哪裡吸進空氣的？</p>
+    <div class="options">
+      <button data-key="a">西伯利亞的陸地</button>
+      <button data-key="b">西北季風越過比空氣暖的日本海時</button>
+      <button data-key="c">太平洋</button>
+      <button data-key="d">脊梁山脈上的積雪</button>
+    </div>
+    <div class="explain" hidden>日本海有暖流（對馬海流）流過，海面比冬天的空氣暖，風吹過就吸飽水氣。這一課先看日本周圍有哪些海流。</div>
+  </div>
+
+  <h2>1. 兩股海流在這裡相遇</h2>
+  <figure>
+    <div class="mapbox" id="current-map"></div>
+    <figcaption>日本周圍的主要海流（路徑為示意）。黑潮、對馬海流是暖流，親潮是寒流。</figcaption>
+  </figure>
+  <ul class="chain">
+    <li><b>黑潮</b>（<span lang="ja">くろしお</span> <button class="btn ghost say" data-audio="audio/0006/01.wav">▶</button>）：從南方的熱帶海域往北流，沿著日本南岸和太平洋側，到關東外海轉向東去。
+      <span class="why">海水溫暖、營養鹽少，水呈深藍色，所以叫黑潮。</span></li>
+    <li><b>親潮</b>（<span lang="ja">おやしお</span> <button class="btn ghost say" data-audio="audio/0006/02.wav">▶</button>）：從北方的千島群島附近往南流，沿著北海道、東北的太平洋外海。
+      <span class="why">海水冷，但營養鹽豐富，浮游生物多，所以叫「養育魚類的父母」之意的親潮。</span></li>
+    <li><b>對馬海流</b>：黑潮分出的一支，從九州西側進入日本海，沿著日本海側往北。
+      <span class="why">這是第 3 課冬季季風吸水氣的暖流。</span></li>
+  </ul>
+
+  <h2>2. 潮目：暖流和寒流相碰的地方是漁場</h2>
+  <p>黑潮和親潮在東北、關東的外海相遇，相遇的地方叫<b>潮目</b>（<span lang="ja">しおめ</span> <button class="btn ghost say" data-audio="audio/0006/03.wav">▶</button>）。這一帶的海面可以看到水色、溫度突然改變的線。三陸外海是代表性的漁場。</p>
+  <ol class="chain">
+    <li>寒流（親潮）帶來豐富的營養鹽，浮游生物大量繁殖。</li>
+    <li>暖流（黑潮）帶來溫暖的海水，各種魚類跟著水溫北上。</li>
+    <li>兩邊的魚在潮目聚集，捕食浮游生物與小魚。
+      <span class="why">海水流動交錯，營養與魚群都集中在這一帶，成了好漁場。例如秋天隨親潮南下的秋刀魚。</span></li>
+  </ol>
+
+  <div class="exercise quiz" data-answer="d">
+    <p class="q">為什麼寒流和暖流相遇的潮目，通常是好漁場？</p>
+    <div class="options">
+      <button data-key="a">因為兩股海流的水溫剛好相同</button>
+      <button data-key="b">因為暖流把寒流的魚都趕走了</button>
+      <button data-key="c">因為潮目的水特別淺，容易捕魚</button>
+      <button data-key="d">因為寒流的營養鹽養出浮游生物，暖流帶來魚群，兩者在這裡交會</button>
+    </div>
+    <div class="explain" hidden>親潮提供營養，黑潮提供魚群與水溫，交會處同時有食物和魚。</div>
+  </div>
+
+  <h2>3. 海流如何影響氣候：北海道和沖繩</h2>
+  <p>日本南北拉得很長，加上海流，北海道和沖繩的氣候差很多：</p>
+  <table class="cmp">
+    <tr><th></th><th>北海道（札幌）</th><th>沖繩（那霸）</th></tr>
+    <tr><td>位置與海流</td><td>最北；太平洋側受親潮、日本海側受對馬海流影響</td><td>最南，被黑潮包圍</td></tr>
+    <tr><td>8 月平均氣溫</td><td>約 22℃</td><td>約 29℃</td></tr>
+    <tr><td>1 月平均氣溫</td><td>約 −3℃</td><td>冬天也在十幾度</td></tr>
+    <tr><td>梅雨</td><td>一般不算有梅雨季</td><td>5 月上旬前後就進入，是全國最早</td></tr>
+    <tr><td>其他特徵</td><td>夏天涼、冬天嚴寒，年雨量少；日本海側冬天雪多</td><td>颱風影響大、全年多雨</td></tr>
+  </table>
+  <p class="small">1991–2020 年平年值（氣象廳）。沖繩的梅雨期平年約 5 月上旬到 6 月下旬。</p>
+  <p>親潮也讓北海道東部的夏天特別涼。夏季的暖濕空氣吹過冰冷的親潮海面，水氣凝結成<b>海霧</b>，所以釧路的夏天常有霧、日照少。</p>
+
+  <h2>4. 谷灣式海岸：河谷被海水淹進來</h2>
+  <p>三陸、志摩半島、福井縣的若狹灣一帶，海岸線像鋸齒一樣，半島和海灣交錯。這種海岸叫<b>谷灣式海岸</b>（リアス式海岸，<span lang="ja">リアスしきかいがん</span> <button class="btn ghost say" data-audio="audio/0006/04.wav">▶</button>）。</p>
+  <ol class="chain">
+    <li>冰期海面較低，河川在山地切出深谷。</li>
+    <li>冰期結束後，海面上升，海水灌進河谷，谷變成海灣。
+      <span class="why">山稜變成半島，谷底變成灣，所以海岸線曲折、灣的兩側很陡。</span></li>
+    <li>海灣的入口窄、裡面深。
+      <span class="why">風浪進不來，成了天然的良港。灣內水面平靜，適合養殖牡蠣、海帶、珍珠。</span></li>
+    <li>但同樣的形狀會把海嘯往灣的深處聚集。
+      <span class="why">狹窄的灣把海嘯的能量擠在一起，灣的最深處海嘯變得更高。三陸沿岸從明治（1896）到 2011 年都遭受過巨大的海嘯。第 1 課的海溝型地震和這裡接起來：海溝在外海，谷灣在眼前。</span></li>
+  </ol>
+
+  <h2>5. 瀨戶內海：被島圍起來的內海</h2>
+  <p><b>瀨戶內海</b>（<span lang="ja">せとないかい</span> <button class="btn ghost say" data-audio="audio/0006/05.wav">▶</button>）位在本州、四國、九州之間，是一片被陸地圍起來的淺海，裡面有很多島（島的數量隨算法而不同，從一千座上下到近三千座都有說法，大部分是無人島）。</p>
+  <ul class="chain">
+    <li><b>先有低地，再被海水淹沒</b><span class="why">地殼活動在本州、四國、九州之間造出低地和山地，約一萬年前冰期結束後海面上升，海水淹進低地，山頂成了島。大部分島是花崗岩構成。</span></li>
+    <li><b>風浪小</b><span class="why">周圍有陸地擋住，外海的大浪進不來。古代的船隻可以沿著島嶼航行，瀨戶內海是從大陸到畿內的重要海上通道。</span></li>
+    <li><b>雨少</b><span class="why">第 3 課的結論：中國山地和四國山地把季風都擋住，所以瀨戶內沿岸少雨。</span></li>
+    <li><b>潮流強</b><span class="why">瀨戶內海淺，通道又窄，漲退潮時水要經過狹窄的海峽。海峽兩側的漲退潮時間不同，鳴門海峽兩側的水面高度出現落差，水流在最窄處形成漩渦，叫<b>渦潮</b>（<span lang="ja">うずしお</span> <button class="btn ghost say" data-audio="audio/0006/06.wav">▶</button>）。</span></li>
+  </ul>
+  <p>瀨戶內的島和狹窄的海峽，之後在第 8 課「橋與隧道」扮演關鍵角色：島連成踏腳石，才讓橋蓋得起來。</p>
+
+  <h2>到現場看什麼</h2>
+  <div class="callout">
+    <p><b>德島・鳴門海峽的渦潮</b>：搭觀潮船，或走大鳴門橋橋桁裡的「渦の道」（從約 45 m 高處往下看）。滿潮、乾潮前後的水流最強，大潮時漩渦最大。這是上面第 5 點最後一條的結果，要查當天的「渦潮予報」。</p>
+    <p><b>三重・志摩半島英虞灣</b>：灣內的水面平靜，水面上排著珍珠和牡蠣養殖的筏。這是谷灣式海岸「風浪進不來」的利用方式。</p>
+    <p><b>岩手・宮古到陸前高田一帶</b>：沿海岸線搭車，會看到一個個狹窄的海灣和高大的防潮堤，以及指示海嘯避難方向的標示。這裡要用第 1 課的海溝型地震、本課的谷灣一起理解。</p>
+    <p><b>北海道・釧路</b>：夏天去，可能整天被海霧蓋住，日照時間很短。這是親潮的冷水冷卻暖濕空氣的結果。</p>
+    <p><b>廣島・尾道到愛媛・今治之間的島嶼群，或香川・高松到直島的渡輪</b>：航行途中一座接一座的島擦身而過，海面平靜。這是瀨戶內海的樣子。</p>
+  </div>
+
+  <div class="source">
+    <b>速查表</b>：<a href="../reference/currents-coasts.html">海流與海岸速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <p class="small">語音：VOICEVOX:青山龍星</p>
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.data.jma.go.jp/obd/stats/etrn/index.php" target="_blank">氣象廳：平年值（札幌、那霸）</a></li><li><a href="https://www.jma.go.jp/jma/press/2103/24a/3_huroku.pdf" target="_blank">氣象廳：新平年值一覽</a></li><li><a href="https://dil.bosai.go.jp/workshop/02kouza_jirei/15sanriku.html" target="_blank">防災科學技術研究所：三陸的海嘯</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/R1-02511.html" target="_blank">國土交通省：鳴門海峽的潮流與速度</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/common/001555590.pdf" target="_blank">國土交通省：瀨戶內海（約 3,000 座島）</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/common/001927714.pdf" target="_blank">國土交通省：瀨戶內海（約 1,000 座島、花崗岩）</a></li><li><a href="https://www.ana.co.jp/ja/jp/japan-travel-planner/tokushima/0000001.html" target="_blank">ANA：渦の道</a></li></ol></details>
+
+  <nav class="lesson-nav">
+    <a href="0005-plains-basins-rivers.html">← 第 5 課：平原、盆地與河川</a>
+    <a href="0007-shinkansen-routes.html">下一課：新幹線路網 →</a>
+  </nav>
+</main>
+
+<script>
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
+JapanMap.render(document.getElementById('current-map'), {
+  view: [[127.5, 30.5], [150, 45.8]],
+  lines: [
+    { cls: 'wind', arrow: true, label: '黑潮', labelAt: 2, coords: [[130.0, 31.0], [133.0, 32.2], [137.0, 33.6], [140.5, 34.7], [143.5, 35.6]] },
+    { cls: 'wind', arrow: true, label: '對馬海流', labelAt: 2, coords: [[129.0, 32.4], [130.8, 35.2], [133.5, 36.7], [136.5, 38.3], [139.5, 40.3], [140.6, 42.0]] },
+    { cls: 'trench', arrow: true, label: '親潮', labelAt: 1, coords: [[148.5, 44.8], [146.0, 43.0], [145.0, 41.0], [144.3, 38.8], [143.5, 37.0]] },
+  ],
+  points: [
+    { label: '潮目（三陸外海）', lon: 144.0, lat: 37.8 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '日本地理 第 6 課・海流與海岸',
+  storageKey: 'geo-l6-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [{ id: 'l6', name: '本課' }, { id: 'review', name: '複習' }],
+  questions: [
+    { id: 'l6-1', facet: 'l6', level: 2, type: 'choice',
+      prompt: '三陸外海的秋刀魚在秋天特別多，和哪個條件最有關？',
+      options: ['南下的親潮帶來冷水與豐富的營養鹽，魚群追著浮游生物而來', '黑潮在秋天把魚群全部往北推到三陸', '秋天的颱風把魚群吹進三陸的灣內', '三陸的河川在秋天帶來大量淡水'],
+      explain: '親潮是營養鹽豐富的寒流，秋天隨它南下的魚群在三陸外海與黑潮交會，成了漁場。' },
+    { id: 'l6-2', facet: 'l6', level: 2, type: 'choice',
+      prompt: '三陸外海是好漁場，主要因為？',
+      options: ['暖流黑潮和寒流親潮在這一帶交會，營養與魚群集中', '三陸外海很淺，容易捕魚', '三陸外海沒有颱風', '三陸附近有很多河流入海'],
+      explain: '潮目同時有寒流的營養鹽和暖流的魚群。' },
+    { id: 'l6-3', facet: 'l6', level: 2, type: 'choice',
+      prompt: '釧路的夏天為什麼常常起霧、日照少？',
+      options: ['暖濕的空氣吹過冰冷的親潮海面，水氣凝結成海霧', '因為釧路附近有很多火山', '因為釧路在盆地裡', '因為釧路冬天下大雪，夏天雪融化的水氣太多'],
+      explain: '暖空氣遇到冷海面，水氣凝結成霧。親潮是冷水。' },
+    { id: 'l6-4', facet: 'l6', level: 2, type: 'choice',
+      prompt: '三陸的海岸線曲折，半島與海灣交錯。為什麼灣兩側的山坡通常很陡？',
+      options: ['海水淹進河谷，山稜變半島、谷底變灣，谷壁本來就陡', '海浪長期侵蝕，把山坡削成陡崖', '火山噴發把山坡堆高', '海底隆起把山坡推陡'],
+      explain: '海灣原本是被河切出的深谷，海水淹進來後，谷壁就成了灣兩側陡峭的山坡。' },
+    { id: 'l6-5', facet: 'l6', level: 3, type: 'short',
+      prompt: '谷灣式海岸既是良港，也是海嘯的高風險地區。各用一個理由說明。',
+      keywords: [['風浪', '浪小', '平靜', '養殖', '良港'], ['狹窄', '灣', '擠', '集中', '增高', '變高', '放大']],
+      need: 2,
+      answer: '好處：灣入口窄、裡面深，風浪進不來，成了天然良港，水面平靜適合養殖。風險：狹窄的灣把海嘯的能量擠在一起，灣最深處海嘯會更高。' },
+    { id: 'l6-6', facet: 'l6', level: 2, type: 'choice',
+      prompt: '鳴門海峽會出現渦潮，是因為？',
+      options: ['瀨戶內海和外海漲退潮時間有差，海峽兩側水面高度不同，水流擠過最窄處', '海底有火山噴發', '海峽中間有很多礁石', '兩股海流在這裡逆向對撞'],
+      explain: '瀨戶內海淺而窄，與外海的潮汐有時間差，水面高度差帶動強烈水流，在海峽最窄處形成漩渦。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 3 課）瀨戶內海沿岸雨少，原因是？',
+      options: ['中國山地和四國山地分別擋住冬、夏的季風', '瀨戶內海的海水溫度比較低', '颱風不會經過瀨戶內', '瀨戶內的海拔比較高'],
+      explain: '兩季的季風都在翻越山地時把水氣下完，瀨戶內成了雨影區。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 1 課）三陸沿岸同時面對海溝和谷灣。這個組合為什麼讓海嘯特別危險？',
+      options: ['海溝型地震推起海水，谷灣又把海嘯擠高', '谷灣的海水本來就特別高', '三陸沿岸有很多火山噴發', '海溝讓海水不流動'],
+      explain: '海溝型地震在海底大範圍推動海水，海嘯進到狹窄的灣裡，能量被擠在一起，波高變大。' },
+  ],
+});
+</script>
+</body>
+</html>

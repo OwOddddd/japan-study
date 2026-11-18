@@ -16,14 +16,27 @@
 <div class="sticky"><span>第 3 課・季風與氣候</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
-  <p class="small">第 3 課・約 10 分鐘</p>
+  <p class="small">第 3 課・約 25 分鐘</p>
   <h1>季風與氣候</h1>
-  <p class="lede">同樣是日本，為什麼金澤冬天下大雪、香川到處是蓄水池、新潟成了米倉？答案都是：季節風撞上了脊梁山脈。</p>
+  <p class="lede">為什麼金澤冬天下大雪，同一時間的東京卻是大晴天？香川到處是蓄水池，新潟又成了米倉？這些都和季風撞上脊梁山脈有關。</p>
 
-  <div class="callout">
-    <b>為什麼學這個</b>：「冬天西北季風帶來日本海側的大雪」大家多半聽過，第 2 課也學了脊梁山脈。
-    瀨戶內為什麼要蓄水池、日本海側為什麼適合種稻，只差把這兩塊零件接起來。
-    旅行時的用途：冬天去北陸、東北要準備雪地裝備，太平洋側卻通常是晴天。
+  <div class="goal">
+    <p><b>本課目標</b></p>
+    <p>1. 解釋冬天日本海側下雪、太平洋側晴天的原因，並用同樣的邏輯說明夏天的雨下在哪裡。</p>
+    <p>2. 說出瀨戶內為什麼雨少，以及香川為什麼有一萬多座蓄水池。</p>
+    <p>3. 說出雪怎麼和稻米扯上關係：融雪水、平原與水田單作。</p>
+  </div>
+
+  <h2>暖身：第 2 課回想</h2>
+  <div class="exercise quiz" data-answer="a">
+    <p class="q">脊梁山脈把日本分成太平洋側和日本海側。除了分開河川的流向，它對氣候還有什麼作用？</p>
+    <div class="options">
+      <button data-key="a">像一道牆，擋住季風帶來的水氣</button>
+      <button data-key="b">讓海水溫度變得比較高</button>
+      <button data-key="c">把颱風全部擋在山脈南邊</button>
+      <button data-key="d">讓火山噴發的灰燼飄向太平洋</button>
+    </div>
+    <div class="explain" hidden>山擋住風，風被迫上升、冷卻，水氣變成雨雪落在迎風的一側。本課把這件事拆成冬天和夏天兩幕。</div>
   </div>
 
   <h2>1. 冬天：水氣被留在日本海側</h2>
@@ -33,23 +46,19 @@
     <li>撞上脊梁山脈後被迫上升、冷卻，水氣變成雪，下在<b>日本海側</b>。</li>
     <li>翻過山後，水氣已經下完了，變成乾燥的風吹向<b>太平洋側</b>，所以東京、高知的冬天多是晴天。</li>
   </ol>
-  <p>數字可以看出差距：1 月的日照時間，金澤只有 <b>62 小時</b>，高知有 <b>191 小時</b>，是金澤的三倍。</p>
 
   <h2>2. 夏天：方向反過來</h2>
   <p>夏天換成從太平洋吹來、又濕又熱的<b>東南季風</b>，再加上梅雨和颱風，雨主要下在<b>太平洋側</b>。高知 6 月和 9 月的雨量都超過 350 mm。</p>
 
-  <h2>3. 一條南北切線：金澤 → 高松 → 高知</h2>
-  <p>這三座城市大致排在同一條南北線上，中間隔著兩道山：<b>中國山地</b>和<b>四國山地</b>。</p>
+  <h2>3. 三種氣候：金澤、高松、高知</h2>
+  <p>金澤代表日本海側，高知代表太平洋側。高松在中間：北邊的<b>中國山地</b>擋在它和日本海之間，南邊的<b>四國山地</b>擋在它和太平洋之間。從日本海側的鳥取一路往南到高知，大致就是這個「山—瀨戶內—山」的順序。</p>
   <figure>
     <div class="mapbox" id="transect-map"></div>
     <figcaption>紅色箭頭是季風方向，橘色線是擋住季風的山地（位置為示意）。</figcaption>
   </figure>
   <figure>
     <div id="rain-chart"></div>
-    <figcaption>各月平均降水量（1991–2020 年平年值，單位 mm，三張圖的縱軸刻度相同）。資料：氣象廳
-      <a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=56&block_no=47605&year=&month=&day=&view=" target="_blank">金澤</a>・
-      <a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=72&block_no=47891&year=&month=&day=&view=" target="_blank">高松</a>・
-      <a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=74&block_no=47893&year=&month=&day=&view=" target="_blank">高知</a>。滑鼠移到長條上可以看數字。</figcaption>
+    <figcaption>各月平均降水量（氣象廳 1991–2020 年平年值，單位 mm，三張圖的縱軸刻度相同）。滑鼠移到長條上可以看數字。</figcaption>
   </figure>
   <p>三張圖的形狀完全不同：</p>
   <ul>
@@ -57,6 +66,17 @@
     <li><b>高知</b>：夏天和秋天最多，因為夏季季風、梅雨、颱風都直接打在這裡。</li>
     <li><b>高松</b>：一整年都很矮。冬天的季風被中國山地擋住，夏天的季風被四國山地擋住，<b>兩邊的水氣都進不來</b>。全年只有 1,150 mm，不到高知的一半。</li>
   </ul>
+
+  <div class="exercise quiz" data-answer="d">
+    <p class="q">高知 6 月的雨量超過 350 mm，高松同月只有約 150 mm。兩地只隔著四國山地，原因是？</p>
+    <div class="options">
+      <button data-key="a">高松的海水溫度比較低</button>
+      <button data-key="b">高知離西伯利亞比較近</button>
+      <button data-key="c">高松地勢比高知高，雨雲飄不上去</button>
+      <button data-key="d">夏季東南季風先撞上四國山地，雨下在山的南側，翻到北側的風已經乾了</button>
+    </div>
+    <div class="explain" hidden>和冬天日本海側的邏輯相同，只是方向反過來：迎風面的高知吃到雨，背風面的高松被山擋住。</div>
+  </div>
 
   <h2>4. 應用一：香川為什麼有一萬多座蓄水池</h2>
   <ol class="chain">
@@ -67,13 +87,12 @@
   <p>
     其中最大的是<b>滿濃池</b>，是日本最大的灌溉用蓄水池。
     後來香川又建了<b>香川用水</b>，把隔壁德島縣吉野川的水引進來。
-    另外，雨少、溫暖的氣候也適合種麥，這是讃岐烏龍麵成為香川縣民美食的背景之一。去香川吃烏龍麵時，可以順道看看滿濃池。
-  </p>
+    另外，雨少、溫暖的氣候也適合種麥，這是讃岐烏龍麵成為香川縣民美食的背景之一。  </p>
 
   <h2>5. 應用二：雪怎麼變成米</h2>
   <p>
     常聽到的說法是「日本海側一年四季都很濕潤」。看金澤的圖，這句話在數字上沒錯：全年 2,400 mm，每個月都有雨。
-    但高知的雨更多（2,666 mm），卻不是稻米大縣。所以關鍵不只是「水多」，而是<b>水在什麼時候出現</b>：
+    但高知的雨更多（2,666 mm），卻不是稻米大縣。兩地的差別在<b>水出現的時間</b>：
   </p>
   <ol class="chain">
     <li>冬天的大雪堆在山上，等於把冬天的水<b>存起來</b>。</li>
@@ -83,20 +102,25 @@
   </ol>
   <p class="small">對照第 2 課：信濃川從長野一路流進日本海，正是脊梁山脈日本海側的河。</p>
 
+  <h2>到現場看什麼</h2>
+  <div class="callout">
+    <p><b>石川・金澤兼六園</b>：冬天（11 月到隔年 3 月）松樹枝上撐著繩子，從樹頂中心柱往四周拉成圓錐形，叫雪吊（<span lang="ja">ゆきつり</span>）。日本海側的雪重而濕，不撐住樹枝會被壓斷。看到雪吊就知道這裡冬天會下濕重的雪。</p>
+    <p><b>群馬到新潟的上越新幹線</b>：從東京出發時窗外是乾燥的晴天，穿過谷川岳下面的長隧道後，窗外變成一片雪地。山這一側和那一側的天氣，就是脊梁山脈擋季風的結果。川端康成《雪國》開頭那句「穿過縣境的長隧道就是雪國」，寫的是同一件事。</p>
+    <p><b>香川・滿濃池</b>：日本最大的灌溉用蓄水池。看堤防、取水設施和從池裡接出去的灌溉水路。池邊就是讃岐烏龍麵的產地，蓄水池的存在說明這裡的水必須靠自己存。</p>
+    <p><b>東京的冬天</b>：冬天常看得到富士山，因為太平洋側空氣乾燥、少雲。同一天金澤可能整天下雪。</p>
+  </div>
+
   <div class="source">
     <b>推薦資料</b>：<a href="https://www.data.jma.go.jp/obd/stats/etrn/index.php" target="_blank">氣象廳「過去の気象データ検索」</a>。去旅行前可以查目的地的平年值，看看那個月是雨季、雪季還是晴天多。<br>
     <b>速查表</b>：<a href="../reference/monsoon-climate.html">季風與氣候速查</a>・<a href="../reference/mountains.html">日本主要山脈速查</a>
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 1、2 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout"><b>延伸想想</b>：東京冬天的風為什麼那麼乾？</div>
-
-  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=56&block_no=47605&year=&month=&day=&view=" target="_blank">氣象廳平年值</a></li><li><a href="https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/area_stories/kagawa.html" target="_blank">農林水產省</a></li><li><a href="https://news.ksb.co.jp/article/16598886" target="_blank">KSB 瀨戶內海放送</a></li><li><a href="https://www.pref.kagawa.lg.jp/documents/12177/part1-2023p1.pdf" target="_blank">香川縣資料</a></li><li><a href="https://www.mlit.go.jp/tochimizushigen/mizsei/mizusato/shichoson/chugoku/mannou.htm" target="_blank">國土交通省</a></li><li><a href="https://www.pref.niigata.lg.jp/uploaded/attachment/491653.pdf" target="_blank">新潟縣</a></li><li><a href="https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/area_stories/niigata.html" target="_blank">農林水產省</a></li></ol></details>
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=56&block_no=47605&year=&month=&day=&view=" target="_blank">氣象廳平年值：金澤</a></li><li><a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=72&block_no=47891&year=&month=&day=&view=" target="_blank">氣象廳平年值：高松</a></li><li><a href="https://www.data.jma.go.jp/obd/stats/etrn/view/nml_sfc_ym.php?prec_no=74&block_no=47893&year=&month=&day=&view=" target="_blank">氣象廳平年值：高知</a></li><li><a href="https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/area_stories/kagawa.html" target="_blank">農林水產省</a></li><li><a href="https://news.ksb.co.jp/article/16598886" target="_blank">KSB 瀨戶內海放送</a></li><li><a href="https://www.pref.kagawa.lg.jp/documents/12177/part1-2023p1.pdf" target="_blank">香川縣資料</a></li><li><a href="https://www.mlit.go.jp/tochimizushigen/mizsei/mizusato/shichoson/chugoku/mannou.htm" target="_blank">國土交通省</a></li><li><a href="https://www.pref.niigata.lg.jp/uploaded/attachment/491653.pdf" target="_blank">新潟縣</a></li><li><a href="https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/area_stories/niigata.html" target="_blank">農林水產省</a></li></ol></details>
 
   <nav class="lesson-nav">
     <a href="0002-japan-alps-mountains.html">← 第 2 課：日本的屋脊</a>
@@ -133,7 +157,7 @@ ClimateChart.render(document.getElementById('rain-chart'), {
 Quiz.mount(document.getElementById('quiz'), {
   title: '日本地理 第 3 課・季風與氣候',
   facets: [{ id: 'l3', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jgeo-lesson-0004-v1',
+  storageKey: 'geo-l3-v1',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -160,7 +184,7 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 3,
       answer: '北邊的中國山地擋住冬季季風、南邊的四國山地擋住夏季季風 → 雨量少（高松全年約 1,150 mm）；加上河川短、雨水很快流進海 → 種稻缺水，只好挖池子把雨水存起來灌溉。' },
     { id: 'l3-6', facet: 'l3', level: 3, type: 'short',
-      prompt: '（重答診斷題）為什麼新潟等日本海側地區適合種稻？用至少兩個步驟說明。',
+      prompt: '為什麼新潟等日本海側地區適合種稻？用至少兩個步驟說明。',
       keywords: [['雪'], ['融', '融雪', '雪水', '春'], ['灌溉', '插秧', '水田'], ['平原', '平野', '越後', '沖積', '泥沙'], ['單作', '一季', '冬天不能', '冬天種不', '只種']],
       need: 3,
       answer: '冬季季風帶來大雪，雪堆在山上把水存起來 → 春天融雪，剛好在插秧需要大量灌溉用水時流進大河 → 大河堆積出越後平原這樣的廣大水田 → 冬天被雪覆蓋，只能專心種一季稻（水田單作）。' },
@@ -173,10 +197,6 @@ Quiz.mount(document.getElementById('quiz'), {
       ],
       prompt: '（複習第 2 課）哪一點是<b>飛驒山脈（北阿爾卑斯）</b>？',
       explain: '由西到東：飛驒（北）、木曾（中央）、赤石（南）。立山黑部阿爾卑斯路線就穿過飛驒山脈。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）南阿爾卑斯被認為還在隆起，跟哪一件事有關？',
-      options: ['伊豆半島撞上本州', '富士山持續地噴發', '日本海持續地擴張', '太平洋板塊的上升'],
-      explain: '伊豆半島原本是菲律賓海板塊上的火山島，北移撞上本州，從南邊推擠赤石山脈。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 1 課）三陸海岸面對日本海溝，卻沒有火山。為什麼？',
       options: ['下方板塊還不夠深產生不了岩漿', '海溝附近的海水把岩漿冷卻了', '三陸海岸的地殼太厚岩漿上不來', '太平洋板塊在這裡沒有往下隱沒'],

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>橋與隧道</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 8 課・橋與隧道</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 8 課・約 25 分鐘</p>
+  <h1>橋與隧道</h1>
+  <p class="lede">北海道、本州、四國、九州四座大島，曾經只能靠船連起來。為什麼北海道和本州之間蓋的是隧道，關門海峽兩種都有，本州和四國之間卻蓋了三條橋？</p>
+
+  <div class="goal">
+    <p><b>本課目標</b></p>
+    <p>1. 說出四大島之間哪些有橋或隧道、哪些還靠渡輪。</p>
+    <p>2. 解釋青函選隧道而不是橋，以及關門海峽為什麼隧道和橋都有。</p>
+    <p>3. 說出本州四國聯絡橋三條路線各連哪裡，並解釋三條路線為什麼蓋在那裡。</p>
+  </div>
+  <div class="note"><b>範圍說明</b>：JR 與私鐵的營運、票價見鐵道主題，本課只講路線為什麼在那裡。聯絡船在<a href="../../railways/lessons/0008-beyond-rail.html">鐵道第 8 課</a>也提到。</div>
+  <p class="small">頁面上的「▶」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 6、7 課回想</h2>
+  <div class="exercise quiz" data-answer="c">
+    <p class="q">瀨戶內海裡有很多島，而且海上風浪小。這對「要在海上蓋橋」的人來說，意味著？</p>
+    <div class="options">
+      <button data-key="a">島太多，橋沒有辦法蓋</button>
+      <button data-key="b">風浪小所以不需要橋，船就夠了</button>
+      <button data-key="c">島可以當橋墩的踏腳石，風浪小也比較好施工</button>
+      <button data-key="d">島全都是火山，不能蓋東西</button>
+    </div>
+    <div class="explain" hidden>橋不必一口氣跨過整個海面，可以在島與島之間分段蓋。瀨戶內海的橋就是這樣一段一段連起來的。</div>
+  </div>
+  <div class="recall-box exercise">第 7 課裡，新幹線遇到山就鑿隧道。想想看：遇到「海」的時候，可以選的方法有哪些？
+    <textarea></textarea>
+    <details><summary>看答案</summary>蓋橋、鑿海底隧道、或繼續坐船。這一課看日本的四座大島之間各自怎麼選，以及為什麼。</details>
+  </div>
+
+  <h2>1. 為什麼要把海峽連起來</h2>
+  <figure>
+    <div class="mapbox" id="link-map"></div>
+    <figcaption>四大島之間的固定連結位置（示意）。四國和九州之間沒有。</figcaption>
+  </figure>
+  <p>以前，北海道和本州之間有<b>青函連絡船</b>（<span lang="ja">れんらくせん</span> <button class="btn ghost say" data-audio="audio/0008/01.wav">▶</button>），本州和四國之間有宇高連絡船，旅客和貨物都要靠船。船有兩個問題：</p>
+  <ol class="chain">
+    <li>要看天氣，也比較慢。
+      <span class="why">颱風、濃霧時班次停開，轉乘也浪費時間。</span></li>
+    <li>會出事故。
+      <span class="why">1954 年颱風中，青函連絡船洞爺丸沉沒。1955 年濃霧中，宇高連絡船紫雲丸在高松港外與另一艘船相撞，死者包括許多修學旅行的學生。兩起事故都讓日本社會認為需要不受天氣影響的固定連結。</span></li>
+  </ol>
+  <p>結果是：北海道和本州之間是隧道，本州和九州之間是隧道加橋，本州和四國之間是橋。四國和九州之間目前還沒有橋或隧道，仍靠渡輪（例如大分縣佐賀關到愛媛縣三崎）。</p>
+
+  <h2>2. 青函隧道：北海道和本州</h2>
+  <p><b>青函隧道</b>（<span lang="ja">せいかんトンネル</span> <button class="btn ghost say" data-audio="audio/0008/02.wav">▶</button>）全長 53.85 km，其中海底的部分 23.3 km，1988 年開通。津輕海峽沒有蓋橋，原因在海峽本身：</p>
+  <ul class="chain">
+    <li><b>海峽深</b><span class="why">津輕海峽最深處的水深約一百多公尺，橋墩很難立在這麼深的海底。</span></li>
+    <li><b>風浪和天氣</b><span class="why">津輕海峽的風浪大，也常有颱風和濃霧，在海上施工和維護橋很困難。</span></li>
+    <li><b>隧道在海底的岩層裡</b><span class="why">隧道穿過海床以下的岩盤（海底面再往下約 100 m），不受海上的天氣影響，下雪的冬天也能行車。</span></li>
+  </ul>
+  <p>起初通的是普通列車（海峽線），2016 年北海道新幹線開通後，新幹線和貨運列車共用同一條隧道。新幹線在共用區間要降低速度（限速 160 km/h），因為和貨運列車交會時，風壓可能讓貨物崩落。</p>
+
+  <div class="exercise quiz" data-answer="d">
+    <p class="q">津輕海峽為什麼選擇建隧道，而不是橋？</p>
+    <div class="options">
+      <button data-key="a">因為海峽很窄，隧道比較短</button>
+      <button data-key="b">因為這一帶沒有颱風</button>
+      <button data-key="c">因為海底有火山，橋墩會被融化</button>
+      <button data-key="d">因為海峽深、風浪大，海底下的岩盤比海上更穩定</button>
+    </div>
+    <div class="explain" hidden>海峽深，橋墩難以立足；海上的天氣又影響施工和維護。隧道藏在海床下的岩盤中，不受天氣影響。</div>
+  </div>
+
+  <h2>3. 關門海峽：本州和九州</h2>
+  <p><b>關門海峽</b>（<span lang="ja">かんもんかいきょう</span> <button class="btn ghost say" data-audio="audio/0008/03.wav">▶</button>）是下關（本州）和門司（九州）之間的狹窄海峽，最窄的地方在壇之浦和和布刈之間的「早鞆瀨戶」。這裡同時有四個通道：</p>
+  <table class="cmp">
+    <tr><th>通道</th><th>開通</th><th>用途</th></tr>
+    <tr><td>關門鐵道隧道</td><td>1942</td><td>JR 在來線</td></tr>
+    <tr><td>關門國道隧道</td><td>1958</td><td>汽車（上層）與行人（下層）</td></tr>
+    <tr><td>關門橋</td><td>1973</td><td>高速公路</td></tr>
+    <tr><td>新關門隧道（約 18.7 km）</td><td>1975</td><td>山陽新幹線</td></tr>
+  </table>
+  <ul class="chain">
+    <li><b>為什麼集中在這裡</b><span class="why">本州和九州最接近的地方就是這裡，兩座島之間距離最短，往來的需求也最大。</span></li>
+    <li><b>為什麼先是隧道</b><span class="why">最早的鐵道隧道在 1936 年開工，當時有陸軍在背後推動；一般說法也提到，戰時海上的橋容易被空襲炸毀，隧道比較安全。後來車流增加，1958 年再蓋國道隧道，1973 年才蓋橋分流。</span></li>
+    <li><b>新幹線為什麼有自己的隧道</b><span class="why">新幹線的軌距（1,435 mm）和舊線（1,067 mm）不同，需要另外的軌道，所以山陽新幹線另外鑿了新關門隧道。</span></li>
+  </ul>
+
+  <h2>4. 本州四國聯絡橋：三條路線</h2>
+  <p>連接四國和本州的橋規劃了三條，分別接到本州的不同位置，也接上各自的高速公路網（山陽道、四國縱貫道等）：</p>
+  <table class="cmp">
+    <tr><th>路線</th><th>連接</th><th>代表橋</th><th>開通</th><th>特徵</th></tr>
+    <tr><td>神戶・鳴門</td><td>兵庫縣神戶 → 淡路島 → 德島縣鳴門</td><td>明石海峽大橋、大鳴門橋</td><td>1998（明石海峽大橋）</td><td>只通汽車。明石海峽大橋全長 3,911 m，中央跨距 1,991 m，建成時是世界最長的吊橋（2022 年被土耳其的橋超過）</td></tr>
+    <tr><td>兒島・坂出</td><td>岡山縣兒島 → 香川縣坂出</td><td>瀨戶大橋</td><td>1988</td><td>道路與鐵路共用（上層汽車、下層電車），電車是 JR 瀨戶大橋線，不是新幹線</td></tr>
+    <tr><td>尾道・今治</td><td>廣島縣尾道 → 愛媛縣今治</td><td>來島海峽大橋等</td><td>1999</td><td>經過 6 座島，橋上設有自行車道，稱為「しまなみ海道」</td></tr>
+  </table>
+  <p><b>本州四國連絡橋</b>（<span lang="ja">ほんしゅうしこくれんらくきょう</span> <button class="btn ghost say" data-audio="audio/0008/04.wav">▶</button>）的三條路線，都選在瀨戶內海兩岸最近、島又多的地方：</p>
+  <ul class="chain">
+    <li><b>神戶・鳴門</b><span class="why">連接關西（第 4 課的大阪圈）與德島。淡路島就位在兩岸之間，是現成的踏腳石，所以分成明石海峽和鳴門海峽兩座橋。鳴門海峽的渦潮在第 6 課提過，就在大鳴門橋下方。</span></li>
+    <li><b>兒島・坂出</b><span class="why">連接岡山與香川，是三條路線中最早完成的。兩岸之間有幾座小島，橋墩就立在這些島上，上層走汽車、下層走電車。</span></li>
+    <li><b>尾道・今治</b><span class="why">連接廣島與愛媛，沿途經過第 6 課提過的瀨戶內海島嶼群中的六座島，其中跨越來島海峽的是一組三連吊橋。</span></li>
+  </ul>
+  <p>連接以後的影響有好有壞：往來變快，觀光客增加（しまなみ海道的自行車旅行很受歡迎）；但橋的建設與通行費負擔重，也有人批評大城市吸走四國的人和生意，這個現象在<a href="../../railways/lessons/0007-shinkansen-and-cities.html">鐵道第 7 課</a>叫「吸管效應」。</p>
+
+  <h2>到現場看什麼</h2>
+  <div class="callout">
+    <p><b>山口・下關到福岡・門司的關門人行隧道（關門トンネル人道）</b>：關門國道隧道的下層是人行道，可以走路從本州走到九州。隧道中間地板上畫著縣境線（山口縣和福岡縣）。這是兩座島之間最近的距離。</p>
+    <p><b>青森・龍飛崎的青函隧道紀念館</b>：展示青函隧道的挖掘過程，也可以搭乘纜車進入體驗坑道，看到隧道在海底岩層裡的樣子。</p>
+    <p><b>兵庫・神戶舞子公園</b>：從公園抬頭看，明石海峽大橋的主塔就在頭上，同時可以看到海峽有多少船來往。想想為什麼橋要這麼高。</p>
+    <p><b>岡山・鷲羽山，或香川・坂出一帶</b>：從高處看瀨戶大橋，橋一段一段連過小島，島就是橋墩的踏腳石。</p>
+    <p><b>愛媛・今治到廣島・尾道的自行車道（しまなみ海道）</b>：騎車過橋，可以看到瀨戶內海的島嶼群，海面平靜，每座橋的另一端是下一座島。</p>
+  </div>
+
+  <div class="source">
+    <b>速查表</b>：<a href="../reference/shinkansen-bridges-tunnels.html">新幹線、橋與隧道速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <p class="small">語音：VOICEVOX:青山龍星</p>
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.nippon.com/ja/japan-topics/today0313/" target="_blank">nippon.com：青函トンネル</a></li><li><a href="https://www.obayashi.co.jp/tunnelworld/lesson/no1/" target="_blank">大林組：青函トンネル</a></li><li><a href="https://tabi-mag.jp/ya0328/" target="_blank">關門鐵道隧道與新關門隧道</a></li><li><a href="https://jafmate.jp/car/car_anniversary_20250309.html" target="_blank">JAF Mate：關門國道隧道開通記念日</a></li><li><a href="https://trafficnews.jp/post/129020" target="_blank">乘りものニュース：關門橋開通五十年</a></li><li><a href="https://www.kobe-np.co.jp/rentoku/akashibridge/201803/0011126577.shtml" target="_blank">神戶新聞：明石海峽大橋</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/common/001554835.pdf" target="_blank">國土交通省：しまなみ海道</a></li><li><a href="https://jtsb.mlit.go.jp/kai/bunseki/bunsekikohosiryo/no7_mutyu/pdf/1_hanseiki.pdf" target="_blank">運輸安全委員會：紫雲丸事故</a></li><li><a href="https://orsj.org/wp-content/or-archives50/pdf/bul/Vol.32_08_504.pdf" target="_blank">本州四國連絡橋の計畫資料</a></li></ol></details>
+
+  <nav class="lesson-nav">
+    <a href="0007-shinkansen-routes.html">← 第 7 課：新幹線路網</a>
+    <a href="0009-industry-and-energy.html">下一課：工業地帶與能源 →</a>
+  </nav>
+</main>
+
+<script>
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
+JapanMap.render(document.getElementById('link-map'), {
+  view: [[129.0, 32.0], [142.2, 42.4]],
+  points: [
+    { label: '青函隧道', lon: 140.5, lat: 41.2 },
+    { label: '關門海峽', lon: 130.93, lat: 33.96 },
+    { label: '神戶・鳴門', lon: 134.95, lat: 34.5 },
+    { label: '兒島・坂出', lon: 133.82, lat: 34.4 },
+    { label: '尾道・今治', lon: 133.1, lat: 34.3 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '日本地理 第 8 課・橋與隧道',
+  storageKey: 'geo-l8-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
+  questions: [
+    { id: 'l8-1', facet: 'l8', level: 1, type: 'choice',
+      prompt: '四大島之間，哪一組目前沒有橋或隧道，仍靠渡輪？',
+      options: ['四國和九州', '本州和四國', '本州和九州', '北海道和本州'],
+      explain: '北海道・本州有青函隧道，本州・九州有關門的隧道與橋，本州・四國有三條橋。四國・九州之間仍靠渡輪。' },
+    { id: 'l8-2', facet: 'l8', level: 2, type: 'choice',
+      prompt: '青函連絡船洞爺丸（1954）和宇高連絡船紫雲丸（1955）的沉沒，帶來什麼影響？',
+      options: ['社會更重視不受天氣影響的固定連結，推動了隧道與橋的建設', '日本政府廢除所有船運', '新幹線立刻開通', '這些事故讓海峽被禁止通行'],
+      explain: '船隻受天氣影響大，事故也帶來傷亡，推動了隧道和橋的建設。' },
+    { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
+      prompt: '關門海峽既有隧道又有橋，主要因為？',
+      options: ['本州和九州在這裡最近、需求最大，隧道先蓋，車流增加後再加蓋橋分流', '隧道比橋便宜，橋只是為了觀光', '隧道只給人走，橋只給車走', '兩者是兩家公司各自蓋的'],
+      explain: '關門海峽是兩島最近處，往來需求大。較早的是隧道（戰前、戰後各一條），後來才蓋橋和新幹線隧道。' },
+    { id: 'l8-4', facet: 'l8', level: 2, type: 'choice',
+      prompt: '本州四國聯絡橋為什麼蓋三條，而不是一條？',
+      options: ['三條路線分別連到本州的近畿、岡山、廣島，各自接上高速公路網', '三條路線互為備援，只選其中一條使用', '因為第一條橋太小，再蓋兩條補強', '因為瀨戶內海太寬，一條橋蓋不完'],
+      explain: '神戶・鳴門連近畿與德島，兒島・坂出連岡山與香川，尾道・今治連廣島與愛媛，各自接上不同的高速公路網。' },
+    { id: 'l8-5', facet: 'l8', level: 3, type: 'short',
+      prompt: '這三條聯絡橋都選在瀨戶內海的「島多、兩岸近」的地方。用至少一個理由說明為什麼這樣選。',
+      keywords: [['島'], ['踏腳石', '橋墩', '分段', '一段一段', '跨'], ['風浪', '平靜', '近', '窄']],
+      need: 2,
+      answer: '島可以當橋墩的踏腳石，橋可以一段一段蓋，不必一口氣跨過整片海；瀨戶內海風浪較小，兩岸距離也較近。' },
+    { id: 'l8-6', facet: 'l8', level: 2, type: 'choice',
+      prompt: '明石海峽大橋與大鳴門橋，為什麼要分成兩座橋？',
+      options: ['因為兩岸之間有淡路島，可以當中繼的踏腳石', '因為海峽太寬，一座橋蓋不起來', '因為淡路島禁止蓋橋', '因為兩座橋是不同年代的設計'],
+      explain: '神戶・鳴門路線經過淡路島，所以分成兩段：神戶（本州）到淡路島是明石海峽大橋，淡路島到鳴門（四國）是大鳴門橋。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 6 課）鳴門海峽的漩渦，是因為？',
+      options: ['瀨戶內海兩側的潮汐有時間差，水面高度不同，水流擠過最窄處', '兩股海流在這裡相撞', '海底有大火山', '風把海水吹成圈'],
+      explain: '潮汐差帶動強烈水流，在最窄處形成漩渦。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 7 課）許多「新○○」新幹線站在舊市區外圍，主要因為？',
+      options: ['高速列車要和緩的彎道，市區很難切出又直又寬的鐵路', '新幹線禁止進入市區', '舊市區沒有任何鐵路', '市區的地下水太多不能挖'],
+      explain: '時速兩百公里以上的列車，彎道要和緩，所以路線繞過市區，在郊區設站。' },
+  ],
+});
+</script>
+</body>
+</html>

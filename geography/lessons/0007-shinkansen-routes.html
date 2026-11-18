@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新幹線路網</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+<script src="../../shared/order.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 7 課・新幹線路網</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 7 課・約 25 分鐘</p>
+  <h1>新幹線路網</h1>
+  <p class="lede">為什麼東海道新幹線在岐阜縣的稻田中間設一個站？為什麼往新潟的上越新幹線要鑿一條 22 公里的隧道？</p>
+
+  <div class="goal">
+    <p><b>本課目標</b></p>
+    <p>1. 說出新幹線為什麼先蓋東京到大阪，再往西、往北延伸。</p>
+    <p>2. 在地圖上指出新幹線遇到山、海、雪時怎麼處理（隧道、積雪對策）。</p>
+    <p>3. 解釋「新○○」站為什麼常在舊市區外圍。</p>
+  </div>
+  <div class="note"><b>範圍說明</b>：新幹線的公司、票價、營運、對城市的影響，見<a href="../../railways/lessons/0007-shinkansen-and-cities.html">鐵道第 7 課</a>。本課只講路線為什麼這樣走。</div>
+  <p class="small">頁面上的「▶」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 1、4 課回想</h2>
+  <div class="exercise quiz" data-answer="a">
+    <p class="q">日本人口最密集的帶狀地帶，從東京連到福岡。要蓋第一條高速鐵路，最合理的路線是？</p>
+    <div class="options">
+      <button data-key="a">沿著這條人口帶，連起東京、名古屋、大阪</button>
+      <button data-key="b">先蓋到北海道，因為那裡可以蓋得最直</button>
+      <button data-key="c">沿著日本海側，因為那裡冬天沒有雪的問題</button>
+      <button data-key="d">蓋在山區，這樣比較不會受地震影響</button>
+    </div>
+    <div class="explain" hidden>乘客最多的地方先蓋。人口帶就是第一條新幹線的路線，也是它能賺錢的原因。</div>
+  </div>
+  <div class="recall-box exercise">第 1 課說日本的地殼很不穩定。對一條時速兩百多公里的鐵路來說，這會帶來什麼問題？
+    <textarea></textarea>
+    <details><summary>看答案</summary>地震時列車可能脫軌。新幹線沿線有地震計，偵測到強烈搖晃就自動切斷電力、讓列車緊急停車。本課路線的選擇，也要考慮過活斷層與軟弱地盤。</details>
+  </div>
+
+  <h2>1. 先蓋哪一段：人口帶</h2>
+  <figure>
+    <div class="mapbox" id="shin-map"></div>
+    <figcaption>主要新幹線路線（位置為示意，線旁標路線名）。</figcaption>
+  </figure>
+  <ol class="chain">
+    <li>東京、名古屋、大阪排在第 4 課的人口帶上。
+      <span class="why">1964 年的東海道新幹線連起這三個都市圈，沿線人口最多，開通後很快就賺錢（見<a href="../../railways/lessons/0007-shinkansen-and-cities.html">鐵道第 7 課</a>）。</span></li>
+    <li>接著往西延伸到福岡。
+      <span class="why">山陽新幹線（1972–75）沿著瀨戶內海北側的平原，連起岡山、廣島、福岡。這一帶也在人口帶上。</span></li>
+    <li>然後往北，連到東北和日本海側。
+      <span class="why">東北新幹線、上越新幹線在 1982 年開通。往北的人口比人口帶少，需要鑿更多的隧道，工程也更貴。</span></li>
+    <li>最後才是九州、北海道。
+      <span class="why">九州新幹線 2011 年全線開通，北海道新幹線 2016 年開到新函館北斗。越往外，沿線人口越少，是靠公家出錢蓋的整備新幹線（見<a href="../../railways/lessons/0007-shinkansen-and-cities.html">鐵道第 7 課</a>）。</span></li>
+  </ol>
+  <p>新幹線延伸的順序，大致對應第 4 課人口密度地圖從深色到淺色。北陸新幹線（1997 年先開到長野）是例外，它的開通和長野舉辦奧運有關，各段的順序也受政治與財源影響。</p>
+
+  <div class="exercise order" data-solution="東海道新幹線,山陽新幹線,東北・上越新幹線,北陸新幹線（到長野）,九州新幹線全線,北海道新幹線">
+    <p class="q">依開通先後，點選這六條：</p>
+  </div>
+
+  <h2>2. 遇到山：鑿隧道，或繞開</h2>
+  <p>新幹線要快，路線就要又直又平，坡度和彎度不能太大。日本多山，所以「遇到山就鑿」是常態：</p>
+  <ul class="chain">
+    <li><b>上越新幹線：大清水隧道</b>（長約 22.2 km，1982 年通車）
+      <span class="why">從東京到新潟，要越過脊梁山脈中的谷川岳一帶。這條隧道穿過山下，把關東和新潟連起來。山的兩側氣候不同（第 3 課），隧道的兩側就是晴天與雪國的交界。</span></li>
+    <li><b>山陽新幹線：六甲隧道與新關門隧道</b>
+      <span class="why">新大阪以西，六甲山地擋在神戶北邊，山陽新幹線用隧道穿過。到本州盡頭，則用新關門隧道（約 18.7 km）通過關門海峽底下（見第 8 課）。</span></li>
+    <li><b>東海道新幹線：沿著平原走</b>
+      <span class="why">東京到大阪大部分在海邊的平原上，最需要穿山的地方在箱根山一帶的熱海、三島之間（新丹那隧道）。比起往北的路線，這條相對平坦。</span></li>
+  </ul>
+  <p>有些路線則是繞開山：東海道新幹線從名古屋往西，不走伊吹山以北，而是沿著關原的山間缺口進入琵琶湖旁的平地，再到京都和大阪。這個缺口自古就是東西往來的通道。</p>
+
+  <h2>3. 遇到雪：關原和日本海側</h2>
+  <p>新幹線跑得快，雪也是問題。列車高速經過積雪的鐵路時，會把雪捲起來，雪塊黏在車底，掉下來時會打飛鐵路碎石。</p>
+  <ul class="chain">
+    <li><b>關原一帶</b>（<span lang="ja">せきがはら</span> <button class="btn ghost say" data-audio="audio/0007/01.wav">▶</button>）
+      <span class="why">東海道新幹線的路線大多是太平洋側的晴天，只有岐阜縣到滋賀縣的關原一帶，冬天會有日本海側來的雪。JR 東海在米原、關原一帶沿線約 68.5 km 的範圍裝了灑水器，用水把雪壓實，減少雪被捲起。</span></li>
+    <li><b>岐阜羽島站</b>（<span lang="ja">ぎふはしま</span> <button class="btn ghost say" data-audio="audio/0007/02.wav">▶</button>）
+      <span class="why">名古屋與米原之間，需要一個除雪車輛的基地，岐阜縣又希望有一個站，所以設在岐阜羽島。這就是為什麼稻田中間有一個新幹線站。</span></li>
+    <li><b>上越、北陸新幹線</b>
+      <span class="why">路線本來就在雪國，所以部分路段有雪棚，沿線用灑水融雪。第 3 課的豪雪地帶，到了這裡成了設計條件。</span></li>
+  </ul>
+
+  <div class="exercise quiz" data-answer="b">
+    <p class="q">東海道新幹線在關原一帶要灑水，上越新幹線沿線用灑水融雪。兩者的共同原因是？</p>
+    <div class="options">
+      <button data-key="a">兩條路線都蓋在火山旁</button>
+      <button data-key="b">列車高速經過積雪的鐵路會捲起雪塊，影響行車</button>
+      <button data-key="c">因為新幹線軌道需要冷卻</button>
+      <button data-key="d">兩個地方的鐵軌都比較容易生鏽</button>
+    </div>
+    <div class="explain" hidden>雪塊被高速列車捲起，黏在車底又掉下來，會打飛碎石、損壞設備。所以要靠灑水、融雪或屋頂讓積雪不要被捲起來。</div>
+  </div>
+
+  <h2>4. 為什麼站常在舊市區外面</h2>
+  <p>新橫濱、新大阪、新神戶、新山口：許多新幹線站叫「新○○」，都在舊市中心的外圍另外設站。</p>
+  <ol class="chain">
+    <li>高速列車需要很大的轉彎半徑。
+      <span class="why">時速兩百公里以上，彎道要和緩。市區的街道密、房子多，很難再切出一條又直又寬的鐵路。</span></li>
+    <li>所以路線繞過市區，或在市區外圍設站。
+      <span class="why">郊區土地便宜，也有空間蓋月台和停車場。</span></li>
+    <li>車站周邊跟著長出新的商業區。
+      <span class="why">新幹線站成了地方的新入口，原本的車站和商店街則要靠電車或巴士連接。</span></li>
+  </ol>
+  <p class="small">新神戶站就貼著六甲山的山腳，出了月台立刻鑽進隧道，是地形直接決定車站位置的例子。</p>
+
+  <h2>到現場看什麼</h2>
+  <div class="callout">
+    <p><b>新潟・越後湯沢站（上越新幹線）</b>：冬天搭車，從東京出發時窗外是乾燥的晴天，穿過隧道後出站就是雪。這裡是脊梁山脈把兩邊氣候切開的現場。</p>
+    <p><b>岐阜羽島站</b>：站前是田地，附近沒有大市區。從月台往兩側看，軌道比一般車站多出幾條，供車輛停放和折返；它們就是上面第 3 點除雪、故障車輛留置所需的設備。</p>
+    <p><b>冬天搭東海道新幹線過關原</b>：窗外積雪，鐵路旁有一排灑水管。名古屋到米原之間的天氣，可能和東京到名古屋完全不同。</p>
+    <p><b>長野・輕井澤站（北陸新幹線）</b>：在淺間山（第 1 課的火山前線）腳下。出站就看得到山。從高崎到輕井澤要翻越碓氷峠一帶的山地，路線有許多隧道。</p>
+    <p><b>新神戶站</b>：站在山邊，進出都是隧道。對照新大阪站的平地，可以看出同一條線上地形差別的影響。</p>
+  </div>
+
+  <div class="source">
+    <b>速查表</b>：<a href="../reference/shinkansen-bridges-tunnels.html">新幹線、橋與隧道速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <p class="small">語音：VOICEVOX:青山龍星</p>
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://trafficnews.jp/post/48453/" target="_blank">乘りものニュース：東海道新幹線、想定外の関ヶ原</a></li><li><a href="https://trafficnews.jp/post/74213/2" target="_blank">乘りものニュース：岐阜羽島駅の役割</a></li><li><a href="https://www.wikipedia.com/wiki/Daishimizu_Tunnel" target="_blank">Wikipedia: Daishimizu Tunnel</a></li><li><a href="https://tabi-mag.jp/ya0328/" target="_blank">旅行雜誌：關門鐵道隧道與新關門隧道</a></li><li><a href="https://www.wikipedia.com/wiki/Joetsu_Shinkansen" target="_blank">Wikipedia: Jōetsu Shinkansen</a></li></ol></details>
+
+  <nav class="lesson-nav">
+    <a href="0006-currents-and-coasts.html">← 第 6 課：海流與海岸</a>
+    <a href="0008-bridges-and-tunnels.html">下一課：橋與隧道 →</a>
+  </nav>
+</main>
+
+<script>
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
+JapanMap.render(document.getElementById('shin-map'), {
+  view: [[128.5, 30.8], [143.5, 42.4]],
+  lines: [
+    { cls: 'trench', label: '東海道・山陽', labelAt: 4, coords: [[139.77, 35.68], [139.16, 35.26], [138.39, 34.97], [137.73, 34.70], [136.88, 35.17], [136.29, 35.31], [135.76, 34.99], [135.50, 34.73], [133.92, 34.67], [132.47, 34.40], [131.40, 34.07], [130.88, 33.89], [130.42, 33.59]] },
+    { cls: 'trench', label: '九州', labelAt: 2, coords: [[130.42, 33.59], [130.69, 32.79], [130.54, 31.58]] },
+    { cls: 'wind', label: '東北・北海道', labelAt: 4, coords: [[139.77, 35.68], [139.62, 35.91], [139.90, 36.56], [140.88, 38.26], [141.14, 39.70], [140.69, 40.83], [140.65, 41.90]] },
+    { cls: 'range', label: '上越', labelAt: 3, coords: [[139.62, 35.91], [139.01, 36.32], [138.81, 36.94], [138.85, 37.45], [139.06, 37.91]] },
+    { cls: 'range', label: '北陸', labelAt: 4, coords: [[139.01, 36.32], [138.19, 36.64], [138.24, 37.10], [137.21, 36.70], [136.65, 36.58], [136.22, 36.06], [136.07, 35.65]] },
+  ],
+  points: [
+    { label: '東京', lon: 139.77, lat: 35.68 },
+    { label: '名古屋', lon: 136.88, lat: 35.17 },
+    { label: '新大阪', lon: 135.50, lat: 34.73 },
+    { label: '博多', lon: 130.42, lat: 33.59 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '日本地理 第 7 課・新幹線路網',
+  storageKey: 'geo-l7-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
+  questions: [
+    { id: 'l7-1', facet: 'l7', level: 1, type: 'choice',
+      prompt: '新幹線為什麼先蓋東京到大阪，再往外延伸？',
+      options: ['這一段人口最密集，乘客最多，路線順著人口帶延伸', '這一段地形最平坦，不需要隧道', '因為這一段離火山最遠', '因為這一段是日本最古老的鐵路'],
+      explain: '人口帶乘客最多，先蓋最划算。往外延伸時，沿線人口越來越少。' },
+    { id: 'l7-2', facet: 'l7', level: 2, type: 'choice',
+      prompt: '上越新幹線的大清水隧道穿過谷川岳一帶，這座山對新幹線的意義是？',
+      options: ['脊梁山脈把關東和新潟隔開，要用長隧道穿過去', '谷川岳是火山，新幹線必須避開岩漿', '谷川岳有大量溫泉，需要設站', '谷川岳是雪的來源，必須避免靠近'],
+      explain: '脊梁山脈擋在關東平原和新潟之間，高速鐵路又要直，只能靠長隧道穿過去。' },
+    { id: 'l7-3', facet: 'l7', level: 2, type: 'choice',
+      prompt: '東海道新幹線為什麼在關原一帶沿線灑水？',
+      options: ['高速列車會把積雪捲起，雪塊掉落會打飛碎石', '為了讓軌道降溫', '為了清洗鐵軌的灰塵', '為了防止鐵軌生鏽'],
+      explain: '關原一帶冬天有雪，灑水把雪壓實，減少被高速列車捲起。' },
+    { id: 'l7-4', facet: 'l7', level: 3, type: 'short',
+      prompt: '為什麼許多新幹線站（新橫濱、新大阪等）在舊市區外圍？用至少兩個理由說明。',
+      keywords: [['彎', '轉彎', '直', '半徑'], ['市區', '房子', '擁擠', '密集', '市中心'], ['土地', '便宜', '空間', '腹地']],
+      need: 2,
+      answer: '高速列車需要和緩的彎道，市區街道密、房子多，很難切出又直又寬的路線；郊區土地便宜，也有空間蓋月台和停車場。' },
+    { id: 'l7-5', facet: 'l7', level: 2, type: 'choice',
+      prompt: '岐阜羽島站為什麼設在稻田中間？',
+      options: ['名古屋和米原之間需要除雪車輛的基地，同時岐阜縣希望有一個站', '因為岐阜羽島有很多工廠', '因為那裡有大城市', '因為那裡有溫泉'],
+      explain: '關原一帶冬天積雪，需要除雪基地。岐阜縣也希望有站，兩件事湊在一起。' },
+    { id: 'l7-6', facet: 'l7', level: 2, type: 'choice',
+      prompt: '北海道新幹線、九州新幹線比東海道新幹線晚了幾十年才蓋，主要原因與什麼有關？',
+      options: ['沿線人口較少，不容易賺錢，要靠公家出錢蓋', '當時的技術還做不出隧道', '北方地震太多，鐵路蓋不起來', '寒冷地區的車輛技術還不成熟'],
+      explain: '越往外，沿線人口越少，營運比較不賺錢，由國家和地方出錢蓋的整備新幹線一段一段延伸。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 3 課）上越新幹線穿過隧道後，窗外從晴天變成雪地。原因是？',
+      options: ['脊梁山脈擋住冬季西北季風，雪下在日本海側', '隧道裡的溫度比較低', '日本海側的海水比較冷', '隧道把雪從山頂運到另一邊'],
+      explain: '冬天的西北季風吸飽日本海的水氣，撞上脊梁山脈後在日本海側下雪，山這一邊就乾燥晴朗。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 4 課）新幹線的延伸順序，大致對應什麼？',
+      options: ['人口密度從高到低的順序', '地震次數從多到少的順序', '山的高度由低到高的順序', '河川長度的順序'],
+      explain: '先連人口密集的帶狀走廊，再往沿線人口較少的地方延伸。' },
+  ],
+});
+</script>
+</body>
+</html>

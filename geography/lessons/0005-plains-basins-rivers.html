@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>平原、盆地與河川</title>
+<link rel="stylesheet" href="../../shared/style.css">
+<script src="../../shared/skin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="../assets/japan-map.js"></script>
+<script src="../../shared/quiz.js"></script>
+<script src="../../shared/order.js"></script>
+</head>
+<body>
+<div class="sticky"><span>第 5 課・平原、盆地與河川</span><span id="progress"></span></div>
+<main>
+<nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">日本地理</a></nav>
+  <p class="small">第 5 課・約 25 分鐘</p>
+  <h1>平原、盆地與河川</h1>
+  <p class="lede">奈良和京都都蓋在盆地裡，江戶在關東平原上長成百萬人的大城市，鎌倉卻擠在三面環山的小谷地。日本只有少數幾片平地，各自適合做什麼？</p>
+
+  <div class="goal">
+    <p><b>本課目標</b></p>
+    <p>1. 說出急流河川怎麼造出扇狀地、沖積平原和三角洲，以及各自適合做什麼。</p>
+    <p>2. 看到「台地」和「低地」時，判斷哪裡適合住、哪裡容易淹水。</p>
+    <p>3. 用地形解釋奈良、京都、江戶、鎌倉為什麼選在那裡，並說出治水怎麼改變了地形。</p>
+  </div>
+  <p class="small">頁面上的「▶」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 2、4 課回想</h2>
+  <div class="exercise quiz" data-answer="a">
+    <p class="q">日本阿爾卑斯是在最近一兩百萬年急速隆起的高山，山坡很陡。這樣的山地，雨水會有什麼結果？</p>
+    <div class="options">
+      <button data-key="a">很快沿著陡坡流走，河川又短又急，並把土砂帶下山</button>
+      <button data-key="b">大部分滲進地下，河川幾乎不流動</button>
+      <button data-key="c">先積在山谷成湖，慢慢流出</button>
+      <button data-key="d">慢慢匯集成很長的大河</button>
+    </div>
+    <div class="explain" hidden>山又高又陡、離海又近，雨水很快就流到海。這個「又短又急又帶土砂」的特性，是本課所有平地地形的起點。</div>
+  </div>
+  <div class="recall-box exercise">第 4 課說日本能住人的土地只有國土的約三分之一。這些土地集中在哪一類地形上？
+    <textarea></textarea>
+    <details><summary>看答案</summary>山與山之間的平地：平原和盆地。這一課接著問：這些平地是怎麼來的，為什麼各有不同的用途。</details>
+  </div>
+
+  <h2>1. 日本的河：短、陡、土砂多</h2>
+  <ol class="chain">
+    <li>山脈高、離海近。
+      <span class="why">日本最長的河信濃川約 367 km，和大陸上動輒上千公里的河比起來很短。</span></li>
+    <li>雨水從山頂到海只要很短的距離，水流又急。
+      <span class="why">梅雨和颱風的雨集中在一兩個月，河水一下暴漲。</span></li>
+    <li>急流把山上崩落的砂礫一路沖下來，在山出口與平地交界處放下。
+      <span class="why">水流到平地速度變慢，搬不動重的東西，先放下礫石，再放下沙，最後才是泥。</span></li>
+  </ol>
+  <p>這個「從山裡搬土砂到平地放下」的過程，造出了日本大部分的平原。放下的位置不同，形成不同的地形。</p>
+
+  <h2>2. 四種平地，四種用途</h2>
+  <ul class="chain">
+    <li>水流越慢，能搬的東西越細：礫石先落、沙次之、泥最後。
+      <span class="why">所以山口堆礫石，中下游堆沙泥，河口堆最細的泥。</span></li>
+    <li>礫石層排水快，泥層留得住水。
+      <span class="why">所以山口多果樹，下游多水田。</span></li>
+    <li>河水到不了比河高的地方。
+      <span class="why">所以高出一截的台地缺水，卻不淹水。</span></li>
+  </ul>
+  <table class="cmp">
+    <tr><th>地形</th><th>怎麼形成</th><th>特性</th><th>適合做什麼</th></tr>
+    <tr><td><b>扇狀地</b>（<span lang="ja">せんじょうち</span> <button class="btn ghost say" data-audio="audio/0005/01.wav">▶</button>）<br><span class="small">山的出口</span></td><td>河從山谷流出，流速一降就把礫石堆成扇形</td><td>礫石層，水容易往下滲，地表缺水</td><td>果樹園、旱田；水田要引水</td></tr>
+    <tr><td><b>沖積平原</b><br><span class="small">中下游</span></td><td>洪水一再漫出河道，細沙和泥堆積</td><td>平坦、土壤肥沃，但容易淹水</td><td>水田、大城市</td></tr>
+    <tr><td><b>三角洲</b>（<span lang="ja">さんかくす</span> <button class="btn ghost say" data-audio="audio/0005/02.wav">▶</button>）<br><span class="small">河口</span></td><td>河口把細泥放在海邊，向海延伸</td><td>地勢很低、地盤軟，靠海</td><td>港口、工業與都市（廣島市就在太田川的三角洲上）</td></tr>
+    <tr><td><b>台地</b>（<span lang="ja">だいち</span> <button class="btn ghost say" data-audio="audio/0005/03.wav">▶</button>）<br><span class="small">高出一截的平地</span></td><td>以前的平原被地殼抬升，或河往下切，剩下高處的平坦面</td><td>河水到不了，缺水；但不淹水、地盤硬</td><td>早期是旱田和雜木林，後來成了住宅區與機場</td></tr>
+  </table>
+  <p class="small">台地和低地的邊界叫「崖」或「坂」。日本地名裡的「坂」「谷」「台」「橋」，常是在說地形。</p>
+
+  <div class="exercise quiz" data-answer="c">
+    <p class="q">山梨縣的甲府盆地邊緣有一大片葡萄園和桃園，山坡下就是扇狀地。為什麼扇狀地適合果樹，卻不太適合水稻？</p>
+    <div class="options">
+      <button data-key="a">扇狀地的氣候太冷，水稻長不好</button>
+      <button data-key="b">扇狀地的土壤太肥沃，水稻會長得太快</button>
+      <button data-key="c">礫石層排水好、水容易滲走，果樹喜歡，水田卻留不住水</button>
+      <button data-key="d">扇狀地總是被海水淹沒</button>
+    </div>
+    <div class="explain" hidden>扇狀地是粗礫石堆成，水往下滲。水田要把水蓄住，所以多在沖積平原；果樹怕根泡水，排水好的扇狀地剛好。</div>
+  </div>
+
+  <h2>3. 盆地：奈良、京都為什麼在盆地裡</h2>
+  <figure>
+    <div class="mapbox" id="site-map"></div>
+    <figcaption>本課的地點（位置為示意）。</figcaption>
+  </figure>
+  <p><b>盆地</b>（<span lang="ja">ぼんち</span> <button class="btn ghost say" data-audio="audio/0005/04.wav">▶</button>）是四面被山圍起來的平地。古代選首都時，盆地同時具備幾個條件：</p>
+  <ol class="chain">
+    <li>四面是山，只有幾條路進出。
+      <span class="why">敵人很難大舉進攻，也適合管制人員出入。</span></li>
+    <li>山上的水匯集成河，流進盆地。
+      <span class="why">奈良盆地有大和川，京都盆地有鴨川、桂川，居民有水可用、有水可灌溉。</span></li>
+    <li>盆地底部是河流堆出的平地。
+      <span class="why">能種稻，養得起官僚和寺院，這是國家初期最重要的條件。</span></li>
+    <li>離海有一段距離，但有河和陸路可以和各地連絡。
+      <span class="why">政府要收各地的稅與貢品，需要交通，但又不想被海上的敵人直接攻擊。</span></li>
+  </ol>
+  <p>平城京（奈良時代）與平安京（平安時代）因此都選在盆地。從歷史的角度，這兩次遷都為什麼發生，見<a href="../../history/lessons/0003-learning-from-china.html">歷史第 3 課</a>和<a href="../../history/lessons/0004-why-the-court-lost-control.html">歷史第 4 課</a>。盆地的缺點是夏天悶熱、冬天寒冷，京都的氣候現在還是這個樣子。</p>
+
+  <h2>4. 關東平原：撐起江戶的大平原</h2>
+  <p>日本最大的平原是<b>關東平原</b>。它的特色是台地很多，台地約占平原面積的一半以上，東京西邊的<b>武藏野台地</b>就是其中之一。低地則像樹枝般伸進台地之間，沿著河川發展。</p>
+  <ul class="chain">
+    <li><b>台地住人、低地種稻</b><span class="why">台地不會淹水，地盤硬，適合蓋城。低地有水，適合水田。江戶城建在台地的邊緣，東邊的低地是後來開發的下町。</span></li>
+    <li><b>面向東京灣</b><span class="why">平原的出口是海灣，船可以進來，江戶成了全國物資集散的港口。</span></li>
+    <li><b>平原夠大，養得起一百萬人</b><span class="why">江戶時代的人口集中是大名參勤交代帶來的消費（見<a href="../../history/lessons/0008-edo-shogunate-rule.html">歷史第 8 課</a>和<a href="../../history/lessons/0009-edo-economy-and-townspeople.html">歷史第 9 課</a>），而平坦的土地和水運是讓這座城市長得起來的條件。</span></li>
+  </ul>
+
+  <h2>5. 治水：人怎麼改變河的方向</h2>
+  <p>平原是河造的，河也會回來淹平原。德川家康進入關東時，利根川的下游還是流進東京灣，一下大雨，江戶一帶就淹水。德川家的工程從 1594 年開始，花了約 60 年，到 1654 年完成，把利根川的流向往東改，改成流到太平洋的銚子。這項工程叫<b>利根川東遷</b>。</p>
+  <ol class="chain">
+    <li>江戶不再被利根川的洪水直接威脅。</li>
+    <li>河道旁的濕地被排乾，開成新的水田（新田開發）。</li>
+    <li>河與運河連成水路，東北、關東的物資可以經由河運到江戶。</li>
+  </ol>
+  <p>其他幾個治水的例子：</p>
+  <ul>
+    <li><b>信玄堤</b>（山梨）：甲府盆地的釜無川與御勅使川在扇狀地上亂流，相傳是戰國時代的武田信玄整治的。用幾道堤防、石堆和堤防上的缺口，把水勢分散，讓洪水退回河裡。四百多年後仍在運作。</li>
+    <li><b>荒川放水路</b>（東京）：荒川下游本來容易淹水，東京東部另外開了一條人工河道分洪。</li>
+    <li><b>首都圈外郭放水路</b>（埼玉縣春日部）：在國道 16 號地下約 50 m 蓋了長 6.3 km 的隧道，大雨時把中小河川的水收進來，排到江戶川。</li>
+  </ul>
+  <p class="small">同樣的原因讓日本的河常見「天井川」（<span lang="ja">てんじょうがわ</span> <button class="btn ghost say" data-audio="audio/0005/05.wav">▶</button>）：河底因為泥沙堆積、河堤越築越高，河面比旁邊的地面還高，河下面反而有隧道通過。</p>
+
+  <h2>6. 鎌倉：太小的平地，反而是優點</h2>
+  <p>鎌倉位在相模灣旁，三面是山，一面是海。對一座平原來說，它太小。但<a href="../../history/lessons/0005-kamakura-shogunate.html">源賴朝選它當武家政權的據點</a>時，這是優點：</p>
+  <ol class="chain">
+    <li>三面環山，只能從山間的幾條路進出。
+      <span class="why">這些在山上鑿開的路叫<b>切通</b>（<span lang="ja">きりどおし</span> <button class="btn ghost say" data-audio="audio/0005/06.wav">▶</button>），後來整理成「鎌倉七口」。</span></li>
+    <li>一面是海，敵人沒有開闊的陸路可走。
+      <span class="why">軍隊要打進來只能走切通，或從海上登陸，容易防守。</span></li>
+    <li>但平地小，人口與糧食的增長有上限。
+      <span class="why">所以鎌倉能當一個武家政權的據點，卻長不成江戶那樣的大城。</span></li>
+  </ol>
+
+  <div class="exercise order" data-solution="扇狀地,沖積平原,三角洲">
+    <p class="q">依河水從山上流向海的順序，點選這三種地形：</p>
+  </div>
+
+  <h2>到現場看什麼</h2>
+  <div class="callout">
+    <p><b>山梨・勝沼一帶（JR 中央本線勝沼葡萄鄉站附近）</b>：站在斜坡上往下看，坡面是一片葡萄園，山谷出口攤成扇形。這是扇狀地的坡面。注意地面是帶礫石的土，不是軟泥。</p>
+    <p><b>東京・山手線沿線</b>：從澀谷站出去，地勢往四面向上；從上野站往東往低處走，則是下町。看地名裡的「坂」「谷」，以及路面的上下坡，這是台地與低地的交界。</p>
+    <p><b>神奈川・鎌倉的切通</b>（例如朝比奈切通、巨福呂坂）：山路兩側是被鑿開的岩壁，路面窄，只容幾個人並排。想像一支軍隊要通過，一次只能過一點點。</p>
+    <p><b>京都・京都塔的展望室或比叡山</b>：從高處往下看，盆地被東、北、西三面的山圍住，鴨川從北邊切進市區。</p>
+    <p><b>埼玉・首都圈外郭放水路</b>：有預約制的導覽，可以進到地下的大水槽（調壓水槽）。看一次就知道大雨時一座城市要多大的容器才收得下。據點是春日部市的「龍Q館」。</p>
+  </div>
+
+  <div class="source">
+    <b>速查表</b>：<a href="../reference/landforms-rivers.html">平原、盆地與河川速查</a>
+  </div>
+
+  <h2>課後小測驗</h2>
+  <div id="results" class="results" hidden></div>
+  <div id="quiz"></div>
+  <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
+
+  <p class="small">語音：VOICEVOX:青山龍星</p>
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://dil.bosai.go.jp/workshop/06kouza_kankyo/pdf/03_tonegawa.pdf" target="_blank">防災科學技術研究所：利根川與關東平野</a></li><li><a href="https://www.ktr.mlit.go.jp/tonejo/m/m-tonegawa/rekishi/B08.htm" target="_blank">國土交通省利根川上流河川事務所：利根川東遷</a></li><li><a href="https://www.ktr.mlit.go.jp/edogawa/edogawa00223.html" target="_blank">國土交通省江戶川河川事務所：利根川東遷事業</a></li><li><a href="https://www.mlit.go.jp/river/toukei_chousa/kasen/jiten/nihon_kawa/0315_fujikawa/0315_fujikawa_01.html" target="_blank">國土交通省：富士川與信玄堤</a></li><li><a href="https://www.ktr.mlit.go.jp/koufu/koufu_index032.html" target="_blank">甲府河川國道事務所：信玄堤</a></li><li><a href="https://tabi-mag.jp/kamakura-7entrances/" target="_blank">鎌倉七口</a></li><li><a href="https://www.ktr.mlit.go.jp/ktr_content/content/000751425.pdf" target="_blank">首都圈外郭放水路</a></li></ol></details>
+
+  <nav class="lesson-nav">
+    <a href="0004-pacific-belt-population.html">← 第 4 課：太平洋側的帶狀走廊</a>
+    <a href="0006-currents-and-coasts.html">下一課：海流與海岸 →</a>
+  </nav>
+</main>
+
+<script>
+const player = new Audio();
+document.querySelectorAll('[data-audio]').forEach(b => {
+  b.textContent = '▶ 聽';
+  b.onclick = () => { player.pause(); player.src = b.dataset.audio; player.currentTime = 0; player.play(); };
+});
+
+JapanMap.render(document.getElementById('site-map'), {
+  view: [[134.4, 34.2], [141.2, 36.9]],
+  points: [
+    { label: '奈良盆地', lon: 135.8, lat: 34.68 },
+    { label: '京都盆地', lon: 135.76, lat: 35.01 },
+    { label: '甲府盆地', lon: 138.57, lat: 35.66 },
+    { label: '關東平原（江戶）', lon: 139.77, lat: 35.69 },
+    { label: '鎌倉', lon: 139.55, lat: 35.32 },
+  ],
+});
+
+Quiz.mount(document.getElementById('quiz'), {
+  title: '日本地理 第 5 課・平原、盆地與河川',
+  storageKey: 'geo-l5-v1',
+  resultsEl: document.getElementById('results'),
+  progressEl: document.getElementById('progress'),
+  submitBtn: document.getElementById('submit'),
+  facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
+  questions: [
+    { id: 'l5-1', facet: 'l5', level: 1, type: 'choice',
+      prompt: '日本的河為什麼又短又急、帶很多土砂？',
+      options: ['山高又陡、離海近，雨水很快流到海，沿路沖下大量砂礫', '日本雨量少，河水一直很淺', '日本的河大多源自平原上的湖泊', '日本的山多是火山，火山灰讓河水變快'],
+      explain: '山高陡、離海近，是日本河川的共同條件，也是所有平地地形的起點。' },
+    { id: 'l5-2', facet: 'l5', level: 2, type: 'choice',
+      prompt: '東京的武藏野台地一帶，為什麼早期不是水田，而是旱田和雜木林？',
+      options: ['台地比河面高，河水引不上去，缺水', '台地的土壤是沙漠', '台地上都是岩石，無法耕種', '台地的氣候太冷'],
+      explain: '台地比河高一截，河水到不了，所以不適合水田。後來靠玉川上水等引水，才開出聚落。' },
+    { id: 'l5-3', facet: 'l5', level: 2, type: 'choice',
+      prompt: '古代選首都時，為什麼盆地是好地方？',
+      options: ['四面有山易於防守，又有河水與平地可種稻', '盆地靠近海，貿易方便', '盆地夏天涼爽', '盆地沒有颱風'],
+      explain: '盆地同時有防守、水源和耕地三個條件，是古代國家初期最需要的。' },
+    { id: 'l5-4', facet: 'l5', level: 3, type: 'short',
+      prompt: '為什麼說「利根川東遷」對江戶很重要？寫出至少兩個好處。',
+      keywords: [['洪水', '水害', '淹水'], ['新田', '水田', '開墾'], ['水運', '舟運', '運河', '交通', '運輸']],
+      need: 2,
+      answer: '利根川原本流進東京灣，改流銚子後，江戶不再被洪水直接威脅；排乾的濕地開成新田；河與運河連成水路，物資可以經水運送到江戶。' },
+    { id: 'l5-5', facet: 'l5', level: 2, type: 'choice',
+      prompt: '鎌倉三面環山一面臨海。為什麼這適合當武家政權的據點，卻長不成江戶那樣的大城？',
+      options: ['容易防守，但平地小，人口和糧食有上限', '離京都太近，容易被朝廷影響', '因為鎌倉沒有河流', '因為鎌倉每年都會被洪水淹沒'],
+      explain: '山和海形成天然的防守，但同樣的地形也限制了平地面積。關東平原則沒有這個限制。' },
+    { id: 'l5-6', facet: 'l5', level: 2, type: 'choice',
+      prompt: '廣島市建在太田川的三角洲上。三角洲對都市的好處和壞處各是什麼？',
+      options: ['靠海有港口、平坦；但地勢低、地盤軟，容易淹水', '地勢比台地高，不淹水，但缺水', '礫石層排水快，適合果樹，但沒有港口', '土壤最肥沃，水田收成最好，沒有缺點'],
+      explain: '三角洲在河口，平坦又靠海，適合港口與都市；但地勢低、地盤軟，淹水和地盤問題是代價。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 4 課）日本人口集中在太平洋側的帶狀地帶，其中與地形直接相關的原因是？',
+      options: ['日本多山，可住地少，大平原和良港在太平洋側', '太平洋側的山比較高', '日本海側沒有河流', '太平洋側沒有地震'],
+      explain: '可住地只有國土約三分之一，大平原和港口集中在太平洋側，本課說明了這些平原是怎麼來的。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 3 課）越後平原是水稻產地，和哪一條「雪→水→米」的因果有關？',
+      options: ['融雪水在春天流進大河，供應插秧所需的水', '冬天的雪把土壤凍得更肥沃', '雪讓蟲害減少', '雪在冬天把稻子直接蓋住保溫'],
+      explain: '冬天的雪堆在山上，春天融化、流進信濃川等大河，剛好是插秧用水的時候。大河堆出的越後平原是沖積平原。' },
+  ],
+});
+</script>
+</body>
+</html>
