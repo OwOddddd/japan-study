@@ -10,7 +10,7 @@
       desc: '山、海、氣候、人口與交通為什麼長這樣', planned: [] },
     { id: 'japanese', line: '日文', code: 'J', name: '日文', icon: 'bubble', stamp: '語', pat: 'yagasuri',
       desc: '以文法為主幹，看懂日常的動畫、日劇和書籍',
-      planned: ['動詞的兩種臉', '〜ない', '〜た 與 〜て', '〜てる・〜ちゃう', '助詞'] },
+      planned: [] },
     { id: 'religion', line: '宗教', code: 'R', name: '宗教與信仰', icon: 'torii', stamp: '宗', pat: 'seigaiha',
       desc: '神社和寺院怎麼分、佛像怎麼看、參拜的規矩從哪來',
       planned: [] },
