@@ -89,6 +89,12 @@ nav.lesson-nav { display: flex; justify-content: space-between; gap: 12px; margi
 .source { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 22px 0; font-size: .95rem; }
 figure { margin: 22px 0; }
 figcaption { font-size: .88rem; color: var(--muted); margin-top: 6px; }
+/* 照片（Wikimedia Commons 縮圖，HTML 用 commons_photo.py 產生）；各外觀的框在 study.css */
+figure.photo .photo-img { display: block; line-height: 0; }
+figure.photo img { display: block; width: 100%; height: auto; border-radius: 4px; background: var(--line); }
+figure.photo figcaption { line-height: 1.6; }
+figure.photo .credit { display: block; margin-top: 2px; font-size: .75rem; opacity: .85; overflow-wrap: anywhere; }
+figure.photo .credit a { color: inherit; }
 
 table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .95rem; }
 th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }

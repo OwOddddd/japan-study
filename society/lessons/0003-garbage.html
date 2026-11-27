@@ -145,15 +145,15 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 3 課・垃圾分類',
   facets: [{ id: 'l3', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l3-v2',
+  storageKey: 'society-l3-v3',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l3-1', facet: 'l3', level: 1, type: 'choice',
-      prompt: '日本家庭垃圾的收集與處理，由誰負責？',
-      options: ['市町村', '環境省', '都道府縣', '民間清潔公司自行決定'],
-      explain: '《廢棄物處理法》把一般廢棄物交給市町村，所以規則各地不同。' },
+      prompt: '同樣是塑膠，橫濱和京都的分類方式卻不同。為什麼？',
+      options: ['家庭垃圾由市町村負責，各地的焚化爐和回收條件不同', '兩市居民守規矩的程度不同', '國給兩個都市訂了不同的分類標準', '民間清潔公司各自決定怎麼收'],
+      explain: '《廢棄物處理法》把家庭垃圾交給市町村，各市町村的焚化爐能不能燒塑膠、離回收廠多遠都不一樣，所以規則各地不同。' },
     { id: 'l3-2', facet: 'l3', level: 2, type: 'choice',
       prompt: '電池、噴霧罐為什麼一定要和可燃垃圾分開？',
       options: ['進焚化爐會爆炸或起火', '它們可以賣到很高的價錢', '它們會讓垃圾袋變得太重', '法律規定金屬一律回收'],
@@ -181,9 +181,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['這兩個城市的街道規劃成棋盤格，而且路有名字', '這兩個城市比較大，政府有預算替每條路編名字', '這兩個城市不受住居表示法管轄', '這兩個城市的郵差要求不同'],
       explain: '京都沿用平安京的棋盤格，札幌是明治時代規劃的格子狀城市，路有名字或編號，所以能用「交叉口＋方向」或座標指位置。多數地方的路沒有名字。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）集積所的清掃為什麼常由町內會排班？',
-      options: ['市町村把一部分事交給住戶自願組成的町內會，附近的人最清楚狀況', '法律規定每戶都要加入町內會並輪值', '町內會是市町村的下級機關，由公務員排班', '市町村不負責收垃圾，全部交給町內會'],
-      explain: '町內會是住戶自願組成的團體，管集積所清掃、回覽板這類事。市町村人力有限，有時也補助經費。垃圾的收集本身仍是市町村的工作。' },
+      prompt: '（複習第 1 課）搬家後要在 14 天內向市町村辦轉入屆。為什麼？',
+      options: ['市町村要靠住民票知道誰住在哪裡，才能寄健保卡、通知入學', '轉入屆辦完才能向房東簽租約', '國稅局規定搬家要先通知市町村', '市町村要確認新住處的垃圾集積所位置'],
+      explain: '市町村靠住民票知道你住哪裡，才能寄健保卡、通知小孩入學、發垃圾分類手冊。' },
   ],
 });
 </script>

@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 6 課・約 30 分鐘</p>
   <h1>日本的學校</h1>
-  <p class="lede">為什麼日本動畫和日劇裡的學校，總有櫻花下的入學式、放學後的社團、輪值打掃教室、學長姐和學弟妹？這些場景背後各有一套制度。這一課把制度和場景接起來，順便學會場景裡最常聽到的日文。</p>
+  <p class="lede">為什麼日本動畫和日劇裡的學校，總有櫻花下的入學式、放學後的社團、輪值打掃教室、學長姐和學弟妹？</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -22,7 +22,6 @@
       <li>說出日本學年為什麼從 4 月開始，以及哪些地方入學式看不到櫻花。</li>
       <li>說出學生打掃、輪值打菜的教育目的，以及這件事的爭議。</li>
       <li>說出社團（部活）怎麼運作、為什麼正在改革，和「前輩後輩」從哪裡開始。</li>
-      <li>聽得懂並說出本課 16 個日文詞。</li>
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
@@ -76,7 +75,7 @@
 
   <h2>4. 放學後：社團和前輩後輩</h2>
   <p>放學後（<span lang="ja">ほうかご</span> <button class="btn ghost say" data-audio="audio/0006/07.wav">▶</button>）是社團活動的時間，叫「部活」（<span lang="ja">ぶかつ</span> <button class="btn ghost say" data-audio="audio/0006/06.wav">▶</button>）。國中、高中大多數學生都參加，分成棒球、籃球這些運動部和吹奏樂、美術這些文化部。運動部常常每天練習，週末還有比賽。</p>
-  <p><b>前輩後輩從這裡開始</b>：社團裡的高年級是「前輩」（<span lang="ja">せんぱい</span> <button class="btn ghost say" data-audio="audio/0006/04.wav">▶</button>），低年級是「後輩」（<span lang="ja">こうはい</span> <button class="btn ghost say" data-audio="audio/0006/05.wav">▶</button>）。差一屆就要用敬語、幫忙收球具。原因很實際：社團每年都有人進來、有人畢業，上一屆教下一屆技術和規矩，一個靠年資排順序的組織最容易傳承。這個「年資決定位置」的結構，第 7 課會在公司裡再看到一次。動畫裡的「<span lang="ja">せんぱい</span>」不只是稱呼，背後就是這套年資排序。</p>
+  <p><b>前輩後輩從這裡開始</b>：社團裡的高年級是「前輩」（<span lang="ja">せんぱい</span> <button class="btn ghost say" data-audio="audio/0006/04.wav">▶</button>），低年級是「後輩」（<span lang="ja">こうはい</span> <button class="btn ghost say" data-audio="audio/0006/05.wav">▶</button>）。差一屆就要用敬語、幫忙收球具。原因很實際：社團每年都有人進來、有人畢業，上一屆教下一屆技術和規矩，一個靠年資排順序的組織最容易傳承。這個「年資決定位置」的結構，第 7 課會在公司裡再看到一次。動畫裡的「<span lang="ja">せんぱい</span>」背後是年資排序。</p>
 
   <h3>部活正在改革</h3>
   <ol class="chain">
@@ -147,7 +146,7 @@ const J = s => `<span lang="ja" style="font-size:1.2em">${s}</span>`;
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 6 課・日本的學校',
   facets: [{ id: 'l6', name: '本課' }, { id: 'word', name: '日文詞' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l6-v2',
+  storageKey: 'society-l6-v3',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -161,42 +160,30 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['札幌', '東京', '大阪', '京都'],
       explain: '北海道的櫻花多在 4 月底到 5 月才開。' },
     { id: 'l6-3', facet: 'l6', level: 2, type: 'choice',
-      prompt: '公立國中的學區和營養午餐，歸哪一層管？',
-      options: ['市町村', '都道府縣', '文部科學省', '學校的家長會'],
-      explain: '公立小學、國中由市町村設立；公立高中多由都道府縣設立。' },
+      prompt: '住在公立國中學區的學生搬到別的市，常常要轉學。為什麼？',
+      options: ['公立小學、國中由市町村設立，學區和營養午餐都歸市町村管', '各縣的課程內容完全不同，轉過去跟不上', '轉入屆辦完後，學校會自動分發到新的班級', '國規定學生每搬一次家就要重新入學'],
+      explain: '公立小學、國中由市町村設立，學區、營養午餐、校舍都歸市町村；公立高中多由都道府縣設立。這是第 1 課的起點 B。' },
     { id: 'l6-4', facet: 'l6', level: 2, type: 'choice',
       prompt: '國推動把週末的部活交給地方俱樂部，原因不包括下列哪一項？',
-      options: ['學生的社團成績太好', '老師的加班時間太長', '少子化讓隊伍湊不齊人', '週末指導幾乎是義務勞動'],
+      options: ['運動部造成太多學生受傷', '老師的加班時間太長', '少子化讓隊伍湊不齊人', '週末指導幾乎是義務勞動'],
       explain: '改革的理由是老師負擔和少子化。' },
     { id: 'l6-5', facet: 'l6', level: 3, type: 'short',
       prompt: '社團裡為什麼會形成「前輩後輩」這種靠年資排序的關係？',
       keywords: [['每年', '畢業', '進來', '新生', '一屆'], ['教', '傳承', '傳', '指導'], ['年資', '年級', '順序', '排']],
       need: 2,
       answer: '社團每年有人畢業、有人加入，靠上一屆教下一屆技術和規矩來傳承；用年級（年資）排順序，誰教誰、誰聽誰最清楚，所以形成前輩後輩。' },
-    { id: 'w-1', facet: 'word', level: 1, type: 'choice',
-      prompt: `${J('ほうかご')} 是什麼意思？`,
-      options: ['放學後', '午休時間', '寒暑假', '早自習'],
-      explain: '放課後（ほうかご）＝放學後，部活的時間。' },
-    { id: 'w-2', facet: 'word', level: 1, type: 'choice',
-      prompt: `${J('うわばき')} 是什麼？`,
-      options: ['室內鞋', '書包', '制服', '鞋櫃'],
-      explain: '上履き（うわばき）是室內鞋；鞋櫃是げたばこ。' },
     { id: 'w-3', facet: 'word', level: 1, type: 'choice',
       prompt: `上課開始時，值日生喊「${J('きりつ、れい、ちゃくせき')}」，意思是？`,
       options: ['起立、敬禮、坐下', '安靜、注意、開始', '點名、報告、出席', '早安、謝謝、再見'],
       explain: '起立（きりつ）、礼（れい）、着席（ちゃくせき）。' },
-    { id: 'w-4', facet: 'word', level: 2, type: 'choice',
-      prompt: `${J('しゅうがくりょこう')} 是什麼？`,
-      options: ['全年級一起去的校外旅行', '暑假的家族旅行', '社團的集訓', '畢業後的出國旅行'],
-      explain: '修学旅行（しゅうがくりょこう）。國中常去京都、奈良。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）在浴場不能把毛巾泡進池裡，最根本的理由是？',
-      options: ['池水是大家共用的', '毛巾會被溫泉染色', '法律規定不能帶毛巾', '毛巾會塞住排水孔'],
-      explain: '入浴規矩幾乎都從「共用一池水」來。' },
+      prompt: '（複習第 5 課）錢湯為什麼曾經到處都是？',
+      options: ['都市的木造公寓多半沒有浴室，洗澡要去錢湯', '政府規定每個町都要開一家錢湯', '日本人習慣每天泡溫泉', '錢湯是每個町內會自己經營的'],
+      explain: '戰後到高度成長期，都市人口暴增，小公寓多半沒有浴室，洗澡要去錢湯；家家有浴室後才大量減少。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）1995 年後東京的車站撤掉垃圾桶，直接的原因是？',
-      options: ['地鐵沙林事件後的防恐', '垃圾分類法正式上路', '鐵道公司經費不足', '奧運前的市容整頓'],
-      explain: '為了防止危險物被藏在垃圾桶裡。' },
+      prompt: '（複習第 3 課）澀谷區 2025 年修改條例，要求站前的便利商店在旁邊放垃圾桶。這說明什麼？',
+      options: ['遊客多的地方，大家把垃圾帶回家的做法會出現縫隙', '日本人已經不再遵守垃圾分類', '澀谷區想增加垃圾車的收集次數', '便利商店要負責所有路人的垃圾分類'],
+      explain: '垃圾桶少，靠的是大部分人把垃圾帶走；觀光客一多，路邊就出現垃圾，所以區裡要求熱鬧地區的店家設垃圾桶。' },
   ],
 });
 </script>

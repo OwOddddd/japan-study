@@ -14,15 +14,14 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 1 課・約 25 分鐘</p>
   <h1>市町村制度</h1>
-  <p class="lede">為什麼日本的垃圾要分那麼多類、住址那樣寫、電車上不能講電話？這些規則看起來各管各的，大多從兩個起點長出來：很多人擠在很小的地方，以及離住民最近的那一層政府管很多事。</p>
+  <p class="lede">為什麼日本的垃圾要分那麼多類、住址那樣寫、電車上不能講電話？</p>
 
   <div class="goal">
     <b>本課目標</b>
     <ul>
       <li>說得出日本人口「擠」在哪裡，以及為什麼整體密度比台灣低、城市裡卻比台北還擠。</li>
-      <li>分得清國、都道府縣、市町村三層，知道日常生活的事大多歸市町村管。</li>
-      <li>知道町內會是什麼、管什麼，以及它正在怎麼變。</li>
-      <li>用這兩個起點，預測後面幾課的規則從哪裡來。</li>
+      <li>分得清國、都道府縣、市町村三層，說得出日常生活的事為什麼大多歸市町村管。</li>
+      <li>說得出町內會是什麼、管什麼，以及它正在怎麼變。</li>
     </ul>
   </div>
 
@@ -118,6 +117,7 @@
     <tr><td>第 4 課 便利商店</td><td>密度高、什麼都能辦</td><td>A 密度</td></tr>
     <tr><td>第 5 課 錢湯</td><td>以前家裡沒浴室、共用浴池的規矩</td><td>A 密度</td></tr>
     <tr><td>第 6 課 學校</td><td>小學、國中由市町村設立</td><td>B 地方自治</td></tr>
+    <tr><td>第 7 課 職場</td><td>長期雇用、年資升遷、叫職稱</td><td>另一個來源：高度成長期定型的雇用制度（不屬於 A、B）</td></tr>
     <tr><td>第 8 課 住宅</td><td>房子小、用「帖」算大小</td><td>A 密度</td></tr>
     <tr><td>第 9 課 公共空間</td><td>電車安靜、排隊</td><td>A 密度</td></tr>
   </table>
@@ -157,7 +157,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 1 課・市町村制度',
   facets: [{ id: 'l1', name: '本課' }],
-  storageKey: 'society-l1-v2',
+  storageKey: 'society-l1-v3',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -170,10 +170,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '下列哪一件事歸<b>市町村</b>負責？',
       options: ['收家庭垃圾', '管理警察', '辦理外交', '訂消費稅'],
       explain: '垃圾、住民登記、小學國中、上下水道、消防是市町村的事；警察屬於都道府縣，外交和稅制屬於國。' },
-    { id: 'l1-3', facet: 'l1', level: 2, type: 'choice',
-      prompt: '東京的新宿區、澀谷區，在地方自治上屬於哪一層？',
-      options: ['和市町村同一層的特別區', '東京都底下的行政派出所', '和都道府縣同一層的單位', '國直接管理的首都特區'],
-      explain: '東京 23 區是「特別區」，和市町村同一層，有自己的區役所和區議會，垃圾也由各區收。' },
     { id: 'l1-4', facet: 'l1', level: 2, type: 'choice',
       prompt: '1999 到 2010 年，市町村從 3,232 個減到 1,727 個。主要原因是？',
       options: ['小町村人口和財政撐不住而合併', '國把一半的市町村收歸國有', '人口增加，市町村改升格成縣', '戰後的占領軍下令減少數量'],

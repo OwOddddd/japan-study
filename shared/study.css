@@ -224,3 +224,12 @@ html[data-skin="pixel"] .btn:not(.ghost) { font-family: var(--dot); font-weight:
 html[data-skin="pixel"] .btn:not(.ghost):active { box-shadow: inset 4px 4px 0 rgba(0,0,0,.3), 0 0 0 4px #000; }
 html[data-skin="pixel"] .totop { width: 48px; height: 48px; border: 0; border-radius: 0; background: var(--px-win); color: var(--gold); display: grid; place-items: center; box-shadow: 0 -4px 0 0 var(--px-frame), 0 4px 0 0 var(--px-frame), -4px 0 0 0 var(--px-frame), 4px 0 0 0 var(--px-frame), 0 0 0 4px #000; }
 html[data-skin="pixel"] .notes-fab { height: 40px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); right: calc(max(16px, env(safe-area-inset-right, 0px)) + 70px); border: 0; border-radius: 0; gap: 6px; padding: 0 12px 0 8px; background: var(--px-win); color: #f3f1ea; box-shadow: 0 -4px 0 0 var(--px-frame), 0 4px 0 0 var(--px-frame), -4px 0 0 0 var(--px-frame), 4px 0 0 0 var(--px-frame), 0 0 0 4px #000; }
+
+/* ---------- 照片（figure.photo）：路線圖＝站內海報框、和柄＝和紙襯、像素＝道具框 ---------- */
+html[data-skin="route"] figure.photo { padding: 8px 8px 6px; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--v-navy); border-radius: 6px; }
+html[data-skin="route"] figure.photo img { border-radius: 3px; }
+html[data-skin="wa"] figure.photo { padding: 10px 10px 8px; background: var(--weave-soft), var(--paper); border: 1px solid var(--paper-line); border-radius: 2px; }
+html[data-skin="wa"] figure.photo img { border-radius: 0; }
+html[data-skin="wa"] figure.photo figcaption { color: var(--paper-ink); }
+html[data-skin="pixel"] figure.photo { padding: 6px 6px 4px; border: 3px solid var(--ink); border-radius: 0; box-shadow: 4px 4px 0 #000; background: var(--surface); }
+html[data-skin="pixel"] figure.photo img { border-radius: 0; }
