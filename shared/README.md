@@ -74,7 +74,7 @@
 
 **文章元件**：`.goal`（本課目標）、`.callout`（提示）、`.note`（補充）、`.source`（資料來源框）、`sup.cite`、`ol.chain`（編號因果鏈）、`ul.chain` + `.why`（圓點因果鏈）、`table` / `table.cmp`、`tr.band`、`figure` / `figcaption`、`.diagram`（SVG 示意圖，配 `.d-*`）、`.legend`
 
-**照片**：`figure.photo`（`a.photo-img` > `img` ＋ `figcaption` 內的 `span.credit`），只用 Wikimedia Commons 可商用授權的照片，HTML 用 `.claude/skills/lesson-spec/scripts/commons_photo.py` 產生（規則見 lesson-spec）。三種外觀的框在 `study.css`。
+**照片**：`figure.photo`（`a.photo-img` > `img` ＋ `figcaption` 內的 `span.credit`），只用 Wikimedia Commons 可商用授權的照片，HTML 用 `.claude/skills/lesson-spec/scripts/commons_photo.py` 產生，放進頁面後用同資料夾的 `photo_credits.py` 把出處移到頁尾資料來源（規則見 lesson-spec）。三種外觀的框在 `study.css`。
 
 **資料來源**：課文裡不放來源連結。來源一律收在頁尾「語音：VOICEVOX:青山龍星」下方（沒有語音行就放在 `nav.lesson-nav` 前）的折疊區：`<details class="sources"><summary>資料來源</summary><ol><li><a href="…" target="_blank">名稱</a></li></ol></details>`。到現場看什麼的官網、延伸閱讀可以留在課文。
 
