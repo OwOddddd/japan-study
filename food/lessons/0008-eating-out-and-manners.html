@@ -14,13 +14,19 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">飲食文化</a></nav>
   <p class="small">第 8 課・約 25 分鐘</p>
   <h1>日本用餐禮儀</h1>
-  <p class="lede">在日本吃飯，常碰到幾個讓人愣一下的時刻：拉麵店門口要先買票、居酒屋沒點的小菜也收錢、筷子不能互相傳菜。每一個規矩背後都有它的來由。這一課是出發前的實用總整理。</p>
+  <p class="lede">為什麼拉麵店門口要先買票、居酒屋沒點的小菜也收錢、筷子不能互相傳菜？每一個規矩背後都有它的來由。這一課是出發前的實用總整理。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
     <p>1. 分辨定食屋、居酒屋、立食店、有食券機的店，知道各自怎麼點、怎麼付。</p>
     <p>2. 說出駅弁為什麼出現、為什麼成了「地方名物的展示櫃」。</p>
     <p>3. 說出幾個筷子禁忌和吃法規矩的由來，在店裡不慌張。</p>
+  </div>
+
+  <h2>暖身：第 7 課回想</h2>
+  <div class="recall-box exercise">博多長濱的拉麵為什麼用極細麵，還有「替え玉」加麵？
+    <textarea></textarea>
+    <details><summary>看答案</summary>長濱的拉麵從魚市場前的屋台開始，市場工人要在競標的空檔快速吃完，極細麵幾十秒就煮好。細麵容易泡軟，所以不賣大碗，改成吃完再加一球。</details>
   </div>
 
   <h2>1. 四種常見的店</h2>
@@ -115,7 +121,7 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。後三題是複習第 4、5、7 課。</p>
+  <p class="small">憑記憶作答。後兩題是複習第 5、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -139,7 +145,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化 第 8 課・日本用餐禮儀',
   facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'food-lesson-0009-v1',
+  storageKey: 'food-lesson-0009-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -172,10 +178,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 5 課）江戶的長屋為什麼很難自己做菜？',
       options: ['廚房通常只有一個灶', '幕府禁止在家煮飯', '長屋沒有屋頂', '江戶買不到柴火'],
       explain: '煮完飯就沒辦法再做菜，配菜買外面的最划算。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）富山的鱒魚壽司屬於壽司發展的哪一個階段？',
-      options: ['早壽司（醋飯壓製）', '熟壽司（發酵）', '握壽司', '迴轉壽司'],
-      explain: '醋飯和魚壓在一起、切開來吃，是早壽司的形，和京都的鯖壽司、大阪的箱壽司同一型。' },
   ],
 });
 </script>

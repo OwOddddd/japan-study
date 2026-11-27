@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">鐵道與交通</a></nav>
   <p class="small">第 7 課・約 25 分鐘</p>
   <h1>新幹線</h1>
-  <p class="lede">1964 年，東京到大阪從 6 個多小時縮短成 4 小時，隔年再縮成 3 小時 10 分。新幹線改變的不只是時間，還有城市之間的關係：有的城市因此熱鬧起來，有的反而被大城市吸走了人和生意。</p>
+  <p class="lede">1964 年，新幹線把東京到大阪從 6 個多小時縮短成 4 小時，隔年再縮成 3 小時 10 分。為什麼同一條新幹線，有的城市因此熱鬧起來，有的反而被大城市吸走了人和生意？</p>
 
   <div class="goal">
     <p><strong>本課結束時你能做到：</strong></p>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <div class="note"><b>範圍說明</b>：新幹線為什麼走那條路、穿哪些山、過哪些海峽，由地理負責，見<a href="../../geography/lessons/0007-shinkansen-routes.html">地理第 7 課「新幹線路網」</a>。本課只講歷史、營運和對城市的影響。</div>
+
+  <h2>暖身：第 6 課回想</h2>
+  <div class="recall-box exercise">從 JR 換到地下鐵、再換到私鐵，票價為什麼通常比同一家公司坐到底貴？
+    <textarea></textarea>
+    <details><summary>看答案</summary>每家公司依自己的距離算運賃，而且都有起跳價，搭一站也要付。每換一家公司，起跳價就多付一次。</details>
+  </div>
 
   <h2>1. 1964 年：一條專用的高速鐵道</h2>
   <p>1950 年代，東京和大阪之間的東海道本線已經擠滿客車和貨車，再加班次也加不了。國鐵於是另外蓋一條<b>完全分開的新線</b>：</p>
@@ -93,7 +99,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 2、4、6 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 4、6 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -112,15 +118,15 @@
 Quiz.mount(document.getElementById('quiz'), {
   title: '鐵道與交通 第 7 課・新幹線',
   facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jrail-lesson-0008-v1',
+  storageKey: 'jrail-lesson-0008-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l7-1', facet: 'l7', level: 1, type: 'choice',
-      prompt: '東海道新幹線在哪一年開通？',
-      options: ['1964 年', '1959 年', '1972 年', '1987 年'],
-      explain: '1964 年 10 月 1 日，比東京奧運開幕早 9 天。' },
+      prompt: '1950 年代東京到大阪的東海道本線已經很擠，國鐵為什麼不直接加班次，而是另蓋一條新線？',
+      options: ['本線擠滿客車和貨車，加不了班次，只有專用新線才能高速密集發車', '本線的軌道是私鐵的，國鐵不能使用', '本線的軌道太窄，無法行駛任何客車', '政府規定舊線一律不准增加班次'],
+      explain: '本線上客車、貨車、慢車混跑。新幹線蓋成完全分開的專用線，沒有平交道、只跑客車，才能高速密集發車。1964 年 10 月 1 日開通，比東京奧運開幕早 9 天。' },
     { id: 'l7-2', facet: 'l7', level: 2, type: 'choice',
       prompt: '東海道新幹線為什麼開通後很快就賺錢？',
       options: ['沿線是人口最密集的帶狀走廊', '政府每年補貼它所有的成本', '它是當時唯一可搭的交通工具', '它的票價是在來線的十倍以上'],
@@ -146,10 +152,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 4 課）大阪的地下鐵為什麼和私鐵直通得比較少？',
       options: ['市營地下鐵照自己的規格建造', '大阪的私鐵數量比東京少很多', '大阪禁止任何列車的直通運轉', '大阪的地下鐵是 JR 經營的'],
       explain: '市營門羅主義下，地下鐵多採第三軌供電等自己的規格，車輛無法和私鐵互開。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）國鐵第一次虧損的年度，和哪件事同一年？',
-      options: ['東海道新幹線開通', '國鐵分割民營化', '鐵道國有法公布', 'Suica 開始使用'],
-      explain: '1964 年度國鐵首次虧損，同年東海道新幹線開通。新幹線本身很快就賺錢。' },
   ],
 });
 </script>

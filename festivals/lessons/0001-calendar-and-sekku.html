@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
   <p class="small">第 1 課・約 20 分鐘</p>
   <h1>日曆換過一次</h1>
-  <p class="lede">台灣的七夕、中元、中秋每年日期都不一樣，日本的七夕卻固定在 7 月 7 日，盂蘭盆有的地方 7 月、有的地方 8 月。差別來自 1873 年日本把整本日曆換掉了。</p>
+  <p class="lede">為什麼日本的七夕固定在 7 月 7 日，盂蘭盆卻有的地方在 7 月、有的地方在 8 月？差別來自 1873 年日本把整本日曆換掉了。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -133,7 +133,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '年中行事與祭典 第 1 課・日曆換過一次',
-  storageKey: 'fest-l1-v1',
+  storageKey: 'fest-l1-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -148,9 +148,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['比原本的季節提早一個月左右', '比原本的季節延後一個月左右', '季節和原本完全一樣不受影響', '每年隨機提早或延後幾個星期'],
       explain: '新曆比舊曆大約早一個月，所以舊曆 7/7 的七夕搬到新曆 7/7，就提早到梅雨季裡。' },
     { id: 'l1-3', facet: 'l1', level: 2, type: 'choice',
-      prompt: '全國大多數地方的盂蘭盆在 8 月中，這種做法叫什麼？',
-      options: ['月遲（月遅れ）', '新曆同日', '照舊曆算', '二十四節氣'],
-      explain: '數字照新曆、但延後一個月，季節就接近舊曆時代的盂蘭盆。' },
+      prompt: '某地的盂蘭盆固定在 8 月 13–16 日，每年相同。最合理的解釋是？',
+      options: ['用新曆的數字，但延後一個月，讓季節接近舊曆時代', '照舊曆算，剛好每年都落在 8 月中', '照新曆同日算，舊曆時代的季節本來就在 8 月', '跟著二十四節氣決定日期'],
+      explain: '照舊曆算的日期每年會浮動，固定在 8 月中的是月遲：數字照新曆、延後一個月，季節就接近舊曆時代的盂蘭盆。' },
     { id: 'l1-4', facet: 'l1', level: 2, type: 'choice',
       prompt: '為什麼很多地方的盂蘭盆選擇月遲，而不是新曆 7 月？',
       options: ['新曆 7 月中是農村最忙的時候', '7 月中的天氣太熱不適合祭祖', '8 月中政府規定放假一週', '7 月中是梅雨季無法點火'],
@@ -164,9 +164,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['新曆 9/9 菊花還沒開，代表植物不在場', '戰後政府明令禁止慶祝重陽', '9 月颱風多，無法舉辦戶外活動', '重陽本來就只有皇室在過'],
       explain: '改曆讓節日提早一個月，9/9 的菊花還沒開；節日少了主角，習俗就淡掉了。' },
     { id: 'l1-7', facet: 'l1', level: 1, type: 'choice',
-      prompt: '五節句裡，現在唯一是國定假日的是哪一天？',
-      options: ['5/5（端午）', '3/3（上巳）', '7/7（七夕）', '1/7（人日）'],
-      explain: '1948 年的祝日法把 5/5 定為「こどもの日」。' },
+      prompt: '雛祭在新曆 3/3，常見的桃花卻是溫室栽培的。為什麼？',
+      options: ['新曆 3/3 比舊曆的季節早一個月，桃花多半還沒開', '桃花只在舊曆 3 月才會開，新曆的月份不會開', '日本的桃花要到 5 月才開', '政府規定雛祭要用溫室花'],
+      explain: '舊曆 3/3 約在新曆 4 月，桃花正開。數字照搬到新曆 3/3，季節提早了一個月左右，桃花還沒開。' },
   ],
 });
 </script>

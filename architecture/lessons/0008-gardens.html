@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
   <p class="small">第 8 課・約 25 分鐘</p>
   <h1>日本庭園</h1>
-  <p class="lede">日本庭園有的要你坐著看，有的要你走著看；有的有大池塘，有的連一滴水都沒有。差別在於誰蓋的、蓋在哪裡、想讓你看見什麼。分清楚這三種，進庭園時就知道該坐下還是該走。</p>
+  <p class="lede">為什麼日本庭園有的要你坐著看，有的要你走著看；有的有大池塘，有的連一滴水都沒有？差別在於誰蓋的、蓋在哪裡、想讓你看見什麼。分清楚這三種，進庭園時就知道該坐下還是該走。</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -135,7 +135,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 2、5、7 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 2、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -153,7 +153,7 @@
 Quiz.mount(document.getElementById('quiz'), {
   title: '建築 第 8 課・日本庭園',
   facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0009-v1',
+  storageKey: 'arch-lesson-0009-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -187,10 +187,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 7 課）京町家中段的小庭院「坪庭」，主要是為了？',
       options: ['讓光和風進到又暗又悶的房子中段', '放置防火用的水缸', '讓客人進門前洗手', '當作曬衣服的地方'],
       explain: '町家兩側貼著鄰居沒有側窗，只好從中間開洞。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）千利休的待庵有多大？',
-      options: ['兩疊', '四疊半', '八疊', '二十疊'],
-      explain: '只有兩疊，極小的草庵茶室。銀閣寺的同仁齋是四疊半。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）禪寺裡，住持的住處、前面常有枯山水的建築叫？',
       options: ['方丈', '法堂', '三門', '金堂'],

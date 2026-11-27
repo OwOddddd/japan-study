@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 5 課・約 25 分鐘</p>
   <h1>錢湯與溫泉</h1>
-  <p class="lede">和一群陌生人裸身泡同一池熱水，這件事本身就需要一套規矩。這一課看錢湯為什麼曾經到處都是、入浴規矩背後的道理，以及刺青為什麼常被拒絕、現在又怎麼在變。</p>
+  <p class="lede">和一群陌生人裸身泡同一池熱水，為什麼需要一套嚴格的規矩？這一課看錢湯為什麼曾經到處都是、入浴規矩背後的道理，以及刺青為什麼常被拒絕、現在又怎麼在變。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 4 課回想</h2>
+  <div class="recall-box exercise">便利商店為什麼能代收水電費、寄宅急便、印住民票？
+    <textarea></textarea>
+    <details><summary>看答案</summary>便利商店有兩個優勢：到處都有，而且整天有人、有收銀系統。銀行下午三點就關門，宅配公司需要很多收件點，市町村的窗口也只在上班時間開，這些需求都由便利商店補上。</details>
+  </div>
 
   <h2>1. 三種「泡澡的地方」</h2>
   <table class="cmp">
@@ -117,7 +123,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 1–4 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 3、4 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -142,7 +148,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 5 課・錢湯與溫泉',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l5-v1',
+  storageKey: 'society-l5-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -160,9 +166,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['泳衣在外面穿過，被看成會把髒污帶進池水', '日本法律規定所有浴池一律裸身入浴', '泳衣的布料遇到溫泉的礦物質會壞掉', '穿泳衣會讓其他客人以為你是工作人員'],
       explain: '日本的浴池是洗乾淨的身體直接泡，大家共用同一池水。' },
     { id: 'l5-4', facet: 'l5', level: 2, type: 'choice',
-      prompt: '2015 年觀光廳調查，拒絕刺青客人進大浴場的住宿設施約占多少？',
-      options: ['約 56%', '約 16%', '約 86%', '約 36%'],
-      explain: '約 56% 拒絕、31% 接受、13% 有條件接受。回收率 15%，只能看傾向。' },
+      prompt: '法律沒有禁止刺青入浴，為什麼仍有過半的住宿設施拒絕有刺青的客人？',
+      options: ['設施想把黑道擋在門外，「有刺青就拒絕」是最簡單的篩法，也怕家庭客抱怨', '《公眾浴場法》規定住宿設施必須拒絕', '刺青的墨水會污染共用的池水', '溫泉的礦物質會讓刺青褪色'],
+      explain: '拒絕是各設施自己的規定。刺青長期和黑道連在一起，暴力團排除條例也要求業者不和黑道往來。2015 年觀光廳的調查中約 56% 拒絕（回收率 15%，只能看傾向）。' },
     { id: 'l5-5', facet: 'l5', level: 3, type: 'short',
       prompt: '很多浴場拒絕有刺青的人。請說出至少兩個原因，並說出一種現在常見的應對方式。',
       keywords: [['黑道', '暴力團', '流氓'], ['裸', '看得到', '遮不住'], ['抱怨', '家庭', '客人', '小孩'], ['條例', '排除'], ['貼紙', '遮', '包租', '貸切', '時段']],
@@ -176,10 +182,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 3 課）住宅區的垃圾集積所，平常由誰負責清掃？',
       options: ['附近住戶輪流，常由町內會排班', '市役所派專職的清潔員常駐', '警察局安排員警定時巡邏', '便利商店的店員順便處理'],
       explain: '集積所在住宅區路邊，附近住戶輪流清掃，町內會常負責排班。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）下列哪一件事歸市町村負責？',
-      options: ['住民登記', '外交事務', '警察業務', '訂定消費稅'],
-      explain: '住民票、垃圾、小學國中、上下水道、消防歸市町村；警察是都道府縣，外交和稅制是國。' },
   ],
 });
 </script>

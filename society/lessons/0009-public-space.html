@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 9 課・約 25 分鐘</p>
   <h1>什麼是迷惑？</h1>
-  <p class="lede">電車上很安靜、月台上排成一列、手扶梯靠一邊站。旅客常把這些歸因於「日本人很守規矩」。這一課把它們拆開來看：哪些來自空間和密度，哪些是業者和政府訂的規定，哪些正在改變，以及它們的例外。</p>
+  <p class="lede">為什麼日本的電車很安靜、月台上排成一列、手扶梯靠一邊站？旅客常把這些歸因於「日本人很守規矩」。這一課把它們拆開來看：哪些來自空間和密度，哪些是業者和政府訂的規定，哪些正在改變，以及它們的例外。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 8 課回想</h2>
+  <div class="recall-box exercise">日本的西式公寓已經睡床、鋪木地板，玄關為什麼還是要脫鞋？
+    <textarea></textarea>
+    <details><summary>看答案</summary>傳統上人坐在地板上吃飯、睡覺，地板不能踩髒；木造房子為了防潮又把地板架高，門口多出一階。低處是外面、高處是裡面，這條界線保留到西式公寓。</details>
+  </div>
 
   <h2>1. 一個關鍵詞：迷惑</h2>
   <p>「迷惑」（<span lang="ja">めいわく</span> <button class="btn ghost say" data-audio="audio/0009/01.wav">▶</button>）是「給別人添麻煩、造成困擾」。日本的公共告示、車廂廣播、家長的叮嚀最常用這個詞：「<span lang="ja">ひとにめいわくをかけない</span>」<button class="btn ghost say" data-audio="audio/0009/02.wav">▶</button>（不要給別人添麻煩）。噪音擾鄰叫「近所迷惑」（<span lang="ja">きんじょめいわく</span> <button class="btn ghost say" data-audio="audio/0009/08.wav">▶</button>）。日常最常用的「<span lang="ja">すみません</span>」<button class="btn ghost say" data-audio="audio/0009/05.wav">▶</button> 同時有「對不起」「不好意思」「謝謝」的意思，也是在處理同一件事：察覺自己占用了別人的時間或空間。</p>
@@ -101,7 +107,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。後半是第 1–8 課的總複習。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 3、5 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -126,20 +132,20 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 const J = s => `<span lang="ja" style="font-size:1.2em">${s}</span>`;
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 9 課・什麼是迷惑？',
-  facets: [{ id: 'l9', name: '本課' }, { id: 'review', name: '總複習' }],
-  storageKey: 'society-l9-v1',
+  facets: [{ id: 'l9', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'society-l9-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l9-1', facet: 'l9', level: 1, type: 'choice',
-      prompt: `${J('めいわく')} 是什麼意思？`,
-      options: ['給別人添麻煩', '向別人道謝', '排隊等候', '保持安靜'],
-      explain: '迷惑（めいわく）＝造成別人的困擾。' },
+      prompt: `日本的公共告示常用「${J('めいわく')}」（給別人添麻煩）當判斷標準，為什麼在日本特別有力？`,
+      options: ['很多人共用很小的空間，一個人的聲音、垃圾會立刻影響很多人', '日本法律明文禁止所有可能影響他人的行為', '日本人天生不喜歡和別人接觸', '日本的公共空間都裝有監視器'],
+      explain: '七成人口擠在 3.5% 的國土上，電車、公寓、人行道都共用，一條一條訂法律不可能，所以用「會不會給別人添麻煩」當通用標準。' },
     { id: 'l9-2', facet: 'l9', level: 2, type: 'choice',
-      prompt: '2015 年 10 月起，關東的鐵道公司把博愛座附近的手機規則改成什麼？',
-      options: ['擁擠時才需要關機', '任何時候都要關機', '可以自由通話', '博愛座全面禁用手機'],
-      explain: '總務省 2013 年修改指引、智慧型手機普及，37 家業者改成擁擠時才關機；通話仍請避免。' },
+      prompt: '博愛座附近的手機規則，2015 年從「要關機」改成「擁擠時才關機」。這件事說明了什麼？',
+      options: ['規矩的依據（電波干擾的疑慮）變了，規矩就跟著改', '乘客抱怨太多，鐵道公司放棄管理車廂', '政府立法允許在車廂內自由通話', '關西的規矩比關東更嚴格'],
+      explain: '總務省 2013 年修改指引，加上智慧型手機普及，37 家業者改成擁擠時才關機；通話仍請乘客避免。' },
     { id: 'l9-3', facet: 'l9', level: 2, type: 'choice',
       prompt: '東京靠左站、大阪靠右站，這個差別說明了什麼？',
       options: ['公共規矩常是地方習慣', '大阪人比較不守規矩', '日本法律各縣不同', '大阪的手扶梯比較寬'],
@@ -149,38 +155,14 @@ Quiz.mount(document.getElementById('quiz'), {
       keywords: [['擠', '擁擠', '混雜', '人多', '密'], ['密閉', '聽得到', '躲'], ['廣播', '規定', '業者', '鐵道公司', '提醒']],
       need: 2,
       answer: '車廂擁擠（東京圈尖峰平均擁擠率約 139%）而且密閉，一個人講話整節車廂都聽得到；鐵道公司也長年廣播請乘客不要通話、手機調靜音。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 1 課）日本約七成的人住在只占國土多少的人口集中地區？',
-      options: ['約 3.5%', '約 15%', '約 35%', '約 50%'],
-      explain: '2020 年 DID 人口 70%、面積 3.5%。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 2 課）京都地址裡的「西入」是什麼意思？',
-      options: ['從交叉口往西', '從交叉口往北', '從交叉口往南', '從交叉口往東'],
-      explain: '上ル北、下ル南、西入西、東入東。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 3 課）垃圾分類規則各地不同，根本原因是？',
+      prompt: '（複習第 3 課）垃圾分類規則各地不同，根本原因是？',
       options: ['家庭垃圾由市町村負責處理', '各縣的法律規定完全不同', '垃圾車由不同的公司製造', '國每年重新指定分類方法'],
       explain: '廢棄物處理法把一般廢棄物交給市町村，各地焚化爐、掩埋場不同。' },
-    { id: 'rv-4', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 4 課）便利商店誕生和哪一條法律有關？',
-      options: ['大規模小賣店鋪法', '住居表示相關法律', '廢棄物處理法', '溫泉法'],
-      explain: '1974 年的大店法限制大店，超市集團轉做小型店。' },
     { id: 'rv-5', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 5 課）關於刺青入浴，下列哪一句正確？',
-      options: ['由各設施決定，常見用貼紙遮住', '法律明文禁止有刺青的人入浴', '全國的溫泉都已經開放刺青', '錢湯一律拒絕，溫泉一律接受'],
-      explain: '法律沒有禁止；觀光廳 2016 年建議用貼紙、包租浴池等方式應對，沒有強制力。' },
-    { id: 'rv-6', facet: 'review', level: 2, type: 'choice',
-      prompt: `（第 6 課）${J('せんぱい')} 是什麼意思？`,
-      options: ['學長姐、前輩', '老師、指導者', '同班同學', '學弟妹、後輩'],
-      explain: '先輩（せんぱい）；後輩是こうはい。' },
-    { id: 'rv-7', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 7 課）2024 年非正式員工約占雇用者的多少？',
-      options: ['約 37%', '約 7%', '約 17%', '約 67%'],
-      explain: '2,126 萬人、36.8%，不在終身雇用的保障裡。' },
-    { id: 'rv-8', facet: 'review', level: 2, type: 'choice',
-      prompt: '（第 8 課）租屋廣告「駅徒歩 5 分」，按規約大約是多遠？',
-      options: ['約 400 公尺', '約 200 公尺', '約 800 公尺', '約 1,000 公尺'],
-      explain: '每 80 公尺算 1 分鐘，5 分鐘是 321–400 公尺。' },
+      prompt: '（複習第 5 課）浴場的入浴規矩，幾乎都能用哪一個理由解釋？',
+      options: ['浴池裡的水是大家共用的', '法律規定浴場要男女分開', '溫泉的礦物質怕被毛巾和泳衣破壞', '浴場的管理員要檢查每個人的身體'],
+      explain: '先洗身體、毛巾不入池、頭髮綁起來，都是為了不弄髒大家共用的一池水。' },
   ],
 });
 </script>

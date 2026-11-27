@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">鐵道與交通</a></nav>
   <p class="small">第 5 課・約 25 分鐘</p>
   <h1>車站的使用方法</h1>
-  <p class="lede">車站裡的標示看起來很多，只回答四個問題：我要搭哪條線、往哪個方向、搭哪一種車、從哪個出口出去。每一種標示的設計，都是為了讓幾百萬個不熟路的人不用問人也走得到。</p>
+  <p class="lede">車站裡那麼多標示，到底在回答什麼？只有四個問題：我要搭哪條線、往哪個方向、搭哪一種車、從哪個出口出去。每一種標示的設計，都是為了讓幾百萬個不熟路的人不用問人也走得到。</p>
 
   <div class="goal">
     <p><strong>本課結束時你能做到：</strong></p>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p class="small">本課的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 4 課回想</h2>
+  <div class="recall-box exercise">東京的私鐵為什麼大多停在山手線的新宿、澀谷、池袋，而不開進都心？
+    <textarea></textarea>
+    <details><summary>看答案</summary>戰前東京市堅持市內交通由市自己經營，不讓私鐵進市區。市區房子密集，鐵道要開進去得高架或地下化，費用太高。乘客到了山手線就能換國鐵進都心，私鐵乾脆把終點設在山手線的車站上。</details>
+  </div>
 
   <h2>1. 路線顏色與車站編號</h2>
   <p>第 4 課看過，東京有 JR、兩家地下鐵、十幾家私鐵，路線上百條。光靠站名很難找，所以每條線都有<b>代表色</b>和<b>英文字母代號</b>，每一站再加上<b>號碼</b>：</p>
@@ -137,7 +143,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 2–4 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 2、3 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -163,7 +169,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '鐵道與交通 第 5 課・車站的使用方法',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jrail-lesson-0006-v1',
+  storageKey: 'jrail-lesson-0006-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -192,10 +198,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '車內廣播「<span lang="ja">次は、渋谷</span>」是什麼意思？',
       options: ['下一站是澀谷', '這班車開往澀谷', '在澀谷換車', '澀谷站不停'],
       explain: '「次は」（つぎは）＝下一站是。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）地下鐵月台上，列車目的地出現別家私鐵的車站名。原因是？',
-      options: ['直通運轉', '路線合併', '臨時改道', '列車回送'],
-      explain: '地下鐵和私鐵的線路接在一起，列車直接開進對方的路線。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 3 課）私鐵在郊外那一頭放遊樂園、劇場，是為了解決什麼問題？',
       options: ['只有通勤方向擠，其他時候空車', '郊外居民抱怨沒有娛樂設施', '郊外土地閒置要繳很多稅', '終點站的月台太小停不下'],

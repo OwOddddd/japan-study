@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
   <p class="small">第 3 課・約 25 分鐘</p>
   <h1>花見到梅雨</h1>
-  <p class="lede">今天說「花見」一定是看櫻花，但一千三百年前的日本貴族賞的是梅花。端午原本是用氣味強烈的草驅邪，後來變成男孩的節日。這兩個變化背後，都是誰在主導文化換了人。</p>
+  <p class="lede">為什麼今天說「花見」就是看櫻花，一千三百年前的日本貴族賞的卻是梅花？端午原本是用氣味強烈的草驅邪，後來變成男孩的節日。這兩個變化背後，都是主導文化的人換了。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -22,6 +22,12 @@
     <p>2. 說得出為什麼染井吉野會「同時開、同時謝」，櫻花前線怎麼來的。</p>
     <p>3. 說得出端午從驅邪變成男孩節日的原因（菖蒲＝尚武），以及鯉魚旗的意思。</p>
     <p>4. 知道梅雨季在哪裡、看什麼。</p>
+  </div>
+
+  <h2>暖身：第 2 課回想</h2>
+  <div class="recall-box exercise">門松擺到 1 月 7 日（關西到 15 日）就收掉。為什麼是這個時間？
+    <textarea></textarea>
+    <details><summary>看答案</summary>門松是給年神認路的標記，擺著的這段「松之內」就是年神在家的時間。時間到了年神離開，門松也就收掉。</details>
   </div>
 
   <h2>1. 奈良：賞的是梅，因為梅是舶來品</h2>
@@ -99,7 +105,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 1、2 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 1、2 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -122,7 +128,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '年中行事與祭典 第 3 課・花見到梅雨',
-  storageKey: 'fest-l3-v1',
+  storageKey: 'fest-l3-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -145,17 +151,13 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['全國的樹基因相同，開花只看氣溫', '染井吉野只種在固定緯度的城市', '每棵樹都由氣象廳統一照顧修剪', '染井吉野一年會開好幾次花'],
       explain: '同一棵原木接枝而來，基因相同，開花早晚只反映各地氣溫的差異。' },
     { id: 'l3-5', facet: 'l3', level: 2, type: 'choice',
-      prompt: '端午在武士的時代變成男孩的節日，關鍵的雙關語是？',
-      options: ['菖蒲（しょうぶ）＝尚武', '鯉（こい）＝戀', '柏（かしわ）＝勝', '粽（ちまき）＝千卷'],
-      explain: '菖蒲和尚武（崇尚武勇）同音，端午被武家看重。' },
+      prompt: '端午本來是用菖蒲驅邪的節日，到了武士的時代為什麼變成男孩的節日？',
+      options: ['菖蒲和「尚武」同音，武家拿它祈求男孩成為強壯的武士', '菖蒲的葉子形狀像刀，武士把它當護身武器', '武家規定只有男孩可以泡菖蒲湯', '端午剛好是武士出征的日子'],
+      explain: '菖蒲（しょうぶ）和尚武（崇尚武勇）同音，端午被武家看重，家裡擺盔甲、頭盔，祈求男孩成為強壯的武士。' },
     { id: 'l3-6', facet: 'l3', level: 3, type: 'choice',
       prompt: '江戶的町人為什麼掛「鯉魚」而不是旗幟？',
       options: ['學武家宣告繼承人，改用登龍門的鯉魚', '鯉魚是當時町人最常吃的魚', '幕府規定町人只能掛魚形的旗', '鯉魚旗能在梅雨季預報風向'],
       explain: '武家立旗宣告有繼承人，町人仿效但改成鯉魚：逆流登上瀑布會變成龍，祈求孩子出人頭地。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）門松要擺到什麼時候收？代表什麼？',
-      options: ['松之內結束，年神離開了', '元旦當天，年神到了以後', '節分前一天，冬天結束了', '鏡開那天，餅已經吃完'],
-      explain: '擺門松的期間＝年神在家的時間，關東一般到 1/7，關西很多到 1/15。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）節分為什麼在 2 月初？',
       options: ['它是立春的前一天', '它是新曆的月底', '它是舊曆的元旦', '它是梅花開的日子'],

@@ -14,13 +14,19 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
   <p class="small">第 4 課・約 25 分鐘</p>
   <h1>七夕到煙火</h1>
-  <p class="lede">日本的夏天看起來很熱鬧：穿浴衣、跳盆舞、看煙火。這些活動的底下有一條共同的線：夏天是祖先回家的季節，也是死者和疫病最多的季節。熱鬧是為了迎接、安慰和送走。</p>
+  <p class="lede">為什麼日本的夏天這麼熱鬧，穿浴衣、跳盆舞、看煙火？這些活動的底下有一條共同的線：夏天是祖先回家的季節，也是死者和疫病最多的季節。熱鬧是為了迎接、安慰和送走。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
     <p>1. 說得出日本七夕由哪幾條源頭合成，為什麼要在竹子上掛紙條。</p>
     <p>2. 照順序說出盂蘭盆的流程：迎火 → 在家 → 送火，並認出精靈馬、盆舞、五山送火在流程中的位置。</p>
     <p>3. 說得出隅田川、長岡兩個煙火大會的起源，理解夏天的煙火和慰靈的關係。</p>
+  </div>
+
+  <h2>暖身：第 3 課回想</h2>
+  <div class="recall-box exercise">染井吉野為什麼會全國同一個地區的樹幾乎同時開花、同時謝？
+    <textarea></textarea>
+    <details><summary>看答案</summary>染井吉野只能靠接枝繁殖，各地的樹都來自同一棵原木，基因相同，對氣溫的反應也相同。氣溫到了就一起開，所以也能畫出從南往北推進的櫻花前線。</details>
   </div>
 
   <h2>1. 七夕：三條線合成一個節日</h2>
@@ -77,7 +83,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 1–3 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 1、2 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -100,7 +106,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '年中行事與祭典 第 4 課・七夕到煙火',
-  storageKey: 'fest-l4-v1',
+  storageKey: 'fest-l4-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -131,17 +137,13 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['1945 年長岡空襲的死者', '2004 年中越地震的死者', '江戶時代長岡藩的戰死者', '信濃川大洪水的罹難者'],
       explain: '1945 年 8 月 1 日晚上 10 點半長岡遭空襲，白菊在同一個時刻放。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）仙台七夕在 8 月 6–8 日，屬於哪種日期？',
-      options: ['月遲', '新曆同日', '照舊曆算', '二十四節氣'],
-      explain: '新曆的數字延後一個月，季節接近舊曆時代的七夕。' },
+      prompt: '（複習第 1 課）仙台七夕辦在 8 月 6–8 日，而不是 7 月 7 日。這樣做的好處是？',
+      options: ['延後一個月，避開梅雨，季節接近舊曆時代的七夕', '8 月是新曆的第一個月，所以辦在這時候', '8 月 6–8 日剛好是舊曆 7 月 7 日，每年相同', '8 月是日本最涼爽的時候，適合戶外活動'],
+      explain: '新曆的數字延後一個月（月遲），季節接近舊曆時代的七夕，不會撞上梅雨。舊曆的 7/7 每年在新曆的日期會浮動，8/6–8 是固定的。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）七夕後把竹子放進河裡流走，和哪一個習俗是同一種想法？',
       options: ['流し雛', '鏡開き', '初詣', '惠方卷'],
       explain: '都是把污穢、災厄轉移到東西上，再讓水帶走。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）江戶時代讓百姓在櫻花下喝酒作樂的是哪位將軍？在哪裡？',
-      options: ['德川吉宗，飛鳥山', '德川家康，上野', '德川綱吉，靖國神社', '德川家光，吉野山'],
-      explain: '吉宗在享保年間於飛鳥山、隅田川堤種櫻並開放百姓遊樂。' },
   ],
 });
 </script>

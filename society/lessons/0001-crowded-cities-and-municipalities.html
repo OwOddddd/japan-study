@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 1 課・約 25 分鐘</p>
   <h1>市町村制度</h1>
-  <p class="lede">垃圾要分幾類、住址怎麼寫、電車上能不能講電話，這些規則看起來各管各的。它們大多從兩個起點長出來：很多人擠在很小的地方，以及離住民最近的那一層政府管很多事。</p>
+  <p class="lede">為什麼日本的垃圾要分那麼多類、住址那樣寫、電車上不能講電話？這些規則看起來各管各的，大多從兩個起點長出來：很多人擠在很小的地方，以及離住民最近的那一層政府管很多事。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -157,15 +157,15 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 1 課・市町村制度',
   facets: [{ id: 'l1', name: '本課' }],
-  storageKey: 'society-l1-v1',
+  storageKey: 'society-l1-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l1-1', facet: 'l1', level: 1, type: 'choice',
-      prompt: '日本約有多少比例的人口住在「人口集中地區（DID）」？',
-      options: ['約 70%', '約 30%', '約 50%', '約 90%'],
-      explain: '2020 年約 70%，而 DID 只占國土 3.5%。' },
+      prompt: '七成日本人住在只占國土 3.5% 的人口集中地區。這會對生活規則帶來什麼影響？',
+      options: ['空間共用變多，一個人的聲音、垃圾會立刻影響很多人', '各地的法律因此變得完全一致', '鄉下的規則比都市更嚴格', '日本人比較少搬家，所以不需要住民登記'],
+      explain: '很多人共用很少的空間，所以才有第 3 課的垃圾規矩、第 9 課的公共空間規矩。這是起點 A。' },
     { id: 'l1-2', facet: 'l1', level: 1, type: 'choice',
       prompt: '下列哪一件事歸<b>市町村</b>負責？',
       options: ['收家庭垃圾', '管理警察', '辦理外交', '訂消費稅'],
@@ -179,9 +179,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['小町村人口和財政撐不住而合併', '國把一半的市町村收歸國有', '人口增加，市町村改升格成縣', '戰後的占領軍下令減少數量'],
       explain: '「平成大合併」：小町村人口減少、財政困難，合併後才養得起焚化爐、醫院等設施。' },
     { id: 'l1-5', facet: 'l1', level: 2, type: 'choice',
-      prompt: '住宅區的「回覽板」是什麼？',
-      options: ['町內會的通知，一戶看完傳下一戶', '市役所寄來的稅單，要簽名寄回', '學校發給家長的成績和出缺勤表', '郵局放在門口的包裹招領通知'],
-      explain: '回覽板（かいらんばん）夾著町內會的通知，在住戶之間輪流傳閱。' },
+      prompt: '為什麼垃圾集積所的清掃、回覽板這類事會交給町內會？',
+      options: ['市町村人力有限，住在附近的人最清楚那條街的狀況', '法律規定町內會是市町村的下級機關', '町內會收的會費比稅金多', '國規定每條街都要成立一個町內會'],
+      explain: '町內會是住戶自願組成的團體。市町村把一部分事交給它，有時也補助經費。回覽板（かいらんばん）就是它在住戶間傳通知的方式。' },
     { id: 'l1-6', facet: 'l1', level: 3, type: 'short',
       prompt: '垃圾分類方式為什麼會因為搬家而改變？用兩個步驟以上說明。',
       keywords: [['市町村', '市', '區', '地方'], ['負責', '管', '處理', '收'], ['焚化', '設施', '處分', '掩埋', '條件', '不同', '各自']],

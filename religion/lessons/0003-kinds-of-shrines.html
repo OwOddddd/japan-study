@@ -139,7 +139,7 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">最後三題複習第 1、2 課。</p>
+  <p class="small">最後兩題複習第 1、2 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -162,7 +162,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教與信仰 第 3 課・神社的種類',
-  storageKey: 'rel-l3-v1',
+  storageKey: 'rel-l3-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -201,10 +201,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 2 課）神社綁在大樹或巨石上的稻草粗繩叫什麼？意思是？',
       options: ['注連繩，劃出神聖的領域', '紙垂，記錄祈願的內容', '注連繩，綁住作祟的怨靈', '玉串，獻給神的供品'],
       explain: '注連繩圍出的地方是神聖領域，綁在樹上就是神木。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）神社最深處、放著神體、一般人看不到的建築叫？',
-      options: ['本殿', '拜殿', '本堂', '神樂殿'],
-      explain: '一般人在拜殿參拜，本殿在後面。本堂是寺院放佛像的建築。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 1 課）愛知的豐川稻荷有鳥居和狐狸，它其實是？',
       options: ['禪宗寺院', '稻荷神社', '八幡神社', '天皇陵墓'],

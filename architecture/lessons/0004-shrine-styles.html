@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
   <p class="small">第 4 課・約 25 分鐘</p>
   <h1>神社建築</h1>
-  <p class="lede">寺院的樣式是從中國學來的，神社最古老的形式卻刻意不學：不用瓦、不用斗栱、柱子直接埋進土裡。看一座神社本殿有多「不像寺院」，就能猜出它的形式有多古老。</p>
+  <p class="lede">寺院的樣式從中國學來，為什麼神社最古老的形式卻刻意不學：不用瓦、不用斗栱、柱子直接埋進土裡？看一座神社本殿有多「不像寺院」，就能猜出它的形式有多古老。</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -149,7 +149,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 1–3 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 1、3 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -167,7 +167,7 @@
 Quiz.mount(document.getElementById('quiz'), {
   title: '建築 第 4 課・神社建築',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0005-v1',
+  storageKey: 'arch-lesson-0005-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -205,10 +205,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 3 課）斗栱密密排滿柱與柱之間（詰組），是哪種樣式？',
       options: ['禪宗樣', '和樣', '大佛樣', '神明造'],
       explain: '禪宗樣，還有扇垂木、花頭窗、石板土間。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）藥師寺的配置是？',
-      options: ['金堂在中央，前方東西各一座塔', '塔和金堂左右並排', '一座塔在正中央，三座金堂圍著', '三門、佛殿、法堂排成一直線'],
-      explain: '藥師寺式：雙塔在金堂前，金堂是中心。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 1 課）寺院的柱子立在礎石上，伊勢的柱子直接埋進土裡。礎石的好處是？',
       options: ['柱腳不碰土不易爛，地震時可以滑動', '柱子埋得更深，颱風吹不倒', '礎石可以把地底的濕氣導進屋內', '礎石讓柱子永遠不必更換'],

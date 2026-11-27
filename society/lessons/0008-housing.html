@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 8 課・約 30 分鐘</p>
   <h1>住宅</h1>
-  <p class="lede">住民宿、去朋友家，或只是在車站前的房屋仲介櫥窗多看兩眼，都會碰到日本住宅的規則：在哪裡脫鞋、房間用幾「帖」算、「1LDK」和「禮金 1」是什麼。這一課從玄關一路讀到一張租屋廣告。</p>
+  <p class="lede">為什麼日本的家一進門要脫鞋、房間用幾「帖」算，租屋廣告上還有「1LDK」和「禮金 1」？住民宿、去朋友家，或在車站前的房屋仲介櫥窗多看兩眼，都會碰到。這一課從玄關一路讀到一張租屋廣告。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 7 課回想</h2>
+  <div class="recall-box exercise">日本式雇用的年功序列，為什麼能把員工留在同一家公司？
+    <textarea></textarea>
+    <details><summary>看答案</summary>年功薪水像延後發的錢：年輕時領得比貢獻少，年資高時領得比貢獻多。中途離職等於放棄後半段。再加上公司專用的技能換到別家用不上，員工更傾向留下。</details>
+  </div>
 
   <h2>1. 玄關：外面和裡面的界線</h2>
   <p>日本的家一進門是玄關（<span lang="ja">げんかん</span> <button class="btn ghost say" data-audio="audio/0008/01.wav">▶</button>）。玄關分兩層：低的那一塊地板和屋外的地面同高，可以穿鞋站；往上踩一階，才是屋內。鞋子就在這一階前脫掉，鞋尖朝外擺好。</p>
@@ -133,7 +139,7 @@
   </table>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 1、5、7 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 5、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -159,15 +165,15 @@ const J = s => `<span lang="ja" style="font-size:1.2em">${s}</span>`;
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 8 課・住宅',
   facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l8-v1',
+  storageKey: 'society-l8-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l8-1', facet: 'l8', level: 1, type: 'choice',
-      prompt: '租屋廣告上的 1 帖，規約規定至少要以多少平方公尺計算？',
-      options: ['1.62 m²', '1.00 m²', '2.50 m²', '3.30 m²'],
-      explain: '1 帖以 1.62 m² 以上計算，6 帖約 9.7 m²。' },
+      prompt: '不動產業界為什麼規定廣告上的 1 帖至少要以 1.62 m² 計算？',
+      options: ['榻榻米尺寸各地不同，避免用小榻榻米把房間算成很多帖', '1.62 m² 是日本法律規定的標準榻榻米大小', '日本所有的榻榻米都是 1.62 m²', '為了讓租金按面積計算比較公平'],
+      explain: '京間、江戶間、團地間的大小不同，規定下限後，廣告上的 6 帖至少約 9.7 m²，不能靠小榻榻米灌水。' },
     { id: 'l8-2', facet: 'l8', level: 2, type: 'choice',
       prompt: '同樣是「6 帖」，為什麼京都的老房間常比東京的大？',
       options: ['京間的榻榻米比江戶間的大', '京都的法律規定房間要更大', '京都人習慣把榻榻米鋪得鬆', '東京的房間要扣掉壁櫥面積'],
@@ -190,13 +196,9 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 2,
       answer: '傳統上人直接坐、睡在榻榻米地板上，地板不能踩髒；木造房子為了防潮把地板架高 → 門口多出一階 → 低處算外面可以穿鞋、高處算裡面要脫鞋，高低差成了內外的界線。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 7 課）2019 年起法律規定的加班上限，原則上每月是？',
-      options: ['45 小時', '80 小時', '20 小時', '100 小時'],
-      explain: '原則上月 45 小時、年 360 小時。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: `（複習第 7 課）${J('おつかれさまです')} 最常在什麼時候說？`,
-      options: ['同事在走廊碰面或下班時', '吃飯前雙手合十時', '進到別人家的玄關時', '早上出門離開家時'],
-      explain: '職場的萬用招呼。進別人家說おじゃまします，出門說いってきます。' },
+      prompt: '（複習第 7 課）終身雇用的公司為什麼容易有長時間加班？',
+      options: ['不輕易裁員，景氣好時不多請人，用加班應付工作量', '加班費比一般薪水高，員工自己想多加班', '法律規定公司每月至少要有 45 小時的加班', '日本員工的效率比較低，工作做不完'],
+      explain: '公司保障長期雇用，景氣好時不多請人、用加班應付，景氣差時減少加班就好。長時間加班成了制度的一部分。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 5 課）錢湯的入浴費為什麼有上限？',
       options: ['它被當成居民的公共衛生設施', '它是市町村經營的公營事業', '業者組合約定彼此不准漲價', '為了吸引外國觀光客的優惠'],

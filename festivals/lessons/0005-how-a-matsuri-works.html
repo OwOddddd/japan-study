@@ -14,13 +14,19 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
   <p class="small">第 5 課・約 25 分鐘</p>
   <h1>祭典的結構</h1>
-  <p class="lede">在日本碰上祭典，眼前是一群穿法被的人扛著金色的轎子大喊、搖晃，後面跟著高大的花車。看懂一場祭典只要抓住一件事：這天神要出門，到街上走一圈。</p>
+  <p class="lede">為什麼祭典上有一群穿法被的人扛著金色的轎子大喊、搖晃，後面還跟著高大的花車？看懂一場祭典只要抓住一件事：這天神要出門，到街上走一圈。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
     <p>1. 說得出神轎、御旅所、山車在「神出門巡行」這件事裡各自的角色。</p>
     <p>2. 說得出為什麼農村的祭典多在春秋，城市的大祭典多在夏天。</p>
     <p>3. 說得出祇園祭從 869 年的疫病開始，以及山鉾在祭典中的作用。</p>
+  </div>
+
+  <h2>暖身：第 4 課回想</h2>
+  <div class="recall-box exercise">盂蘭盆為什麼要在家門口燒迎火和送火？
+    <textarea></textarea>
+    <details><summary>看答案</summary>盂蘭盆是祖先回家的期間。迎火讓祖先在傍晚看得到回家的路，送火照亮祂們回去的路。把這件事放大到整座城市，就是京都的五山送火。</details>
   </div>
 
   <h2>1. 祭典的骨架：請神、招待、送神</h2>
@@ -107,7 +113,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題是複習第 2–4 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 2、4 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -130,20 +136,20 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '年中行事與祭典 第 5 課・祭典的結構',
-  storageKey: 'fest-l5-v1',
+  storageKey: 'fest-l5-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
   questions: [
     { id: 'l5-1', facet: 'l5', level: 1, type: 'choice',
-      prompt: '祭典裡的神轎（神輿）載的是什麼？',
-      options: ['神本身', '祭典的主角', '供品和酒', '神社的寶物'],
-      explain: '出發前把神從本殿請進神轎，神轎是神的交通工具。' },
+      prompt: '神轎做成一座小神殿的樣子，屋頂上還站著金色鳳凰。為什麼？',
+      options: ['轎裡載的是神本身，所以做成神的住處', '裡面放的是神社的寶物，要用神殿保護', '替扛轎的人擋雨', '模仿天皇的轎子，顯示氏子的地位'],
+      explain: '出發前把神從本殿請進神轎，神轎是神的交通工具，所以要像一座小神殿。' },
     { id: 'l5-2', facet: 'l5', level: 2, type: 'choice',
-      prompt: '「御旅所」是什麼地方？',
-      options: ['神出巡時暫住的臨時住所', '扛轎的人換衣服休息的地方', '祭典結束後收神轎的倉庫', '觀光客買祭典紀念品的地方'],
-      explain: '神離開神社巡行，在御旅所停留，之後再回神社。' },
+      prompt: '有些祭典的神轎要在「御旅所」停留幾天。這是因為？',
+      options: ['神離開神社巡行，在外面需要臨時的住所', '扛轎的人需要換衣服、休息', '神轎太重，中途要放下來保養', '各町的山車要在那裡集合'],
+      explain: '神離開神社巡行，在御旅所暫住，之後再回神社（還御）。' },
     { id: 'l5-3', facet: 'l5', level: 2, type: 'choice',
       prompt: '神轎和山車最主要的差別是？',
       options: ['神轎裡有神，山車沒有', '神轎用拉的，山車用扛的', '神轎只在夏祭，山車只在秋祭', '神轎屬寺院，山車屬神社'],
@@ -153,9 +159,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['城市怕夏天的疫病，農村跟著稻作', '城市夏天放假，農村春秋放假', '夏天天氣好，適合大型遊行', '幕府規定城市只能在夏天辦祭典'],
       explain: '夏天又熱又濕，人擠在一起的城市最怕傳染病，所以辦除疫的夏祭；農村配合插秧前、收成後。' },
     { id: 'l5-5', facet: 'l5', level: 2, type: 'choice',
-      prompt: '869 年神泉苑立了 66 支鉾，數字 66 代表什麼？',
-      options: ['當時全國「國」的數量', '那年疫病死亡的人數', '平安京的町的數量', '祇園社神職人員的數量'],
-      explain: '66 支鉾代表全國 66 國，把全國的疫神都封住。' },
+      prompt: '869 年疫病流行時，人們在神泉苑立了 66 支鉾。用意是？',
+      options: ['66 代表全國的「國」，把各地的疫神引到鉾上封住', '66 支長矛排成陣勢，把疫神嚇走', '66 個町各出一支，比賽誰的鉾最華麗', '每支鉾紀念一位疫病死去的貴族'],
+      explain: '66 支鉾代表當時全國 66 國，把疫神引到鉾上封住，再迎來祇園社的神轎，這就是祇園御靈會。' },
     { id: 'l5-6', facet: 'l5', level: 3, type: 'choice',
       prompt: '祇園祭的山鉾巡行為什麼排在神轎出巡的同一天上午？',
       options: ['在神通過前把街道的疫神吸走、清乾淨', '讓觀光客上午看山鉾、下午看神轎', '山鉾要先去御旅所布置神的住處', '上午比較涼快，適合拉重的山鉾'],
@@ -164,10 +170,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 4 課）盂蘭盆時，小黃瓜做的馬和茄子做的牛分別代表什麼？',
       options: ['快快來、慢慢回去', '男性祖先、女性祖先', '今年豐收、明年豐收', '驅走疫病、驅走蚊蟲'],
       explain: '騎快馬早點回家，坐慢牛晚點離開。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）端午在武士時代變成男孩的節日，關鍵是什麼雙關？',
-      options: ['菖蒲＝尚武', '柏＝勝', '鯉＝戀', '粽＝千卷'],
-      explain: '菖蒲和尚武都讀しょうぶ。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）門松和山車上高高豎起的柱子，背後是同一種想法。是什麼？',
       options: ['給神降臨、停留的標記', '驅趕惡鬼的武器', '炫耀家族財力的裝飾', '標示祭典路線的路標'],

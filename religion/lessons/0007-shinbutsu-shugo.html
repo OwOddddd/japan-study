@@ -15,7 +15,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">宗教與信仰</a></nav>
   <p class="small">第 7 課・約 25 分鐘</p>
   <h1>神佛習合與神佛分離</h1>
-  <p class="lede">第 1 課教你分辨神社和寺院，但一路上你已經碰到好幾個「分不清」的例子：有鳥居的禪寺、叫「大菩薩」的八幡神、和大國主合體的大黑天。這一課解釋為什麼：神和佛一起被祭拜了一千多年，直到 1868 年才被強行拆開。</p>
+  <p class="lede">為什麼有鳥居的是禪寺、八幡神被叫「大菩薩」、大黑天還和大國主合為一體？因為神和佛一起被祭拜了一千多年，直到 1868 年才被強行拆開。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -110,7 +110,7 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">最後三題複習第 2、4、6 課。</p>
+  <p class="small">最後兩題複習第 2、6 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -133,7 +133,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教與信仰 第 7 課・神佛習合與神佛分離',
-  storageKey: 'rel-l7-v1',
+  storageKey: 'rel-l7-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -168,10 +168,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 6 課）七福神裡的大黑天，在日本和哪一位神合為一體？',
       options: ['大國主', '天照大御神', '菅原道真', '八幡神'],
       explain: '「大國」可以讀成だいこく，大黑天就和出雲的大國主合在一起。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）天台宗的根據地比叡山，山麓的守護神社是？',
-      options: ['日吉大社', '伏見稻荷大社', '八坂神社', '宇佐神宮'],
-      explain: '日吉大社的神稱為山王權現，是比叡山的守護神。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）神社的本殿為什麼通常看不到裡面？',
       options: ['神看不見，神體不公開', '本殿裡放著寺院的佛像', '本殿只有天皇能看', '本殿正在式年遷宮'],

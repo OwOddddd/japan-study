@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
   <p class="small">第 5 課・約 25 分鐘</p>
   <h1>和室的由來</h1>
-  <p class="lede">住進日本旅館的和室，你會看到：整面鋪滿的榻榻米、牆上一個凹進去掛著掛軸的空間、紙拉門、方方正正的柱子。這些東西不是一開始就有的，是從平安貴族的大廳一步步改出來的。</p>
+  <p class="lede">住進日本旅館的和室，為什麼會有整面鋪滿的榻榻米、牆上凹進去掛著掛軸的空間、紙拉門、方方正正的柱子？這些東西從平安貴族的大廳，一步步改成了今天的樣子。</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -123,7 +123,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 2–4 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 3、4 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -141,7 +141,7 @@
 Quiz.mount(document.getElementById('quiz'), {
   title: '建築 第 5 課・和室的由來',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0006-v1',
+  storageKey: 'arch-lesson-0006-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -175,14 +175,10 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '茶室的躙口（只有六、七十公分的小門），一般的解釋是？',
       options: ['不論身分都要低頭進入，刀也帶不進去', '冬天門小才能保住茶室的溫度', '茶室太小，放不下一般大小的門', '防止小偷闖進茶室偷茶具'],
       explain: '要彎腰爬進去，武士也得把刀留在外面，進了茶室人人平等。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）從正面看到三角形的山牆，入口開在這一側。這叫？',
-      options: ['妻入', '平入', '流造', '權現造'],
-      explain: '妻入。大社造、春日造都是妻入；神明造、流造是平入。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）伊勢神宮每 20 年重建一次的儀式叫？',
-      options: ['式年遷宮', '解體修理', '神佛分離', '御開帳'],
-      explain: '最近一次 2013 年，下一次 2033 年。' },
+      prompt: '（複習第 4 課）伊勢神宮為什麼每 20 年重建一次？',
+      options: ['直接埋進土裡的柱子和茅草屋頂約 20 年就腐朽，照原樣重做來保存形式', '神每 20 年要換一位新的來住', '為了配合天皇即位的年份', '每次大地震後都必須重蓋'],
+      explain: '掘立柱和茅草撐不過二十年，所以定期照原樣重建：木頭是新的，設計是古代的。這個做法叫式年遷宮，最近一次 2013 年，下一次 2033 年。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 3 課）禪宗樣的窗，上緣是火焰形曲線，叫？',
       options: ['花頭窗', '連子窗', '下地窗', '蔀戶'],

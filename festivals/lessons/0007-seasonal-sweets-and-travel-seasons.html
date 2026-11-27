@@ -14,13 +14,19 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">年中行事與祭典</a></nav>
   <p class="small">第 7 課・約 25 分鐘</p>
   <h1>季節感和旺季</h1>
-  <p class="lede">在日本，和菓子店的櫥窗每個月都換一輪，超商的零食一年換四次口味，連信的開頭都要寫季節。前六課講的行事，在日常生活裡留下的痕跡就是這種「季節感」。最後再看一個實際問題：哪些日子全日本都在放假，旅館和車票最難訂。</p>
+  <p class="lede">為什麼日本和菓子店的櫥窗每個月換一輪，超商的零食一年換四次口味，連信的開頭都要寫季節？這是前六課的行事留在日常生活裡的「季節感」。本課最後也看哪些日子全日本一起放假、旅館和車票最難訂。</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
     <p>1. 看到一個和菓子，說得出它對應哪個季節或行事。</p>
     <p>2. 說得出「走り・旬・名残」的意思，解釋為什麼季節商品總是提早上架。</p>
     <p>3. 說得出一年三大旅遊人潮（年末年始、黃金週、盂蘭盆）是怎麼形成的，排行程時避開。</p>
+  </div>
+
+  <h2>暖身：第 6 課回想</h2>
+  <div class="recall-box exercise">櫻花前線從南往北推進，紅葉前線卻從北往南。為什麼方向相反？
+    <textarea></textarea>
+    <details><summary>看答案</summary>櫻花要等天氣變暖才開，暖得早的南方先開。紅葉要等天氣變冷才紅，冷得早的北方和高山先紅。</details>
   </div>
 
   <h2>1. 和菓子：把行事做成點心</h2>
@@ -103,7 +109,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後四題是複習第 1–6 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 4、6 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -126,7 +132,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '年中行事與祭典 第 7 課・季節感和旺季',
-  storageKey: 'fest-l7-v1',
+  storageKey: 'fest-l7-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -149,9 +155,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['搶先迎接季節本來就被當成雅趣', '原料只有在前一個月才採收得到', '政府規定季節商品的上市日期', '日本的季節比日曆晚一個月'],
       explain: '從江戶人搶初鰹到和菓子提前推出季節造型，「走り」的習慣讓提早上架變成常態。' },
     { id: 'l7-5', facet: 'l7', level: 1, type: 'choice',
-      prompt: '日本一年最擠的三段旅遊人潮是？',
-      options: ['年末年始、黃金週、盂蘭盆', '春分、七夕、秋分', '梅雨、颱風季、聖誕節', '成人之日、建國紀念之日、文化之日'],
-      explain: '這三段時間全國公司一起放假，加上返鄉。' },
+      prompt: '黃金週的連休長度每年不同，從三天到一週以上都有。原因是？',
+      options: ['4/29 和 5/3–5/5 四個假日，要看怎麼和週末、中間的平日接起來', '政府每年公布不同的連假天數', '春分的日期每年變動，影響連休長度', '各公司自己決定要放幾天'],
+      explain: '5/3–5/5 固定連休，碰上星期日時 5/6 補假；4/29 和它之間隔幾天平日、前後接不接週末，每年不同。出發前要看當年的日曆。' },
     { id: 'l7-6', facet: 'l7', level: 2, type: 'choice',
       prompt: '「お盆休み」為什麼大多在 8 月中，而不是 7 月中？',
       options: ['全國多數地方的盂蘭盆採月遲', '8 月中是日本最熱的時候', '8 月中有政府規定的連假', '7 月中各地都在辦祇園祭'],
@@ -160,18 +166,10 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 6 課）酉之市的熊手為什麼多半是商家在買？',
       options: ['耙子把福氣和生意耙進來', '熊手可以拿來打掃店面', '商家要供奉給鷲神社', '熊手是年底大掃除的工具'],
       explain: '耙子的作用是把東西耙進來，所以祈求生意興隆，每年買大一點的。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）神轎和山車，哪一個裡面有神？',
-      options: ['神轎', '山車', '兩個都有', '兩個都沒有'],
-      explain: '神轎是神的交通工具；山車是迎神、招待神、熱鬧用的。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 4 課）京都五山送火在 8 月 16 日，它在送什麼？',
-      options: ['祖先的靈魂', '夏天的疫神', '祇園祭的神', '新年的年神'],
-      explain: '盂蘭盆最後一天的送火，放大到整座城市。' },
-    { id: 'rv-4', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）鏡開那天把鏡餅吃掉，代表什麼？',
-      options: ['年神離開了，把祂的力量吃進身體', '年神剛到，用餅招待祂', '宣告正月開始', '把一年的災厄敲碎'],
-      explain: '鏡餅是年神停留的地方，年神離開後吃掉它。' },
+      prompt: '（複習第 4 課）京都五山送火在 8 月 16 日晚上點燃，為什麼選在這天？',
+      options: ['盂蘭盆最後一天，照亮祖先回去的路', '祇園祭的神轎要在這天回神社', '夏天的疫神要在這天被趕出京都', '年神要在這天離開京都'],
+      explain: '盂蘭盆的最後一天要送祖先回去，家門口的送火放大到整座城市，就是五山送火。' },
   ],
 });
 </script>

@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">鐵道與交通</a></nav>
   <p class="small">第 8 課・約 20 分鐘</p>
   <h1>其他交通工具</h1>
-  <p class="lede">日本曾經有六十多座城市跑著路面電車，今天只剩二十幾座。留下來的城市各有理由，最近還有城市重新蓋了新的。這一課也看看鐵道接不到的地方：巴士和渡輪怎麼補上。</p>
+  <p class="lede">日本曾經有六十多座城市跑著路面電車，為什麼今天只剩二十幾座？留下來的城市各有理由，最近還有城市重新蓋了新的。這一課也看看鐵道接不到的地方：巴士和渡輪怎麼補上。</p>
 
   <div class="goal">
     <p><strong>本課結束時你能做到：</strong></p>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p class="small">本課的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 7 課回想</h2>
+  <div class="recall-box exercise">新幹線讓金澤熱鬧起來，同一件事為什麼也可能讓地方城市變冷清？
+    <textarea></textarea>
+    <details><summary>看答案</summary>這叫吸管效應。交通變快，大城市和地方城市當天就能來回，企業不必在地方常駐，分公司縮小；地方居民也能當天去大城市購物、看病，地方商圈流失客人。人和錢沿著新幹線被吸往大城市。</details>
+  </div>
 
   <h2>1. 路面電車：從六十多座城市到二十幾座</h2>
   <p>路面電車（<span lang="ja">路面電車（ろめんでんしゃ）</span> <button class="btn ghost say" data-audio="audio/0008/01.wav">▶</button>）是在馬路上和汽車共用路面的電車。第 4 課說過，戰前的東京市、大阪市都靠市營的路面電車（市電）經營市內交通。</p>
@@ -96,7 +102,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後四題是複習第 1、3、5、7 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 1、3 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -122,7 +128,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '鐵道與交通 第 8 課・其他交通工具',
   facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jrail-lesson-0009-v1',
+  storageKey: 'jrail-lesson-0009-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -136,9 +142,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['買了其他城市廢止後的舊車廂', '把所有的車廂都放進博物館', '只在週末開放給遊客參觀', '它的車站都改建成了博物館'],
       explain: '其他城市廢止市電時，廣電便宜買下京都、大阪、神戶等地的舊車，很多維持原塗裝在跑。' },
     { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
-      prompt: '2023 年開通、日本 75 年來第一條全新開業的路面電車在哪裡？',
-      options: ['宇都宮', '富山', '廣島', '熊本'],
-      explain: '宇都宮芳賀輕軌線，2023 年 8 月開通。富山是把既有的 JR 線改造成 LRT。' },
+      prompt: '富山、宇都宮近年反過來重新做路面電車（LRT），背後最主要的原因是？',
+      options: ['人口老化、不能開車的人變多，地方城市需要不靠汽車的交通骨架', '汽車已經全面禁止進入市區', '路面電車的收入比新幹線更高', 'JR 把所有地方線免費送給地方'],
+      explain: '地方城市人口老化，不能開車的人變多，所以把路面電車改良成較快、低底盤好上下車的 LRT。宇都宮芳賀輕軌線 2023 年 8 月開通，是日本 75 年來第一條全新開業的路面電車；富山則是把既有的 JR 線改造成 LRT。' },
     { id: 'l8-4', facet: 'l8', level: 1, type: 'choice',
       prompt: '地方巴士後門上車時抽的「<span lang="ja">整理券</span>」有什麼用？',
       options: ['記錄上車的站來算車資', '證明已經付過錢的收據', '上車排隊用的號碼牌', '下車時換零錢的兌換券'],
@@ -147,14 +153,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '本州和北海道之間的青函聯絡船，為什麼在 1988 年停航？',
       options: ['青函隧道開通了', '新幹線通到了函館', '航線的船全部老舊', '海峽結冰無法航行'],
       explain: '1988 年青函隧道開通，鐵道直接穿過海峽，聯絡船就停航了。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 7 課）新幹線讓地方城市的分公司縮小、商圈流失的現象叫？',
-      options: ['吸管效應', '甜甜圈化', '並行在來線', '上下分離'],
-      explain: '交通變快，人和錢沿著新幹線被吸往大城市。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）停車站一覽表上，你要去的站沒有亮燈，代表？',
-      options: ['這班車會通過不停', '這站今天暫停營業', '這站要另外付錢', '這站只能從後門下'],
-      explain: '沒亮燈就是這個種別不停這站，要換搭停站較多的車。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 3 課）私鐵在開通前先買下車站附近的土地，是為了？',
       options: ['通車後地價上漲，再賣掉賺錢', '用來蓋鐵道公司員工的宿舍', '政府規定一定要先買下土地', '防止別家公司蓋車站搶客人'],

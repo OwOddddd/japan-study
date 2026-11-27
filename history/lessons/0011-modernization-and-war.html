@@ -26,19 +26,19 @@
   <p class="small">頁面上的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
 
   <h2>暖身：第 10 課回想</h2>
-  <div class="exercise quiz" data-answer="c">
-    <p class="q">明治政府最想修改的不平等條約內容是什麼？</p>
+  <div class="exercise quiz" data-answer="d">
+    <p class="q">1877 年西鄉隆盛率領士族起兵，為什麼被政府軍打敗？</p>
     <div class="options">
-      <button data-key="a">天皇的稱號</button>
-      <button data-key="b">首都的位置</button>
-      <button data-key="c">領事裁判權與關稅自主權</button>
-      <button data-key="d">武士的俸祿</button>
+      <button data-key="a">外國軍隊出手協助政府</button>
+      <button data-key="b">士族內部分裂成兩派</button>
+      <button data-key="c">天皇親自率軍出征</button>
+      <button data-key="d">政府軍是依徵兵令組成的全民近代軍隊</button>
     </div>
-    <div class="explain" hidden>外國人犯罪不歸日本審判（領事裁判權），日本不能自己決定進口稅（沒有關稅自主權）。修約是近代化的主要動力。</div>
+    <div class="explain" hidden>徵兵令讓軍隊不再只有武士。這是最後一次大規模的武士叛亂，此後反對政府的手段轉向言論與政治運動。</div>
   </div>
-  <div class="recall-box exercise">寫出廢藩置縣、徵兵令、地租改正各自解決什麼問題。
+  <div class="recall-box exercise">德川慶喜為什麼主動大政奉還？倒幕派為什麼不接受，還要奪走他的官位與領地？
     <textarea></textarea>
-    <details><summary>看答案</summary>廢藩置縣：廢除藩，中央政府直接掌握全國。徵兵令：改由全民組成近代軍隊。地租改正：土地所有人用現金繳稅，政府有穩定的現金收入。三者合起來讓日本成為「一個國家」。</details>
+    <details><summary>看答案</summary>慶喜想先交出名義，繼續在新體制裡掌握影響力。倒幕派不願讓德川家保有實力，所以 1868 年發動王政復古，不給慶喜留位置，之後的戊辰戰爭打垮了舊幕府軍。</details>
   </div>
 
   <h2>1. 憲法與議會：權力怎麼分配</h2>
@@ -102,8 +102,8 @@
       <span class="why">軍部主導的政府，走向全面戰爭。</span></li>
     </ul>
 
-  <div class="exercise order" data-solution="日清戰爭,日俄戰爭,滿洲事變,五一五事件,日中戰爭,太平洋戰爭">
-    <p class="q">依時間先後，點選這六件事：</p>
+  <div class="exercise order" data-solution="經濟恐慌與政黨失信,軍部視滿洲為出路,關東軍先動手,政黨內閣終結,日中戰爭陷入泥沼,進軍東南亞求資源,美英荷禁運石油,偷襲珍珠港">
+    <p class="q">依因果先後（前一件導致後一件），點選這八個環節：</p>
   </div>
 
   <h2>5. 戰敗</h2>
@@ -145,7 +145,7 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
-  <div class="callout"><b>延伸想想</b>：第 1 節說統帥權獨立，讓軍隊不受內閣與議會控制。為什麼這個設計在 1930 年代讓政府管不住軍隊？</div>
+  <div class="callout"><b>延伸想想</b>：兩場勝仗讓日本修改了不平等條約，也留下「用武力解決問題有效」的經驗。這兩個結果，哪一個對 1930 年代的影響比較大？</div>
   <p class="small">語音：VOICEVOX:青山龍星</p>
   <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.britannica.com/place/Japan/The-Meiji-Restoration-and-Japans-modernization" target="_blank">Britannica: Japan, Meiji Restoration and modernization</a></li><li><a href="https://www.britannica.com/place/Japan/The-rise-of-militarism" target="_blank">Britannica: Japan, rise of militarism</a></li><li><a href="https://afe.easia.columbia.edu/timelines/japan_timeline.htm" target="_blank">Columbia 年表</a></li><li><a href="https://en.wikipedia.org/wiki/Treaty_of_Shimonoseki" target="_blank">Wikipedia: Treaty of Shimonoseki</a></li><li><a href="https://www.history.com/this-day-in-history/july-26/united-states-freezes-japanese-assets" target="_blank">History.com: US freezes Japanese assets</a></li><li><a href="https://whc.unesco.org/en/list/1449" target="_blank">UNESCO：富岡製絲場與絲綢產業遺產群</a></li><li><a href="https://hpmmuseum.jp/" target="_blank">廣島和平紀念資料館</a></li></ol></details>
 
@@ -164,7 +164,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '日本歷史 第 11 課・近代化與戰爭',
-  storageKey: 'his-l11-v1',
+  storageKey: 'his-l11-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -176,12 +176,12 @@ Quiz.mount(document.getElementById('quiz'), {
       explain: '統帥權獨立讓軍部不受內閣控制。滿洲事變等行動，政府只能事後承認。' },
     { id: 'l11-2', facet: 'l11', level: 2, type: 'choice',
       prompt: '日清戰爭的結果，與台灣有什麼關係？',
-      options: ['1895 年下關條約，清朝把台灣與澎湖割讓給日本', '台灣在這場戰爭中獨立', '台灣由清朝與日本共管', '台灣與日清戰爭無關'],
+      options: ['1895 年下關條約，清朝把台灣與澎湖割讓給日本', '條約規定台灣由清朝與日本共管，主權仍屬清朝', '日本只取得台灣的貿易權，沒有統治權', '清朝把台灣租借給日本五十年，期滿歸還'],
       explain: '台灣成為日本的第一個殖民地，統治持續到 1945 年。戰後由中華民國政府接收。' },
     { id: 'l11-3', facet: 'l11', level: 3, type: 'choice',
-      prompt: '明治時代日本修改不平等條約，下列哪一項正確？',
-      options: ['1894 年談妥撤銷領事裁判權（1899 年生效），1911 年取得關稅自主權', '日清戰爭之後才開始談判，1911 年全部修完', '先取得關稅自主權，再撤銷領事裁判權', '靠戰勝俄國後的賠款買回主權'],
-      explain: '領事裁判權先在 1894 年談妥，關稅自主權到 1911 年才拿到。國力與近代化的成果，讓列強逐步願意讓步。' },
+      prompt: '明治時代的日本為什麼能逐步修改不平等條約？',
+      options: ['近代化與兩場戰爭的勝利提升了國力，列強逐步願意讓步', '日本答應開放更多港口，用通商利益交換', '日本付了大筆賠款，向列強買回主權', '列強自己決定放棄在亞洲的特權'],
+      explain: '領事裁判權在 1894 年談妥（1899 年生效），關稅自主權 1911 年取得。國力與近代化的成果，讓列強逐步讓步。' },
     { id: 'l11-4', facet: 'l11', level: 3, type: 'choice',
       prompt: '1930 年代政黨內閣為什麼被軍部壓過？',
       options: ['經濟恐慌讓政黨失去信任，加上暗殺（五一五事件）與統帥權獨立削弱了政府', '天皇廢除了政黨', '軍隊在選舉中全面獲勝', '美國要求解散政黨'],
@@ -192,13 +192,13 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 2,
       answer: '問題：資源缺乏與經濟恐慌，政黨無法解決。舊權力撐不住：政黨內閣被暗殺與軍部壓力削弱，統帥權獨立讓政府管不住軍隊。新權力：軍部主導，從滿洲事變走向日中戰爭與太平洋戰爭。' },
     { id: 'l11-6', facet: 'l11', level: 2, type: 'choice',
-      prompt: '你在群馬的富岡製絲場看到木骨磚造的繭倉庫。它在日本近代化中是什麼角色？',
-      options: ['明治政府建的官營工廠，生絲出口賺外匯，屬於殖產興業', '江戶幕府的米倉庫', '戰國大名的軍火庫', '戰後美軍的兵營'],
-      explain: '富岡製絲場 1872 年開業，是殖產興業的代表，生絲輸出為政府賺到外匯，2014 年列入世界遺產。' },
+      prompt: '你在群馬的富岡製絲場看到木骨磚造的繭倉庫。明治政府為什麼要自己蓋這樣的官營工廠，把生絲賣到國外？',
+      options: ['生絲輸出能賺外匯，再用來引進西方技術，達成富國強兵', '供應軍隊的制服', '安置失去俸祿的武士', '償還幕府留下的債務'],
+      explain: '政府要追上列強，需要錢和技術。生絲輸出賺到外匯，富岡製絲場是殖產興業的實例，2014 年列入世界遺產。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 10 課）廢藩置縣的意義是什麼？',
-      options: ['中央政府直接掌握全國，幕藩體制終結', '天皇遷都京都', '武士取得更多領地', '外國人可以居住內地'],
-      explain: '藩被廢除、改設府縣，由中央任命官員，政府第一次直接管理全國。' },
+      prompt: '（複習第 10 課）明治政府為什麼要建官營工廠、鋪鐵路、引進西方技術？',
+      options: ['要富國強兵，才有力量對抗列強', '為了還清幕府留下的債務', '為了讓武士繼續擁有特權', '為了取代天皇的權威'],
+      explain: '政府的目標是對抗列強，要先把國家變強，殖產興業就是其中一環，例如 1872 年開通的新橋到橫濱鐵路。' },
   ],
 });
 </script>

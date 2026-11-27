@@ -113,7 +113,7 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">最後三題複習第 1、5、7 課。</p>
+  <p class="small">最後兩題複習第 1、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -136,7 +136,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教與信仰 第 8 課・參拜規矩與信仰用品',
-  storageKey: 'rel-l8-v1',
+  storageKey: 'rel-l8-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -175,10 +175,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 7 課）「熊野權現」「東照大權現」的「權現」來自哪個想法？',
       options: ['本地垂跡：佛化身為神', '御靈信仰：怨靈變成神', '鎮護國家：佛保護國家', '末法思想：佛法衰退'],
       explain: '權現＝佛暫時以神的樣子出現，是本地垂跡的稱呼。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）只管打坐、以福井永平寺為大本山的是？',
-      options: ['曹洞宗', '臨濟宗', '淨土宗', '日蓮宗'],
-      explain: '道元的曹洞宗。臨濟宗重公案，本山有建長寺、妙心寺等。' },
     { id: 'rv-3', facet: 'review', level: 1, type: 'choice',
       prompt: '（複習第 1 課）在日本，燒香把煙撥到身上，一般是在哪裡？',
       options: ['寺院', '神社', '兩邊都有', '兩邊都沒有'],

@@ -136,7 +136,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '城與城下町 第 7 課・今日的城下町',
-  storageKey: 'castles-l7-v1',
+  storageKey: 'castles-l7-v2',
   facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -169,12 +169,12 @@ Quiz.mount(document.getElementById('quiz'), {
       answer: '町名常直接寫職業（鍛冶町住打鐵的、紺屋町住染布的）；兩邊是土塀、路折來折去的是武家屋敷；沿著街道密集排列的是町人地；山門一座接一座的是寺町。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 6 課）城下町的路設計成丁字路、鉤形彎道，主要目的是？',
-      options: ['切斷視線、阻止敵人直衝', '讓商店的門面變多', '方便雨水排掉', '讓大名騎馬時有更多轉彎'],
-      explain: '看不到前面就不能直衝，每個轉角都是擋住敵人的地方。' },
+      options: ['切斷視線、阻止敵人直衝', '讓商店的門面變多', '方便雨水排掉', '順著原本的地形修路，沒有特別的用意'],
+      explain: '看不到前面就不能直衝，每個轉角都是擋住敵人的地方。今天城下町舊區的路折來折去，就是這個設計留下的痕跡。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）1945 年空襲中，下列哪一座城的天守被燒毀？',
-      options: ['名古屋城', '姬路城', '松本城', '彥根城'],
-      explain: '名古屋城 1945 年 5 月被空襲燒毀。姬路、松本、彥根都留下來，是現存天守。' },
+      prompt: '（複習第 5 課）1873 年廢城令之後，城的木造建築大多消失，石垣和堀卻大多留下來。原因是？',
+      options: ['木造的東西可以拆、可以賣，石垣和堀又重又大，沒人要', '石垣和堀被政府指定為文化財保護', '石垣和堀比木造建築更早蓋好', '木造建築都在戰爭中被燒光'],
+      explain: '廢城令後城被拆賣或閒置，木造的可以拆了賣，石垣和堀拆掉成本高，所以留下來。名古屋城的天守是 1945 年空襲燒毀的，另一種消失的原因。' },
   ],
 });
 </script>

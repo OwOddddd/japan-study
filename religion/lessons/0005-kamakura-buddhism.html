@@ -133,7 +133,7 @@
   </div>
 
   <h2>課後小測驗</h2>
-  <p class="small">最後三題複習第 2–4 課。</p>
+  <p class="small">最後兩題複習第 2、4 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -156,7 +156,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教與信仰 第 5 課・鎌倉新佛教',
-  storageKey: 'rel-l5-v1',
+  storageKey: 'rel-l5-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -195,10 +195,6 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '（複習第 4 課）京都東寺講堂的「立體曼荼羅」，中心的佛是？',
       options: ['大日如來', '阿彌陀如來', '藥師如來', '釋迦如來'],
       explain: '密教以大日如來為宇宙的中心，其他佛都是祂的不同面貌。' },
-    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）八幡神社最初的總本社在哪裡？',
-      options: ['大分的宇佐神宮', '京都的石清水八幡宮', '鎌倉的鶴岡八幡宮', '三重的伊勢神宮'],
-      explain: '總本社是宇佐神宮。石清水和鶴岡都是後來勸請出去的。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）神社參道「靠邊走」的民間說法是因為？',
       options: ['正中央是神走的路', '中間的石板比較滑', '邊上有比較多樹蔭', '正中央留給神職走'],

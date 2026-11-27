@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 4 課・約 25 分鐘</p>
   <h1>超商&amp;販賣機</h1>
-  <p class="lede">台灣人對便利商店不陌生，台灣的密度甚至比日本還高。日本便利商店值得看的地方在於它怎麼誕生、為什麼開成一群一群，以及它和到處都是的自動販賣機怎麼分工。</p>
+  <p class="lede">台灣的便利商店密度比日本還高，日本的便利商店為什麼還值得看？值得看的是它怎麼誕生、為什麼開成一群一群，以及它和到處都是的自動販賣機怎麼分工。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 3 課回想</h2>
+  <div class="recall-box exercise">日本為什麼把家庭垃圾先燒再埋，還要分得這麼細？
+    <textarea></textarea>
+    <details><summary>看答案</summary>平地少、人多，能蓋掩埋場的土地很少，所以先燒掉縮小體積再埋。焚化爐怕燒不掉的（金屬、玻璃）和會爆炸的（電池、噴霧罐），能回收的也要分出來減量，所以要細分。</details>
+  </div>
 
   <h2>1. 一些基準數字</h2>
   <table class="cmp">
@@ -106,7 +112,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 1–3 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 3 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -131,15 +137,15 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 4 課・超商&販賣機',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l4-v1',
+  storageKey: 'society-l4-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l4-1', facet: 'l4', level: 1, type: 'choice',
-      prompt: '日本第一家 7-Eleven 是哪一年開的？',
-      options: ['1974 年', '1964 年', '1987 年', '1995 年'],
-      explain: '1974 年 5 月，東京江東區豐洲，由酒行改裝。同年大店法施行。' },
+      prompt: '日本的便利商店很多開在原本就有商店的街角。原因是？',
+      options: ['加盟主多是原本的酒行、米店，把店面改成便利商店', '市町村規定便利商店只能開在舊商店街', '大型超市把便利商店開在自家分店旁', '原本商店街的租金最便宜'],
+      explain: '日本第一家 7-Eleven 是 1974 年由豐洲的一家酒行改裝而成。傳統小商店加盟，把原本的店面換成便利商店。' },
     { id: 'l4-2', facet: 'l4', level: 2, type: 'choice',
       prompt: '同一家便利商店在附近開好幾家（集中出店），主要的好處是？',
       options: ['配送卡車一趟可以補很多家店', '可以讓店員在不同的店之間輪班', '分店多可以少繳一些營業稅', '市町村規定一區至少要開三家'],
@@ -149,26 +155,22 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['到處都有，而且整天開著', '店員都有會計師的資格', '國家規定電費只能在這裡繳', '電力公司是便利商店的股東'],
       explain: '1987 年開始代收東京電力電費；以前要在銀行或郵局的營業時間內去繳。' },
     { id: 'l4-4', facet: 'l4', level: 2, type: 'choice',
-      prompt: '日本的飲料自動販賣機，很多是誰在擁有和補貨？',
-      options: ['飲料公司', '市町村公所', '便利商店', '町內會'],
-      explain: '對飲料公司來說，一台機器就是一家不用店租、不用店員的自家通路。' },
+      prompt: '飲料公司為什麼願意把機器免費放在別人的土地上？',
+      options: ['機器裡只賣自家商品，等於一家不用店租和店員的自家通路', '政府補助每一台機器的成本', '屋主要先買下機器裡所有的飲料', '主要目的是讓路人免費試喝新口味'],
+      explain: '機器由飲料公司擁有、補貨，賣出去的分一部分給屋主。對飲料公司來說，一台機器就是一家不用店租、不用店員的小店。' },
     { id: 'l4-5', facet: 'l4', level: 3, type: 'short',
       prompt: '保護小商店的大店法，為什麼反而促成了全國連鎖的便利商店？',
       keywords: [['大店', '大型', '500', '超市'], ['限制', '開不了', '規制', '難開'], ['小店', '小型', '便利商店', '管不到']],
       need: 2,
       answer: '大店法限制大型店開店 → 大型超市集團的擴張受阻 → 轉向法律管不到的小型店，經營便利商店（伊藤洋華堂的 7-Eleven），加盟主多是原本的酒行、米店。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）日本垃圾以哪一種處理方式為主？',
-      options: ['先燒再埋', '全部掩埋', '全部回收', '運往國外'],
-      explain: '掩埋場的土地少，先燒掉縮小體積，灰再拿去掩埋。' },
+      prompt: '（複習第 3 課）為什麼日本的家庭垃圾以「先燒再埋」為主？',
+      options: ['平地少，能蓋掩埋場的土地很少，燒過體積縮得很小', '法律禁止把垃圾直接掩埋', '燒垃圾發的電可以全部賣錢，所以比回收划算', '運到國外處理成本太高'],
+      explain: '人多地少，掩埋場的土地少，先燒掉縮小體積，灰再拿去掩埋。這是第 1 課的起點 A。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 3 課）德島縣上勝町把垃圾分成 45 類，主要原因是？',
       options: ['聚落分散，收集與焚化成本太高', '國法規定山區要分得特別細', '町民想參加國際環保比賽', '町裡的焚化爐比大城市好'],
       explain: '55 個聚落散在山間，沒有垃圾車，居民自己帶去垃圾站細分回收。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）地址寫「○○町 45 番地」，最可能代表什麼？',
-      options: ['這一帶還在用地番', '這是京都的通り名', '這是札幌的條丁目', '這是大樓第 45 層'],
-      explain: '「番地」是地番的寫法；住居表示地區寫「○番○號」。' },
   ],
 });
 </script>

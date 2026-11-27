@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 2 課・約 25 分鐘</p>
   <h1>住址的寫法</h1>
-  <p class="lede">在台灣找地址，先找路名，再沿著路找門牌。在日本這招常常行不通：大部分的路沒有名字，地址寫的是「第幾塊地」。這一課看這套系統怎麼來、怎麼讀，以及京都和札幌這兩個例外。</p>
+  <p class="lede">為什麼在日本靠路名找門牌常常行不通？因為大部分的路沒有名字，地址寫的是「第幾塊地」。這一課看這套系統怎麼來、怎麼讀，以及京都和札幌這兩個例外。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -26,6 +26,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 1 課回想</h2>
+  <div class="recall-box exercise">為什麼垃圾分幾類、哪天收這類日常的事，各市町村的做法可以不一樣？
+    <textarea></textarea>
+    <details><summary>看答案</summary>垃圾、自來水、小學這些每天都要做的事，交給離住民最近的市町村管，國和都道府縣只訂基準、出一部分錢。管的人不同，做法就可以不同。</details>
+  </div>
 
   <h2>1. 拆一個地址</h2>
   <p>東京都廳的地址：</p>
@@ -155,7 +161,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 2 課・住址的寫法',
   facets: [{ id: 'l2', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l2-v1',
+  storageKey: 'society-l2-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -182,9 +188,9 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 2,
       answer: '從烏丸通和三條通的交叉口，沿著烏丸通往南。京都市中心是平安京的棋盤格，每條路都有名字，町也沿著道路兩側組成，所以能用「交叉口＋方向」指位置。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）東京 23 區在地方自治上屬於哪一層？',
-      options: ['和市町村同一層的特別區', '東京都的行政派出單位', '和都道府縣同一層的單位', '國直接管理的首都特區'],
-      explain: '特別區和市町村同一層，有自己的區役所，垃圾、住民登記都由區負責。' },
+      prompt: '（複習第 1 課）住居表示由市町村自己出錢、一個町一個町改，到現在還沒改完。這和第 1 課的哪個道理有關？',
+      options: ['生活相關的事歸市町村管，各地做法和進度可以不同', '住居表示是都道府縣的事，各縣的預算不同', '町內會決定住址的寫法，每個町的進度不同', '國規定每年只能改一個町'],
+      explain: '住址怎麼編由市町村決定，這是第 1 課的起點 B。橫濱改了約七成，鄉下多半還在用地番。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 1 課）日本整體人口密度比台灣低，東京卻比台北擠。原因是？',
       options: ['七成人口集中在只占 3.5% 國土的地區', '東京的面積很小，所以數字被放大了', '台灣大多數人口都住在山區的村落', '兩國計算人口密度的方式完全不同'],

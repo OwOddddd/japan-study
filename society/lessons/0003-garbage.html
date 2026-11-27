@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">社會與生活</a></nav>
   <p class="small">第 3 課・約 25 分鐘</p>
   <h1>垃圾分類</h1>
-  <p class="lede">旅客在日本最常碰到的兩個垃圾問題：手上的空瓶不知道丟哪裡，住民宿時看到一張密密麻麻的分類表。兩件事都可以追回第 1 課的兩個起點。</p>
+  <p class="lede">為什麼在日本手上的空瓶常找不到地方丟，住民宿時又會拿到一張密密麻麻的分類表？兩件事都可以追回第 1 課的兩個起點。</p>
 
   <div class="goal">
     <b>本課目標</b>
@@ -25,6 +25,12 @@
     </ul>
   </div>
   <p>按「▶ 聽」可以聽發音（語音：VOICEVOX:青山龍星）。</p>
+
+  <h2>暖身：第 2 課回想</h2>
+  <div class="recall-box exercise">日本大多數地方的地址為什麼不用路名？
+    <textarea></textarea>
+    <details><summary>看答案</summary>多數道路本來沒有名字，生活單位是「町」這種區塊。明治政府為了收地租給每筆土地編號（地番），地址就借用土地編號；1962 年改成住居表示後，也是按街區編號。</details>
+  </div>
 
   <h2>1. 誰收垃圾：市町村</h2>
   <p>日本的《廢棄物處理法》把家庭垃圾（一般廢棄物）的收集與處理交給<b>市町村</b>：各市町村要訂自己的處理計畫，自己收、自己燒或委託處理。國只訂技術標準。</p>
@@ -114,7 +120,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後三題複習第 1、2 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 1、2 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -139,7 +145,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '社會與生活 第 3 課・垃圾分類',
   facets: [{ id: 'l3', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'society-l3-v1',
+  storageKey: 'society-l3-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -157,9 +163,9 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['地鐵沙林事件後的防恐措施', '垃圾分類的法律正式上路', '鐵道公司民營化後的裁員', '奧運前的市容整頓計畫'],
       explain: '1995 年 3 月地鐵沙林事件後，為防止危險物被藏在垃圾桶裡而撤除；2005 年倫敦爆炸案後又再撤一次。' },
     { id: 'l3-4', facet: 'l3', level: 2, type: 'choice',
-      prompt: '自動販賣機旁的回收箱，可以丟什麼？',
-      options: ['只能丟瓶罐和寶特瓶', '所有在路上產生的垃圾', '只能丟紙杯和吸管', '可燃垃圾和廚餘'],
-      explain: '販賣機旁的回收箱是給飲料容器的，塞進其他垃圾會造成管理的人很大的麻煩。' },
+      prompt: '旅客手上有喝完的空瓶，在日本街上最可能丟在哪裡？為什麼？',
+      options: ['販賣機旁的回收箱，那裡專門收瓶罐和寶特瓶', '路邊的垃圾桶，日本街上到處都有', '便利商店的垃圾桶，那裡什麼垃圾都收', '住宅區的集積所，反正垃圾車會收走'],
+      explain: '街上的垃圾桶很少。販賣機旁的回收箱是給飲料容器的，塞進其他垃圾會造成管理者很大的麻煩。集積所是給住戶在收集日放家庭垃圾的地方。' },
     { id: 'l3-5', facet: 'l3', level: 3, type: 'short',
       prompt: '日本為什麼「先燒再埋」，而且要分這麼細？用兩個步驟以上說明。',
       keywords: [['平地少', '土地', '地少', '掩埋場少', '空間'], ['燒', '焚化', '體積'], ['分', '金屬', '電池', '爆炸', '回收']],
@@ -170,18 +176,14 @@ Quiz.mount(document.getElementById('quiz'), {
       keywords: [['帶回', '帶走', '回家'], ['成本', '清', '管理', '人員'], ['防恐', '沙林', '垃圾桶少'], ['觀光', '遊客', '澀谷', '破綻', '例外', '亂丟']],
       need: 2,
       answer: '乾淨靠的是一套條件：垃圾桶少（防恐、管理成本），大家把垃圾帶回家照自家規則分類，加上清掃人員。遊客一多就出現縫隙，例如澀谷的路邊垃圾問題。' },
-    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）「新宿區西新宿 2-8-1」的「8」是什麼？',
-      options: ['街區', '路名', '樓層', '房號'],
-      explain: '丁目－番－號：8 番是被道路圍起來的街區。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）京都地址裡的「下ル」是什麼意思？',
-      options: ['從交叉口往南', '從交叉口往北', '從交叉口往西', '從交叉口往東'],
-      explain: '上ル北、下ル南、西入西、東入東。' },
+      prompt: '（複習第 2 課）京都和札幌可以用道路當座標寫地址，多數地方卻不行。差別在於？',
+      options: ['這兩個城市的街道規劃成棋盤格，而且路有名字', '這兩個城市比較大，政府有預算替每條路編名字', '這兩個城市不受住居表示法管轄', '這兩個城市的郵差要求不同'],
+      explain: '京都沿用平安京的棋盤格，札幌是明治時代規劃的格子狀城市，路有名字或編號，所以能用「交叉口＋方向」或座標指位置。多數地方的路沒有名字。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）町內會在法律上是什麼？',
-      options: ['住戶自願組成的團體', '市町村的下級機關', '都道府縣的派出所', '全戶強制加入組織'],
-      explain: '町內會是住戶自己組成、自願參加的團體，加入率在很多城市正在下降。' },
+      prompt: '（複習第 1 課）集積所的清掃為什麼常由町內會排班？',
+      options: ['市町村把一部分事交給住戶自願組成的町內會，附近的人最清楚狀況', '法律規定每戶都要加入町內會並輪值', '町內會是市町村的下級機關，由公務員排班', '市町村不負責收垃圾，全部交給町內會'],
+      explain: '町內會是住戶自願組成的團體，管集積所清掃、回覽板這類事。市町村人力有限，有時也補助經費。垃圾的收集本身仍是市町村的工作。' },
   ],
 });
 </script>
