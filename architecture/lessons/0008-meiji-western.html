@@ -9,12 +9,12 @@
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 9 課・明治的洋風建築</span><span id="progress"></span></div>
+<div class="sticky"><span>第 8 課・明治的洋風建築</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
-  <p class="small">第 9 課・約 25 分鐘</p>
+  <p class="small">第 8 課・約 25 分鐘</p>
   <h1>明治的洋風建築</h1>
-  <p class="lede">東京車站的紅磚、長崎山坡上的白色洋館、松本那棟屋頂上有八角塔的小學，同樣叫「西洋式」，為什麼看起來差這麼多？因為蓋的是三種人：外國商人、沒看過西洋建築的日本木匠、在日本學會西洋建築的第一代建築師。分得出是誰蓋的，就看得出那棟建築屬於明治的哪一段。</p>
+  <p class="lede">東京車站的紅磚、長崎山坡上的白色洋館、松本那棟屋頂上有八角塔的小學，同樣叫「西洋式」，為什麼看起來差這麼多？</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -24,7 +24,7 @@
 
   <p class="small">開國、明治維新的政治經過由歷史主題負責，本課只講建築。</p>
 
-  <h2>0. 暖身</h2>
+  <h2>暖身：第 1 課回想</h2>
   <div class="exercise quiz" data-answer="c">
     <p class="q">（第 1 課）傳統木造建築對付地震的方式，最接近哪一句？</p>
     <div class="options">
@@ -99,10 +99,10 @@
   <div class="exercise quiz" data-answer="d">
     <p class="q">為什麼日本的紅磚建築大多是 1923 年以前的？</p>
     <div class="options">
-      <button data-key="a">1923 年以後日本的紅土用完了</button>
-      <button data-key="b">政府在 1923 年禁止使用西洋建材</button>
-      <button data-key="c">紅磚被認為不夠日本，大正時代退流行</button>
-      <button data-key="d">關東大地震中磚造建築大量倒塌，之後改用鋼筋混凝土</button>
+      <button data-key="a">1923 年以後日本再也找不到適合燒磚的黏土</button>
+      <button data-key="b">政府在 1923 年下令禁止使用西洋建材</button>
+      <button data-key="c">紅磚被認為不夠日本，大正時代開始退流行</button>
+      <button data-key="d">關東大地震中磚造大量倒塌，之後改用鋼筋混凝土</button>
     </div>
     <div class="explain" hidden>磚造重、接縫沒有彈性，地震時容易倒。1923 年之後大型建築改用鋼筋混凝土和鋼骨。</div>
   </div>
@@ -129,7 +129,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後兩題複習第 1、8 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 3、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -138,57 +138,53 @@
   <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.mlit.go.jp/tagengo-db/R4-00174.html" target="_blank">觀光廳多語解說</a></li><li><a href="https://online.bunka.go.jp/heritages/detail/212090" target="_blank">文化遺產オンライン</a></li><li><a href="https://en.wikipedia.org/wiki/Josiah_Conder" target="_blank">Wikipedia: Josiah Conder</a></li><li><a href="https://en.wikipedia.org/wiki/Tokyo_Station" target="_blank">Wikipedia: Tokyo Station</a></li><li><a href="https://en.wikipedia.org/wiki/Ry%C5%8Dunkaku" target="_blank">Wikipedia: Ryōunkaku</a></li></ol></details>
 
   <nav class="lesson-nav">
-    <a href="0008-gardens.html">← 第 8 課：日本庭園</a>
+    <a href="0007-gardens.html">← 第 7 課：日本庭園</a>
     <a href="../index.html">回到建築目錄 →</a>
   </nav>
 </main>
 
 <script>
 Quiz.mount(document.getElementById('quiz'), {
-  title: '建築 第 9 課・明治的洋風建築',
-  facets: [{ id: 'l9', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0010-v2',
+  title: '建築 第 8 課・明治的洋風建築',
+  facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'arch-l8-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
-    { id: 'l9-1', facet: 'l9', level: 2, type: 'choice',
+    { id: 'l8-1', facet: 'l8', level: 2, type: 'choice',
       prompt: '居留地洋館四周寬大的陽台，原本是為了什麼發展出來的？',
       options: ['炎熱殖民地的避暑與擋雨', '寒冷地區冬天曬太陽', '讓房子在地震時比較穩', '方便商人在外面擺攤做生意'],
       explain: '英國人在東南亞、印度等炎熱地區發展出的樣式，帶到同樣濕熱的日本。' },
-    { id: 'l9-2', facet: 'l9', level: 1, type: 'choice',
-      prompt: '舊開智學校是誰設計的？',
-      options: ['松本的木匠立石清重', '英國建築師康德', '建築師辰野金吾', '法國技師布琉納'],
-      explain: '沒有學過西洋建築的松本木匠，在東京、橫濱觀察洋館後設計的擬洋風建築。' },
-    { id: 'l9-3', facet: 'l9', level: 2, type: 'choice',
+    { id: 'l8-2', facet: 'l8', level: 2, type: 'choice',
+      prompt: '擬洋風建築的外牆塗灰泥、畫出石塊的樣子。這是為什麼？',
+      options: ['骨子是木造，卻想看起來像西洋的石造建築', '灰泥比木板更耐地震', '外國商人規定外牆必須塗成白色', '灰泥可以防止雨水滲進木頭'],
+      explain: '舊開智學校的骨子是木造，外表塗白色灰泥，牆腳那圈像石塊的部分是用灰泥畫出來的。' },
+    { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
       prompt: '明治初期各地出現擬洋風建築，最主要的原因是？',
-      options: ['要趕快蓋出像西洋的建築，但還沒有日本建築師', '外國建築師太多，日本木匠只好模仿', '政府規定新建築必須和洋混合', '西洋建材太貴，只好用木頭假裝'],
+      options: ['想蓋像西洋的建築，卻還沒有日本建築師', '外國建築師太多，日本木匠只好模仿', '政府規定新蓋的建築必須和洋混合', '西洋建材進口太貴，只好用木頭假裝'],
       explain: '新時代需要西洋式的學校、官廳，當時只有木匠能接，他們憑印象用木造技術蓋出來。' },
-    { id: 'l9-4', facet: 'l9', level: 2, type: 'choice',
-      prompt: '紅磚牆上橫跨白色石材條紋、屋頂有圓頂的「辰野式」，代表作是？',
-      options: ['東京車站丸之內站房', '舊開智學校', '舊格拉巴住宅', '富岡製絲場'],
-      explain: '辰野金吾設計，1914 年完成，2012 年復原三樓和圓頂。' },
-    { id: 'l9-5', facet: 'l9', level: 3, type: 'choice',
+    { id: 'l8-4', facet: 'l8', level: 3, type: 'choice',
       prompt: '富岡製絲場的「木骨磚造」是什麼意思？',
-      options: ['木造柱梁當骨架，柱間用紅磚砌牆', '整棟用紅磚砌，只有屋頂用木頭', '外面是紅磚，裡面再蓋一層木屋', '用木頭做成磚塊的形狀'],
+      options: ['木造柱梁當骨架，柱間用紅磚砌牆', '整棟用紅磚砌，只有屋頂用木頭', '外面是紅磚，裡面再蓋一層木屋', '用木頭刻成磚塊的樣子來裝飾牆面'],
       explain: '骨架照日本木匠熟悉的柱梁做法，牆換成磚：牆不承重的思路延續自第 1 課。' },
-    { id: 'l9-6', facet: 'l9', level: 3, type: 'short',
+    { id: 'l8-5', facet: 'l8', level: 3, type: 'short',
       prompt: '為什麼日本的紅磚建築幾乎都是 1923 年以前蓋的？用因果說明。',
       keywords: [['重', '厚牆', '堆'], ['彈性', '接縫', '脆', '不能晃'], ['1923', '關東大地震', '關東', '地震'], ['倒', '崩', '折'], ['鋼筋', '混凝土', '鋼骨']],
       need: 3,
       answer: '磚造靠堆起來的厚牆撐住，又重、接縫沒有彈性 → 1923 年關東大地震時大量倒塌（淺草凌雲閣折斷）→ 之後大型建築改用鋼筋混凝土和鋼骨，紅磚很少新建。' },
-    { id: 'l9-7', facet: 'l9', level: 2, type: 'choice',
+    { id: 'l8-6', facet: 'l8', level: 2, type: 'choice',
       prompt: '明治政府急著蓋正統西洋建築（官廳、鹿鳴館），背後的目的之一是？',
-      options: ['讓西方各國覺得日本是文明國家，以修改不平等條約', '西洋建築比較便宜，可以省下國家預算', '日本的木材不夠，只好改用磚石', '天皇規定所有新建築都要用西洋樣式'],
+      options: ['讓西方認為日本是文明國家，好修改條約', '西洋建築比較便宜，可以省下國家預算', '日本木材不夠用，只好改用磚造石造', '天皇規定所有新建築都要用西洋樣式'],
       explain: '建築是展示給西方看的門面，鹿鳴館就是招待外國人的社交場所。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 8 課）兼六園、後樂園、偕樂園這三座名園屬於哪一型？',
-      options: ['池泉回遊式', '枯山水', '淨土庭園', '露地'],
-      explain: '江戶大名的池泉回遊式庭園，繞池走一圈。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）傳統木造建築為什麼可以把牆整面換成拉門？',
-      options: ['屋頂由柱和梁撐住，牆不承重', '木牆太重，地震時會倒', '拉門比牆壁更保暖', '日本法律規定要用拉門'],
-      explain: '柱梁骨架承重，牆可以拿掉。富岡製絲場的木骨磚造也用了同樣的思路。' },
+      prompt: '（複習第 7 課）池泉回遊式庭園為什麼用樹和小山擋住視線？',
+      options: ['讓人轉個彎就出現新的景色，邊走邊換景', '遮住鄰居，保護庭園的隱私', '擋住池塘的反光，保護眼睛', '防止遊客直接走近池塘'],
+      explain: '設計者刻意用樹和小山擋住視線，轉個彎才出現新的景，這是要繞池走的庭園的設計。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 3 課）花頭窗原本是禪宗樣的特徵，後來也出現在彥根城的天守和茶室。這說明什麼？',
+      options: ['禪寺的做法也流行到禪寺以外的建築', '天守和茶室原本是禪寺的一部分', '花頭窗是日本古代自己發明的窗', '天守和茶室都由禪僧設計'],
+      explain: '花頭窗後來流行到禪寺以外，城的天守、茶室、民家都用。看到這種窗，就知道它的源頭在禪寺。' },
   ],
 });
 </script>

@@ -9,12 +9,12 @@
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 8 課・日本庭園</span><span id="progress"></span></div>
+<div class="sticky"><span>第 7 課・日本庭園</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
-  <p class="small">第 8 課・約 25 分鐘</p>
+  <p class="small">第 7 課・約 25 分鐘</p>
   <h1>日本庭園</h1>
-  <p class="lede">為什麼日本庭園有的要你坐著看，有的要你走著看；有的有大池塘，有的連一滴水都沒有？差別在於誰蓋的、蓋在哪裡、想讓你看見什麼。分清楚這三種，進庭園時就知道該坐下還是該走。</p>
+  <p class="lede">為什麼日本庭園有的要你坐著看，有的要你走著看，有的連一滴水都沒有？</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -24,7 +24,7 @@
 
   <p class="small">本課講庭園的設計與看法。淨土信仰、禪宗的教義由宗教主題負責，這裡只講到理解設計所需的程度。</p>
 
-  <h2>0. 暖身</h2>
+  <h2>暖身：第 5 課回想</h2>
   <div class="exercise quiz" data-answer="b">
     <p class="q">（第 5 課）平安貴族的寢殿造，主屋南邊是什麼？</p>
     <div class="options">
@@ -135,7 +135,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後兩題複習第 2、7 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 5、6 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -144,53 +144,49 @@
   <details class="sources"><summary>資料來源</summary><ol><li><a href="https://en.wikipedia.org/wiki/Japanese_garden" target="_blank">Wikipedia: Japanese garden</a></li><li><a href="https://en.wikipedia.org/wiki/Ry%C5%8Dan-ji" target="_blank">Wikipedia: Ryōan-ji</a></li><li><a href="https://en.wikipedia.org/wiki/Three_Great_Gardens_of_Japan" target="_blank">Wikipedia: Three Great Gardens of Japan</a></li></ol></details>
 
   <nav class="lesson-nav">
-    <a href="0007-townscapes.html">← 第 7 課：傳統街區類型</a>
-    <a href="0009-meiji-western.html">下一課：明治的洋風建築 →</a>
+    <a href="0006-townscapes.html">← 第 6 課：傳統街區類型</a>
+    <a href="0008-meiji-western.html">下一課：明治的洋風建築 →</a>
   </nav>
 </main>
 
 <script>
 Quiz.mount(document.getElementById('quiz'), {
-  title: '建築 第 8 課・日本庭園',
-  facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0009-v2',
+  title: '建築 第 7 課・日本庭園',
+  facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'arch-l7-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
-    { id: 'l8-1', facet: 'l8', level: 2, type: 'choice',
-      prompt: '淨土庭園裡，阿彌陀堂通常蓋在池的哪一邊？',
-      options: ['西岸，面朝東', '東岸，面朝西', '北岸，面朝南', '池中的島上'],
-      explain: '阿彌陀佛在西方，佛堂在西岸，人從東岸隔著池往西看。' },
-    { id: 'l8-2', facet: 'l8', level: 1, type: 'choice',
-      prompt: '平等院鳳凰堂是誰建的？',
-      options: ['藤原賴通', '足利義政', '德川家康', '千利休'],
-      explain: '藤原賴通，1053 年完成，攝關政治全盛時期的財力展現。' },
-    { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
+    { id: 'l7-1', facet: 'l7', level: 2, type: 'choice',
+      prompt: '淨土庭園的佛堂蓋在池的西岸、面朝東，人站在東岸看。為什麼這樣設計？',
+      options: ['阿彌陀佛在西方，傍晚太陽從佛堂後面落下', '西岸地勢比較高，佛堂不會被水淹', '東岸有道路，香客比較容易抵達', '池水在傍晚反射陽光，讓佛堂更亮'],
+      explain: '阿彌陀佛在西方極樂淨土，所以佛堂在西岸。人站在東岸隔著池往西看，傍晚太陽就從佛堂後面落下，佛堂倒映在水面。' },
+    { id: 'l7-2', facet: 'l7', level: 2, type: 'choice',
       prompt: '枯山水在室町時代的禪寺發展起來。下列哪一項<b>不是</b>課中提到的原因？',
       options: ['禪宗規定寺院裡不可以有水', '方丈前原本是白砂的儀式空間', '禪僧熟悉宋元的水墨山水畫', '城裡的寺院引水做池塘不容易'],
       explain: '禪宗沒有這種規定，天龍寺就有大池塘。枯山水的成因是位置、山水畫的影響和條件限制。' },
-    { id: 'l8-4', facet: 'l8', level: 2, type: 'choice',
-      prompt: '茶庭裡低矮、要蹲下才洗得到手的石製洗手盆叫？',
-      options: ['蹲踞', '飛石', '石燈籠', '砂紋'],
-      explain: '蹲踞。和茶室的躙口一樣，讓人放低身段。' },
-    { id: 'l8-5', facet: 'l8', level: 2, type: 'choice',
-      prompt: '「日本三名園」不包括哪一座？',
-      options: ['龍安寺石庭', '兼六園', '後樂園', '偕樂園'],
-      explain: '三名園是兼六園、岡山後樂園、偕樂園，都是江戶大名的池泉回遊式庭園。龍安寺是枯山水。' },
-    { id: 'l8-6', facet: 'l8', level: 3, type: 'short',
+    { id: 'l7-3', facet: 'l7', level: 2, type: 'choice',
+      prompt: '茶庭的蹲踞要蹲下才洗得到手，和茶室的哪個設計想達到同樣的效果？',
+      options: ['躙口：要彎腰低頭才能進入', '床之間：掛畫的凹處，展示收藏', '違棚：錯開高度的置物架', '付書院：靠窗的矮書桌'],
+      explain: '蹲踞和躙口一樣，讓人放低身段，一路把心情沉澱下來。' },
+    { id: 'l7-4', facet: 'l7', level: 2, type: 'choice',
+      prompt: '江戶時代的大名為什麼蓋大型的池泉回遊式庭園？',
+      options: ['有錢、沒有仗可打，又要招待賓客', '幕府規定各藩必須蓋庭園送給將軍', '平安貴族留下的池塘需要大名接手維護', '禪寺的枯山水太小，容納不了賓客'],
+      explain: '大名有錢、沒仗可打，又要在江戶的宅邸和自己的藩裡招待客人，於是蓋起大型庭園。' },
+    { id: 'l7-5', facet: 'l7', level: 3, type: 'short',
       prompt: '枯山水和池泉回遊式庭園，觀看方式有什麼不同？為什麼？',
       keywords: [['坐', '座觀', '緣側', '固定'], ['走', '繞', '回遊', '步道'], ['畫', '山水畫'], ['換', '變', '景色', '轉彎', '縮景']],
       need: 3,
       answer: '枯山水坐在方丈的緣側，從固定位置看，像看一幅立體的山水畫；池泉回遊式要沿池邊步道繞一圈走，設計者用樹和小山擋視線，每轉一個彎出現新的景，還有名勝的縮景。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 7 課）京町家中段的小庭院「坪庭」，主要是為了？',
-      options: ['讓光和風進到又暗又悶的房子中段', '放置防火用的水缸', '讓客人進門前洗手', '當作曬衣服的地方'],
-      explain: '町家兩側貼著鄰居沒有側窗，只好從中間開洞。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）禪寺裡，住持的住處、前面常有枯山水的建築叫？',
-      options: ['方丈', '法堂', '三門', '金堂'],
-      explain: '方丈。這一課的枯山水就在方丈前面。' },
+      prompt: '（複習第 6 課）妻籠宿的居民訂下「不賣、不租、不拆」三原則，是為了？',
+      options: ['街道快要消失時，由居民自己保存', '阻止外地人進入宿場町', '讓宿場町可以重新蓋成現代街區', '保護本陣不被其他旅館搶生意'],
+      explain: '妻籠宿 1960 年代快要消失時，居民在 1971 年自己訂下三原則保存街道，後來成為日本第一批重傳建地區。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 5 課）武士的家為什麼需要書院造那種固定的房間？',
+      options: ['要接見部下和客人，並分出上下關係', '武士人數多，需要把房子隔成小單位出租', '武士討厭開放的空間，想保持隱密', '禪僧規定武士住宅必須有固定房間'],
+      explain: '武士的家要接見部下和客人，需要固定的房間，還要分出「主人坐哪裡、客人坐哪裡」的上下關係。' },
   ],
 });
 </script>

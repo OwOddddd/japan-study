@@ -17,7 +17,7 @@
   <p class="lede">日本曾經有六十多座城市跑著路面電車，為什麼今天只剩二十幾座？留下來的城市各有理由，最近還有城市重新蓋了新的。這一課也看看鐵道接不到的地方：巴士和渡輪怎麼補上。</p>
 
   <div class="goal">
-    <p><strong>本課結束時你能做到：</strong></p>
+    <b>本課目標</b>
     <ul>
       <li>說出路面電車為什麼在 1960–70 年代大量消失，以及廣島為什麼留得下來。</li>
       <li>說出富山、宇都宮為什麼反過來重新做路面電車。</li>
@@ -128,7 +128,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '鐵道與交通 第 8 課・其他交通工具',
   facets: [{ id: 'l8', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jrail-lesson-0009-v2',
+  storageKey: 'jrail-l8-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -143,7 +143,7 @@ Quiz.mount(document.getElementById('quiz'), {
       explain: '其他城市廢止市電時，廣電便宜買下京都、大阪、神戶等地的舊車，很多維持原塗裝在跑。' },
     { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
       prompt: '富山、宇都宮近年反過來重新做路面電車（LRT），背後最主要的原因是？',
-      options: ['人口老化、不能開車的人變多，地方城市需要不靠汽車的交通骨架', '汽車已經全面禁止進入市區', '路面電車的收入比新幹線更高', 'JR 把所有地方線免費送給地方'],
+      options: ['人口老化，不能開車的人變多，需要不靠汽車的交通', '汽車已被全面禁止進入這兩座城市的市區', '路面電車的收入比新幹線更高，政府想擴大規模', 'JR 把所有地方線免費送給地方，由地方改造成電車'],
       explain: '地方城市人口老化，不能開車的人變多，所以把路面電車改良成較快、低底盤好上下車的 LRT。宇都宮芳賀輕軌線 2023 年 8 月開通，是日本 75 年來第一條全新開業的路面電車；富山則是把既有的 JR 線改造成 LRT。' },
     { id: 'l8-4', facet: 'l8', level: 1, type: 'choice',
       prompt: '地方巴士後門上車時抽的「<span lang="ja">整理券</span>」有什麼用？',
@@ -154,13 +154,13 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['青函隧道開通了', '新幹線通到了函館', '航線的船全部老舊', '海峽結冰無法航行'],
       explain: '1988 年青函隧道開通，鐵道直接穿過海峽，聯絡船就停航了。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）私鐵在開通前先買下車站附近的土地，是為了？',
-      options: ['通車後地價上漲，再賣掉賺錢', '用來蓋鐵道公司員工的宿舍', '政府規定一定要先買下土地', '防止別家公司蓋車站搶客人'],
-      explain: '鐵道開通讓車站附近變方便、地價上漲，鐵道公司自己收下漲價的好處。' },
-    { id: 'rv-4', facet: 'review', level: 1, type: 'choice',
-      prompt: '（複習第 1 課）鐵道要賺錢，最需要什麼條件？本課的巴士轉換也和它有關。',
-      options: ['沿線住了很多人', '沿線的地勢平坦', '沿線有很多隧道', '沿線的天氣很好'],
-      explain: '人少的地方鐵道養不起，所以改由巴士接手。' },
+      prompt: '（複習第 3 課）小田急為什麼很用力經營往箱根的浪漫特快？',
+      options: ['箱根是它在郊外那一端的「遊樂設施」，能填滿假日和反方向的車', '箱根是小田急創辦人的故鄉', '政府補助所有往箱根的特急列車', '箱根是小田急唯一能賺錢的路線'],
+      explain: '通勤只在特定方向、平日才擠。郊外那一端有箱根這樣的觀光地，假日和反方向也有人搭。' },
+    { id: 'rv-4', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 1 課）日本人口為什麼大量擠在太平洋側從東京到福岡的一條帶子上？',
+      options: ['山地多，能住人的平原少，平原集中在太平洋側', '政府規定人口要集中在太平洋側', '日本海側沒有鐵道，所以沒有人住', '太平洋側一年四季的氣候都最涼爽'],
+      explain: '日本山地多、平原少，大城市排成一條線，一條鐵道就能串起東京、名古屋、大阪。人少的地方鐵道養不起，才有本課的巴士接手。' },
   ],
 });
 </script>

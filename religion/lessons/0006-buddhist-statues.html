@@ -14,7 +14,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">宗教與信仰</a></nav>
   <p class="small">第 6 課・約 25 分鐘</p>
   <h1>佛像怎麼看</h1>
-  <p class="lede">寺院裡的佛像為什麼有的樸素、有的戴滿寶冠、有的怒目？可以分成四個等級：如來、菩薩、明王、天，每一級的打扮都有原因，看懂原因就認得出來。</p>
+  <p class="lede">寺院裡的佛像為什麼有的樸素、有的戴滿寶冠、有的怒目？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -59,7 +59,7 @@
     <tr><td>藥師如來</td><td>左手捧著一個<b>小藥壺</b></td><td>治病</td></tr>
     <tr><td>大日如來</td><td><b>例外：戴寶冠和飾品</b>；兩手一上一下握住（智拳印）或疊在腿上</td><td>密教宇宙的中心（第 4 課）</td></tr>
   </table>
-  <p class="note">大日如來是如來，卻打扮得像菩薩。密教把祂看成宇宙的王，所以用王的裝扮。看到「戴冠的如來」就想到密教、真言宗。</p>
+  <p class="note">大日如來是最常見的戴冠如來，卻打扮得像菩薩。密教把祂看成宇宙的王，所以用王的裝扮。看到戴冠的如來，可以先想到密教、真言宗（也有少數戴寶冠的阿彌陀如來等例外）。</p>
 
   <h2>3. 菩薩：王子的打扮</h2>
   <p>菩薩是「已經可以成佛，卻選擇留在人間救人」的存在，所以造型是出家前的王子：寶冠、項鍊、長髮盤起、身上飄著長長的絲帶。日本最常見的幾位：</p>
@@ -121,18 +121,15 @@
     <p><b>路邊與墓地</b>：戴紅圍兜的地藏，在京都的巷子、鎌倉的寺院隨處可見。</p>
   </div>
 
-  <div class="source">
-    <b>官方網站</b>：<a href="https://toji.or.jp/" target="_blank">東寺</a>・<a href="https://www.sanjusangendo.jp/" target="_blank">三十三間堂</a>・<a href="https://www.kohfukuji.com/" target="_blank">興福寺</a><br>
-    寺院官網通常有佛像的照片，可以對照本課的表格練習。
-  </div>
-
   <h2>課後小測驗</h2>
-  <p class="small">最後兩題複習第 1、3 課。</p>
+  <p class="small">最後兩題複習第 4、5 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
   <div class="callout"><b>延伸想想</b>：台灣廟裡的觀音和日本的有什麼不同？</div>
+
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://toji.or.jp/" target="_blank">東寺</a></li><li><a href="https://www.sanjusangendo.jp/" target="_blank">三十三間堂</a></li><li><a href="https://www.kohfukuji.com/" target="_blank">興福寺</a></li></ol></details>
 
   <nav class="lesson-nav">
     <a href="0005-kamakura-buddhism.html">← 第 5 課：鎌倉新佛教</a>
@@ -149,43 +146,39 @@ Quiz.mount(document.getElementById('quiz'), {
   submitBtn: document.getElementById('submit'),
   facets: [{ id: 'l6', name: '本課' }, { id: 'review', name: '複習' }],
   questions: [
-    { id: 'l6-1', facet: 'l6', level: 1, type: 'choice',
-      prompt: '佛像的四個等級，由上到下是？',
-      options: ['如來、菩薩、明王、天', '菩薩、如來、天、明王', '如來、明王、菩薩、天', '天、如來、菩薩、明王'],
-      explain: '如來（已開悟）→ 菩薩（修行中救人）→ 明王（如來的憤怒相）→ 天（護法的印度神）。' },
-    { id: 'l6-2', facet: 'l6', level: 2, type: 'choice',
+    { id: 'l6-1', facet: 'l6', level: 2, type: 'choice',
       prompt: '為什麼如來沒有飾品，菩薩卻戴寶冠和項鍊？',
-      options: ['釋迦出家前是王子、開悟時已捨棄裝飾', '菩薩的地位比如來高', '如來的飾品被收在寺院裡', '菩薩都是女性所以戴飾品'],
+      options: ['釋迦出家前是王子，開悟時已捨棄裝飾', '菩薩的地位比如來更高，所以配戴寶冠', '如來的飾品被寺院收起來保管', '菩薩都是女性，所以戴飾品'],
       explain: '菩薩用出家前王子的樣子表示還在修行；如來用只穿一件衣服表示已經開悟。' },
-    { id: 'l6-3', facet: 'l6', level: 2, type: 'choice',
+    { id: 'l6-2', facet: 'l6', level: 2, type: 'choice',
       prompt: '一尊如來左手捧著小壺，這是？',
       options: ['藥師如來', '阿彌陀如來', '釋迦如來', '大日如來'],
       explain: '藥壺是藥師如來的記號，祂負責治病。' },
-    { id: 'l6-4', facet: 'l6', level: 2, type: 'choice',
+    { id: 'l6-3', facet: 'l6', level: 2, type: 'choice',
       prompt: '光頭、穿僧衣、拿著掛環的杖，常在路邊戴紅圍兜的是？',
       options: ['地藏菩薩', '釋迦如來', '不動明王', '毘沙門天'],
       explain: '地藏雖是菩薩，卻用僧侶的樸素模樣，因為祂要走進人間與地獄救人，特別保護小孩。' },
-    { id: 'l6-5', facet: 'l6', level: 2, type: 'choice',
+    { id: 'l6-4', facet: 'l6', level: 2, type: 'choice',
       prompt: '背後有火焰、右手拿劍、左手拿繩索的怒相，是？',
       options: ['不動明王', '四天王', '仁王', '愛染明王'],
       explain: '不動明王：劍斬煩惱，繩索拉回迷途的人，火焰燒盡煩惱。' },
-    { id: 'l6-6', facet: 'l6', level: 3, type: 'choice',
-      prompt: '一尊<b>戴寶冠</b>、兩手一上一下握在胸前的佛，卻被稱為「如來」。它是？',
+    { id: 'l6-5', facet: 'l6', level: 3, type: 'choice',
+      prompt: '一尊<b>戴寶冠</b>、兩手一上一下握在胸前的佛，卻被稱為「如來」。它最可能是？',
       options: ['大日如來', '阿彌陀如來', '觀音菩薩', '彌勒菩薩'],
-      explain: '大日如來是唯一戴冠的如來，密教把祂看成宇宙之王。' },
-    { id: 'l6-7', facet: 'l6', level: 3, type: 'short',
+      explain: '大日如來是最常見的戴冠如來，密教把祂看成宇宙之王，所以用王的裝扮。' },
+    { id: 'l6-6', facet: 'l6', level: 3, type: 'short',
       prompt: '一組佛像中，正中央一尊樸素的坐像，兩旁各站一尊戴冠的像，四個角落有穿盔甲的武將。分別是哪一級？為什麼這樣排？',
       keywords: [['如來'], ['菩薩'], ['天', '四天王'], ['守', '護', '階層', '等級']],
       need: 3,
       answer: '中央是如來（本尊），兩旁是菩薩（三尊），四角是四天王（天）。排法就是階層：開悟的如來在中心，修行救人的菩薩在旁，護法的天在外圍守護。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 5 課）鎌倉幕府為什麼在鎌倉和京都各選出五座最高等級的禪寺（五山）？',
+      options: ['禪寺是武家的文化中心，幕府大力支持', '五山必須由天皇親自任命住持', '五山負責替幕府徵收全國寺院的稅', '五山是專門收容戰死武士的墓地寺院'],
+      explain: '禪帶來宋朝的先進文化，幕府大力支持，禪寺成了武家的文化中心，茶道、枯山水庭園都從這裡長出來。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）天滿宮祭的菅原道真，最初為什麼被當成神？',
-      options: ['人們怕他的怨靈作祟', '他是天皇家的祖先', '他把佛教帶進日本', '他打贏了源平合戰'],
-      explain: '御靈信仰：把作祟的怨靈當神祭祀，讓祂變成守護神。' },
-    { id: 'rv-3', facet: 'review', level: 1, type: 'choice',
-      prompt: '（複習第 1 課）寺院山門兩旁的仁王像，在佛像的四個等級中屬於？',
-      options: ['天', '如來', '菩薩', '明王'],
-      explain: '仁王（金剛力士）是守護佛法的天。' },
+      prompt: '（複習第 4 課）朝廷為什麼要請唐朝高僧鑑真到東大寺設立授戒的壇？',
+      options: ['讓出家的資格正式化，僧侶要經國家認可', '請他為大佛殿畫建築設計圖', '請他傳授密教，讓貴族祈禱治病', '請他擔任天台宗的第一任座主'],
+      explain: '奈良時代出家要經過國家許可，朝廷請鑑真設立授戒的壇，讓出家的資格「正式」。' },
   ],
 });
 </script>

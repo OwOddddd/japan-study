@@ -15,13 +15,13 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">宗教與信仰</a></nav>
   <p class="small">第 8 課・約 25 分鐘</p>
   <h1>參拜規矩與信仰用品</h1>
-  <p class="lede">為什麼神社要拍手、寺院不拍？御守為什麼一年換一次？繪馬為什麼叫「馬」？每個動作和每樣東西都有來歷，知道來歷就不必死背規矩。</p>
+  <p class="lede">為什麼神社要拍手、寺院卻不拍？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
-    <p>1. 在神社和寺院各做一次完整的參拜，知道每個動作的意思。</p>
+    <p>1. 在神社和寺院各做一次完整的參拜，說得出每個動作的意思。</p>
     <p>2. 說得出御朱印、御守、繪馬、籤的由來。</p>
-    <p>3. 知道哪些「規矩」是古老的、哪些是近代才統一的。</p>
+    <p>3. 判斷哪些「規矩」是古老的、哪些是近代才統一的。</p>
   </div>
   <p class="small">頁面上的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
 
@@ -108,17 +108,15 @@
     <p><b>正月（1 月初）</b>：神社的古御守回收處、初詣的人潮。初詣的由來見<a href="../../festivals/lessons/0002-new-year-to-hinamatsuri.html">祭典第 2 課</a>。</p>
   </div>
 
-  <div class="source">
-    <b>延伸閱讀</b>：<a href="https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9060" target="_blank">國學院大學《Encyclopedia of Shinto》〈Gyōji sahō〉</a>（英文，神社儀式作法的統一經過）・<a href="https://www.japan-guide.com/e/e2057.html" target="_blank">japan-guide〈Visiting a temple or shrine〉</a>（英文）
-  </div>
-
   <h2>課後小測驗</h2>
-  <p class="small">最後兩題複習第 1、7 課。</p>
+  <p class="small">最後兩題複習第 6、7 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
   <div class="callout"><b>延伸想想</b>：御守可以送人嗎？</div>
+
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://d-museum.kokugakuin.ac.jp/eos/detail/?id=9060" target="_blank">國學院大學《Encyclopedia of Shinto》〈Gyōji sahō〉</a></li><li><a href="https://www.japan-guide.com/e/e2057.html" target="_blank">japan-guide〈Visiting a temple or shrine〉</a></li></ol></details>
 
   <nav class="lesson-nav">
     <a href="0007-shinbutsu-shugo.html">← 第 7 課：神佛習合與神佛分離</a>
@@ -148,37 +146,33 @@ Quiz.mount(document.getElementById('quiz'), {
       explain: '拍手是對神的禮儀，寺院用從印度傳來的合掌。' },
     { id: 'l8-2', facet: 'l8', level: 2, type: 'choice',
       prompt: '「二拜二拍手一拜」是什麼時候成為全國標準的？',
-      options: ['明治以後逐步統一，戰後定型', '奈良時代由天皇規定', '鎌倉幕府為武士制定', '從古至今各地都一樣'],
+      options: ['明治以後逐步統一，戰後定型', '奈良時代就由天皇下令全國統一', '鎌倉幕府為了武士的禮儀而制定', '從古到今各地神社的拜法都一樣'],
       explain: '江戶以前各地拜法不一，明治政府以神道為國家中心後統一儀式，戰後神社本廳定下現在的作法。' },
     { id: 'l8-3', facet: 'l8', level: 2, type: 'choice',
-      prompt: '御朱印最早是什麼？',
-      options: ['獻上抄寫的經文後拿到的證明', '寺院給捐款人的收據', '幕府發給旅人的通行證', '神社賣給觀光客的紀念章'],
-      explain: '納經的證明印，江戶時代巡禮流行後變成參拜的證明。' },
-    { id: 'l8-4', facet: 'l8', level: 2, type: 'choice',
       prompt: '繪馬為什麼叫「馬」？',
-      options: ['古代獻活馬給神，後來用畫的馬代替', '馬是稻荷神的使者', '繪馬最早是賽馬的獎品', '神社用馬拉車運送繪馬'],
+      options: ['古代獻活馬給神，後來用畫的馬代替', '馬是各神社共同的神使，所以板上畫馬', '繪馬最早是賽馬比賽頒發給贏家的獎品', '早期神社用馬車運送信徒的祈願板'],
       explain: '神被認為騎馬降臨，祈雨祈晴時獻上活馬；活馬太貴，改成木頭的馬、畫著馬的板子。' },
-    { id: 'l8-5', facet: 'l8', level: 2, type: 'choice',
+    { id: 'l8-4', facet: 'l8', level: 2, type: 'choice',
       prompt: '御守習慣上一年後送回神社燒掉、換新的，和哪個觀念最接近？',
       options: ['神的力量要保持新鮮乾淨', '御守的布料只能用一年', '神社規定御守有效期一年', '舊御守會招來怨靈作祟'],
       explain: '和伊勢神宮定期重建同一個思路：保持潔淨、更新力量。' },
-    { id: 'l8-6', facet: 'l8', level: 3, type: 'choice',
+    { id: 'l8-5', facet: 'l8', level: 3, type: 'choice',
       prompt: '淺草寺的籤上印著漢詩，和台灣廟裡的籤詩很像。為什麼？',
-      options: ['都是從中國傳來的觀音籤系統', '淺草寺是台灣人建的', '日本人仿照台灣籤詩製作', '只是巧合沒有關係'],
+      options: ['源自平安時代傳到日本的中國觀音靈籤', '淺草寺的籤詩是台灣信徒捐贈的', '日本人仿照台灣廟宇的籤詩製作', '台灣廟宇的籤詩源自日本的元三大師籤'],
       explain: '一般說日本的觀音籤源自平安時代的良源（元三大師百籤），屬於從中國傳來的靈籤，和台灣的籤詩是親戚。' },
-    { id: 'l8-7', facet: 'l8', level: 3, type: 'short',
+    { id: 'l8-6', facet: 'l8', level: 3, type: 'short',
       prompt: '朋友說「神社的御守要用買的」。用本課內容說明日本人為什麼說「請」或「授與」，付的錢又叫什麼？',
       keywords: [['授', '神給', '佛給', '賜'], ['初穗', '初穂', '供品', '獻', '奉納']],
       need: 2,
       answer: '御守是神佛「授給」人的授與品，不是商品；在神社付的錢叫「初穗料」（初穗是古代獻神的第一批稻穗），寺院多半叫「志納金」。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 7 課）「熊野權現」「東照大權現」的「權現」來自哪個想法？',
-      options: ['本地垂跡：佛化身為神', '御靈信仰：怨靈變成神', '鎮護國家：佛保護國家', '末法思想：佛法衰退'],
-      explain: '權現＝佛暫時以神的樣子出現，是本地垂跡的稱呼。' },
-    { id: 'rv-3', facet: 'review', level: 1, type: 'choice',
-      prompt: '（複習第 1 課）在日本，燒香把煙撥到身上，一般是在哪裡？',
-      options: ['寺院', '神社', '兩邊都有', '兩邊都沒有'],
-      explain: '燒香是佛教的供養，神社一般不燒香。' },
+      prompt: '（複習第 7 課）江戶時代的大神社常有佛塔，管理神社的甚至是僧侶（別當）。這反映當時什麼狀況？',
+      options: ['神佛習合已是理所當然的日常', '幕府要求神社全部交給寺院管理', '神職人員不足，只好請僧侶代班', '神社因財政困難而出租給寺院'],
+      explain: '到了江戶時代，習合已經是理所當然的狀態：神社裡有佛塔、佛堂，管理神社的常是僧侶。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 6 課）路邊的地藏像常戴著紅色圍兜和帽子，是誰奉上的、為了什麼？',
+      options: ['家人為祈求孩子平安，或悼念早逝的孩子', '寺院為了替石像擋風雨，每年統一更換', '旅人為了祈求旅途平安而獻上的行李包', '地藏原本是印度的火神，所以用紅色供奉'],
+      explain: '地藏特別保護小孩。紅色圍兜是家人為了祈求孩子平安，或是悼念早逝的孩子而奉上的。' },
   ],
 });
 </script>

@@ -9,12 +9,12 @@
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 7 課・傳統街區類型</span><span id="progress"></span></div>
+<div class="sticky"><span>第 6 課・傳統街區類型</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">建築</a></nav>
-  <p class="small">第 7 課・約 25 分鐘</p>
+  <p class="small">第 6 課・約 25 分鐘</p>
   <h1>傳統街區類型</h1>
-  <p class="lede">為什麼日本的老街，形狀會各不相同？除了圍著城長出來的<a href="../../castles/index.html">城下町</a>，還有沿著古道的宿場町、擠在大寺社門前的門前町，出身不同，街道的形狀就不同。再加上京都那種正面窄、往裡深的町家，走在老街上就有很多東西可以讀。</p>
+  <p class="lede">為什麼同樣是日本的老街，有的拉成一長條，有的只有一條通往寺社大門的路，京都的町家卻正面窄、往裡深？</p>
 
   <div class="goal">
     <p><b>本課結束時你能做到：</b></p>
@@ -24,16 +24,10 @@
 
   <p class="small">本課只講宿場町、門前町的格局和町家的構造。參勤交代的政治意義屬於歷史主題（見<a href="../../history/lessons/0008-edo-shogunate-rule.html">歷史第 8 課</a>），寺社參拜的宗教意義屬於宗教主題。</p>
 
-  <h2>0. 暖身</h2>
-  <div class="exercise quiz" data-answer="c">
-    <p class="q">（第 5 課）和室裡最尊貴的位置，離哪個設施最近？</p>
-    <div class="options">
-      <button data-key="a">付書院</button>
-      <button data-key="b">躙口</button>
-      <button data-key="c">床之間</button>
-      <button data-key="d">違棚</button>
-    </div>
-    <div class="explain" hidden>床之間原本是展示主人收藏的地方，離它最近的位置是上座。</div>
+  <h2>暖身：第 5 課回想</h2>
+  <div class="recall-box exercise">書院造裡，主人坐的房間為什麼地板要高一階（上段之間）？
+    <textarea></textarea>
+    <details><summary>看答案</summary>武士的家要接見部下和客人，需要分出「主人坐哪裡、客人坐哪裡」的上下關係。地板高一階，是用高低直接表現身分。</details>
   </div>
 
   <h2>1. 先說城下町</h2>
@@ -129,7 +123,7 @@
 
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後兩題複習第 1、5 課。</p>
+  <p class="small">憑記憶作答。最後兩題複習第 4、5 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -139,56 +133,52 @@
 
   <nav class="lesson-nav">
     <a href="0005-houses-shoin-tea.html">← 第 5 課：和室的由來</a>
-    <a href="0008-gardens.html">下一課：日本庭園 →</a>
+    <a href="0007-gardens.html">下一課：日本庭園 →</a>
   </nav>
 </main>
 
 <script>
 Quiz.mount(document.getElementById('quiz'), {
-  title: '建築 第 7 課・傳統街區類型',
-  facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'arch-lesson-0008-v2',
+  title: '建築 第 6 課・傳統街區類型',
+  facets: [{ id: 'l6', name: '本課' }, { id: 'review', name: '複習' }],
+  storageKey: 'arch-l6-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
-    { id: 'l7-1', facet: 'l7', level: 2, type: 'choice',
-      prompt: '宿場町的形狀通常是？',
-      options: ['沿著一條路排成一長條', '圍著城分成好幾區', '一條直通寺社大門的參道', '棋盤狀的方格街區'],
-      explain: '宿場町沿古道兩側排成長條，背後很快就是田或山。直通寺社大門的是門前町。' },
-    { id: 'l7-2', facet: 'l7', level: 2, type: 'choice',
-      prompt: '長野市是從哪一種町發展成縣廳所在地的？',
-      options: ['善光寺的門前町', '中山道的宿場町', '加賀藩的城下町', '日本海側的港町'],
-      explain: '長野是善光寺的門前町。' },
-    { id: 'l7-3', facet: 'l7', level: 1, type: 'choice',
-      prompt: '宿場町裡，大名和幕府官員住的指定旅館叫？',
-      options: ['本陣', '旅籠', '問屋場', '町家'],
-      explain: '本陣；備用的是脇本陣，一般旅客住旅籠。' },
-    { id: 'l7-4', facet: 'l7', level: 2, type: 'choice',
+    { id: 'l6-1', facet: 'l6', level: 2, type: 'choice',
+      prompt: '宿場町的入口和出口常做成直角轉彎（枡形），目的是？',
+      options: ['管制旅人與隊伍進出宿場', '減緩風勢，保護旅籠', '讓大名的隊伍排成整齊的隊形', '避免旅人誤闖旁邊的農田'],
+      explain: '宿場町的形狀就是一條路，入口和出口做成直角轉彎，用來管制出入。' },
+    { id: 'l6-2', facet: 'l6', level: 2, type: 'choice',
       prompt: '相鄰兩戶屋頂之間突出的小牆「卯建」，原本是為了？',
       options: ['防止火從鄰家延燒過來', '標示兩戶土地的分界', '擋住冬天屋頂的積雪', '讓兩家可以共用排水'],
       explain: '原本是防火牆，後來變成炫耀財力的裝飾，「蓋不起卯建」就成了出不了頭的意思。' },
-    { id: 'l7-5', facet: 'l7', level: 3, type: 'short',
+    { id: 'l6-3', facet: 'l6', level: 3, type: 'short',
       prompt: '京町家為什麼正面窄、往裡深？寫出至少兩個原因。',
       keywords: [['臨街', '面向', '面對', '街', '店'], ['生意', '商', '店面'], ['秀吉', '天正', '地割', '切', '長方', '細長'], ['稅', '說法']],
       need: 2,
       answer: '町家是店面兼住家，每戶都要臨街做生意，臨街長度有限，分下來每戶就窄；1590 年豐臣秀吉在街區中間開路（天正地割），正方形街區變成細長長方形，土地被切成窄而深的長條。按臨街寬度課稅是流傳的說法，根據不夠確實。' },
-    { id: 'l7-6', facet: 'l7', level: 2, type: 'choice',
-      prompt: '京町家從正門一直通到後院的泥土地面走道叫什麼？',
-      options: ['通庭', '坪庭', '火袋', '緣側'],
-      explain: '通庭。廚房沿著它設置，廚房上方挑高的部分叫火袋，讓煙和熱排出去。' },
-    { id: 'l7-7', facet: 'l7', level: 2, type: 'choice',
-      prompt: '伊勢おはらい町的房子幾乎都是妻入，常見的說法是？',
-      options: ['神宮正殿是平入，民家避免和神宮一樣', '妻入的房子比較便宜，香客多的地方都這樣蓋', '伊勢的法律規定商店必須用妻入', '妻入可以讓店面變寬，招攬更多香客'],
-      explain: '這是常見的說法，沒有確實文獻；但妻入確實是伊勢傳統民家的特色。' },
+    { id: 'l6-4', facet: 'l6', level: 2, type: 'choice',
+      prompt: '京町家的廚房上方挑高到屋頂、不做天花板（火袋），為什麼？',
+      options: ['讓做飯的煙和熱往上排出去', '讓光從屋頂照進廚房', '增加二樓的儲藏空間', '方便從屋頂取水滅火'],
+      explain: '房子又窄又深，廚房沿著通庭設置。上方挑高成火袋，煙和熱就往上排出屋外。' },
+    { id: 'l6-5', facet: 'l6', level: 2, type: 'choice',
+      prompt: '伊勢おはらい町的房子幾乎都是妻入，而神宮正殿是平入。兩者的差別是？',
+      options: ['妻入的入口在三角形山牆那一側，平入在屋簷長邊', '妻入從屋簷長邊進入，平入從三角形山牆進入', '妻入的屋頂是平的，平入的屋頂是三角形', '妻入只用在寺院，平入只用在民家'],
+      explain: '平入的入口開在屋簷那一側，正面看是一片斜屋頂；妻入的入口在三角形山牆那一側，正面看是一個三角形。' },
+    { id: 'l6-6', facet: 'l6', level: 2, type: 'choice',
+      prompt: '門前町為什麼形成一條直通寺社大門的參道、兩旁全是店？',
+      options: ['香客多，店和旅館聚集在通往大門的路旁', '幕府規定寺社前必須蓋成直線街道', '參道是為了讓大名隊伍排成整齊的隊形', '寺社把土地分成細長的方格出租'],
+      explain: '香客多的大寺社前面，自然長出賣吃的、賣伴手禮、提供住宿的店，越靠近大門越熱鬧。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）書院造把柱子改成方柱，最直接的原因是？',
-      options: ['方柱的平面才能和拉門、牆壁貼合', '方柱比較耐地震', '圓柱的木材用完了', '武士喜歡方柱的威嚴感'],
-      explain: '要用襖、障子隔出固定房間，柱子需要平面。' },
-    { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）傳統木造建築的屋簷伸得很遠，主要是對付？',
-      options: ['雨水淋濕木頭', '地震時的搖晃', '冬天的積雪', '夏天的蚊蟲'],
-      explain: '雨落在牆和柱子外面；也順便擋夏天的高角度陽光。' },
+      prompt: '（複習第 5 課）千利休的茶室為什麼故意用土牆、竹子和帶樹皮的木頭？',
+      options: ['追求「侘」的美感，反對炫耀昂貴收藏', '這些材料比木板更耐地震', '戰國時代只買得起這些材料', '武士規定茶室不可以用貴重木材'],
+      explain: '草庵茶室用農家的材料，故意不華麗，和室町時代茶會炫耀中國茶具形成對比。' },
+    { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 4 課）伊勢神宮每 20 年重建，除了材料腐朽，還有什麼好處？',
+      options: ['工匠一代代參與，技術不會斷', '舊木材可以賣給信徒，增加收入', '讓神每 20 年換一位新神來住', '方便配合每一任天皇的即位'],
+      explain: '工匠年輕時當助手參加一次、壯年時主導一次、年老時指導下一代一次，技術就不會斷。' },
   ],
 });
 </script>

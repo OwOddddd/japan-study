@@ -14,10 +14,10 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">鐵道與交通</a></nav>
   <p class="small">第 5 課・約 25 分鐘</p>
   <h1>車站的使用方法</h1>
-  <p class="lede">車站裡那麼多標示，到底在回答什麼？只有四個問題：我要搭哪條線、往哪個方向、搭哪一種車、從哪個出口出去。每一種標示的設計，都是為了讓幾百萬個不熟路的人不用問人也走得到。</p>
+  <p class="lede">車站裡那麼多標示，到底在回答什麼問題？</p>
 
   <div class="goal">
-    <p><strong>本課結束時你能做到：</strong></p>
+    <b>本課目標</b>
     <ul>
       <li>看懂路線顏色與車站編號（例如 <b>G 09</b>、<b>JY 17</b>），說出它們為什麼存在。</li>
       <li>分辨各駅停車、快速、急行、特急，知道為什麼同一條線要分這麼多種車，以及哪些特急要另外付錢。</li>
@@ -132,7 +132,7 @@
   </ul>
   <p class="small">東京的大多數路線廣播之後會接英文版，車門上方的螢幕也會輪流顯示日、英、中、韓文。</p>
 
-  <div class="callout"><b>串起來看</b>：路線太多 → 用顏色、字母、號碼讓不識字的人也能找路；一條線要同時服務遠處和小站 → 分種別、在大站超車；公司各算各的 → 換公司要過閘門；鐵軌把城市切開 → 出口方向決定你出來在哪一邊。</div>
+  <div class="callout"><b>串起來看</b>：路線太多 → 用顏色、字母、號碼讓不會讀日文的人也能找路；一條線要同時服務遠處和小站 → 分種別、在大站超車；公司各算各的 → 換公司要過閘門；鐵軌把城市切開 → 出口方向決定你出來在哪一邊。</div>
 
   <h2>到現場看什麼</h2>
   <ul>
@@ -143,7 +143,7 @@
   </ul>
 
   <h2>課後小測驗</h2>
-  <p class="small">憑記憶作答。最後兩題是複習第 2、3 課。</p>
+  <p class="small">憑記憶作答。最後兩題是複習第 4 課。</p>
   <div id="results" class="results" hidden></div>
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
@@ -169,7 +169,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '鐵道與交通 第 5 課・車站的使用方法',
   facets: [{ id: 'l5', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'jrail-lesson-0006-v2',
+  storageKey: 'jrail-l5-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
@@ -199,13 +199,13 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['下一站是澀谷', '這班車開往澀谷', '在澀谷換車', '澀谷站不停'],
       explain: '「次は」（つぎは）＝下一站是。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）私鐵在郊外那一頭放遊樂園、劇場，是為了解決什麼問題？',
-      options: ['只有通勤方向擠，其他時候空車', '郊外居民抱怨沒有娛樂設施', '郊外土地閒置要繳很多稅', '終點站的月台太小停不下'],
-      explain: '通勤只有單方向、平日才擠。郊外的娛樂設施讓假日和反方向的車也有人搭。' },
+      prompt: '（複習第 4 課）澀谷站的東急東橫線 2013 年從地面搬到地下五樓，和什麼有關？',
+      options: ['要和副都心線直通，電車得開進地下鐵的線路', '為了躲開地面上越蓋越多的大樓', '為了避開地面的淹水', '地面的月台太小，容納不下電車'],
+      explain: '東橫線和副都心線直通後，電車可以一路開到埼玉。代價是月台搬到地下五樓，在澀谷換車要走很長的路。' },
     { id: 'rv-3', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）國鐵在 1987 年要「分割」，主要想解決什麼？',
-      options: ['全國一個組織太大，看不出哪裡賺賠', '國鐵的員工太少，需要分給各地', '各地的軌道寬度不同無法統一', '新幹線需要交給外國公司經營'],
-      explain: '依地區切成 6 家，每家只管自己的地盤，經營好壞一目了然。民營化則是讓票價、路線不再受政治牽制。' },
+      prompt: '（複習第 4 課）在東京メトロ和都營地下鐵之間轉乘，為什麼要多付一次錢？',
+      options: ['兩家由不同的機構建造和經營，票價各自計算', '都營地下鐵比較貴，要補差價', '轉乘時必須重新購買車票', '東京メトロ不能使用 IC 卡'],
+      explain: '東京メトロ的前身是營團，都營地下鐵是東京都自己蓋的，兩套系統各算各的票價，有轉乘折扣但仍是兩段。' },
   ],
 });
 </script>

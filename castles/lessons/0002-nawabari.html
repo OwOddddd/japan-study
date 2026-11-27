@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>什麼是繩張？</title>
+<title>繩張</title>
 <link rel="stylesheet" href="../../shared/style.css">
 <link rel="stylesheet" href="../assets/style.css">
 <script src="../../shared/skin.js"></script>
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 2 課・什麼是繩張？</span><span id="progress"></span></div>
+<div class="sticky"><span>第 2 課・繩張</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">城與城下町</a></nav>
   <p class="small">第 2 課・約 25 分鐘</p>
-  <h1>什麼是繩張？</h1>
-  <p class="lede">走進一座城，路總是轉來轉去，明明看得到天守，卻要繞一大圈才到得了。為什麼不修一條直通天守的路？這一課學怎麼把這些轉彎讀成一張防禦設計圖。</p>
+  <h1>繩張</h1>
+  <p class="lede">走進一座城，路總是轉來轉去，明明看得到天守，卻要繞一大圈才到得了。為什麼不修一條直通天守的路？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -158,10 +158,12 @@
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
 
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.mlit.go.jp/tagengo-db/en/R1-00697.html" target="_blank">國土交通省的姬路城說明</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/en/R1-01757.html" target="_blank">國土交通省</a></li></ol></details>
+
   <nav class="lesson-nav">
-    <a href="0001-reading-a-castle-site.html">← 第 1 課：怎麼看一座城？</a>
+    <a href="0001-reading-a-castle-site.html">← 第 1 課：城的選址與地形</a>
     <a href="../index.html">目錄</a>
-    <a href="0003-ishigaki.html">下一課：堅硬的石垣 →</a>
+    <a href="0003-ishigaki.html">下一課：石垣的砌法 →</a>
   </nav>
 </main>
 
@@ -175,46 +177,46 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '城與城下町 第 2 課・什麼是繩張？',
-  storageKey: 'castles-l2-v1',
+  title: '城與城下町 第 2 課・繩張',
+  storageKey: 'castles-l2-v2',
   facets: [{ id: 'l2', name: '本課' }, { id: 'review', name: '複習' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l2-1', facet: 'l2', level: 1, type: 'choice',
-      prompt: '城裡用堀或石垣圍起來的一塊平地，例如本丸、二之丸，叫什麼？',
-      options: ['曲輪', '虎口', '堀切', '狹間'],
-      explain: '曲輪（くるわ）。城由好幾個曲輪組成，丸就是曲輪的意思。' },
+      prompt: '城由好幾個曲輪（本丸、二之丸、三之丸）組成。敵人攻下最外面的曲輪後，接著會怎麼樣？',
+      options: ['還有下一層要攻，每攻下一塊都要重新打', '守軍通常會就此投降', '可以沿著曲輪直接走到本丸', '裡面的城門會自動打開'],
+      explain: '曲輪（くるわ）是用堀、石垣或土壘圍起來的一塊平地，一層被突破還有下一層。丸就是曲輪的意思。' },
     { id: 'l2-2', facet: 'l2', level: 2, type: 'choice',
-      prompt: '本丸背靠大河，二之丸、三之丸只包住另外幾面。這種排法叫什麼？',
-      options: ['梯郭式', '輪郭式', '連郭式', '枡形式'],
-      explain: '梯郭式利用天然屏障省掉一面的防禦。輪郭式是一圈包一圈，連郭式是排成一列。' },
+      prompt: '本丸背靠大河，二之丸、三之丸只包住另外幾面。這樣排的好處是？',
+      options: ['河當天然屏障，省下一面的防禦', '河水可以直接灌進本丸滅火', '本丸可以離城下町更近', '河面能把本丸的位置藏起來'],
+      explain: '這是梯郭式，利用天然屏障省掉一面的防禦。輪郭式是一圈包一圈，連郭式是排成一列。' },
     { id: 'l2-3', facet: 'l2', level: 2, type: 'choice',
-      prompt: '山城常在山脊上橫著挖一道深溝，把連到城的稜線切斷。這叫什麼？',
-      options: ['堀切', '水堀', '障子堀', '馬出'],
-      explain: '堀切（ほりきり）讓沿著稜線走來的敵人無路可走。' },
+      prompt: '山城在山脊上橫著挖一道深溝，切斷連到城的稜線。沿著稜線走來的敵人會怎麼樣？',
+      options: ['被深溝擋住，沒辦法沿稜線直接走到城', '被迫改走山腳的大路，反而更快到達', '沿著溝底前進，可以躲過守方的箭', '被溝引到城門前，正好走進枡形'],
+      explain: '這道溝叫堀切（ほりきり），讓沿著稜線走來的敵人無路可走。' },
     { id: 'l2-4', facet: 'l2', level: 2, type: 'choice',
       prompt: '枡形虎口外側的高麗門，為什麼故意蓋得比較矮、構造簡單？',
       options: ['讓裡面的守方可以從上方往外射擊', '因為外側的門很少被敵人攻擊', '節省建材，把預算留給天守', '讓馬匹和轎子可以快速通過'],
       explain: '外門矮，內側的櫓門和石垣上的守方視線不會被擋住，可以射擊門外和門口的敵人。' },
     { id: 'l2-5', facet: 'l2', level: 2, type: 'choice',
-      prompt: '土牆上直長方形的射擊孔，主要是給什麼武器用的？',
-      options: ['弓箭', '鐵砲', '大砲', '長槍'],
-      explain: '拉弓需要上下的空間，所以弓用的狹間是直長方形；鐵砲用的多是圓形、三角形、正方形。' },
+      prompt: '土牆上的狹間，直長方形的是給弓箭用的，圓形、三角形的多半是給鐵砲用的。弓箭用的孔為什麼是直長方形？',
+      options: ['拉弓需要上下的空間', '弓箭手比鐵砲手站得更高', '長方形的孔比較不容易被敵人的箭射進來', '直長方形的孔最容易在土牆上開'],
+      explain: '拉弓需要上下的空間，所以弓用的狹間是直長方形；鐵砲槍管細，開圓形、三角形、正方形的小孔就夠了。' },
     { id: 'l2-6', facet: 'l2', level: 3, type: 'short',
       prompt: '想像你是攻城的士兵，剛衝過枡形虎口的第一道門。用兩三句話描述接下來會發生什麼，以及為什麼對你不利。',
       keywords: [['轉', '90', '直角', '側面'], ['停', '擠', '困', '慢'], ['四周', '三面', '上方', '多個方向', '四面'], ['櫓', '石垣', '櫓門']],
       need: 3,
       answer: '眼前是一面石垣，第二道門開在側面，必須停下來轉 90 度；後面的人還在往裡擠，大家困在四方形的枡形裡。四周的石垣和櫓門上方的守方從好幾個方向同時攻擊，我們卻看不到也打不到他們。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）松本城海拔約 600 m，卻被歸類為平城。為什麼？',
-      options: ['它和周圍的平地沒有高度差', '它的天守只有五層不夠高', '它蓋在海拔較低的海邊', '它的石垣是用平的石頭砌的'],
-      explain: '分類看比高，不看海拔。松本城在盆地底部的平地上。' },
+      prompt: '（複習第 1 課）名古屋城、大阪城、江戶城都蓋在台地的邊緣。這種地形為什麼同時適合防守和城下町？',
+      options: ['一側是陡坡和低地，難以接近；另一側是平坦的台地面，可以展開城下町', '台地的土質最適合砌石垣', '台地上風小，天守不會被吹倒', '台地離海最遠，不怕船隻攻擊'],
+      explain: '台地的邊緣一邊是陡坡，坡下有河或低濕地；另一邊是平坦的台地面，城下町有地方長大。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 1 課）城從戰國的山上移到江戶時代的平地，背後是哪個任務變重要了？',
-      options: ['管理領地、收稅和城下町', '守住山頭不被攻下', '祭祀神明和祖先', '對外國的海上防衛'],
-      explain: '天下安定後，「管」比「守」重要，平原、河川和街道都在平地。' },
+      prompt: '（複習第 1 課）江戶時代的名城很多是平山城。這種城兼顧了哪兩件事？',
+      options: ['小丘夠高可以守，四周的平原又能讓城下町長大', '山頂最好守，山腳又最容易取水', '離海最近方便運輸，離山最遠不怕滑坡', '石垣可以省下一半，城下町可以多蓋一倍'],
+      explain: '平山城兼顧「守」和「管」：小丘讓人看得遠、敵人要爬坡；平原讓城下町有地方發展。' },
   ],
 });
 </script>

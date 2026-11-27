@@ -86,6 +86,8 @@
     }).join('');
     return '<div class="' + cls + '">' + (items || '<span class="nt">每天三到五則日本新聞</span>') + '</div><a class="all" href="news/index.html">更多日期 →</a>';
   }
+  // 現地索引入口，每種外觀放在 NOTE 前面
+  var PLACES = '<p class="places-link"><a href="places/index.html">現地索引：依地點查學過的課 →</a></p>';
   function warn() {
     return failed ? '<p class="note">讀不到各主題的課程清單，下面只列出預定的課。用檔案直接開啟首頁時會這樣，請從網站網址開啟：https://owoddddd.github.io/japan-study/</p>' : '';
   }
@@ -97,7 +99,7 @@
       '<h2>主題</h2><ul class="toc">' + data.map(function (t) {
         return '<li><a href="' + t.id + '/index.html">' + t.name + '</a><span class="small">' + t.desc + '</span></li>'; }).join('') + '</ul>' +
       '<h2>睡前日本新聞</h2>' + newsList('news3') +
-      '<p class="small">' + NOTE + '</p>';
+      PLACES + '<p class="small">' + NOTE + '</p>';
   };
   // 路線圖：車站大廳的發車看板。一行一條線，顯示學到哪一站；跳過沒學的站算「通過」，這條車就是快速。點一行展開全部站點
   R.route = function () {
@@ -129,7 +131,7 @@
       '<div class="board"><div class="bhead"><span>番線</span><span>種別</span><span>現在地</span><span>次の停車駅</span></div>' + rows + '</div>' +
       '<div class="ticker"><a class="tk-tag" href="news/index.html">告示</a><div class="run"><p>' + (tick || '每天三到五則日本新聞') + '</p></div></div>' +
       (window.HomeMap ? window.HomeMap.svg(data) : '') +
-      '<details class="booth"><summary><i>i</i>案內所</summary><p>每個主題是一條線，每一課是一站。每課最下方選「我學完了」，看板就會顯示你坐到哪一站；跳過沒學的站算「通過」，這條車就變成快速。下面的路線圖把滑鼠移到線上（手機點一下）會顯示站名。</p><p>' + NOTE + '</p></details>';
+      PLACES + '<details class="booth"><summary><i>i</i>案內所</summary><p>每個主題是一條線，每一課是一站。每課最下方選「我學完了」，看板就會顯示你坐到哪一站；跳過沒學的站算「通過」，這條車就變成快速。下面的路線圖把滑鼠移到線上（手機點一下）會顯示站名。</p><p>' + NOTE + '</p></details>';
   };
   // 和柄：暖簾街。一個主題一家店，暖簾上的紋被中間的縫隙切成兩半；滑過會晃，點了往左右拉開，下方列出這家店的課
   function stOf(t) { return t.stations.map(function (s, i) { return { n: s.n, href: s.href, i: i, s: s.done ? 'done' : s.href ? 'open' : 'plan' }; }); }
@@ -151,7 +153,7 @@
       '<h1 class="vh">日本學習</h1><div class="street">' + shops + '</div><div class="wa-menu"></div>' +
       '<div class="kb"><div class="kb-roof" aria-hidden="true"></div><div class="kb-board"><div class="kb-paper"><a class="kb-title" href="news/index.html">瓦版</a><span class="kb-sub">睡前日本新聞・每晚一期</span>' + kb +
       '<span class="kb-wave" aria-hidden="true"></span><span class="kb-seal" aria-hidden="true">讀</span></div></div><div class="kb-posts" aria-hidden="true"><i></i><i></i></div></div>' +
-      '<p class="small">' + NOTE + '</p>';
+      PLACES + '<p class="small">' + NOTE + '</p>';
   };
   var CHEER = ['がんばって', 'ファイト', 'お疲れさま', 'その調子', '一歩ずつ', 'よくやった', 'えらい！', 'いい感じ'];
   function bindWa(root) {
@@ -190,7 +192,7 @@
     return '<div class="band"><canvas class="band-c"></canvas><h1>日本學習</h1></div>' +
       '<div class="mapbox"><div class="mapin"><canvas class="map" width="320" height="176"></canvas>' + nodes + '</div></div>' +
       '<div class="side"><div class="win dialog"></div><div class="win pxnews"><h2><a href="news/index.html">今日情報</a></h2><ol>' + nw + '</ol></div></div>' +
-      '<p class="small">' + NOTE + '</p>';
+      PLACES + '<p class="small">' + NOTE + '</p>';
   };
   function rnd(n) { var v = Math.sin(n * 12.9898) * 43758.5453; return v - Math.floor(v); }
   function drawMap(c) {

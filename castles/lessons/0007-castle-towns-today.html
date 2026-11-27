@@ -87,7 +87,7 @@
   <h3>武家屋敷</h3>
   <p>武家屋敷（<span lang="ja">ぶけやしき</span> <button class="btn ghost say" data-audio="audio/0007/05.wav">▶</button>）的外觀特徵：長長的土塀，一道有屋子的大門叫長屋門（<span lang="ja">ながやもん</span> <button class="btn ghost say" data-audio="audio/0007/06.wav">▶</button>），屋頂是瓦。路本身常常折來折去。</p>
   <h3>町人地</h3>
-  <p>町人地的特徵是房子沿路排得很密，一棟接一棟。町家（商人的房子）的構造，包括為什麼窄又深，見<a href="../../architecture/lessons/0007-townscapes.html">建築第 7 課・傳統街區類型</a>。</p>
+  <p>町人地的特徵是房子沿路排得很密，一棟接一棟。町家（商人的房子）的構造，包括為什麼窄又深，見<a href="../../architecture/lessons/0006-townscapes.html">建築第 6 課・傳統街區類型</a>。</p>
   <h3>寺町</h3>
   <p>寺町的特徵：大門（山門）和築地塀（有瓦頂的泥牆）連續排下去，一座接一座。</p>
 
@@ -119,6 +119,8 @@
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
 
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.nilim.go.jp/lab/bcg/siryou/tnn/tnn0723pdf/ks072307.pdf" target="_blank">國土技術政策總合研究所（縣的中心都市多由城下町發展而來）</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/H30-00648.html" target="_blank">國土交通省（金澤・長町武家屋敷跡界隈）</a></li></ol></details>
+
   <nav class="lesson-nav">
     <a href="0006-castle-town-design.html">← 第 6 課：城下町的配置</a>
     <a href="../index.html">目錄</a>
@@ -136,7 +138,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '城與城下町 第 7 課・今日的城下町',
-  storageKey: 'castles-l7-v2',
+  storageKey: 'castles-l7-v3',
   facets: [{ id: 'l7', name: '本課' }, { id: 'review', name: '複習' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -156,25 +158,25 @@ Quiz.mount(document.getElementById('quiz'), {
       explain: '大手是城的正面，大手町多半在城的正門前，靠近城。今天日文的「大手」也指大企業，但町名比這個意思早得多。' },
     { id: 'l7-4', facet: 'l7', level: 2, type: 'choice',
       prompt: '為什麼今天許多縣廳所在地的市中心，格局像是城下町？',
-      options: ['城下町的街道和町名大多留下來，變成市中心的骨架', '明治政府按照城下町的圖紙重新蓋了所有城市', '因為縣廳都剛好蓋在原來的城裡', '因為現代的人都愛住在城的附近'],
+      options: ['城下町的街道和町名大多留下來，成為市中心的骨架', '明治政府照城下町的圖紙重新建造了各個城市', '縣廳全都剛好蓋在原來的城裡，周圍才跟著發展', '現代人偏好住在舊城附近，所以街道都改成放射狀'],
       explain: '廢城令拆的是城，街道和人還在，所以路網和町名延續下來。' },
     { id: 'l7-5', facet: 'l7', level: 2, type: 'choice',
       prompt: '在金澤，下面哪個地方是以前的「武家地」的痕跡？',
-      options: ['長町武家屋敷跡（土塀、折來折去的路）', '東茶屋街（格子窗的茶屋）', '兼六園附近的商店街', '犀川的河岸倉庫'],
-      explain: '長町是中上級武士的屋敷區。東茶屋街是 1820 年公認的花街，屬於町人地。' },
+      options: ['長町武家屋敷跡', '東茶屋街', '香林坊的商店街', '犀川的河岸倉庫'],
+      explain: '長町是中上級武士的屋敷區：土塀加上折來折去的路。東茶屋街是 1820 年公認的花街，屬於町人地。' },
     { id: 'l7-6', facet: 'l7', level: 3, type: 'short',
       prompt: '用兩三句話說明：到一座新的城下町，怎麼從町名和街道猜出這裡以前住的是誰？',
       keywords: [['町名', '鍛冶', '紺屋', '職業', '工匠'], ['土塀', '武家', '武士', '屋敷', '長屋門'], ['町家', '商人', '街道', '町人'], ['寺', '山門', '築地塀', '寺町']],
       need: 2,
       answer: '町名常直接寫職業（鍛冶町住打鐵的、紺屋町住染布的）；兩邊是土塀、路折來折去的是武家屋敷；沿著街道密集排列的是町人地；山門一座接一座的是寺町。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 6 課）城下町的路設計成丁字路、鉤形彎道，主要目的是？',
-      options: ['切斷視線、阻止敵人直衝', '讓商店的門面變多', '方便雨水排掉', '順著原本的地形修路，沒有特別的用意'],
-      explain: '看不到前面就不能直衝，每個轉角都是擋住敵人的地方。今天城下町舊區的路折來折去，就是這個設計留下的痕跡。' },
+      prompt: '（複習第 6 課）彥根的城下町怎麼把武士的身分排出遠近？',
+      options: ['用三重同心圓的堀，身分越高越靠內圈', '用街道的寬窄區分，越寬的路住越高階的武士', '用河川分成南北兩邊，北邊住高階武士', '依職業分成一條一條的町，高階武士住在最長的町'],
+      explain: '彥根城有三重的堀，內堀以內是藩主和城，往外依序是重臣、中堅家臣，最外圈是下級武士和足輕。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）1873 年廢城令之後，城的木造建築大多消失，石垣和堀卻大多留下來。原因是？',
-      options: ['木造的東西可以拆、可以賣，石垣和堀又重又大，沒人要', '石垣和堀被政府指定為文化財保護', '石垣和堀比木造建築更早蓋好', '木造建築都在戰爭中被燒光'],
-      explain: '廢城令後城被拆賣或閒置，木造的可以拆了賣，石垣和堀拆掉成本高，所以留下來。名古屋城的天守是 1945 年空襲燒毀的，另一種消失的原因。' },
+      prompt: '（複習第 5 課）今天各縣廳所在地附近的那座城，多半是怎麼留下來的？',
+      options: ['一國一城令下，大名只留居住的主城，其他城被拆掉', '廢城令時政府指定保存所有的主城', '戰後各縣各選一座城重建', '各縣自己出錢新蓋了一座城'],
+      explain: '1615 年的一國一城令讓每個大名只留一座主城，正好是平原上、城下町中央的城。' },
   ],
 });
 </script>

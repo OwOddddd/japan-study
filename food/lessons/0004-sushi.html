@@ -13,8 +13,8 @@
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">飲食文化</a></nav>
   <p class="small">第 4 課・約 25 分鐘</p>
-  <h1>壽司：從保存食到江戶的速食</h1>
-  <p class="lede">為什麼今天代表「新鮮」的壽司，一開始是為了讓魚放上好幾個月才發明的？壽司的歷史，就是一路縮短等待時間的歷史。</p>
+  <h1>壽司</h1>
+  <p class="lede">為什麼今天代表「新鮮」的壽司，一開始是為了讓魚放上好幾個月才發明的？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -129,22 +129,22 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 Quiz.mount(document.getElementById('quiz'), {
   title: '飲食文化 第 4 課・壽司',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
-  storageKey: 'food-lesson-0005-v1',
+  storageKey: 'food-l4-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   questions: [
     { id: 'l4-1', facet: 'l4', level: 1, type: 'choice',
       prompt: '熟壽司（なれずし）裡的米，原本的用途是？',
-      options: ['讓魚發酵變酸，保存下來', '當作主食一起吃', '讓魚的顏色變白', '吸掉魚的水分就丟'],
+      options: ['米的澱粉變成乳酸，讓魚能保存好幾個月', '米是主食，和魚一起吃來補充熱量', '米讓魚肉變白、變軟，口感比較好', '米把魚包住，隔絕空氣'],
       explain: '米的澱粉被乳酸菌分解成乳酸，酸讓雜菌活不了。發酵完的米大多刮掉不吃。' },
     { id: 'l4-2', facet: 'l4', level: 2, type: 'choice',
       prompt: '「早壽司」比熟壽司快在哪裡？',
-      options: ['直接在飯裡加醋，不用等發酵變酸', '用火把魚烤熟', '改用冰塊保存魚', '改用麵包代替米'],
+      options: ['直接在飯裡加醋，不用等發酵變酸', '把魚先煮熟再放進飯裡，縮短保存時間', '多加鹽，讓發酵一個月就結束', '改用新鮮的魚，不再需要保存'],
       explain: '發酵的目的是讓飯變酸，加醋就一步到位。醋飯從這裡開始。' },
     { id: 'l4-3', facet: 'l4', level: 2, type: 'choice',
       prompt: '京都吃鯖魚壽司的傳統，和下列哪一點最有關？',
-      options: ['京都在內陸，海魚要醃過才運得到', '京都附近的湖產很多鯖魚', '京都人信佛不吃其他魚', '鯖魚是天皇指定的魚'],
+      options: ['京都在內陸，海魚要用鹽醃過才運得到', '琵琶湖盛產鯖魚，京都就近取用', '鯖魚在京都最便宜，所以最常被拿來做壽司', '鯖魚是京都貴族祭典的指定供品'],
       explain: '若狹灣的鯖魚用鹽醃好，沿鯖街道運到京都。內陸吃到的海魚一定是醃過的。' },
     { id: 'l4-4', facet: 'l4', level: 2, type: 'choice',
       prompt: '江戶的握壽司一開始主要在哪裡賣？',
@@ -156,9 +156,9 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 3,
       answer: '沒有冰箱，生魚撐不過一天就會壞 → 每種魚都要先做保存處理：鮪魚泡醬油（漬け）、小鰭用鹽和醋醃、星鰻和蛤蜊煮過 → 這些技術留到今天，成了江戶前壽司的特色。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）名古屋一帶的味噌顏色深，原因是？',
-      options: ['豆味噌熟成一年以上，梅納反應讓顏色變深', '加了醬油染色', '用的是黑色的大豆', '名古屋的水含鐵'],
-      explain: '東海地方高溫潮濕，直接在大豆上培麴、長期熟成，就成了深褐近黑的八丁味噌。' },
+      prompt: '（複習第 3 課）東海地方的豆味噌，為什麼直接在大豆上培麴？',
+      options: ['夏天高溫潮濕，在米或麥上培麴容易失敗', '大豆比米和麥都便宜很多', '東海地方不種稻米，也不種麥', '愛知人偏好濃厚的味道，只有大豆做得出來'],
+      explain: '直接把麴菌種在大豆糰上、壓上大石頭長期熟成，不怕雜菌，就成了深褐近黑的八丁味噌。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 2 課）江戶的高湯偏向柴魚。下列哪一項是原因之一？',
       options: ['鰹魚隨黑潮經過太平洋岸，容易取得', '江戶灣出產大量昆布', '幕府禁止使用昆布', '柴魚是北前船運來的'],

@@ -15,7 +15,7 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">城與城下町</a></nav>
   <p class="small">第 6 課・約 25 分鐘</p>
   <h1>城下町的配置</h1>
-  <p class="lede">走在老城下町，路常常走到一半就折一下，或是撞上一堵牆變成死路；寺院又一大排擠在城市的邊上。為什麼要把城市蓋得這麼難走？城下町是一座事先畫好格子、為了防守而設計的城市。</p>
+  <p class="lede">走在老城下町，路常常走到一半就折一下，或是撞上一堵牆變成死路；寺院又一大排擠在城市的邊上。為什麼要把城市蓋得這麼難走？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -59,7 +59,7 @@
     <tr><td><b>町人地</b>（<span lang="ja">ちょうにんち</span> <button class="btn ghost say" data-audio="audio/0006/03.wav">▶</button>）</td><td>商人、工匠</td><td>街道和水路進城的地方，城和武家地的外側</td><td>要有人流和貨物。街道從外面進來，商店就沿著那條路排。</td></tr>
     <tr><td><b>寺社地</b>（<span lang="ja">じしゃち</span> <button class="btn ghost say" data-audio="audio/0006/04.wav">▶</button>）</td><td>寺院、神社</td><td>集中在外緣，常在入口或河邊</td><td>下一段講：大寺院有厚牆和大空地，是現成的據點。</td></tr>
   </table>
-  <p>江戶的城下町比例很極端：武家地約 68%、町人地約 16%、寺社地約 16%（東京都的資料）。城下町是武士的城市，商人擠在小小的一塊裡。</p>
+  <p>江戶的城下町比例很極端：武家地約 68%、町人地約 16%、寺社地約 16%。城下町是武士的城市，商人擠在小小的一塊裡。</p>
 
   <h3>一座城下町的示意格子</h3>
   <p class="small">這張圖不對應任何一座真實的城，只把規則畫出來。城在中間，往外一圈一圈變成武家地、町人地，寺在最外緣；街道從右邊進城，穿過町人地。</p>
@@ -163,7 +163,7 @@
     <li><b>彥根城</b>（滋賀縣）：在地圖上找城的三重堀，就是上表的同心圓。堀的圈層，決定了誰住在哪一圈。</li>
     <li><b>怎麼認出「這條路是設計過的」</b>：丁字路多、轉角直角、路突然變窄或斷頭，而且兩邊有高牆。</li>
   </ul>
-  <p class="small">町家的房子構造（為什麼窄又深）屬於建築的範圍，見<a href="../../architecture/lessons/0007-townscapes.html">建築第 7 課・傳統街區類型</a>。這一課只看街道和分區。</p>
+  <p class="small">町家的房子構造（為什麼窄又深）屬於建築的範圍，見<a href="../../architecture/lessons/0006-townscapes.html">建築第 6 課・傳統街區類型</a>。這一課只看街道和分區。</p>
 
   <h2>課後小測驗</h2>
   <p class="small">憑記憶作答。最後兩題複習第 2、5 課。</p>
@@ -171,6 +171,8 @@
   <div id="quiz"></div>
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
+
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.toshiseibi.metro.tokyo.lg.jp/keikaku_chousa_singikai/pdf/tokyotoshizukuri/0_04.pdf" target="_blank">東京都都市整備局（江戶的土地利用：武家地、町人地、寺社地的面積比例）</a></li></ol></details>
 
   <nav class="lesson-nav">
     <a href="0005-life-of-a-castle.html">← 第 5 課：城的一生</a>
@@ -190,7 +192,7 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '城與城下町 第 6 課・城下町的配置',
-  storageKey: 'castles-l6-v2',
+  storageKey: 'castles-l6-v3',
   facets: [{ id: 'l6', name: '本課' }, { id: 'review', name: '複習' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -222,13 +224,14 @@ Quiz.mount(document.getElementById('quiz'), {
       need: 3,
       answer: '武士要隨時趕到城裡，所以靠近城；商人要靠街道帶來人和貨，所以跟著街道走；寺院有厚牆和大空地，排在外緣和入口，戰時可當防線和據點。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）「虎口」的設計目的是？',
-      options: ['讓敵人進門前被擋住、轉彎，並暴露在攻擊下', '讓進出的人可以排隊', '方便守衛逐一檢查進出的人、收通行稅', '減少城門的建築成本'],
-      explain: '虎口是繩張的核心：控制敵人走的路線，讓敵人在門前被擋住、轉彎。城門確實也能管制進出，但虎口的形狀是為了防守。' },
+      prompt: '（複習第 2 課）障子堀在空堀底部留下格子狀的土堤，目的是？',
+      options: ['掉進去的人被困在一格裡，左右移動不了', '讓雨水均勻排出，堀底不積水', '把堀分成一格一格，養魚當糧食', '標示各家臣負責挖掘的範圍'],
+      explain: '障子堀像日式拉門的格子，掉進去的人被困在一格裡。山中城（靜岡縣）保存得最好。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 5 課）1873 年廢城令之後，大部分城的哪一部分被留了下來？',
-      options: ['石垣和堀', '木造的天守', '櫓和城門', '御殿'],
-      explain: '木造的東西可以拆、可以賣；石垣和堀又重又大，沒人要。' },
+      prompt: '（複習第 5 課）廢城令之後，松本城、松江城的天守為什麼沒有被拍賣拆掉？',
+      options: ['地方人士出錢買回，或四處奔走保住', '政府指定為國寶，禁止拆除', '陸軍要拿來當司令部使用', '天守太堅固，拆不動']
+      ,
+      explain: '松本城、松江城的天守都曾差點被拍賣拆除，靠地方人士出錢買回或奔走才留下來。' },
   ],
 });
 </script>

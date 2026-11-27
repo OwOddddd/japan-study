@@ -36,6 +36,8 @@
 日本學習/
 ├── index.html            網站首頁，列出所有主題
 ├── shared/               共用樣式與元件（本資料夾）
+├── places/               現地索引（依地點列出各課的到現場段落）
+├── news/                 睡前日本新聞（排程對話每天產生）
 └── <主題資料夾，英文小寫，例如 history、geography>/
     ├── index.html        主題目錄頁，列出所有課程與參考文件
     ├── lessons/          課程（0001-xxx.html …）
@@ -61,7 +63,7 @@
    ```html
    <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">主題名</a></nav>
    ```
-4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css` 與 `../shared/skin.js`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。目錄頁分三段：`<h2>起點</h2>`（診斷頁，不算課）、`<h2>課程</h2>`（`ul.toc`，首頁靠這段讀取站點；預定的課寫成 `<li class="todo">`）、`<h2>速查表</h2>`。課號與檔名的規則見根目錄 CURRICULUM.md「課號規則」。
+4. 建立主題的 `index.html`（可照抄 `history/index.html`），樣式引用 `../shared/style.css` 與 `../shared/skin.js`，導覽寫 `<a href="../index.html">日本學習</a> › 主題名`。目錄頁分兩段：`<h2>課程</h2>`（`ul.toc`，首頁靠這段讀取站點；預定的課寫成 `<li class="todo">`）、`<h2>速查表</h2>`。沒有程度診斷頁，檔名 000N＝第 N 課。
 5. 新主題要出現在首頁：在 `shared/home.js` 的 `TOPICS` 加一筆，並在 `index.html` 的 `#home` 靜態清單加一行連結（給不能執行 JS 時看）。
 6. 在主題的 `NOTES.md`「工作筆記」寫入網站規則（可照抄 history/NOTES.md 的那一段，改主題名）。
 7. 主題的 `.claude/launch.json` 用 `python -m http.server <埠號> --directory ..`，讓伺服器根目錄是 `日本學習/`，才讀得到 `shared/`。直接用 `file://` 開啟時 script 不會正常運作。
@@ -89,6 +91,6 @@
 <div class="recall-box exercise">題目 <textarea></textarea> <details><summary>看答案</summary>…</details></div>
 ```
 
-**測驗引擎**（整份小測驗、診斷考卷）：`Quiz.mount(root, { title, storageKey, facets, questions, resultsEl, progressEl, submitBtn })`，用法見 `quiz.js` 開頭註解與日本地理的課程。配套 class：`.sticky`（頂部進度列）、`.results`、`.btn`、`.btn.ghost`。
+**測驗引擎**（課後小測驗）：`Quiz.mount(root, { title, storageKey, facets, questions, resultsEl, progressEl, submitBtn })`，用法見 `quiz.js` 開頭註解與日本地理的課程。配套 class：`.sticky`（頂部進度列）、`.results`、`.btn`、`.btn.ghost`。
 
 **目錄頁**：`ul.toc` > `li`（`a` + `.small` 說明），未完成的課程用 `li.todo`。首頁的站點從 `<h2>課程</h2>` 下的清單讀：已出的課是連結，預定的課是 `li.todo`。目錄頁沒有 `li.todo` 時，首頁改用 `shared/home.js` 的 `planned` 顯示預定站，所以**主題的最後一課做完、目錄頁不再有 `li.todo` 時，總管要同一次提交把該主題的 `planned` 清成 `[]`**，否則舊課名會在已開通的站後面再出現一排空心站（11/13 六個主題、11/15 城都出過）。

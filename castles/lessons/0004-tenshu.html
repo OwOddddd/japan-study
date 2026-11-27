@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>有名的天守</title>
+<title>天守的種類</title>
 <link rel="stylesheet" href="../../shared/style.css">
 <link rel="stylesheet" href="../assets/style.css">
 <script src="../../shared/skin.js"></script>
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 4 課・有名的天守</span><span id="progress"></span></div>
+<div class="sticky"><span>第 4 課・天守的種類</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">城與城下町</a></nav>
   <p class="small">第 4 課・約 25 分鐘</p>
-  <h1>有名的天守</h1>
+  <h1>天守的種類</h1>
   <p class="lede">日本各地看得到很多天守，江戶時代蓋好、留到今天的只有 12 座。其他的是什麼？這一課學會看一座天守時問兩個問題：它長成什麼樣子，以及它是什麼身分。</p>
 
   <div class="goal">
@@ -115,7 +115,7 @@
     <tr><td>宇和島城</td><td>愛媛</td><td>重要文化財</td><td>整齊的層塔型</td></tr>
     <tr><td>高知城</td><td>高知</td><td>重要文化財</td><td>天守和本丸御殿都留下來，是全國唯一兩者都在的城</td></tr>
   </table>
-  <p>表裡有一個規律：國寶五座全部集中在本州中部到山陰（長野、愛知、滋賀、兵庫、島根），小小的四國卻有四座（丸龜、伊予松山、宇和島、高知）。反過來，東京、大阪、名古屋這些大都市一座都沒有。為什麼有的留下、有的消失，是第 5 課的主題。</p>
+  <p>表裡有一個規律：國寶五座全部集中在本州中部到山陰（長野、愛知、滋賀、兵庫、島根），小小的四國卻有四座（丸龜、伊予松山、宇和島、高知）。反過來，東京、大阪、名古屋這些大都市一座都沒有：江戶城、大阪城的天守燒毀後沒有重建，名古屋城的天守毀於 1945 年的空襲。有的留下、有的消失，是第 5 課的主題。</p>
   <p class="small">另一個要注意的規律：弘前、伊予松山、高知的天守都是江戶時代中後期重建的。「現存」指的是江戶時代蓋、留到今天，不一定是築城當時的原物。</p>
 
   <div class="exercise quiz" data-answer="a">
@@ -144,8 +144,10 @@
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
 
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://www.nippon.com/cn/japan-data/h00418/" target="_blank">nippon.com（現存天守）</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/en/R1-00697.html" target="_blank">國土交通省的姬路城說明</a></li></ol></details>
+
   <nav class="lesson-nav">
-    <a href="0003-ishigaki.html">← 第 3 課：堅硬的石垣</a>
+    <a href="0003-ishigaki.html">← 第 3 課：石垣的砌法</a>
     <a href="../index.html">目錄</a>
     <a href="0005-life-of-a-castle.html">下一課：城的一生 →</a>
   </nav>
@@ -161,8 +163,8 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '城與城下町 第 4 課・有名的天守',
-  storageKey: 'castles-l4-v1',
+  title: '城與城下町 第 4 課・天守的種類',
+  storageKey: 'castles-l4-v2',
   facets: [{ id: 'l4', name: '本課' }, { id: 'review', name: '複習' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -173,9 +175,10 @@ Quiz.mount(document.getElementById('quiz'), {
       options: ['本丸或二之丸的御殿', '天守的最上層', '天守的地下室', '城外的寺院'],
       explain: '天守陰暗陡峭、不適合生活。城主住在平房式的御殿，天守主要是象徵、瞭望和最後據點。' },
     { id: 'l4-2', facet: 'l4', level: 2, type: 'choice',
-      prompt: '底下是大屋子加上大屋頂，屋頂上再放一座瞭望台。這種天守叫什麼？',
-      options: ['望樓型', '層塔型', '連立式', '模擬天守'],
-      explain: '望樓型比較早。每層整齊縮小往上疊的是層塔型。' },
+      prompt: '十七世紀初以後，層塔型天守比望樓型更流行。最主要的原因是？',
+      options: ['各層形狀規格化，木材好準備，蓋得快', '層塔型比較便宜，因為層數比較少', '層塔型的防禦力比望樓型更強', '幕府規定新蓋的天守一律用層塔型']
+      ,
+      explain: '望樓型比較早，是大屋頂上再放一座瞭望台。層塔型每層整齊縮小往上疊，規格化後木材好準備、蓋得快。' },
     { id: 'l4-3', facet: 'l4', level: 2, type: 'choice',
       prompt: '名古屋城的天守 1945 年燒毀，1959 年用鋼筋混凝土照原本外觀重建。它是哪一種？',
       options: ['外觀復元天守', '現存天守', '模擬天守', '木造復元天守'],
@@ -184,24 +187,23 @@ Quiz.mount(document.getElementById('quiz'), {
       prompt: '一座城原本沒有天守，後來為了觀光蓋了一座天守樣子的建築。它是哪一種？',
       options: ['模擬天守', '復興天守', '外觀復元天守', '現存天守'],
       explain: '模擬天守：原本沒有天守，或不在原本的位置。復興天守是原本有、但沒照原樣重建。' },
-    { id: 'l4-5', facet: 'l4', level: 2, type: 'multi',
-      prompt: '下列哪些是國寶天守？（複選）',
-      options: ['松本城', '姬路城', '松江城', '大阪城', '熊本城', '高知城'],
-      correct: [0, 1, 2],
-      explain: '國寶五天守：松本、犬山、彥根、姬路、松江。大阪城、熊本城是戰後重建的；高知城是現存天守，但身分是重要文化財。' },
+    { id: 'l4-5', facet: 'l4', level: 2, type: 'choice',
+      prompt: '東京、大阪、名古屋這三座大都市都沒有現存天守。下列哪一項正確說明了原因？',
+      options: ['江戶城、大阪城的天守燒毀後沒有重建，名古屋城的天守毀於 1945 年空襲', '三座城的天守都在關原之戰後被幕府拆除', '三座城的天守都是明治時代被政府拍賣拆掉的', '三座城都從來沒有蓋過天守'],
+      explain: '江戶城 1657 年大火後沒重建，大阪城的天守 1665 年被雷打中燒毀，名古屋城 1945 年毀於空襲。三座城今天的天守或天守台，是戰後重建或遺跡。' },
     { id: 'l4-6', facet: 'l4', level: 3, type: 'short',
       prompt: '朋友說大阪城天守是假的、不值得看。根據這一課，你會怎麼回應？',
       keywords: [['復興', '1931', '昭和'], ['混凝土', '不是原樣', '不照原樣', '豐臣', '德川'], ['歷史', '文化財', '一百年', '價值', '博物館'], ['石垣', '刻印', '蛸石', '枡形']],
       need: 2,
       answer: '它是 1931 年蓋的復興天守，外觀混合了豐臣和德川時代的樣子，不是原樣；但它本身也有將近百年歷史，是登錄有形文化財。而且大阪城真正的看點是德川時代的巨大石垣、刻印和櫻門枡形的蛸石，這些都是原物。' },
     { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 3 課）石垣轉角長邊、短邊交互疊起來的砌法叫什麼？',
-      options: ['算木積', '野面積', '武者返', '間詰石'],
-      explain: '算木積讓兩面石垣在轉角咬合，十七世紀初成熟。' },
+      prompt: '（複習第 3 課）大阪城櫻門枡形的巨石「蛸石」放在門的正面，作用是？',
+      options: ['沒有防禦功能，讓進城的人震懾於城主的力量', '加強城門的防禦，擋住敵人的衝撞', '標示這段石垣由哪一家大名施工', '當作城門的門檻，不讓馬車進城'],
+      explain: '這是鏡石：放在城門正面、特別巨大的石頭。它沒有防禦功能，作用是讓人震懾於城主的力量。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
-      prompt: '（複習第 2 課）枡形虎口內側、上方蓋著二層樓建築的門叫什麼？',
-      options: ['櫓門', '高麗門', '馬出', '狹間'],
-      explain: '外側是矮的高麗門，內側是櫓門。' },
+      prompt: '（複習第 2 課）有些城在虎口外面再加一個小曲輪「馬出」，作用是？',
+      options: ['讓守方可以從這裡出擊反攻，同時擋住外面的視線', '讓進出城門的馬匹有地方休息', '存放糧食和武器的倉庫', '讓敵人從這裡走進枡形'],
+      explain: '馬出讓守方可以出擊反攻，同時擋住外面的視線，讓敵人看不出城門開在哪裡。' },
   ],
 });
 </script>

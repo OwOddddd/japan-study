@@ -15,12 +15,12 @@
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">宗教與信仰</a></nav>
   <p class="small">第 2 課・約 25 分鐘</p>
   <h1>神道的世界觀</h1>
-  <p class="lede">為什麼日本人會對一座山、一塊石頭、一棵老樹鞠躬？為什麼進神社要先洗手？從這兩個問題出發，神社裡每一段路的意思就都說得通了。</p>
+  <p class="lede">為什麼日本人會對一座山、一塊石頭、一棵老樹鞠躬？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
     <p>1. 說得出神道的「神」是什麼樣的存在，為什麼自然物會被當成神。</p>
-    <p>2. 理解「穢」與「祓」這組觀念，用它解釋手水舍。</p>
+    <p>2. 解釋「穢」與「祓」這組觀念，並用它說明手水舍在做什麼。</p>
     <p>3. 從鳥居走到本殿，說得出每一站的宗教意義。</p>
   </div>
   <p class="small">頁面上的「▶ 聽」按鈕會播放日文發音（語音：VOICEVOX:青山龍星）。</p>
@@ -115,11 +115,6 @@
     <p><b>和歌山・那智瀑布</b>：飛瀧神社的鳥居後面直接就是瀑布，沒有本殿。</p>
   </div>
 
-  <div class="source">
-    <b>延伸閱讀</b>：<a href="https://oomiwa.or.jp/" target="_blank">大神神社官方網站</a>（三輪山的由來與登拜規則）・<a href="https://www.meijijingu.or.jp/" target="_blank">明治神宮官方網站</a>（森林的由來）。<br>
-    英文概說：<a href="https://www.japan-guide.com/e/e2056.html" target="_blank">japan-guide〈Shinto〉</a>。
-  </div>
-
   <h2>課後小測驗</h2>
   <p class="small">最後兩題複習第 1 課。</p>
   <div id="results" class="results" hidden></div>
@@ -127,6 +122,8 @@
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
   <div class="callout"><b>延伸想想</b>：神道有沒有地獄？</div>
+
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://oomiwa.or.jp/" target="_blank">大神神社官方網站</a></li><li><a href="https://www.meijijingu.or.jp/" target="_blank">明治神宮官方網站</a></li><li><a href="https://www.japan-guide.com/e/e2056.html" target="_blank">japan-guide〈Shinto〉</a></li></ol></details>
 
   <nav class="lesson-nav">
     <a href="0001-shrine-or-temple.html">← 第 1 課：神社還是寺院</a>
@@ -144,41 +141,37 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 
 Quiz.mount(document.getElementById('quiz'), {
   title: '宗教與信仰 第 2 課・神道的世界觀',
-  storageKey: 'rel-l2-v1',
+  storageKey: 'rel-l2-v2',
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
   submitBtn: document.getElementById('submit'),
   facets: [{ id: 'l2', name: '本課' }, { id: 'review', name: '複習' }],
   questions: [
-    { id: 'l2-1', facet: 'l2', level: 1, type: 'choice',
-      prompt: '「八百萬の神」的「八百萬」是什麼意思？',
-      options: ['多到數不清', '正好八百萬位', '八百座山的神', '天皇封的神數'],
-      explain: '八百萬是「非常多」的意思。讓人敬畏的自然與人都可以是神。' },
-    { id: 'l2-2', facet: 'l2', level: 2, type: 'choice',
+    { id: 'l2-1', facet: 'l2', level: 2, type: 'choice',
       prompt: '為什麼神道的神常常是山、瀑布這類自然物？',
       options: ['稻作仰賴自然，自然又會降災', '佛教傳入前日本沒有人像', '天皇規定只能祭拜自然物', '山上的神社比較不怕火災'],
       explain: '稻作要靠山上的水和適時的雨，但同一個自然也會帶來地震、颱風。人只能敬它、求它、安撫它。' },
-    { id: 'l2-3', facet: 'l2', level: 2, type: 'choice',
+    { id: 'l2-2', facet: 'l2', level: 2, type: 'choice',
       prompt: '大神神社沒有本殿。這代表什麼？',
       options: ['保留蓋建築之前直接拜山的形式', '本殿被燒掉後一直沒有錢重建', '明治時代把本殿改成了寺院', '本殿藏在山裡只有神職能去'],
       explain: '三輪山本身就是神體。最早的神道祭祀不需要建築，大神神社保留了這種形式。' },
-    { id: 'l2-4', facet: 'l2', level: 2, type: 'choice',
+    { id: 'l2-3', facet: 'l2', level: 2, type: 'choice',
       prompt: '神社的手水舍，在神道的觀念裡是在做什麼？',
-      options: ['簡化的禊，見神前祓除穢', '喝了能保佑身體的聖水', '把錢幣洗乾淨再投進去', '向神報告自己的名字'],
+      options: ['簡化的禊，見神前祓除穢', '把手洗乾淨，避免弄髒神前的供品', '向神表示誠意，用水代替賽錢', '洗掉旅途的灰塵，以免弄髒神社'],
       explain: '神討厭穢，見神前要先弄乾淨。原本是用河水或海水洗全身的禊，簡化成洗手漱口。' },
-    { id: 'l2-5', facet: 'l2', level: 3, type: 'choice',
+    { id: 'l2-4', facet: 'l2', level: 3, type: 'choice',
       prompt: '「穢」和道德上的「罪」有什麼不同？',
       options: ['沒做錯事也會因碰到死亡而沾上', '穢只有神職人員才會沾上', '穢是做了壞事才會有的', '穢永遠無法去除'],
       explain: '穢是生命力衰退的不潔狀態，碰到死亡、血、疾病就會沾上，跟有沒有做錯事無關，可以用祓去除。' },
-    { id: 'l2-6', facet: 'l2', level: 3, type: 'short',
+    { id: 'l2-5', facet: 'l2', level: 3, type: 'short',
       prompt: '神社從鳥居走到本殿，整條路線的設計邏輯是什麼？和寺院有什麼不同？',
       keywords: [['乾淨', '潔淨', '祓', '洗'], ['神聖', '越來越', '深', '內'], ['看不到', '看不見', '藏', '關', '隱'], ['佛像', '寺院']],
       need: 2,
       answer: '由外往內越來越神聖：跨過鳥居進神域、走參道轉換心情、在手水舍祓除穢，最後在拜殿參拜，本殿裡的神體看不到。寺院相反，把佛像放在眼前讓人膜拜。' },
-    { id: 'rv-1', facet: 'review', level: 1, type: 'choice',
-      prompt: '（複習第 1 課）寺院山門左右站著的兩尊怒目巨像叫什麼？',
-      options: ['仁王', '狛犬', '明王', '天狗'],
-      explain: '仁王（金剛力士），放仁王像的門叫仁王門。狛犬是神社的。' },
+    { id: 'rv-1', facet: 'review', level: 2, type: 'choice',
+      prompt: '（複習第 1 課）寺名前面常加「〇〇山」（山號），像淺草寺正式叫金龍山淺草寺。原因是？',
+      options: ['早期寺院多蓋在山裡修行，搬到平地仍保留稱呼', '寺院的木材都取自附近的山，所以用山命名', '朝廷規定寺院必須蓋在山上才能登記', '山號表示這座寺院在各寺院中的等級高低'],
+      explain: '早期的寺院多半蓋在山裡修行，就算後來搬到平地，也保留「〇〇山」的稱呼。' },
     { id: 'rv-2', facet: 'review', level: 2, type: 'choice',
       prompt: '（複習第 1 課）在日本，下列哪一個動作<b>一般只在寺院</b>做？',
       options: ['把香爐的煙撥到身上', '在鳥居前輕輕鞠躬', '參拜時拍手', '在手水舍洗手'],

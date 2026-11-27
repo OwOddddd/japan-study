@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>怎麼看一座城？</title>
+<title>城的選址與地形</title>
 <link rel="stylesheet" href="../../shared/style.css">
 <link rel="stylesheet" href="../assets/style.css">
 <script src="../../shared/skin.js"></script>
 <script src="../../shared/quiz.js"></script>
 </head>
 <body>
-<div class="sticky"><span>第 1 課・怎麼看一座城？</span><span id="progress"></span></div>
+<div class="sticky"><span>第 1 課・城的選址與地形</span><span id="progress"></span></div>
 <main>
 <nav class="site-nav"><a href="../../index.html">日本學習</a> › <a href="../index.html">城與城下町</a></nav>
   <p class="small">第 1 課・約 25 分鐘</p>
-  <h1>怎麼看一座城？</h1>
-  <p class="lede">到了一座城，先問：它為什麼蓋在這裡？地形決定了城怎麼防守，也決定了城下的街道能長多大。</p>
+  <h1>城的選址與地形</h1>
+  <p class="lede">到了一座城，為什麼它蓋在這裡，而不是蓋在別的地方？</p>
 
   <div class="goal">
     <p><b>本課目標</b></p>
@@ -99,7 +99,7 @@
   </ol>
   <p>還有一件事：城在平地上，城下的每個人都抬頭看得到它。高聳的<b>天守</b>（<span lang="ja">てんしゅ</span> <button class="btn ghost say" data-audio="audio/0001/05.wav">▶</button>）讓領民每天看見城主的權威，這也是「管」的一部分。天守的種類在第 4 課講。</p>
   <div class="note">
-    戰國時代各勢力為什麼打成一團、又怎麼被統一，屬於歷史的範圍，之後見歷史的「室町與戰國」「統一與江戶」兩課（製作中）。本主題只講這些事件讓城的位置和形狀變成什麼樣子。
+    戰國時代各勢力為什麼打成一團、又怎麼被統一，屬於歷史的範圍，見<a href="../../history/lessons/0006-muromachi-to-sengoku.html">歷史第 6 課</a>、<a href="../../history/lessons/0007-three-unifiers.html">歷史第 7 課</a>。本主題只講這些事件讓城的位置和形狀變成什麼樣子。
   </div>
   <p class="small">平山城兼顧兩邊：小丘夠高，可以看得遠、讓敵人爬坡；四周又是平原，城下町可以長大。這是為什麼江戶時代的名城很多是平山城。</p>
 
@@ -143,10 +143,12 @@
   <p style="text-align:center;margin-top:28px"><button class="btn" id="submit">交卷</button></p>
 
 
+  <details class="sources"><summary>資料來源</summary><ol><li><a href="https://maps.gsi.go.jp/" target="_blank">國土地理院「地理院地圖」</a></li><li><a href="https://www.mlit.go.jp/tagengo-db/en/R1-00697.html" target="_blank">國土交通省的姬路城說明</a></li></ol></details>
+
   <nav class="lesson-nav">
     <a href="../index.html">← 回到課程目錄</a>
     <a href="../index.html">目錄</a>
-    <a href="0002-nawabari.html">下一課：什麼是繩張？ →</a>
+    <a href="0002-nawabari.html">下一課：繩張 →</a>
   </nav>
 </main>
 
@@ -160,8 +162,8 @@ document.querySelectorAll('[data-audio]').forEach(b => {
 });
 
 Quiz.mount(document.getElementById('quiz'), {
-  title: '城與城下町 第 1 課・怎麼看一座城？',
-  storageKey: 'castles-l1-v1',
+  title: '城與城下町 第 1 課・城的選址與地形',
+  storageKey: 'castles-l1-v2',
   facets: [{ id: 'l1', name: '本課' }],
   resultsEl: document.getElementById('results'),
   progressEl: document.getElementById('progress'),
@@ -177,16 +179,16 @@ Quiz.mount(document.getElementById('quiz'), {
       explain: '平常住山下比較方便，敵人來了才退到山上的城據守。福井的一乘谷就是這種組合。' },
     { id: 'l1-3', facet: 'l1', level: 2, type: 'choice',
       prompt: '天下逐漸統一後，新蓋的城移向平原。下列哪一項<b>不是</b>主要原因？',
-      options: ['山上的城都被大地震震垮了', '要管的人和米變多，需要靠近平原', '河川和街道方便運輸和收稅', '平地才有空間讓武士商人聚居'],
-      explain: '城的任務從「守」轉向「管」，管理需要的平原、河川、街道和大片土地都在平地。' },
+      options: ['平地比山頂更容易防守，所以城主搬下山', '要管的人和米變多，需要靠近平原', '河川和街道方便運輸和收稅', '平地才有空間讓武士商人聚居'],
+      explain: '城的任務從「守」轉向「管」，管理需要的平原、河川、街道和大片土地都在平地。平地其實最難守，所以要靠人工的堀和高石垣補回來。' },
     { id: 'l1-4', facet: 'l1', level: 2, type: 'choice',
       prompt: '名古屋城、大阪城、江戶城都利用了同一種地形。是哪一種？',
       options: ['台地的邊緣', '深山的山頂', '海中的小島', '河中的沙洲'],
       explain: '台地的一側是陡坡和低地，方便防守；另一側是平坦的台地面，可以展開城下町。' },
     { id: 'l1-5', facet: 'l1', level: 2, type: 'choice',
-      prompt: '高松城、今治城的堀裡引進了海水。這類城常被特別稱為什麼？',
-      options: ['水城', '山城', '平山城', '海城下町'],
-      explain: '水城把海或湖直接當堀。依高度來說它們多半是平城。' },
+      prompt: '彥根城靠著琵琶湖，松江城的堀和宍道湖連在一起。「水」對選址有什麼用處？',
+      options: ['河、湖、海可以當天然的堀，又是運輸路線', '提供天守所需的飲用水和灌溉用水', '水的重量能讓石垣在地震時更穩', '水面的倒影能讓城看起來更有威嚴'],
+      explain: '「水」是選址四條件之一：天然的堀讓敵人難以接近，又能運米運貨。高松城、今治城更把海水直接引進堀裡，叫水城，依高度多半是平城。' },
     { id: 'l1-6', facet: 'l1', level: 3, type: 'short',
       prompt: '用「高、水、路、平地」中的至少三項，說明一座平山城的選址為什麼比山城適合江戶時代。',
       keywords: [['高', '小丘', '看得遠', '爬坡'], ['水', '河', '湖', '海', '堀', '運'], ['路', '街道', '交通', '稅'], ['平地', '平原', '城下町', '水田', '空間'], ['管', '統治', '政務']],
